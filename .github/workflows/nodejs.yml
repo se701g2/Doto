@@ -25,10 +25,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: cd doto-backend && npm ci
-    - run: npm run build --if-present
-    - run: npm test
-    - run: cd ../doto-frontend && npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - run: cd doto-backend && npm run build --if-present
+    - run: cd doto-backend && npm test
+    - run: cd doto-frontend && npm ci
+    - run: cd doto-frontend && npm run build --if-present
+    - run: cd doto-backend && npm test
       env:
         CI: true
