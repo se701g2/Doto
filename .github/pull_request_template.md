@@ -5,6 +5,6 @@
 - [ ] The pull request describes the changes that have been made, and enough information is present in the description for any developer to understand what has changed
 - [ ] Commmits have been squashed
 - [ ] The pull request title is of the following format : {issue/bug...}/(Issue Number) - Name of issue. E.g bug/30-Fix-Project
-- [ ] The description uses [github syntax](https://help.github.com/en/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue) to link to the issue. E,g Resolves se701g2/Doto#4
+- [ ] The description uses [github syntax](https://help.github.com/en/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue) to link to the issue. E,g Resolves se701g2/Doto#{Number}
 - [ ] At least two reviewers assigned. One of which must be the assigner of the issue.
 - [ ] If there are merge conflicts, run git rebase as opposed to git merge with master.
