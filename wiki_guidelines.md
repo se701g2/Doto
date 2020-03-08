@@ -57,7 +57,7 @@ If you are suggesting future work that someone could work on, it is important th
 
  ## Writing style 
  Some important writing guidelines when contributing include:
- * Writing in first person e.g. "we implemented y using ... "
+ * Writing in first person but avoid using singular pronouns e.g. "we implemented y using ... "
  * Writing with proper grammar and spelling 
  * Maintaining a level of professional etiquette while contributing 
 
