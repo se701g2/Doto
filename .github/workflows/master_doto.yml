@@ -22,10 +22,9 @@ jobs:
 
     - name: npm install, build, and test
       run: |
-        cd doto-frontend
-        npm install
-        npm run build --if-present
-        npm run test --if-present
+        cd doto-frontend && npm install
+        cd doto-frontend && npm run build --if-present
+        cd doto-frontend && npm run test --if-present
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v1
