@@ -23,7 +23,7 @@ Meeting minutes format should be standardised and should include:
 ### Documenting contributions 
 When documenting contributions to the project, each contributor should be fairly credited with the work they have accomplished. So the contributions page should include a short description of the different work each team member contributed (both technical or non-technical). The contributions page should be split up into the different parts of the project for example. 
 
-'''
+```
 DevOps 
 - Casey: I worked on x feature, and y feature and helped on z feature.
 - Reshad: I worked on m feature and helped with x feature 
@@ -41,15 +41,16 @@ Documentation
 ...
 
 And so on..
-'''
+```
 
 ## Future work
 If you are suggesting future work that someone could work on, it is important that the description of the work is clear what the work entails. Additionally, details on why the feature should be worked on and how to approach it should be given. For example:
- '''
+
+```
  Feature description: I want to add x feature to the front end 
  Because: I think this feature will help improve y feature
  Feasibility: I think this is possible if we do y and z to the backend 
- ''' 
+``` 
 
  ## Code of conduct when contributing 
  Before you contribute to the wiki it is important you have reviewed our code of conduct. All contributors are expected to contribute while treating their fellow contributors with respect. 
