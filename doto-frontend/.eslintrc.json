@@ -17,5 +17,10 @@
         "sourceType": "module"
     },
     "plugins": ["react"],
-    "rules": {}
+    "rules": {
+        "indent": 0,
+        "quotes": "off",
+        "space-before-function-paren": "off",
+        "semi": "off"
+    }
 }
