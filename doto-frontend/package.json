@@ -40,12 +40,17 @@
         "eslint-plugin-react": "^7.19.0",
         "eslint-plugin-standard": "^4.0.1",
         "husky": "^4.2.3",
+        "lint-staged": "^10.0.8",
         "prettier": "1.19.1",
         "pretty-quick": "^2.0.1"
     },
     "husky": {
         "hooks": {
-            "pre-commit": "pretty-quick --staged"
+            "pre-commit": "lint-staged"
         }
+    },
+    "lint-staged": {
+        "*.js": "eslint --cache --fix",
+        "*.{js,css,md}": "prettier --write"
     }
 }
