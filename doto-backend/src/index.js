@@ -3,11 +3,11 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express()
 const apiPort = 3000
+require('dotenv').config();
 
 // Mongoose connection
 const mongoose = require('mongoose');
-const connectionString = "mongodb+srv://701Group2:SoftwareEngineering701Group2@cluster0-ahuai.mongodb.net";
-mongoose.connect(connectionString, { useNewUrlParser: true });
+mongoose.connect(process.env.mongodb_uri, { useNewUrlParser: true });
 const db = mongoose.connection;
 
 // Checking for DB connection
