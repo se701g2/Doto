@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - doto-backend
 on:
   push:
     branches:
-      - enhancement/42-set-up-backend-deployment-with-azure
+      - master
 
 jobs:
   build-and-deploy:
@@ -22,6 +22,7 @@ jobs:
 
     - name: npm install, build, and test
       run: |
+        cd doto-backend 
         npm install
         npm run build --if-present
         npm run test --if-present
@@ -32,4 +33,4 @@ jobs:
         app-name: 'doto-backend'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_1a48d7d3d58a4327a6f6e034ff403ce4 }}
-        package: .
+        package: ./doto-backend/
