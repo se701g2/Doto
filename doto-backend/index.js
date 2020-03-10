@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const apiPort = 3000
+const apiPort = process.env.PORT || 3000
 require('dotenv').config();
 
 // Mongoose connection
@@ -22,7 +22,7 @@ app.use(cors())
 app.use(express.json())
 
 // exporting Routes 
-const users = require('./routes/router');
+const users = require('./src/routes/router');
 app.use('/api', users);
 
 app.get('/', (req, res) => {
