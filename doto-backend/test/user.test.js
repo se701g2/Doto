@@ -9,7 +9,7 @@ process.env.TEST_SUITE = 'user-test';
 describe('User Model Test', () => {
 
     beforeEach(async () => {
-        await mongoose.connect(`mongodb://localhost:27017/${process.env.TEST_SUITE}`, { useNewUrlParser: true}, (err) => {
+        await mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.TEST_SUITE}`, { useNewUrlParser: true}, (err) => {
             if (err) {
                 console.error(err);
                 process.exit(1);
