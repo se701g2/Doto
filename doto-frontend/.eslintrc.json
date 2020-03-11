@@ -21,6 +21,8 @@
         "indent": 0,
         "quotes": "off",
         "space-before-function-paren": "off",
-        "semi": "off"
+        "semi": "off",
+        "comma-dangle": "off",
+        "quote-props": "off"
     }
 }
