@@ -13,6 +13,10 @@ const taskSchema = mongoose.Schema({
         type: String,
         default: ''
     },
+    location: {
+        type: String,
+        default: ''
+    },
     priority: {
         type: Number
     },
