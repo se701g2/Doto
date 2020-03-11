@@ -1,15 +1,32 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express()
-const apiPort = 3000
+const apiPort = process.env.PORT || 3000
+require('dotenv').config();
 
-app.use(bodyParser.urlencoded({ extended: true }))
+// Mongoose connection
+const mongoose = require('mongoose');
+mongoose.connect(process.env.mongodb_uri, { useNewUrlParser: true });
+const db = mongoose.connection;
+
+// Checking for DB connection
+db.once('open', function(){
+    console.log("Connected to MongoDB.");
+});
+db.on('error', function(){
+    console.log(err);
+});
+
+app.use(express.urlencoded({ extended: true }))
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json())
+
+// exporting Routes 
+const users = require('./src/routes/router');
+app.use('/api', users);
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('Hello world!')
 })
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))

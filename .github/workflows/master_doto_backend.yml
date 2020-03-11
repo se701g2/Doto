@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - doto
+name: Build and deploy Node.js app to Azure Web App - doto-backend
 
 on:
   push:
@@ -22,14 +22,15 @@ jobs:
 
     - name: npm install, build, and test
       run: |
-        cd doto-frontend
+        cd doto-backend 
         npm install
         npm run build --if-present
+        npm run test --if-present
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v1
       with:
-        app-name: 'doto'
+        app-name: 'doto-backend'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_cff2daf75fd04dffbc6244cf8a4727cb }}
-        package: ./doto-frontend/build
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_1a48d7d3d58a4327a6f6e034ff403ce4 }}
+        package: ./doto-backend/
