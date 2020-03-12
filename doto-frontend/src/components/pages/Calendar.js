@@ -1,13 +1,13 @@
 import React from "react";
 
-const Calender = () => {
+const Calendar = () => {
     return (
         <div className="App">
             <header className="App-header">
-                <div>Calender</div>
+                <div>Calendar</div>
             </header>
         </div>
     );
 };
 
-export default Calender;
+export default Calendar;
