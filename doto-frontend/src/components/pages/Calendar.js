@@ -1,15 +1,13 @@
 import React from "react";
-import "./App.css";
-import "./tailwind-generated.css";
 
-const App = () => {
+const Calendar = () => {
     return (
         <div className="App">
             <header className="App-header">
-                <div>Doto</div>
+                <div>Calendar</div>
             </header>
         </div>
     );
 };
 
-export default App;
+export default Calendar;
