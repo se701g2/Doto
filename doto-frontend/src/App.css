@@ -12,33 +12,3 @@
     font-size: calc(10px + 2vmin);
     color: white;
 }
-
-.Calendar-header {
-    background-color: #ffffff;
-    min-height: 15vh;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: center;
-    font-size: 70px;
-    color: rgb(0, 0, 0);
-    width: 100%;
-    font-weight: bold;
-    margin-left: 10%;
-}
-
-.Side {
-    background-color: #470f7a;
-    min-height: 15vh;
-    width: 90%;
-    border-radius: 60px;
-    margin-left: 5%;
-}
-
-.Calendar {
-    background-color: #ffffff;
-    width: 90%;
-    justify-content: center;
-    position: static;
-    margin-left: 5%;
-}

@@ -1,5 +1,5 @@
 import React from "react";
-import "./../../App.css";
+import "./Calendar.css";
 import Paper from "@material-ui/core/Paper";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { ViewState, EditingState, IntegratedEditing } from "@devexpress/dx-react-scheduler";
