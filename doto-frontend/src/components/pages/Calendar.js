@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./../../App.css";
 import Paper from "@material-ui/core/Paper";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { ViewState, EditingState, IntegratedEditing } from "@devexpress/dx-react-scheduler";
@@ -63,7 +63,7 @@ export const appointments = [
     },
 ];
 
-const CalendarCoponent = () => {
+const Calendar = () => {
     getDate();
     return (
         <div className="CalendarContainer">
@@ -111,4 +111,4 @@ const CalendarCoponent = () => {
 
 // render(<App />, document.getElementById("root"));
 
-export default CalendarCoponent;
+export default Calendar;

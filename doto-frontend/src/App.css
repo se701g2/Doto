@@ -1,6 +1,5 @@
 .App {
     text-align: center;
-<<<<<<< HEAD
 }
 
 .App-header {
@@ -28,7 +27,7 @@
     margin-left: 10%;
 }
 
-.Side{
+.Side {
     background-color: #470f7a;
     min-height: 15vh;
     width: 90%;
@@ -36,25 +35,10 @@
     margin-left: 5%;
 }
 
-.Calendar{
+.Calendar {
     background-color: #ffffff;
     width: 90%;
     justify-content: center;
     position: static;
     margin-left: 5%;
 }
-
-=======
-}
-
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
->>>>>>> c510cd7b54bad4ab5703e81b7aadf0f2e994c323
