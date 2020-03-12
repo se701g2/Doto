@@ -29,7 +29,7 @@ function getDate() {
     const day = String(today.getDate()).padStart(2, "0");
     const month = String(today.getMonth() + 1).padStart(2, "0");
     const year = today.getFullYear();
-    today = year + "-" + month + "-" + day;
+    today = year + "-" + month + "-" + day; // yyyy-mm-ddT24.00.000
 }
 
 // Current Tasks as appointments

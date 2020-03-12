@@ -27,7 +27,7 @@
     margin-left: 10%;
 }
 
-.Side {
+.Side{
     background-color: #470f7a;
     min-height: 15vh;
     width: 90%;
@@ -35,10 +35,11 @@
     margin-left: 5%;
 }
 
-.Calendar {
+.Calendar{
     background-color: #ffffff;
     width: 90%;
     justify-content: center;
     position: static;
     margin-left: 5%;
 }
+
