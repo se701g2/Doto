@@ -1,4 +1,3 @@
-
 # Register
 
 Used to register the user for the application
@@ -13,15 +12,15 @@ Used to register the user for the application
 
 ```json
 {
-	“Username” : “[Unique email address]”
-	“Password”  : “[Password the user chooses]”
+	"Username" : "[Unique email address]",
+	"Password" : "[Password the user chooses]"
 }
 ```
 **Data example**:
 ```json
 {
-	“Username” : “jyao413@aucklanduni.ac.nz”
-	“Password”  : “softwareengineering”	
+	"Username" : "jyao413@aucklanduni.ac.nz",
+	"Password"  : "softwareengineering"	
 }
 ```
 ## Success response
@@ -33,14 +32,14 @@ Used to register the user for the application
 For user that wants to register their account without doing it before
 ```json
 {
-    "_id: "1234",
+    "_id": "1234",
     "Successful": "True"
 }
 ```
 For user that wants to register their account again
 ```json
 {
-    "_id: " ",
+    "_id": " ",
     "Successful": "False"
 }
 ```
@@ -62,15 +61,15 @@ Used to log the user into the application
 **Data constraints**:
 ```json
 {
-	“Username” : “[Unique email address]”
-	“Password”  : “[Password the user chooses]”
+	"Username" : "[Unique email address]",
+	"Password"  : "[Password the user chooses]"
 }
 ```
 **Data example**:
 ```json
 {
-	“Username” : “jyao413@aucklanduni.ac.nz”
-	“Password”  : “softwareengineering”	
+	"Username" : "jyao413@aucklanduni.ac.nz",
+	"Password"  : "softwareengineering"	
 }
 ```
 ## Success response
@@ -85,9 +84,9 @@ For a user with ID 1234 on the database where the user has saved their login inf
     "name": "Jason",
     "email": "jyao413@aucklanduni.ac.nz",
     "_id": "1234", 
-        "Picture": “imgur.com/ao12r”
-        “Preferences”: “blue”,
-    "__v": 0
+        "Picture": "imgur.com/ao12r",
+        "Preferences": "blue",
+    "__v": "0"
 }
 ```
 Notes: 
@@ -108,14 +107,14 @@ Used to schedule a task
 **Data constraints**:
 ```json
 {
-	“id” : “[Unique id for task]”,
-	“Title” : “[Name for schedule task]”,
-	“Description”  : “[Description for task]”,
-	“Start_Date” : “[Time of creation]”,
-	“End_Date” : “[Time to finish task by]”,
-	“User_id” : “[Users email]”,
-	“Location” : “[Location of their task]”,
-	“Color” : “[Preferences of task color]”
+	"id" : "Unique id for task]",
+	"Title" : "Name for schedule task",
+	"Description"  : "[Description for task]",
+	"Start_Date" : "[Time of creation]",
+	"End_Date" : "[Time to finish task by]",
+	"User_id" : "[Users email]",
+	"Location" : "[Location of their task]",
+	"Color" : "[Preferences of task color]"
 }
 ```
 **Data example**:
@@ -123,27 +122,27 @@ Used to schedule a task
 With all fields filled
 ```json
 {
-	“id” : “1234”,
-	“Title” : “Eat dinner”,
-	“Description”  : “Eat dinner for tonight”,
-	“Start_Date” : “2020-03-12T09:50:00.000”,
-	“End_Date” : “2020-03-19T10:55:00.000”,
-	“User_id” : “jyao413@aucklanduni.ac.nz”,
-	“Location” : “Home”,
-	“Color” : “Red”
+	"id" : "1234",
+	"Title" : "Eat dinner",
+	"Description"  : "Eat dinner for tonight",
+	"Start_Date" : "2020-03-12T09:50:00.000",
+	"End_Date" : "2020-03-19T10:55:00.000",
+	"User_id" : "jyao413@aucklanduni.ac.nz",
+	"Location" : "Home",
+	"Color" : "Red"
 }
 ```
 With only mandatory fields filled
 ```json
 {
-	“id” : “1234”,
-	“Title” : “Eat dinner”,
-	“Description”  : “”,
-	“Start_Date” : “2020-03-12T09:50:00.000”,
-	“End_Date” : “2020-03-19T10:55:00.000”,
-	“User_id” : “jyao413@aucklanduni.ac.nz”,
-	“Location” : “Home”,
-	“Color” : “”
+	"id" : "1234",
+	"Title" : "Eat dinner",
+	"Description"  : "Eat dinner for tonight",
+	"Start_Date" : "2020-03-12T09:50:00.000",
+	"End_Date" : "2020-03-19T10:55:00.000",
+	"User_id" : "jyao413@aucklanduni.ac.nz",
+	"Location" : "Home",
+	"Color" : " "
 }
 ```
 
@@ -156,15 +155,15 @@ With only mandatory fields filled
 For a successful task scheduled
 ```json
 {
-    "task_id: "1234",
-    "Successful": "True"
+    "task_id" : "1234",
+    "Successful" : "True"
 }
 ```
 For an unsuccessful task scheduled
 ```json
 {
-    "task_id: "1234",
-    "Successful": "False"
+    "task_id" : "1234",
+    "Successful" : "False"
 }
 ```
 
@@ -183,25 +182,25 @@ Used to update a user’s task
 **Data Constraints**:
 ```json
 {
-    “id” : “1234”,
-	“Title” : “[Name for schedule task]”,
-	“Description”  : “[Description for task]”,
-	“Start_Date” : “[Time of creation]”,
-	“End_Date” : “[Time to finish task by]”,
-	“Location” : “[Location of their task]”,
-	“Color” : “[Preferences of task color]”
+    	"id" : "1234",
+	"Title" : "[Name for schedule task]",
+	"Description"  : "[Description for task]",
+	"Start_Date" : "[Time of creation]",
+	"End_Date" : "[Time to finish task by]",
+	"Location" : "[Location of their task]",
+	"Color" : "[Preferences of task color]"
 }
 ```
 **Data example**:
 ```json
 {
-    “id” : “1234”,
-	“Title” : “Eat breakfast”,
-	“Description”  : “Eat breakfast for today”,
-	“Start_Date” : “2020-03-12T08:50:00.000”,
-	“End_Date” : “2020-03-19T09:55:00.000”,
-	“Location” : “Home”,
-	“Color” : “Red”
+    	"id" : "1234",
+	"Title" : "Eat breakfast",
+	"Description" : "Eat breakfast for today",
+	"Start_Date" : "2020-03-12T08:50:00.000",
+	"End_Date" : "2020-03-19T09:55:00.000",
+	"Location" : "Home",
+	"Color" : "Red"
 }
 ```
 ## Success response
@@ -213,8 +212,8 @@ Used to update a user’s task
 If the user enters a valid update and task ID
 ```json
 {
-    "task_id: "1234",
-    "Successful": "True"
+    "task_id" : "1234",
+    "Successful" : "True"
 }
 ```
 # GetTasks
@@ -235,29 +234,28 @@ Get the tasks of a user
 
 **Content examples**
 
-Shows an array of all tasks
+Returns all the tasks the current user has
 ```json
 {
-    {
-        “id” : “1234”,
-        “Title” : “Eat dinner”,
-        “Description”  : “Eat dinner for tonight”,
-        “Start_Date” : “2020-03-12T21:50:00.000”,
-        “End_Date” : “2020-03-12T22:55:00.000”,
-        “User_id” : “jyao413@aucklanduni.ac.nz”,
-        “Location” : “Home”,
-        “Color” : “Red”
-    },
-    {
-        “id” : “125215”,
-        “Title” : “Eat lunch”,
-        “Description”  : “Eat lunch today”,
-        “Start_Date” : “2020-03-12T11:50:00.000”,
-        “End_Date” : “2020-03-12T12:55:00.000”,
-        “User_id” : “jyao413@aucklanduni.ac.nz”,
-        “Location” : “Home”,
-        “Color” : “Red”
-    }
+
+	"id" : "1234",
+        "Title" : "Eat dinner",
+        "Description"  : "Eat dinner for tonight",
+        "Start_Date" : "2020-03-12T21:50:00.000",
+        "End_Date" : "2020-03-12T22:55:00.000",
+        "User_id" : "jyao413@aucklanduni.ac.nz",
+        "Location" : "Home",
+        "Color" : "Red"
+},
+{
+        "id" : "1231241244",
+        "Title" : "Eat lunch",
+        "Description"  : "Eat lunch for today",
+        "Start_Date" : "2020-03-12T13:50:00.000",
+        "End_Date" : "2020-03-12T11:55:00.000",
+        "User_id" : "jyao413@aucklanduni.ac.nz",
+        "Location" : "Home",
+        "Color" : "Red"
 }
 ```
 # DeleteTask
@@ -275,13 +273,13 @@ Used to delete a user’s task
 **Data Constraints**:
 ```json
 {
-    “id” : “[ID of the task]”
+    "id" : "[ID of the task]"
 }
 ```
 **Data example**:
 ```json
 {
-    “id” : “1234”
+    "id" : "1234"
 }
 ```
 
@@ -294,16 +292,14 @@ Used to delete a user’s task
 If the user enters a valid task ID
 ```json
 {
-    "task_id: "1234",
-    "Deleted": "True"
+    "task_id" : "1234",
+    "Deleted" : "True"
 }
 ```
 If the user enters an invalid task ID
 ```json 
 {
-    "task_id: "1234",
-    "Deleted": "False"
+    "task_id" : "1234",
+    "Deleted" : "False"
 }
 ```
-
-
