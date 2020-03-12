@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import "./index.css";
-import routes from "./routes/common";
+import routes from "./routes/Route";
 import * as serviceWorker from "./serviceWorker";
 import "typeface-roboto";
 
