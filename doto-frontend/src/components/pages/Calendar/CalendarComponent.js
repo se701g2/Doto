@@ -109,6 +109,4 @@ const CalendarComponent = () => {
     );
 };
 
-// render(<App />, document.getElementById("root"));
-
 export default CalendarComponent;
