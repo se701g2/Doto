@@ -1,15 +1,13 @@
 import React from "react";
-import "./App.css";
-import "./tailwind-generated.css";
 
-const App = () => {
+const Settings = () => {
     return (
         <div className="App">
             <header className="App-header">
-                <div>Doto</div>
+                <div>Settings</div>
             </header>
         </div>
     );
 };
 
-export default App;
+export default Settings;

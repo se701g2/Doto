@@ -17,6 +17,7 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x]
+        mongodb-version: [4.2]
 
     steps:
     - uses: actions/checkout@v2
@@ -24,11 +25,15 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: Start MongoDB ${{ matrix.mongodb-version }}
+      uses: supercharge/mongodb-github-action@1.1.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
     - run: cd doto-backend && npm ci
     - run: cd doto-backend && npm run build --if-present
     - run: cd doto-backend && npm test
     - run: cd doto-frontend && npm ci
     - run: cd doto-frontend && npm run build --if-present
-    - run: cd doto-backend && npm test
+    - run: cd doto-frontend && npm test
       env:
         CI: true
