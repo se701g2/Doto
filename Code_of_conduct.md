@@ -1,8 +1,8 @@
-# Taffy's Code of Conduct
+# Doto's Code of Conduct
 
-The following code of conduct outlines the expectations for participation in the open-source community managed by Taffy, as well as steps for reporting unacceptable behavior. 
+The following code of conduct outlines the expectations for participation in the open-source community managed by Doto, as well as steps for reporting unacceptable behavior. 
 
-At Taffy, we are committed to providing a welcoming, open, diverse, inclusive and healthy workspace for everyone. 
+At Doto, we are committed to providing a welcoming, open, diverse, inclusive and healthy workspace for everyone. 
 
 Any individual violating this code of conduct may be banned from the community.
 
@@ -10,14 +10,14 @@ This code is not exhaustive or complete. It serves to capture our common underst
 
 ## Standards
 
-As a part of the Taffy community we will:
+As a part of the Doto community we will:
 
   - **Be patient and friendly:** Remember that you might not be communicating in someone else's primary 
   spoken or programming language and others may not have your level of understanding.
 
-  - **Be welcoming:** Taffy welcomes and supports people from all backgrounds and communities. This includes but is not limited to the level of experience, education, socio-economic status, visible or invisible disability, race, ethnicity, nationality, religion, sexual identity, and orientation or gender identity. 
+  - **Be welcoming:** Doto welcomes and supports people from all backgrounds and communities. This includes but is not limited to the level of experience, education, socio-economic status, visible or invisible disability, race, ethnicity, nationality, religion, sexual identity, and orientation or gender identity. 
 
-  - **Be respectful:** As developers of the Taffy community, we conduct ourselves professionally and practice acceptance and tolerance. Disagreement is no excuse for poor behavior and poor manners. Taffy defines disrespectful and unacceptable behavior to be:
+  - **Be respectful:** As developers of the Doto community, we conduct ourselves professionally and practice acceptance and tolerance. Disagreement is no excuse for poor behavior and poor manners. Doto defines disrespectful and unacceptable behavior to be:
     - Belittling anyone's experience 
     - Violent threats or language
     - Discriminatory or derogatory jokes and language
@@ -27,7 +27,7 @@ As a part of the Taffy community we will:
     - Behavior that could be perceived as sexual attention
     - Advocating for or encouraging any of the above behaviors.
 
-  - **Demonstrate empathy and kindness toward other people:** At Taffy we promote empathy as it helps us make more informed decisions as developers. We should also not taunt others or be show anger. It doesn't help anyone when we furiously tell others what they do is wrong and that they shouldn’t be doing what they are doing.
+  - **Demonstrate empathy and kindness toward other people:** At Doto we promote empathy as it helps us make more informed decisions as developers. We should also not taunt others or be show anger. It doesn't help anyone when we furiously tell others what they do is wrong and that they shouldn’t be doing what they are doing.
   
   - **Take constructive criticism:** Disagreements, both social and technical, are useful learning opportunities. Seek to understand the other viewpoints and resolve differences constructively. Give and gracefully accept constructive feedback.
 
@@ -36,7 +36,7 @@ As a part of the Taffy community we will:
 
 ## Enforcement Responsibilities
 
-Everyone who belongs to Taffy should be practicing this code and making sure that no one else is violating it. However, community leaders are responsible for clarifying these standards
+Everyone who belongs to Doto should be practicing this code and making sure that no one else is violating it. However, community leaders are responsible for clarifying these standards
 of acceptable behavior wherever the line is unclear. They will also take appropriate action for any behavior that they deem unaligned with this code. 
 
 Community leaders have the right to remove, edit, or reject, comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this code of conduct, and will communicate the reasons for moderation decisions when appropriate. 
