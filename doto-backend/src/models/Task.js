@@ -1,32 +1,41 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const taskSchema = mongoose.Schema({
     user: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        required: true
+    },
+    taskId: {
         type: String,
         required: true
     },
-    taskName: {
-        type: String,
-        required: true
+    title: {
+        type: String
     },
     description: {
         type: String,
-        default: ''
     },
     location: {
         type: String,
-        default: ''
     },
     priority: {
         type: Number
     },
     duration: {
-        type: Number
+        type: Number,
+        required: true
     },
-    reminderDate: {
-        type: Date
+    startDate: {
+        type: Date,
+        required: true
     },
     endDate: {
+        type: Date,
+        required: true
+    },
+    reminderDate: {
         type: Date
     }
 });
