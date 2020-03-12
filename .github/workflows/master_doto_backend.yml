@@ -34,3 +34,8 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_1a48d7d3d58a4327a6f6e034ff403ce4 }}
         package: ./doto-backend/
+    
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.1.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
