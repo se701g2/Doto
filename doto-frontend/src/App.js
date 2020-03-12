@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+// import CalendarComponent from "./CalendarComponent"; // CalendarComponent(), To call the calendar component
 import "./tailwind-generated.css";
 
 const App = () => {
