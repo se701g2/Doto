@@ -6,6 +6,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
+import DateFnsUtils from "@date-io/date-fns";
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 import "./ModalContent.css";
 
@@ -25,7 +27,9 @@ const useStyles = makeStyles(theme => ({
 const ModalContent = () => {
     const classes = useStyles();
 
-    const [priority, setPriority, reminder, setReminder] = React.useState("");
+    const [selectedDate, setSelectedDate] = React.useState(new Date());
+    const [priority, setPriority] = React.useState("");
+    const [reminder, setReminder] = React.useState("");
 
     const handlePriority = event => {
         setPriority(event.target.value);
@@ -33,6 +37,14 @@ const ModalContent = () => {
 
     const handleReminder = event => {
         setReminder(event.target.value);
+    };
+
+    const handleDateChange = date => {
+        setSelectedDate(date);
+    };
+
+    const handleAdd = event => {
+        // close modal
     };
 
     return (
@@ -45,7 +57,23 @@ const ModalContent = () => {
                     <div>
                         <TextField className="text-area spacing" id="standard-basic" label="Task description" />
                     </div>
-                    <div>Due Date :</div>
+                    <div>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                                disableToolbar
+                                variant="inline"
+                                format="MM/dd/yyyy"
+                                margin="normal"
+                                id="date-picker-inline"
+                                label="Due Date"
+                                value={selectedDate}
+                                onChange={handleDateChange}
+                                KeyboardButtonProps={{
+                                    "aria-label": "change date",
+                                }}
+                            />
+                        </MuiPickersUtilsProvider>
+                    </div>
                     <div>Duration :</div>
                     <div>
                         <TextField className="text-area spacing" id="standard-basic" label="Location" />
@@ -67,16 +95,18 @@ const ModalContent = () => {
                                 <MenuItem value={10}>1 Week Before</MenuItem>
                                 <MenuItem value={20}>1 Day Before</MenuItem>
                                 <MenuItem value={30}>1 Hour Before</MenuItem>
-                                <MenuItem value={30}>30 Minuties Before</MenuItem>
-                                <MenuItem value={30}>15 Minuties Before</MenuItem>
-                                <MenuItem value={30}>5 Minuties Before</MenuItem>
+                                <MenuItem value={40}>30 Minuties Before</MenuItem>
+                                <MenuItem value={50}>15 Minuties Before</MenuItem>
+                                <MenuItem value={60}>5 Minuties Before</MenuItem>
                             </Select>
                         </FormControl>
                     </div>
                 </form>
             </div>
             <div id="add-button">
-                <Button variant="outlined">ADD</Button>
+                <Button variant="outlined" onClick={handleAdd}>
+                    ADD
+                </Button>
             </div>
         </div>
     );
