@@ -2,7 +2,7 @@
 
 Used to register the user for the application
 
-**URL** : `/api/schedule/post`
+**URL** : `/api/register/post`
 
 **Method** : POST
 
@@ -81,12 +81,12 @@ Used to log the user into the application
 For a user with ID 1234 on the database where the user has saved their login information:
 ```json
 {
-    "name": "Jason",
-    "email": "jyao413@aucklanduni.ac.nz",
-    "_id": "1234", 
+    	"name": "Jason",
+    	"email": "jyao413@aucklanduni.ac.nz",
+    	"_id": "1234", 
         "Picture": "imgur.com/ao12r",
         "Preferences": "blue",
-    "__v": "0"
+    	"__v": "0"
 }
 ```
 Notes: 
@@ -107,12 +107,11 @@ Used to schedule a task
 **Data constraints**:
 ```json
 {
-	"id" : "Unique id for task]",
 	"Title" : "Name for schedule task",
 	"Description"  : "[Description for task]",
 	"Start_Date" : "[Time of creation]",
 	"End_Date" : "[Time to finish task by]",
-	"User_id" : "[Users email]",
+	"User_id" : "[Users google ID]",
 	"Location" : "[Location of their task]",
 	"Color" : "[Preferences of task color]"
 }
