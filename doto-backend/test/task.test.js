@@ -31,8 +31,8 @@ describe('Task Model Tests', () => {
 
     it('create & save task successfully.', async () => {
         const validTask = new TaskModel({
+            id: new mongoose.Types.ObjectId(),
             user: validUser,
-            taskId: '1234',
             title: 'title',
             description: 'Re-Doing all the things',
             location: 'science building',
@@ -42,14 +42,14 @@ describe('Task Model Tests', () => {
             startDate: '2020-08-14T08:50:00',
             endDate: '2020-08-14T07:50:00'
         });
-
+        let taskID = validTask.id;
         const savedTask = await validTask.save();
-        assert(savedTask.taskId === '1234');
+        assert(savedTask.id === taskID);
     });
 
     it('create task without required user & throws error.', async ()=>{
         const invalidTask = new TaskModel({
-            taskId: '1234',
+            id: new mongoose.Types.ObjectId(),
             description: 'Re-Doing all the things',
             location: 'science building',
             priority: 0,
@@ -61,23 +61,6 @@ describe('Task Model Tests', () => {
     
         var error = invalidTask.validateSync();
         assert.equal(error.errors['user'].message,'Path `user` is required.');
-    });
-
-    it('create task without required taskName & throws error.', async ()=>{
-        const invalidTask = new TaskModel({
-            user: validUser,
-            title: 'title',
-            description: 'Re-Doing all the things',
-            location: 'science building',
-            priority: 0,
-            duration: 120,
-            reminderDate: '2020-07-14T07:50:00',
-            startDate: '2020-08-14T06:50:00',
-            endDate: '2020-08-14T07:50:00'
-        });
-    
-        var error = invalidTask.validateSync();
-        assert.equal(error.errors['taskId'].message,'Path `taskId` is required.');
     });
 
     it('create task with incorrect date type & throws error.', async ()=>{
@@ -101,7 +84,7 @@ describe('Task Model Tests', () => {
     it('create task with incorrect user type & throws error.', async ()=>{
         const invalidTask = new TaskModel({
             user: 'john',
-            taskId: '1234',
+            id: new mongoose.Types.ObjectId(),
             title: 'title',
             description: 'Re-Doing all the things',
             location: 'science building',
@@ -119,7 +102,7 @@ describe('Task Model Tests', () => {
     it('create task with incorrect priority number type & throws error.', async ()=>{
         const invalidTask = new TaskModel({
             user: validUser,
-            taskId: '1234',
+            id: new mongoose.Types.ObjectId(),
             title: 'title',
             description: 'Re-Doing all the things',
             location: 'science building',
