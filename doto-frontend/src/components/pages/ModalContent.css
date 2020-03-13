@@ -1,0 +1,41 @@
+.modal {
+    background-image: url("../images/modal-background.jpg");
+    background-size: cover;
+}
+
+.makeStyles-paper-2 {
+    padding: 0px !important;
+}
+
+.forum-content {
+    text-align: left;
+    margin-left: 100px;
+}
+
+.name-field {
+    font-size: 40px;
+}
+
+.drop-down {
+    padding-top: 30px;
+    width: 200px;
+}
+
+.text-area {
+    width: 400px;
+}
+
+.MuiSelect-selectMenu {
+    width: 300px;
+}
+
+#add-button {
+    text-align: right;
+    padding-top: 40px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+}
+
+.spacing {
+    margin-top: 30px !important;
+}
