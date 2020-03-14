@@ -15,10 +15,15 @@ const useStyles = makeStyles(theme => ({
     root: {
         "& > *": {
             margin: theme.spacing(1),
-            width: 450,
+            width: 400,
         },
     },
-
+    taskNameInput: {
+        fontSize: 30,
+    },
+    labelFocus: {
+        fontSize: 18,
+    },
     formControl: {
         width: 200,
     },
@@ -52,12 +57,27 @@ const ModalContent = () => {
             <div className="forum-content">
                 <form className={classes.root} noValidate autoComplete="off">
                     <div>
-                        <TextField className="text-area name-field spacing" id="standard-basic" label="Task name" />
+                        <TextField
+                            className="text-area name-field spacing"
+                            id="standard-basic"
+                            label="Task name"
+                            InputProps={{
+                                classes: {
+                                    input: classes.taskNameInput,
+                                },
+                            }}
+                            InputLabelProps={{
+                                classes: {
+                                    root: classes.taskNameInput,
+                                    shrink: classes.labelFocus,
+                                },
+                            }}
+                        />
                     </div>
                     <div>
                         <TextField className="text-area spacing" id="standard-basic" label="Task description" />
                     </div>
-                    <div>
+                    <div className="spacing">
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <KeyboardDatePicker
                                 disableToolbar
@@ -104,7 +124,7 @@ const ModalContent = () => {
                 </form>
             </div>
             <div id="add-button">
-                <Button variant="outlined" onClick={handleAdd}>
+                <Button variant="contained" color="default" onClick={handleAdd}>
                     ADD
                 </Button>
             </div>
