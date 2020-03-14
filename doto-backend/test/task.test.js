@@ -20,8 +20,6 @@ describe('Task Model Tests', () => {
             if (err) {
                 console.error(err);
                 process.exit(1);
-            } else {
-                console.log(app.get('env'))
             }
         });
     });
