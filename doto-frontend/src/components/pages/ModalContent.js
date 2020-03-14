@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
     },
     taskNameInput: {
         fontSize: 30,
+        fontWeight: 600,
     },
     labelFocus: {
         fontSize: 18,
@@ -58,7 +59,7 @@ const ModalContent = () => {
                 <form className={classes.root} noValidate autoComplete="off">
                     <div>
                         <TextField
-                            className="text-area name-field spacing"
+                            className="text-area name-field"
                             id="standard-basic"
                             label="Task name"
                             InputProps={{
@@ -75,7 +76,7 @@ const ModalContent = () => {
                         />
                     </div>
                     <div>
-                        <TextField className="text-area spacing" id="standard-basic" label="Task description" />
+                        <TextField className="text-area group-spacing" id="standard-basic" label="Task description" />
                     </div>
                     <div className="spacing">
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -94,7 +95,9 @@ const ModalContent = () => {
                             />
                         </MuiPickersUtilsProvider>
                     </div>
-                    <div>Duration :</div>
+                    <div>
+                        <TextField className="small-text-area group-spacing" id="standard-basic" label="Duration" />
+                    </div>
                     <div>
                         <TextField className="text-area spacing" id="standard-basic" label="Location" />
                     </div>
