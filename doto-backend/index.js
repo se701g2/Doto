@@ -3,17 +3,20 @@ const cors = require('cors')
 const app = express()
 const apiPort = process.env.PORT || 3000
 require('dotenv').config();
-const connectionString = process.env.AZURE_CONN || process.env.mongodb_uri;
+
 // Mongoose connection
 const mongoose = require('mongoose');
-const connObj = { useNewUrlParser: true }
+// db connection string will point to Azure string only in production, fallbacks to dev database string 
+const connectionString = process.env.AZURE_CONN || process.env.mongodb_uri;
+// Add authentication strings only in production environment
+const connParams = { useNewUrlParser: true }
 if(process.env.AZURE_USER && process.env.AZURE_PW){
-    connObj.auth = {
+    connParams.auth = {
         user : process.env.AZURE_USER,
         password: process.env.AZURE_PW
     };
 }
-mongoose.connect(connectionString, connObj);
+mongoose.connect(connectionString, connParams);
 const db = mongoose.connection;
 
 // Checking for DB connection
