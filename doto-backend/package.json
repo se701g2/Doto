@@ -21,6 +21,7 @@
         "mongoose-unique-validator": "^2.0.3",
         "nodemon": "^2.0.2",
         "passport": "^0.4.1",
-        "passport-google-oauth20": "^2.0.0"
+        "passport-google-oauth20": "^2.0.0",
+        "swagger-ui-express": "^4.1.3"
     }
 }
