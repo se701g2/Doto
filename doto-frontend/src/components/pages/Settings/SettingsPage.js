@@ -68,14 +68,12 @@ const SettingsPage = () => {
 
                 <div className="column-fields">
                     <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
-                    <div>
-                        <ThemeProvider theme={theme1}>
-                            <Button id="color-palette" variant="contained" color="primary"></Button>
-                        </ThemeProvider>
-                        <ThemeProvider theme={theme1}>
-                            <Button id="color-palette" variant="contained" color="secondary"></Button>
-                        </ThemeProvider>
-                    </div>
+                    <ThemeProvider theme={theme1}>
+                        <Button id="color-palette" variant="contained" color="primary"></Button>
+                    </ThemeProvider>
+                    <ThemeProvider theme={theme1}>
+                        <Button id="color-palette" variant="contained" color="secondary"></Button>
+                    </ThemeProvider>
                 </div>
 
                 <div className="column-fields">
