@@ -6,14 +6,30 @@ import "./Header.css";
 
 const MenuBar = props => {
     return (
-        <div>
-            <h1>{/* {props.title} */}</h1>
-            <h1>
-                <AccountCircleIcon className="App" />
-                <SettingsIcon className="App" />
-                <DateRangeIcon className="App" />
-            </h1>
-        </div>
+        <nav>
+            {/* UNCOMMENT THIS TO SEE PAGE TITLE <h1 className="Title"> {props.title}</h1> */}
+
+            <ul className="IconList">
+                <li className="Account">
+                    {" "}
+                    <AccountCircleIcon className="IconLarge" />{" "}
+                </li>
+                <li className="IconList">
+                    {" "}
+                    <a href="/Settings">
+                        {" "}
+                        <SettingsIcon className="IconLarge" />{" "}
+                    </a>{" "}
+                </li>
+                <li className="IconList">
+                    {" "}
+                    <a href="/Calendar">
+                        {" "}
+                        <DateRangeIcon className="IconLarge" />{" "}
+                    </a>{" "}
+                </li>
+            </ul>
+        </nav>
     );
 };
 
