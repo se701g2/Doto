@@ -7,7 +7,7 @@ import "./Header.css";
 const MenuBar = props => {
     return (
         <nav>
-            {/* UNCOMMENT THIS TO SEE PAGE TITLE <h1 className="Title"> {props.title}</h1> */}
+            {/* UNCOMMENT THIS TO SEE TITLE  <h1 className="Title"> {props.title}</h1> */}
 
             <ul className="IconList">
                 <li className="Account">
