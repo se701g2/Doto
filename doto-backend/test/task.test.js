@@ -18,9 +18,9 @@ const validTask = new TaskModel({
     location: 'science building',
     priority: 0,
     duration: 120,
-    reminderDate: '2020-07-14T07:50:00',
-    startDate: '2020-08-14T08:50:00',
-    endDate: '2020-08-14T07:50:00'
+    reminderDate: '2020-07-14T07:50:00+12:00',
+    startDate: '2020-08-14T08:50:00+12:00',
+    endDate: '2020-08-14T07:50:00+12:00'
 });
 
 process.env.TEST_SUITE = 'task-test';
@@ -54,9 +54,9 @@ describe('Task Model Tests', () => {
             location: 'science building',
             priority: 0,
             duration: 120,
-            reminderDate: '2020-07-14T07:50:00',
-            startDate: '2020-08-14T06:50:00',
-            endDate: '2020-08-14T07:50:00'
+            reminderDate: '2020-07-14T07:50:00+12:00',
+            startDate: '2020-08-14T06:50:00+12:00',
+            endDate: '2020-08-14T07:50:00+12:00'
         });
     
         var error = invalidTask.validateSync();
@@ -69,9 +69,9 @@ describe('Task Model Tests', () => {
             location: 'science building',
             priority: 0,
             duration: 120,
-            reminderDate: '2020-07-14T07:50:00',
-            startDate: '2020-08-14T06:50:00',
-            endDate: '2020-08-14T07:50:00'
+            reminderDate: '2020-07-14T07:50:00+12:00',
+            startDate: '2020-08-14T06:50:00+12:00',
+            endDate: '2020-08-14T07:50:00+12:00'
         });
     
         var error = invalidTask.validateSync();
@@ -87,9 +87,9 @@ describe('Task Model Tests', () => {
             location: 'science building',
             priority: 0,
             duration: 120,
-            reminderDate: '2020-07-14T07:50:00',
+            reminderDate: '2020-07-14T07:50:00+12:00',
             startDate: 'yesterday',
-            endDate: '2020-08-14T07:50:00'
+            endDate: '2020-08-14T07:50:00+12:00'
         });
     
         var error = invalidTask.validateSync();
@@ -104,9 +104,9 @@ describe('Task Model Tests', () => {
             location: 'science building',
             priority: 0,
             duration: 120,
-            reminderDate: '2020-07-14T07:50:00',
-            startDate: '2020-08-14T08:50:00',
-            endDate: '2020-08-14T07:50:00'
+            reminderDate: '2020-07-14T07:50:00+12:00',
+            startDate: '2020-08-14T08:50:00+12:00',
+            endDate: '2020-08-14T07:50:00+12:00'
         });
     
         var error = invalidTask.validateSync();
@@ -121,9 +121,9 @@ describe('Task Model Tests', () => {
             location: 'science building',
             priority: 'High',
             duration: 120,
-            reminderDate: '2020-07-14T07:50:00',
-            startDate: '2020-08-14T08:50:00',
-            endDate: '2020-08-14T07:50:00'
+            reminderDate: '2020-07-14T07:50:00+12:00',
+            startDate: '2020-08-14T08:50:00+12:00',
+            endDate: '2020-08-14T07:50:00+12:00'
         });
     
         var error = invalidTask.validateSync();
