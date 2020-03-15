@@ -118,9 +118,9 @@ const ModalContent = () => {
                                 <MenuItem value={10}>1 Week Before</MenuItem>
                                 <MenuItem value={20}>1 Day Before</MenuItem>
                                 <MenuItem value={30}>1 Hour Before</MenuItem>
-                                <MenuItem value={40}>30 Minuties Before</MenuItem>
-                                <MenuItem value={50}>15 Minuties Before</MenuItem>
-                                <MenuItem value={60}>5 Minuties Before</MenuItem>
+                                <MenuItem value={40}>30 Minutes Before</MenuItem>
+                                <MenuItem value={50}>15 Minutes Before</MenuItem>
+                                <MenuItem value={60}>5 Minutes Before</MenuItem>
                             </Select>
                         </FormControl>
                     </div>
