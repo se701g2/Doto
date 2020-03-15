@@ -1,0 +1,63 @@
+.SettingsPage {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-side-bar {
+    border-radius: 0px 79px 0px 0px;
+    width: 20vh;
+    background-color: #3700b3;
+    min-height: 80vh;
+    margin-top: 20vh;
+}
+
+.right-side-bar {
+    border-radius: 79px 0px 0px 0px;
+    width: 95vw;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: #8d6cd9;
+    min-height: 80vh;
+    margin-top: 20vh;
+    margin-left: 5vw;
+}
+
+.column-fields {
+    display: flex;
+    flex-direction: row;
+}
+
+#upload-photo {
+    width: 180px;
+    height: 50px;
+    margin-top: 10vh;
+    margin-left: 2vw;
+}
+
+#save_changes {
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+}
+
+#input-field {
+    width: 250px;
+    margin-left: 10vw;
+    margin-top: 4vh;
+    text-align: left;
+}
+
+#profile-photo {
+    width: 150px;
+    margin-left: 10vw;
+    margin-top: 4vh;
+    height: 150px;
+}
+
+#color-palette {
+    margin-top: 3vh;
+    height: 40px;
+    margin-left: 2vw;
+    border-radius: 50px 50px 50px 50px;
+}
