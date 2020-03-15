@@ -14,7 +14,7 @@ import {
     Appointments,
 } from "@devexpress/dx-react-scheduler-material-ui";
 
-const DoToScheduler = ({ appointments }) => {
+const CalendarComponent = ({ appointments }) => {
     return (
         <Scheduler data={appointments} currentView={MonthView} editable={true}>
             <ViewState />
@@ -28,10 +28,6 @@ const DoToScheduler = ({ appointments }) => {
             <Appointments />
         </Scheduler>
     );
-};
-
-const CalendarComponent = ({ appointments }) => {
-    return <DoToScheduler appointments={appointments} />;
 };
 
 export default CalendarComponent;

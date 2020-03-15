@@ -99,6 +99,19 @@ const Calendar = () => {
                         </Fab>
                     </div>
                 </div>
+                {listView && (
+                    <div className="flex">
+                        <div className="Calendar">
+                            <CalendarComponent appointments={appointments} />
+                        </div>
+                        <CalendarListView appointments={appointments} />
+                    </div>
+                )}
+                {!listView && (
+                    <div className={"Calendar "}>
+                        <CalendarComponent appointments={appointments} />
+                    </div>
+                )}
                 <div>
                     <Modal
                         aria-labelledby="transition-modal-title"
@@ -119,19 +132,6 @@ const Calendar = () => {
                         </Fade>
                     </Modal>
                 </div>
-                {listView && (
-                    <div className="flex">
-                        <div className="Calendar">
-                            <CalendarComponent appointments={appointments} />
-                        </div>
-                        <CalendarListView appointments={appointments} />
-                    </div>
-                )}
-                {!listView && (
-                    <div className={"Calendar "}>
-                        <CalendarComponent appointments={appointments} />
-                    </div>
-                )}
             </span>
         </div>
     );
