@@ -1,14 +1,9 @@
 import React from "react";
 import "date-fns";
 import "./SettingsPage.css";
-import { FormControl, Button } from "@material-ui/core";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import { FormControl, Button, Input, InputLabel, InputAdornment, Avatar } from "@material-ui/core";
+import { AccountCircle } from "@material-ui/icons";
 import EmailIcon from "@material-ui/icons/Email";
-import Avatar from "@material-ui/core/Avatar";
-
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import SaveIcon from "@material-ui/icons/Save";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
