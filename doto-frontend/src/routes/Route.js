@@ -2,8 +2,8 @@ import React from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import App from "../App";
 import Settings from "../components/pages/Settings";
-import Calendar from "../components/pages/Calendar/CalendarPage";
 import Login from "../components/pages/Login/Login";
+import Calendar from "../components/pages/Calendar/Calendar";
 import NotFound from "../components/pages/NotFound";
 
 export default (
