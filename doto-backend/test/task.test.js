@@ -13,6 +13,7 @@ const validUser = new UserModel({
 
 const validTask = new TaskModel({
     user: validUser,
+    taskId: '1',
     title: 'title',
     description: 'Re-Doing all the things',
     location: 'science building',
