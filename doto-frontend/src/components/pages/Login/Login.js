@@ -3,7 +3,7 @@ import "./Login.css";
 
 const DotoTitle = () => {
     return (
-        <div className="ml-48 p-4">
+        <div className="p-4" style={{ marginLeft: "7rem" }}>
             <span className="text-6xl font-bold font"> Doto </span>
         </div>
     );
@@ -19,7 +19,7 @@ const BlueBubble = () => {
                 <div>
                     <span className="text-white text-5xl font-light">Planned for you</span>
                 </div>
-                <div className="google-btn-container">
+                <div className="google-btn-container mt-2">
                     <a href="/auth/google">
                         <div className="google-btn">
                             <div className="google-icon-wrapper">
@@ -46,7 +46,7 @@ const PurpleBubble = () => {
 
 const Login = () => {
     return (
-        <div className="flex flex-row bg-white w-full overflow-hidden">
+        <div className="flex flex-row bg-white w-full overflow-hidden max-h-screen">
             <div className="flex flex-col h-screen w-2/3 mt-32">
                 <DotoTitle />
                 <BlueBubble />
