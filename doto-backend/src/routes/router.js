@@ -16,7 +16,7 @@ router.get('/users', function(req, res){
 })
 
 // ADD user
-router.post('/users', function (req, res) {
+router.post('/users/add', function (req, res) {
 
     let user = new User();
     user.name = req.body.name;
