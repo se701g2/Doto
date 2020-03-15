@@ -30,7 +30,7 @@ const Calendar = () => {
     const classes = useStyles();
     const [listView, setListView] = useState();
     const [appointments, setAppointments] = useState([]);
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
@@ -99,39 +99,30 @@ const Calendar = () => {
                         </Fab>
                     </div>
                 </div>
-                {listView && (
-                    <div className="flex">
-                        <div className="Calendar">
-                            <CalendarComponent appointments={appointments} />
-                        </div>
-                        <CalendarListView appointments={appointments} />
-                    </div>
-                )}
-                {!listView && (
-                    <div className={"Calendar "}>
+                <div className="flex">
+                    <div className="Calendar">
                         <CalendarComponent appointments={appointments} />
                     </div>
-                )}
-                <div>
-                    <Modal
-                        aria-labelledby="transition-modal-title"
-                        aria-describedby="transition-modal-description"
-                        className={classes.modal}
-                        open={open}
-                        onClose={handleClose}
-                        closeAfterTransition
-                        BackdropComponent={Backdrop}
-                        BackdropProps={{
-                            timeout: 500,
-                        }}
-                    >
-                        <Fade in={open}>
-                            <div className={classes.paper}>
-                                <ModalConent />
-                            </div>
-                        </Fade>
-                    </Modal>
+                    {listView && <CalendarListView appointments={appointments} />}
                 </div>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={open}>
+                        <div className={classes.paper}>
+                            <ModalConent />
+                        </div>
+                    </Fade>
+                </Modal>
             </span>
         </div>
     );
