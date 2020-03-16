@@ -30,7 +30,7 @@ const Calendar = () => {
     const classes = useStyles();
     const [listView, setListView] = useState();
     const [appointments, setAppointments] = useState([]);
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => {
         setOpen(true);
@@ -88,7 +88,7 @@ const Calendar = () => {
                 </header>
                 <div className="flex justify-end">
                     <div className="ml-3">
-                        <Fab onClick={() => handleOpen} size="small">
+                        <Fab onClick={handleOpen} size="small">
                             <AddIcon />
                         </Fab>
                     </div>
