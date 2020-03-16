@@ -29,7 +29,6 @@ Please refer to our [wiki] (https://github.com/se701g2/Doto/wiki) for an outline
 ## Meta
 Se701 Group2 - Se701group2@gmail.com
 Distributed under the MIT licence. Check the [wiki] (https://github.com/se701g2/Doto/wiki/licence) for more details
-Please refer to the [wiki] (https://github.com/se701g2/wiki) for our coding practices 
 
 ## Where to Get More Help
 If you have run into any issues, you can contact our lecturer Kelly Blincoe and she will be able to point you in the right direction. 
