@@ -12,7 +12,7 @@ passport.use(
         //Check if user already exists in database
         User.findOne({name: email._json.email}).then((currentUser)=>{
             if(currentUser){
-                console.log('User already exists ' + newUser.name)
+                console.log('User already exists ' + currentUser.name)
                 user = currentUser
             }else{
                 user = new User({
