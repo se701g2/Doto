@@ -149,13 +149,5 @@ describe('Task Model Tests', () => {
             )
     });
 
-    it('delete user successfully.', async ()=>{
-        TaskModel.remove({title: 'Do the thing'})
-            .then(
-                (task) => {
-                    assert(task === null); 
-                    done();
-                }
-            )
-    });
+
 })
