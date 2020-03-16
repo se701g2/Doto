@@ -104,7 +104,6 @@ describe('Task Model Tests', () => {
 
     it('create task with incorrect user type & throws error.', async ()=>{
         const invalidTask = new TaskModel({
-            user: 'john',
             title: 'title',
             description: 'Re-Doing all the things',
             location: 'science building',
