@@ -63,24 +63,10 @@ router.route('/users/add').post((req, res) => {
 
 
 //GET ALL task
-// Due to not fully understanding ':username' param, and how to get this,
-// This is still work-in-progress, and does not currently function/is of
-// a different style.
 router.route('/schedule/get/:user').get((req,res) => {
-// router.get('/schedule/get/:name', function(req, res){
-    let tasks = Task.find()
+    let tasks = Task.find({"user": req.params.user})
     .then(tasks => res.json(tasks))
     .catch(err => res.status(400).json('Error: ' + err));
-    // let tasks = Task.findById({}, function(req, res){
-    //     if(err){
-    //         console.log(err);
-    //         res.json({msg: "error retriving tasks..."});
-    //     } else {
-    //         console.log(tasks);
-    //         res.json(tasks);
-    //     }
-    // })
-
 });
 
 //ADD task 
@@ -109,10 +95,8 @@ router.post('/schedule/post', function(req, res){
 });
 
 //DELETE task
-// currently deletes all tasks
 router.delete('/schedule/:taskId', function(req, res){
-    
-    Task.remove(function(err){
+    Task.remove({"taskId": req.params.taskId}, function(err){
         if(err){
             console.log(err);
             res.json({msg: "error deleting task..."});
