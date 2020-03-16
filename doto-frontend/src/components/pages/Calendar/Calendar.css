@@ -1,38 +1,35 @@
-.Calendar-header {
-    text-align: left;
-    font-size: 70px;
-    font-weight: bold;
+.CalendarPage {
+    display: flex;
+    max-width: 100%;
+}
+
+.calendar-buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 20vh 10px 0px 10px;
 }
 
 .Side {
     margin-top: 20vh;
     background-color: #3700b3;
-    width: 10%;
+    width: 20vh;
     border-radius: 0px 79px 0px 0px;
     max-height: 86vh;
 }
 
-.CalendarPage {
-    display: flex;
-    flex-direction: row;
-    max-width: 100%;
-    overflow-y: hidden;
-}
-
-.container {
+.calendar-container {
     display: flex;
     height: 100vh;
+    width: 100%;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .Calendar {
-    height: 75vh;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px 10px 10px 0px;
+    height: 80vh;
     max-width: 100vw;
     overflow: hidden;
-    margin-left: 5%;
 }
 
 .list-view {
