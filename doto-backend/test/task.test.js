@@ -29,18 +29,6 @@ const validTask = new TaskModel({
     endDate: '2020-08-14T07:50:00+12:00'
 });
 
-const invalidTask = new TaskModel({
-    user: validUser,
-    title: 'title',
-    description: 'Re-Doing all the things',
-    location: 'science building',
-    priority: 0,
-    duration: 120,
-    reminderDate: '2020-07-14T07:50:00+12:00',
-    startDate: '2020-08-14T08:50:00+12:00',
-    endDate: '2020-08-14T07:50:00+12:00'
-});
-
 process.env.TEST_SUITE = 'task-test';
 
 describe('Task Model Tests', () => {
@@ -116,7 +104,7 @@ describe('Task Model Tests', () => {
 
     it('create task with incorrect user type & throws error.', async ()=>{
         const invalidTask = new TaskModel({
-            user: invalidUser,
+            user: 'john',
             title: 'title',
             description: 'Re-Doing all the things',
             location: 'science building',
@@ -149,9 +137,9 @@ describe('Task Model Tests', () => {
     });
 
     it('populating user field from user model.', async ()=>{
-        await invalidTask.save();
+        await validTask.save();
         
-        TaskModel.findOne({_id: invalidTask._id})
+        TaskModel.findOne({_id: validTask._id})
             .populate('user')
             .then(
                 (task) => {
