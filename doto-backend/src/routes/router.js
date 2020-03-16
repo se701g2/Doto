@@ -63,9 +63,9 @@ router.post('/schedule/post', function(req, res){
     task.save(function(err){
         if(err){
             console.log(err);
-            res.json({msg: "error adding task..."});
+            res.json({taskId: req.params.taskId, Successful: "False"});
         } else {
-            res.json(task)
+            res.json({taskId: req.params.taskId, Successful: "True"})
         }
     });
 });
@@ -88,7 +88,7 @@ router.put('/schedule/:taskId', function(req, res){
     task.updateOne({"taskId":req.params.taskId},function(err){
         if(err){
             console.log(err);
-            res.json({msg: "error adding task..."});
+            res.json({taskId: req.params.taskId, Successful: "False"});
         } else {
             res.json({taskId: req.params.taskId, Successful: "True"})
         }
@@ -100,9 +100,9 @@ router.delete('/schedule/:taskId', function(req, res){
     Task.remove({"taskId": req.params.taskId}, function(err){
         if(err){
             console.log(err);
-            res.json({msg: "error deleting task..."});
+            res.json({taskId: req.params.taskId, Deleted: "False"});
         } else {
-            res.json({msg: "delete successful"});
+            res.json({taskId: req.params.taskId, Deleted: "True"});
         }
     });
 });

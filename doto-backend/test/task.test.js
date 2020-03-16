@@ -11,11 +11,6 @@ const validUser = new UserModel({
     themePreference: 'dark'
 })
 
-const invalidUser = new UserModel({
-    picture: 'profile.png',
-    themePreference: 'dark'
-})
-
 const validTask = new TaskModel({
     user: validUser,
     taskId: '1',
