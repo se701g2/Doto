@@ -1,36 +1,36 @@
 import React from "react";
+import PropTypes from "prop-types";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import SettingsIcon from "@material-ui/icons/Settings";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import "./Header.css";
 
-const MenuBar = props => {
+const MenuBar = ({ title }) => {
     return (
         <nav>
-            {/* UNCOMMENT THIS TO SEE TITLE  <h1 className="Title"> {props.title}</h1> */}
+            <h1 className="Title">{title}</h1>
 
             <ul className="IconList">
                 <li className="Account">
-                    {" "}
-                    <AccountCircleIcon className="IconLarge" />{" "}
+                    <AccountCircleIcon className="IconLarge" />
                 </li>
                 <li className="IconList">
-                    {" "}
-                    <a href="/Settings">
-                        {" "}
-                        <SettingsIcon className="IconLarge" />{" "}
-                    </a>{" "}
+                    <a href="/Settings/SettingsPage">
+                        <SettingsIcon className="IconLarge" />
+                    </a>
                 </li>
                 <li className="IconList">
-                    {" "}
-                    <a href="/Calendar">
-                        {" "}
-                        <DateRangeIcon className="IconLarge" />{" "}
-                    </a>{" "}
+                    <a href="/Calendar/Calendar">
+                        <DateRangeIcon className="IconLarge" />
+                    </a>
                 </li>
             </ul>
         </nav>
     );
+};
+
+MenuBar.propTypes = {
+    title: PropTypes.string.isRequired,
 };
 
 export default MenuBar;
