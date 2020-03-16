@@ -1,34 +1,47 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+var uniqueValidator = require('mongoose-unique-validator');
 
 const taskSchema = mongoose.Schema({
     user: {
         type: String,
         required: true
     },
-    taskName: {
+    taskId: {
         type: String,
-        required: true
+        required: true,
+        unique: true
+    },
+    title: {
+        type: String,
+        required: true,
     },
     description: {
         type: String,
-        default: ''
     },
     location: {
         type: String,
-        default: ''
     },
     priority: {
         type: Number
     },
     duration: {
-        type: Number
+        type: Number,
+        required: true
+    },
+    startDate: {
+        type: Date,
+        required: true
+    },
+    endDate: {
+        type: Date,
+        required: true
     },
     reminderDate: {
         type: Date
-    },
-    endDate: {
-        type: Date
     }
 });
+
+taskSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('task', taskSchema);

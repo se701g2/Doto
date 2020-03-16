@@ -1,0 +1,74 @@
+.Calendar-header {
+    text-align: left;
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.Side {
+    margin-top: 20vh;
+    background-color: #3700b3;
+    width: 10%;
+    border-radius: 0px 79px 0px 0px;
+    max-height: 86vh;
+}
+
+.CalendarPage {
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    overflow-y: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.Calendar {
+    height: 75vh;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 100vw;
+    overflow: hidden;
+    margin-left: 5%;
+}
+
+.list-view {
+    width: 100%;
+    margin-left: 10px;
+}
+
+.list-view-components {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.radio-unchecked {
+    border: 2px solid #dddddd;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+.radio-unchecked:disabled .radio-checked:disabled {
+    background: rgba(206, 217, 244, 0.5);
+}
+
+.radio-checked {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    /* background-color: #137cbd; */
+}
+
+.radio-checked::before {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: radial-gradient(#fff, #fff 28%, transparent 32%);
+    content: " ";
+}
