@@ -18,17 +18,17 @@ We are using npm for this particular project (https://www.npmjs.com/get-npm).
 
 ### `npm start`
 
-Please check the front end [readme] (https://github.com/se701g2/Doto/blob/master/doto-frontend/README.md) for more information on running the front end of the code.
+Please check the front end [readme](https://github.com/se701g2/Doto/blob/master/doto-frontend/README.md) for more information on running the front end of the code.
 
 ## Usage Examples
 (will do once more of the website is done)
 
 ## Contributing to this Project
-Please refer to our [wiki] (https://github.com/se701g2/Doto/wiki) for an outline of our coding conventions and git workflow
+Please refer to our [wiki](https://github.com/se701g2/Doto/wiki) for an outline of our coding conventions and git workflow
 
 ## Meta
 Se701 Group2 - Se701group2@gmail.com
-Distributed under the MIT license. Check the [wiki] (https://github.com/se701g2/Doto/wiki/license) for more details
+Distributed under the MIT license. Check the [wiki](https://github.com/se701g2/Doto/wiki/license) for more details
 
 ## Where to Get More Help
 If you have run into any issues, you can contact our lecturer Kelly Blincoe and she will be able to point you in the right direction. 
