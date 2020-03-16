@@ -5,7 +5,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import "./Header.css";
 
-const MenuBar = ({ title }) => {
+const Header = ({ title }) => {
     return (
         <nav>
             <h1 className="Title">{title}</h1>
@@ -29,8 +29,8 @@ const MenuBar = ({ title }) => {
     );
 };
 
-MenuBar.propTypes = {
+Header.propTypes = {
     title: PropTypes.string.isRequired,
 };
 
-export default MenuBar;
+export default Header;

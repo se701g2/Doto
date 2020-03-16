@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-// import "./tailwind-generated.css";
+import "./tailwind-generated.css";
 
 const App = () => {
     return (
