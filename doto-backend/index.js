@@ -1,8 +1,10 @@
 const express = require('express')
 const cors = require('cors')
+const passportSetUp = require('./src/config/passport-setup.js')
 const app = express()
 const apiPort = process.env.PORT || 3000
 require('dotenv').config();
+const passport = require('passport')
 
 // Mongoose connection
 const mongoose = require('mongoose');
@@ -30,10 +32,13 @@ db.on('error', function(){
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.json())
+app.use(passport.initialize());
 
 // exporting Routes 
 const users = require('./src/routes/router');
 app.use('/api', users);
+const authRoute = require('./src/routes/auth-route')
+app.use('/auth', authRoute)
 
 app.get('/', (req, res) => {
     res.send('Hello world!')
