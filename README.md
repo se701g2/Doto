@@ -7,37 +7,29 @@ This project is useful as it has the basic functionalities of any normal calenda
 
 
 ## Development Setup
-It is recommended that you use VsCode when contributing to this project. Please install the Eslint and Prettier extensions so that the code style matches what has already been done before.
+It is recommended that you use **VsCode** when contributing to this project. Please install the **Eslint** and **Prettier** extensions so that the code style matches what has already been done before.
 
 ## Running the code
-We are using Npm for this particular project (https://www.npmjs.com/get-npm).
-```bash
-Npm install
-```
-```bash
-Npm start 
-```
+We are using npm for this particular project (https://www.npmjs.com/get-npm).
+### `cd doto-frontend/backend`
+(change to either frontend or backend depending on where you wish to contribute)
 
-Please check the front end readme for more information on running the front end of the code.
+### `npm install`
+
+### `npm start`
+
+Please check the front end [readme] (https://github.com/se701g2/Doto/blob/master/doto-frontend/README.md) for more information on running the front end of the code.
 
 ## Usage Examples
 (will do once more of the website is done)
 
 ## Contributing to this Project
-1) Fork the repository (https://github.com/yourname/Doto.git
-2) Set up an upstream
-3) Sync with the upstream
-4) Rebase with the upstream (often)
-5) Test changes
-6) Create a pull request
-7) The pull request must be reviewed and approved by at least 2 other members
-8) Once the reviewers approve the pull request, they can merge your contributions into the main repository. DO NOT MERGE YOUR OWN PULL REQUESTS
-9) For more details about the exactly git practices and conventions check out our GIT wiki
+Please refer to our [wiki] (https://github.com/se701g2/Doto/wiki) for an outline of our coding conventions and git workflow
 
 ## Meta
 Se701 Group2 - Se701group2@gmail.com
-Distributed under the MIT licence. Check the Wiki for more details
-https://github.com/se701g2
+Distributed under the MIT licence. Check the [wiki] (https://github.com/se701g2/Doto/wiki/licence) for more details
+Please refer to the [wiki] (https://github.com/se701g2/wiki) for our coding practices 
 
 ## Where to Get More Help
 If you have run into any issues, you can contact our lecturer Kelly Blincoe and she will be able to point you in the right direction. 
