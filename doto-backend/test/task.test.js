@@ -11,6 +11,19 @@ const validUser = new UserModel({
     themePreference: 'dark'
 })
 
+const validTask = new TaskModel({
+    user: validUser,
+    taskId: '1',
+    title: 'title',
+    description: 'Re-Doing all the things',
+    location: 'science building',
+    priority: 0,
+    duration: 120,
+    reminderDate: '2020-07-14T07:50:00+12:00',
+    startDate: '2020-08-14T08:50:00+12:00',
+    endDate: '2020-08-14T07:50:00+12:00'
+});
+
 process.env.TEST_SUITE = 'task-test';
 
 describe('Task Model Tests', () => {
@@ -30,54 +43,40 @@ describe('Task Model Tests', () => {
     });
 
     it('create & save task successfully.', async () => {
-        const validTask = new TaskModel({
-            user: validUser,
-            taskId: '1234',
-            title: 'title',
-            description: 'Re-Doing all the things',
-            location: 'science building',
-            priority: 0,
-            duration: 120,
-            reminderDate: '2020-07-14T07:50:00',
-            startDate: '2020-08-14T08:50:00',
-            endDate: '2020-08-14T07:50:00'
-        });
-
+        let taskID = validTask._id;
         const savedTask = await validTask.save();
-        assert(savedTask.taskId === '1234');
+        assert(savedTask._id === taskID);
     });
 
     it('create task without required user & throws error.', async ()=>{
         const invalidTask = new TaskModel({
-            taskId: '1234',
+            title: 'Do the thing',
             description: 'Re-Doing all the things',
             location: 'science building',
             priority: 0,
             duration: 120,
-            reminderDate: '2020-07-14T07:50:00',
-            startDate: '2020-08-14T06:50:00',
-            endDate: '2020-08-14T07:50:00'
+            reminderDate: '2020-07-14T07:50:00+12:00',
+            startDate: '2020-08-14T06:50:00+12:00',
+            endDate: '2020-08-14T07:50:00+12:00'
         });
     
         var error = invalidTask.validateSync();
         assert.equal(error.errors['user'].message,'Path `user` is required.');
     });
 
-    it('create task without required taskName & throws error.', async ()=>{
+    it('create task without required title & throws error.', async ()=>{
         const invalidTask = new TaskModel({
-            user: validUser,
-            title: 'title',
             description: 'Re-Doing all the things',
             location: 'science building',
             priority: 0,
             duration: 120,
-            reminderDate: '2020-07-14T07:50:00',
-            startDate: '2020-08-14T06:50:00',
-            endDate: '2020-08-14T07:50:00'
+            reminderDate: '2020-07-14T07:50:00+12:00',
+            startDate: '2020-08-14T06:50:00+12:00',
+            endDate: '2020-08-14T07:50:00+12:00'
         });
     
         var error = invalidTask.validateSync();
-        assert.equal(error.errors['taskId'].message,'Path `taskId` is required.');
+        assert.equal(error.errors['title'].message,'Path `title` is required.');
     });
 
     it('create task with incorrect date type & throws error.', async ()=>{
@@ -89,9 +88,9 @@ describe('Task Model Tests', () => {
             location: 'science building',
             priority: 0,
             duration: 120,
-            reminderDate: '2020-07-14T07:50:00',
+            reminderDate: '2020-07-14T07:50:00+12:00',
             startDate: 'yesterday',
-            endDate: '2020-08-14T07:50:00'
+            endDate: '2020-08-14T07:50:00+12:00'
         });
     
         var error = invalidTask.validateSync();
@@ -100,18 +99,16 @@ describe('Task Model Tests', () => {
 
     it('create task with incorrect user type & throws error.', async ()=>{
         const invalidTask = new TaskModel({
-            user: 'john',
-            taskId: '1234',
             title: 'title',
             description: 'Re-Doing all the things',
             location: 'science building',
             priority: 0,
             duration: 120,
-            reminderDate: '2020-07-14T07:50:00',
-            startDate: '2020-08-14T08:50:00',
-            endDate: '2020-08-14T07:50:00'
+            reminderDate: '2020-07-14T07:50:00+12:00',
+            startDate: '2020-08-14T08:50:00+12:00',
+            endDate: '2020-08-14T07:50:00+12:00'
         });
-    
+        
         var error = invalidTask.validateSync();
         assert.ok(error.errors['user'].message);
     });
@@ -119,15 +116,14 @@ describe('Task Model Tests', () => {
     it('create task with incorrect priority number type & throws error.', async ()=>{
         const invalidTask = new TaskModel({
             user: validUser,
-            taskId: '1234',
             title: 'title',
             description: 'Re-Doing all the things',
             location: 'science building',
             priority: 'High',
             duration: 120,
-            reminderDate: '2020-07-14T07:50:00',
-            startDate: '2020-08-14T08:50:00',
-            endDate: '2020-08-14T07:50:00'
+            reminderDate: '2020-07-14T07:50:00+12:00',
+            startDate: '2020-08-14T08:50:00+12:00',
+            endDate: '2020-08-14T07:50:00+12:00'
         });
     
         var error = invalidTask.validateSync();
@@ -135,7 +131,9 @@ describe('Task Model Tests', () => {
     });
 
     it('populating user field from user model.', async ()=>{
-        TaskModel.findOne({taskName: 'Do the thing'})
+        await validTask.save();
+        
+        TaskModel.findOne({_id: validTask._id})
             .populate('user')
             .then(
                 (task) => {
@@ -146,7 +144,7 @@ describe('Task Model Tests', () => {
     });
 
     it('delete user successfully.', async ()=>{
-        TaskModel.remove({taskName: 'Do the thing'})
+        TaskModel.remove({title: 'Do the thing'})
             .then(
                 (task) => {
                     assert(task === null); 

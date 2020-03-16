@@ -4,8 +4,8 @@ import { MemoryRouter } from "react-router";
 import Route from "./Route";
 import NotFound from "../components/pages/NotFound";
 import App from "../App";
-import Settings from "../components/pages/Settings";
-import Calendar from "../components/pages/Calendar/CalendarPage";
+import SettingsPage from "../components/pages/Settings/SettingsPage";
+import Calendar from "../components/pages/Calendar/Calendar";
 import Login from "../components/pages/Login/Login";
 
 test("initial landing page should be App", () => {
@@ -23,7 +23,7 @@ test("Settings page should be loaded correctly", () => {
             <Route />
         </MemoryRouter>,
     );
-    expect(wrapper.find(Settings)).toHaveLength(1);
+    expect(wrapper.find(SettingsPage)).toHaveLength(1);
 });
 
 test("Login page should be loaded correctly", () => {
