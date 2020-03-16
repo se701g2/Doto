@@ -17,7 +17,7 @@ test("initial landing page should be App", () => {
     expect(wrapper.find(App)).toHaveLength(1);
 });
 
-test("Settings page should be loeaded correctly", () => {
+test("Settings page should be loaded correctly", () => {
     const wrapper = mount(
         <MemoryRouter initialEntries={["/settings"]}>
             <Route />
@@ -26,7 +26,7 @@ test("Settings page should be loeaded correctly", () => {
     expect(wrapper.find(Settings)).toHaveLength(1);
 });
 
-test("Login page should be loeaded correctly", () => {
+test("Login page should be loaded correctly", () => {
     const wrapper = mount(
         <MemoryRouter initialEntries={["/login"]}>
             <Route />
@@ -35,7 +35,7 @@ test("Login page should be loeaded correctly", () => {
     expect(wrapper.find(Login)).toHaveLength(1);
 });
 
-test("Calendar page should be loeaded correctly", () => {
+test("Calendar page should be loaded correctly", () => {
     const wrapper = mount(
         <MemoryRouter initialEntries={["/calendar"]}>
             <Route />
