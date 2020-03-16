@@ -70,23 +70,11 @@ router.post('/schedule/post', function(req, res){
     });
 });
 
-//UPDATE task (WIP - Not currently usable)
+//UPDATE task
 router.put('/schedule/:taskId', function(req, res){
-
-    let task = new Task();
-    task.user = req.body.user;
-    task.taskId = req.params.taskId;
-    task.title = req.body.title;
-    task.description = req.body.description;
-    task.location = req.body.location;
-    task.priority = req.body.priority;
-    task.duration = req.body.duration;
-    task.startDate = req.body.startDate;
-    task.endDate = req.body.endDate;
-    task.reminderDate = req.body.reminderDate;
-
-    task.updateOne({"taskId":req.params.taskId},function(err){
-        if(err){
+    Task.updateOne({taskId: req.params.taskId}, req.body, {new: true}, function(err, updatedTask){
+        console.log(updatedTask);
+        if(err || !updatedTask){
             console.log(err);
             res.json({taskId: req.params.taskId, Successful: "False"});
         } else {
