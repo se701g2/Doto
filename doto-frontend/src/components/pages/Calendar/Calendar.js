@@ -10,6 +10,8 @@ import Fab from "@material-ui/core/Fab";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import AddIcon from "@material-ui/icons/Add";
+import Header from "../Header";
+
 import "./Calendar.css";
 
 const useStyles = makeStyles(theme => ({
@@ -80,25 +82,21 @@ const Calendar = () => {
     return (
         <div className="CalendarPage">
             <div className="Side" />
-            <span className="container">
-                {/* Header is a placeholder */}
-                <header className="Calendar-header">
-                    {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    <span>Calendar</span>
-                </header>
-                <div className="flex justify-end">
-                    <div className="ml-3">
-                        <Fab onClick={handleOpen} size="small">
-                            <AddIcon />
-                        </Fab>
-                    </div>
-                    <div className="ml-3">
-                        <Fab onClick={() => setListView(!listView)} size="small">
-                            {!listView && <FormatListBulletedIcon />}
-                            {listView && <CalendarTodayIcon />}
-                        </Fab>
-                    </div>
+            <div className="calendar-buttons">
+                <div className="mb-3">
+                    <Fab onClick={handleOpen} size="small">
+                        <AddIcon />
+                    </Fab>
                 </div>
+                <div className="mb-3">
+                    <Fab onClick={() => setListView(!listView)} size="small">
+                        {!listView && <FormatListBulletedIcon />}
+                        {listView && <CalendarTodayIcon />}
+                    </Fab>
+                </div>
+            </div>
+            <span className="calendar-container">
+                <Header title="Calendar" />
                 <div className="flex">
                     <div className="Calendar">
                         <CalendarComponent appointments={appointments} />
