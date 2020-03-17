@@ -1,31 +1,19 @@
-.SettingsPage {
-    display: flex;
-    flex-direction: row;
-}
-
-.left-side-bar {
-    border-radius: 0px 79px 0px 0px;
-    width: 20vh;
-    background-color: #3700b3;
-    min-height: 80vh;
-    margin-top: 20vh;
-}
-
 .right-side-bar {
     border-radius: 79px 0px 0px 0px;
-    width: 95vw;
+    height: 80vh;
+    margin-top: 10px;
+    margin-left: 5vw;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    background-color: #8d6cd9;
-    min-height: 80vh;
-    margin-top: 20vh;
-    margin-left: 5vw;
 }
 
-.column-fields {
-    display: flex;
-    flex-direction: row;
+.right-side-bg-green {
+    background-color: #a5d6a7;
+}
+
+.right-side-bg-blue {
+    background-color: #8d6cd9;
 }
 
 #upload-photo {

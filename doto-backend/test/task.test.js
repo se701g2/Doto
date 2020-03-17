@@ -27,7 +27,6 @@ const validTask = new TaskModel({
 process.env.TEST_SUITE = 'task-test';
 
 describe('Task Model Tests', () => {
-
     before(async () => {
         await mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.TEST_SUITE}`, { useNewUrlParser: true}, (err) => {
             if (err) {

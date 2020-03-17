@@ -3,18 +3,17 @@ import { mount } from "enzyme";
 import { MemoryRouter } from "react-router";
 import Route from "./Route";
 import NotFound from "../components/pages/NotFound";
-import App from "../App";
 import SettingsPage from "../components/pages/Settings/SettingsPage";
 import Calendar from "../components/pages/Calendar/Calendar";
 import Login from "../components/pages/Login/Login";
 
-test("initial landing page should be App", () => {
+test("initial landing page should be Login", () => {
     const wrapper = mount(
         <MemoryRouter initialEntries={["/"]}>
             <Route />
         </MemoryRouter>,
     );
-    expect(wrapper.find(App)).toHaveLength(1);
+    expect(wrapper.find(Login)).toHaveLength(1);
 });
 
 test("Settings page should be loaded correctly", () => {

@@ -10,6 +10,8 @@ const DotoTitle = () => {
 };
 
 const BlueBubble = () => {
+    const url =
+        process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://doto-backend.azurewebsites.net";
     return (
         <div className="h-full mr-16" style={{ borderRadius: "0px 79px 0px 0px", backgroundColor: "#3700b3" }}>
             <div className="flex flex-col ml-32 mt-10">
@@ -20,7 +22,7 @@ const BlueBubble = () => {
                     <span className="text-white text-5xl font-light">Planned for you</span>
                 </div>
                 <div className="google-btn-container mt-2">
-                    <a href="/auth/google">
+                    <a href={url + "/auth/google"}>
                         <div className="google-btn">
                             <div className="google-icon-wrapper">
                                 <img
