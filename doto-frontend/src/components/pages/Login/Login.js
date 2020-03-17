@@ -10,7 +10,8 @@ const DotoTitle = () => {
 };
 
 const BlueBubble = () => {
-    const url = process.env.BACKEND_URL || "http://localhost:3001";
+    const url =
+        process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://doto-backend.azurewebsites.net";
     return (
         <div className="h-full mr-16" style={{ borderRadius: "0px 79px 0px 0px", backgroundColor: "#3700b3" }}>
             <div className="flex flex-col ml-32 mt-10">
