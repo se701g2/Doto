@@ -71,9 +71,9 @@ const useStyles = makeStyles(theme => ({
 const Calendar = () => {
     const classes = useStyles();
     const [listView, setListView] = useState();
-    const [theme] = useContext(ThemeContext);
     const [tasks, setTasks] = useState([]);
     const [open, setOpen] = React.useState(false);
+    const [theme] = useContext(ThemeContext);
 
     const handleOpen = () => {
         setOpen(true);
