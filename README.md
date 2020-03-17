@@ -20,6 +20,12 @@ We are using npm for this particular project (https://www.npmjs.com/get-npm).
 
 Please check the front end [readme](https://github.com/se701g2/Doto/blob/master/doto-frontend/README.md) for more information on running the front end of the code.
 
+### Link to the website 
+doto.azurewebsites.net
+
+### Link to the API
+doto-backend.azurewebsites.net
+
 ## Usage Examples
 (will do once more of the website is done)
 
