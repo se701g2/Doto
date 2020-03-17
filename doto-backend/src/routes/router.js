@@ -10,11 +10,11 @@ router.get('/users', function(req, res){
     let users = User.find({}, function(err, users){
         if(err){
             console.log(err);
-            res.json({msg: "failed"})
+            res.status(400).json({msg: "failed"})
         }
         else {
             console.log(users)
-            res.json(users);
+            res.status(200).json(users);
         }
     })
 })
@@ -30,10 +30,10 @@ router.post('/users/add', function (req, res) {
     user.save(function(err){
         if(err){
             console.log(err);
-            res.json({msg: "failed..."})
+            res.status(400).json({msg: "failed..."})
         }
         else{   
-            res.json(user)
+            res.status(200).json(user)
         }
     });
 });
@@ -41,7 +41,7 @@ router.post('/users/add', function (req, res) {
 //GET ALL task
 router.route('/schedule/get/:user').get((req,res) => {
     let tasks = Task.find({"user": req.params.user})
-    .then(tasks => res.json(tasks))
+    .then(tasks => res.status(200).json(tasks))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -63,9 +63,9 @@ router.post('/schedule/post', function(req, res){
     task.save(function(err){
         if(err){
             console.log(err);
-            res.json({taskId: req.params.taskId, Successful: "False"});
+            res.status(400).json({taskId: req.params.taskId, Successful: "False"});
         } else {
-            res.json({taskId: req.params.taskId, Successful: "True"})
+            res.status(200).json({taskId: req.params.taskId, Successful: "True"})
         }
     });
 });
@@ -88,9 +88,9 @@ router.delete('/schedule/:taskId', function(req, res){
     Task.remove({"taskId": req.params.taskId}, function(err){
         if(err){
             console.log(err);
-            res.json({taskId: req.params.taskId, Deleted: "False"});
+            res.status(400).json({taskId: req.params.taskId, Deleted: "False"});
         } else {
-            res.json({taskId: req.params.taskId, Deleted: "True"});
+            res.status(200).json({taskId: req.params.taskId, Deleted: "True"});
         }
     });
 });
