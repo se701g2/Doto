@@ -15,8 +15,6 @@ import Header from "../Header";
 import "./Calendar.css";
 import "../Pages.css";
 
-// const classnames = require("classnames");
-
 const useStyles = makeStyles(theme => ({
     modal: {
         display: "flex",
