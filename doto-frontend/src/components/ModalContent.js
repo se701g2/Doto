@@ -7,7 +7,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
+import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 import "./ModalContent.css";
 
@@ -33,24 +33,56 @@ const useStyles = makeStyles(theme => ({
 const ModalContent = () => {
     const classes = useStyles();
 
-    const [selectedDate, setSelectedDate] = React.useState(new Date());
-    const [priority, setPriority] = React.useState("");
-    const [reminder, setReminder] = React.useState("");
+    const [selectedName, setSelectedName] = React.useState("TASK" + new Date());
+    const [selectedDescription, setSelectedDescription] = React.useState("Cry in anguish");
+    const [selectedDueDate, setSelectedDueDate] = React.useState(new Date());
+    const [selectedDuration, setSelectedDuration] = React.useState(0);
+    const [selectedLocation, setSelectedLocation] = React.useState("");
+    const [selectedPriority, setSelectedPriority] = React.useState("");
+    const [selectedReminder, setSelectedReminder] = React.useState("");
 
-    const handlePriority = event => {
-        setPriority(event.target.value);
+    const handleNameChange = event => {
+        setSelectedName(event.target.value);
     };
 
-    const handleReminder = event => {
-        setReminder(event.target.value);
+    const handleDescriptionChange = event => {
+        setSelectedDescription(event.target.value);
     };
 
     const handleDateChange = date => {
-        setSelectedDate(date);
+        if (date > new Date()) {
+            setSelectedDueDate(date);
+        }
+    };
+
+    const handleDurationChange = event => {
+        setSelectedDuration(event.target.value);
+    };
+
+    const handleLocationChange = event => {
+        setSelectedLocation(event.target.value);
+    };
+
+    const handlePriority = event => {
+        setSelectedPriority(event.target.value);
+    };
+
+    const handleReminder = event => {
+        setSelectedReminder(event.target.value);
     };
 
     const handleAdd = event => {
-        // close modal
+        const task = {
+            title: selectedName,
+            description: selectedDescription,
+            dueDate: selectedDueDate,
+            duration: selectedDuration,
+            location: selectedLocation,
+            priority: selectedPriority,
+            reminder: selectedReminder,
+        };
+
+        console.table(task);
     };
 
     return (
@@ -73,38 +105,57 @@ const ModalContent = () => {
                                     shrink: classes.labelFocus,
                                 },
                             }}
+                            onChange={handleNameChange}
                         />
                     </div>
                     <div>
-                        <TextField className="text-area group-spacing" id="standard-basic" label="Task description" />
+                        <TextField
+                            className="text-area group-spacing"
+                            id="standard-basic"
+                            label="Task description"
+                            onChange={handleDescriptionChange}
+                        />
                     </div>
-                    <div className="spacing">
+                    <div>
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <KeyboardDatePicker
+                            <KeyboardDateTimePicker
                                 disableToolbar
                                 variant="inline"
-                                format="MM/dd/yyyy"
+                                format="MM/dd/yyyy HH:mm"
+                                ampm={false}
                                 margin="normal"
                                 id="date-picker-inline"
                                 label="Due Date"
-                                value={selectedDate}
+                                value={selectedDueDate}
                                 onChange={handleDateChange}
                                 KeyboardButtonProps={{
-                                    "aria-label": "change date",
+                                    "aria-label": "Change date/time",
                                 }}
                             />
                         </MuiPickersUtilsProvider>
                     </div>
                     <div>
-                        <TextField className="small-text-area group-spacing" id="standard-basic" label="Duration" />
+                        <TextField
+                            className="small-text-area group-spacing"
+                            id="standard-basic"
+                            type="number"
+                            inputProps={{ min: "0" }}
+                            label="Duration (in minutes)"
+                            onChange={handleDurationChange}
+                        />
                     </div>
                     <div>
-                        <TextField className="text-area spacing" id="standard-basic" label="Location" />
+                        <TextField
+                            className="text-area spacing"
+                            id="standard-basic"
+                            label="Location"
+                            onChange={handleLocationChange}
+                        />
                     </div>
                     <div className="drop-down">
                         <FormControl className={classes.formControl}>
                             <InputLabel id="priority-label">Priority</InputLabel>
-                            <Select value={priority} onChange={handlePriority}>
+                            <Select value={selectedPriority} onChange={handlePriority}>
                                 <MenuItem value={10}>High</MenuItem>
                                 <MenuItem value={20}>Medium</MenuItem>
                                 <MenuItem value={30}>Low</MenuItem>
@@ -114,7 +165,7 @@ const ModalContent = () => {
                     <div className="drop-down">
                         <FormControl className={classes.formControl}>
                             <InputLabel id="reminder-label">Reminders</InputLabel>
-                            <Select value={reminder} onChange={handleReminder}>
+                            <Select value={selectedReminder} onChange={handleReminder}>
                                 <MenuItem value={10}>1 Week Before</MenuItem>
                                 <MenuItem value={20}>1 Day Before</MenuItem>
                                 <MenuItem value={30}>1 Hour Before</MenuItem>
