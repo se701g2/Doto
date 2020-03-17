@@ -1,31 +1,34 @@
 .SettingsPage {
     display: flex;
-    flex-direction: row;
+    max-width: 100%;
 }
 
 .left-side-bar {
-    border-radius: 0px 79px 0px 0px;
-    width: 20vh;
-    background-color: #3700b3;
-    min-height: 80vh;
     margin-top: 20vh;
+    background-color: #3700b3;
+    width: 20vh;
+    border-radius: 0px 79px 0px 0px;
+    max-height: 86vh;
+}
+
+.settings-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .right-side-bar {
     border-radius: 79px 0px 0px 0px;
-    width: 95vw;
+    background-color: #8d6cd9;
+    height: 80vh;
+
+    margin-top: 10px;
+    margin-left: 5vw;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    background-color: #8d6cd9;
-    min-height: 80vh;
-    margin-top: 20vh;
-    margin-left: 5vw;
-}
-
-.column-fields {
-    display: flex;
-    flex-direction: row;
 }
 
 #upload-photo {
