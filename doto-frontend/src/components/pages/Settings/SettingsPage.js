@@ -4,7 +4,6 @@ import "date-fns";
 import { FormControl, Button, Input, InputLabel, InputAdornment, Avatar } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import EmailIcon from "@material-ui/icons/Email";
-import SaveIcon from "@material-ui/icons/Save";
 import { ThemeProvider } from "@material-ui/core/styles";
 import DateFnsUtils from "@date-io/date-fns";
 import Header from "../Header";
@@ -100,18 +99,6 @@ const WorkingHoursPicker = () => {
     );
 };
 
-const SubmitButton = () => {
-    return (
-        <Button
-            variant="contained"
-            startIcon={<SaveIcon />}
-            style={{ width: "200px", marginLeft: "70vw", marginTop: "2vh" }}
-        >
-            Save Changes
-        </Button>
-    );
-};
-
 const SettingsPage = () => {
     const [theme, setTheme] = useContext(ThemeContext);
     const ThemePicker = () => {
@@ -139,7 +126,6 @@ const SettingsPage = () => {
                     <UploadPhoto />
                     <ThemePicker />
                     <WorkingHoursPicker />
-                    <SubmitButton />
                 </div>
             </span>
         </div>
