@@ -5,6 +5,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Tooltip from "@material-ui/core/Tooltip";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const Header = ({ title }) => {
     return (
@@ -14,23 +15,23 @@ const Header = ({ title }) => {
             <ul className="IconList">
                 <Tooltip title="Log Out">
                     <li className="Account">
-                        <a href="/Login/Login">
+                        <Link to="/login">
                             <ExitToAppIcon className="IconLarge" />
-                        </a>
+                        </Link>
                     </li>
                 </Tooltip>
                 <Tooltip title="Settings">
                     <li className="IconList">
-                        <a href="/Settings/SettingsPage">
+                        <Link to="/settings">
                             <SettingsIcon className="IconLarge" />
-                        </a>
+                        </Link>
                     </li>
                 </Tooltip>
                 <Tooltip title="Calender">
                     <li className="IconList">
-                        <a href="/Calendar/Calendar">
+                        <Link to="/calendar">
                             <DateRangeIcon className="IconLarge" />
-                        </a>
+                        </Link>
                     </li>
                 </Tooltip>
             </ul>
