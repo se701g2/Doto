@@ -10,6 +10,7 @@ import Fab from "@material-ui/core/Fab";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import AddIcon from "@material-ui/icons/Add";
+import Tooltip from "@material-ui/core/Tooltip";
 import Header from "../Header";
 
 import "./Calendar.css";
@@ -84,15 +85,19 @@ const Calendar = () => {
             <div className="Side" />
             <div className="calendar-buttons">
                 <div className="mb-3">
-                    <Fab onClick={handleOpen} size="small">
-                        <AddIcon />
-                    </Fab>
+                    <Tooltip title="Add Task">
+                        <Fab onClick={handleOpen} size="small">
+                            <AddIcon />
+                        </Fab>
+                    </Tooltip>
                 </div>
                 <div className="mb-3">
-                    <Fab onClick={() => setListView(!listView)} size="small">
-                        {!listView && <FormatListBulletedIcon />}
-                        {listView && <CalendarTodayIcon />}
-                    </Fab>
+                    <Tooltip title="List View">
+                        <Fab onClick={() => setListView(!listView)} size="small">
+                            {!listView && <FormatListBulletedIcon />}
+                            {listView && <CalendarTodayIcon />}
+                        </Fab>
+                    </Tooltip>
                 </div>
             </div>
             <span className="calendar-container">
