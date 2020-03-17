@@ -14,9 +14,9 @@ import {
     Appointments,
 } from "@devexpress/dx-react-scheduler-material-ui";
 
-const CalendarComponent = ({ appointments }) => {
+const CalendarComponent = ({ tasks }) => {
     return (
-        <Scheduler data={appointments} currentView={MonthView} editable={true}>
+        <Scheduler data={tasks} currentView={MonthView} editable={true}>
             <ViewState />
             <DayView />
             <WeekView />

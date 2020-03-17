@@ -8,6 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from "@material-ui/pickers";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import "./ModalContent.css";
 
@@ -30,10 +31,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const ModalContent = () => {
+const ModalContent = props => {
     const classes = useStyles();
 
-    const [selectedName, setSelectedName] = React.useState("TASK" + new Date());
+    const [selectedName, setSelectedName] = React.useState("TASK - " + new Date());
     const [selectedDescription, setSelectedDescription] = React.useState("Cry in anguish");
     const [selectedDueDate, setSelectedDueDate] = React.useState(new Date());
     const [selectedDuration, setSelectedDuration] = React.useState(0);
@@ -52,6 +53,8 @@ const ModalContent = () => {
     const handleDateChange = date => {
         if (date > new Date()) {
             setSelectedDueDate(date);
+        } else {
+            setSelectedDueDate("invalid beans");
         }
     };
 
@@ -76,13 +79,13 @@ const ModalContent = () => {
             title: selectedName,
             description: selectedDescription,
             dueDate: selectedDueDate,
-            duration: selectedDuration,
+            duration: parseInt(selectedDuration),
             location: selectedLocation,
             priority: selectedPriority,
             reminder: selectedReminder,
         };
 
-        console.table(task);
+        props.addTask(task, new Date());
     };
 
     return (
@@ -120,6 +123,10 @@ const ModalContent = () => {
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <KeyboardDateTimePicker
                                 disableToolbar
+                                autoOk={true}
+                                minDate={new Date()}
+                                minDateMessage="Date must be after now"
+                                invalidDateMessage="Date must be after now"
                                 variant="inline"
                                 format="MM/dd/yyyy HH:mm"
                                 ampm={false}
@@ -184,6 +191,10 @@ const ModalContent = () => {
             </div>
         </div>
     );
+};
+
+ModalContent.propTypes = {
+    addTask: PropTypes.func.isRequired,
 };
 
 export default ModalContent;
