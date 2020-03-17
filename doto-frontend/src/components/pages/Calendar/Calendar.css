@@ -1,28 +1,7 @@
-.CalendarPage {
-    display: flex;
-    max-width: 100%;
-}
-
 .calendar-buttons {
     display: flex;
     flex-direction: column;
     margin: 20vh 10px 0px 10px;
-}
-
-.Side {
-    margin-top: 20vh;
-    background-color: #3700b3;
-    width: 20vh;
-    border-radius: 0px 79px 0px 0px;
-    max-height: 86vh;
-}
-
-.calendar-container {
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .Calendar {
