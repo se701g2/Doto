@@ -96,7 +96,7 @@ const Calendar = () => {
 
     return (
         <div className="PageLayout">
-            <div className={classnames("left-side-bar", theme ? "right-side-bg-blue" : "right-side-bg-green")} />
+            <div className={classnames("left-side-bar", theme ? "left-side-bg-blue" : "left-side-bg-green")} />
             <div className="calendar-buttons">
                 <div className="mb-3">
                     <Tooltip title="Add Task">
