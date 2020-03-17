@@ -76,9 +76,9 @@ router.put('/schedule/:taskId', function(req, res){
         console.log(updatedTask);
         if(err || !updatedTask){
             console.log(err);
-            res.json({taskId: req.params.taskId, Successful: "False"});
+            res.status(400).json({taskId: req.params.taskId, Successful: "False"});
         } else {
-            res.json({taskId: req.params.taskId, Successful: "True"})
+            res.status(200).json({taskId: req.params.taskId, Successful: "True"})
         }
     });
 });
