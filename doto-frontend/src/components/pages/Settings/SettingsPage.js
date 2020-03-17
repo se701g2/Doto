@@ -1,29 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "date-fns";
 
 import { FormControl, Button, Input, InputLabel, InputAdornment, Avatar } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import EmailIcon from "@material-ui/icons/Email";
 import SaveIcon from "@material-ui/icons/Save";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
 import DateFnsUtils from "@date-io/date-fns";
 import Header from "../Header";
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from "@material-ui/pickers";
 import "./SettingsPage.css";
 import "../Pages.css";
+import { ThemeContext } from "../../../context/ThemeContext";
 
 const classnames = require("classnames");
-
-const theme1 = createMuiTheme({
-    palette: {
-        primary: {
-            main: "#3700B3",
-        },
-        secondary: {
-            main: "#006400",
-        },
-    },
-});
 
 const InputNameField = () => {
     return (
@@ -123,22 +113,16 @@ const SubmitButton = () => {
 };
 
 const SettingsPage = () => {
-    const [theme, setTheme] = useState("blue");
-
+    const [theme, setTheme] = useContext(ThemeContext);
     const ThemePicker = () => {
         return (
             <div className="flex">
                 <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
-                <ThemeProvider theme={theme1}>
-                    <Button onClick={() => setTheme("blue")} id="color-palette" variant="contained" color="primary" />
+                <ThemeProvider>
+                    <Button onClick={() => setTheme(true)} id="color-palette" style={{ backgroundColor: "#3700b3" }} />
                 </ThemeProvider>
-                <ThemeProvider theme={theme1}>
-                    <Button
-                        onClick={() => setTheme("green")}
-                        id="color-palette"
-                        variant="contained"
-                        color="secondary"
-                    />
+                <ThemeProvider>
+                    <Button onClick={() => setTheme(false)} id="color-palette" style={{ backgroundColor: "#2e7d32" }} />
                 </ThemeProvider>
             </div>
         );
@@ -146,17 +130,10 @@ const SettingsPage = () => {
 
     return (
         <div className="PageLayout">
-            <div
-                className={classnames("left-side-bar", theme === "blue" ? "left-side-bg-blue" : "left-side-bg-green")}
-            />
+            <div className={classnames("left-side-bar", theme ? "left-side-bg-blue" : "left-side-bg-green")} />
             <span className="content-container">
                 <Header title="Settings" />
-                <div
-                    className={classnames(
-                        "right-side-bar",
-                        theme === "blue" ? "right-side-bg-blue" : "right-side-bg-green",
-                    )}
-                >
+                <div className={classnames("right-side-bar", theme ? "right-side-bg-blue" : "right-side-bg-green")}>
                     <InputNameField />
                     <InputEmailField />
                     <UploadPhoto />

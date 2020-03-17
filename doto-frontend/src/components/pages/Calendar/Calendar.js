@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -14,6 +14,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Header from "../Header";
 import "./Calendar.css";
 import "../Pages.css";
+import { ThemeContext } from "../../../context/ThemeContext";
+
+const classnames = require("classnames");
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -34,7 +37,9 @@ const Calendar = () => {
     const [listView, setListView] = useState();
     const [appointments, setAppointments] = useState([]);
     const [open, setOpen] = useState(false);
+    const [theme] = useContext(ThemeContext);
 
+    console.log(theme);
     const handleOpen = () => {
         setOpen(true);
     };
@@ -82,9 +87,7 @@ const Calendar = () => {
 
     return (
         <div className="PageLayout">
-            {/* Wrong purple will change in next PR */}
-            <div className="left-side-bar bg-purple-800" />
-            {/* className={classnames("left-side-bar", theme ? "left-side-bg-blue" : "left-side-bg-green")} /> */}
+            <div className={classnames("left-side-bar", theme ? "right-side-bg-blue" : "right-side-bg-green")} />
             <div className="calendar-buttons">
                 <div className="mb-3">
                     <Tooltip title="Add Task">

@@ -4,19 +4,33 @@ import SettingsPage from "../components/pages/Settings/SettingsPage";
 import Login from "../components/pages/Login/Login";
 import Calendar from "../components/pages/Calendar/Calendar";
 import NotFound from "../components/pages/NotFound";
-import "../App.css";
+import { ThemeContext } from "../context/ThemeContext";
 import "../tailwind-generated.css";
 
-export default (
-    <Router>
-        <div>
-            <Switch>
-                <Route exact path="/" component={Login} />
-                <Route path="/settings" component={SettingsPage} />
-                <Route path="/calendar" component={Calendar} />
-                <Route path="/login" component={Login} />
-                <Route component={NotFound} />
-            </Switch>
-        </div>
-    </Router>
-);
+const Routes = () => {
+    const [theme, setTheme] = React.useState(true);
+
+    return (
+        <Router>
+            <div>
+                <Switch>
+                    <Route exact path="/" component={Login} />
+                    <Route path="/settings">
+                        <ThemeContext.Provider value={[theme, setTheme]}>
+                            <SettingsPage />
+                        </ThemeContext.Provider>
+                    </Route>
+                    <Route path="/calendar">
+                        <ThemeContext.Provider value={[theme, setTheme]}>
+                            <Calendar />
+                        </ThemeContext.Provider>
+                    </Route>
+                    <Route path="/login" component={Login} />
+                    <Route component={NotFound} />
+                </Switch>
+            </div>
+        </Router>
+    );
+};
+
+export default Routes;

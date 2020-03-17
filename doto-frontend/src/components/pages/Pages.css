@@ -18,6 +18,14 @@
     background-color: #2e7d32;
 }
 
+.right-side-bg-green {
+    background-color: #a5d6a7;
+}
+
+.right-side-bg-blue {
+    background-color: #8d6cd9;
+}
+
 .content-container {
     display: flex;
     width: 100%;
