@@ -23,6 +23,7 @@
         "space-before-function-paren": "off",
         "semi": "off",
         "comma-dangle": "off",
-        "quote-props": "off"
+        "quote-props": "off",
+        "react/prop-types": "off"
     }
 }

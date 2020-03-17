@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -10,7 +10,13 @@ import Fab from "@material-ui/core/Fab";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import AddIcon from "@material-ui/icons/Add";
+import Tooltip from "@material-ui/core/Tooltip";
+import Header from "../Header";
 import "./Calendar.css";
+import "../Pages.css";
+import { ThemeContext } from "../../../context/ThemeContext";
+
+const classnames = require("classnames");
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -30,8 +36,10 @@ const Calendar = () => {
     const classes = useStyles();
     const [listView, setListView] = useState();
     const [appointments, setAppointments] = useState([]);
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [theme] = useContext(ThemeContext);
 
+    console.log(theme);
     const handleOpen = () => {
         setOpen(true);
     };
@@ -78,27 +86,27 @@ const Calendar = () => {
     }, []);
 
     return (
-        <div className="CalendarPage">
-            <div className="Side" />
-            <span className="container">
-                {/* Header is a placeholder */}
-                <header className="Calendar-header">
-                    {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    <span>Calendar</span>
-                </header>
-                <div className="flex justify-end">
-                    <div className="ml-3">
+        <div className="PageLayout">
+            <div className={classnames("left-side-bar", theme ? "right-side-bg-blue" : "right-side-bg-green")} />
+            <div className="calendar-buttons">
+                <div className="mb-3">
+                    <Tooltip title="Add Task">
                         <Fab onClick={handleOpen} size="small">
                             <AddIcon />
                         </Fab>
-                    </div>
-                    <div className="ml-3">
+                    </Tooltip>
+                </div>
+                <div className="mb-3">
+                    <Tooltip title="List View">
                         <Fab onClick={() => setListView(!listView)} size="small">
                             {!listView && <FormatListBulletedIcon />}
                             {listView && <CalendarTodayIcon />}
                         </Fab>
-                    </div>
+                    </Tooltip>
                 </div>
+            </div>
+            <span className="content-container">
+                <Header title="Calendar" />
                 <div className="flex">
                     <div className="Calendar">
                         <CalendarComponent appointments={appointments} />
