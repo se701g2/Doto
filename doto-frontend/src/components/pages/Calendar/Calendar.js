@@ -12,8 +12,8 @@ import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import AddIcon from "@material-ui/icons/Add";
 import Tooltip from "@material-ui/core/Tooltip";
 import Header from "../Header";
-
 import "./Calendar.css";
+import "../Pages.css";
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -33,7 +33,7 @@ const Calendar = () => {
     const classes = useStyles();
     const [listView, setListView] = useState();
     const [appointments, setAppointments] = useState([]);
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
@@ -81,8 +81,10 @@ const Calendar = () => {
     }, []);
 
     return (
-        <div className="CalendarPage">
-            <div className="Side" />
+        <div className="PageLayout">
+            {/* Wrong purple will change in next PR */}
+            <div className="left-side-bar bg-purple-800" />
+            {/* className={classnames("left-side-bar", theme ? "left-side-bg-blue" : "left-side-bg-green")} /> */}
             <div className="calendar-buttons">
                 <div className="mb-3">
                     <Tooltip title="Add Task">
@@ -100,7 +102,7 @@ const Calendar = () => {
                     </Tooltip>
                 </div>
             </div>
-            <span className="calendar-container">
+            <span className="content-container">
                 <Header title="Calendar" />
                 <div className="flex">
                     <div className="Calendar">

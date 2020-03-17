@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "date-fns";
-import "./SettingsPage.css";
+
 import { FormControl, Button, Input, InputLabel, InputAdornment, Avatar } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import EmailIcon from "@material-ui/icons/Email";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import SaveIcon from "@material-ui/icons/Save";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import DateFnsUtils from "@date-io/date-fns";
 import Header from "../Header";
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from "@material-ui/pickers";
+import "./SettingsPage.css";
+import "../Pages.css";
+
+const classnames = require("classnames");
 
 const theme1 = createMuiTheme({
     palette: {
@@ -17,7 +20,7 @@ const theme1 = createMuiTheme({
             main: "#3700B3",
         },
         secondary: {
-            main: "#7cb342",
+            main: "#006400",
         },
     },
 });
@@ -56,30 +59,14 @@ const UploadPhoto = () => {
     return (
         <div className="flex">
             <Avatar id="profile-photo" alt="John Smith" src="/upload.jpg" variant="square" />
-            <Button id="upload-photo" variant="contained" startIcon={<CloudUploadIcon />}>
-                Upload Photo
-            </Button>
-        </div>
-    );
-};
-
-const ThemePicker = () => {
-    return (
-        <div className="flex">
-            <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
-            <ThemeProvider theme={theme1}>
-                <Button id="color-palette" variant="contained" color="primary"></Button>
-            </ThemeProvider>
-            <ThemeProvider theme={theme1}>
-                <Button id="color-palette" variant="contained" color="secondary"></Button>
-            </ThemeProvider>
+            <input id="upload-photo" type="file" />
         </div>
     );
 };
 
 const WorkingHoursPicker = () => {
-    const [selectedStartTime, setSelectedStartTime] = React.useState(new Date("2020-03-15T09:00:00"));
-    const [selectedEndTime, setSelectedEndTime] = React.useState(new Date("2020-03-15T17:00:00"));
+    const [selectedStartTime, setSelectedStartTime] = useState(new Date("2020-03-15T09:00:00"));
+    const [selectedEndTime, setSelectedEndTime] = useState(new Date("2020-03-15T17:00:00"));
 
     const handleStartTimeChange = date => {
         setSelectedStartTime(date);
@@ -136,12 +123,40 @@ const SubmitButton = () => {
 };
 
 const SettingsPage = () => {
+    const [theme, setTheme] = useState("blue");
+
+    const ThemePicker = () => {
+        return (
+            <div className="flex">
+                <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
+                <ThemeProvider theme={theme1}>
+                    <Button onClick={() => setTheme("blue")} id="color-palette" variant="contained" color="primary" />
+                </ThemeProvider>
+                <ThemeProvider theme={theme1}>
+                    <Button
+                        onClick={() => setTheme("green")}
+                        id="color-palette"
+                        variant="contained"
+                        color="secondary"
+                    />
+                </ThemeProvider>
+            </div>
+        );
+    };
+
     return (
-        <div className="SettingsPage">
-            <div className="left-side-bar" />
-            <span className="settings-container">
+        <div className="PageLayout">
+            <div
+                className={classnames("left-side-bar", theme === "blue" ? "left-side-bg-blue" : "left-side-bg-green")}
+            />
+            <span className="content-container">
                 <Header title="Settings" />
-                <div className="right-side-bar">
+                <div
+                    className={classnames(
+                        "right-side-bar",
+                        theme === "blue" ? "right-side-bg-blue" : "right-side-bg-green",
+                    )}
+                >
                     <InputNameField />
                     <InputEmailField />
                     <UploadPhoto />
