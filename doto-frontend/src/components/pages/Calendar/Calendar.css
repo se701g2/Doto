@@ -1,0 +1,50 @@
+.calendar-buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 20vh 10px 0px 10px;
+}
+
+.Calendar {
+    margin: 10px 10px 10px 0px;
+    height: 80vh;
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+.list-view {
+    width: 100%;
+    margin-left: 10px;
+}
+
+.list-view-components {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.radio-unchecked {
+    border: 2px solid #dddddd;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+.radio-unchecked:disabled .radio-checked:disabled {
+    background: rgba(206, 217, 244, 0.5);
+}
+
+.radio-checked {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    /* background-color: #137cbd; */
+}
+
+.radio-checked::before {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: radial-gradient(#fff, #fff 28%, transparent 32%);
+    content: " ";
+}
