@@ -15,6 +15,7 @@ import "./ModalContent.css";
 const useStyles = makeStyles(theme => ({
     root: {
         "& > *": {
+            padding: 0,
             margin: theme.spacing(1),
             width: 400,
         },
@@ -71,6 +72,7 @@ const ModalContent = props => {
     };
 
     const handleReminder = event => {
+        console.log(props.theme);
         setSelectedReminder(event.target.value);
     };
 
@@ -89,7 +91,7 @@ const ModalContent = props => {
     };
 
     return (
-        <div className="modal">
+        <div className={props.backgroundColor ? "modal-p" : "modal-g"}>
             <div className="forum-content">
                 <form className={classes.root} noValidate autoComplete="off">
                     <div>
