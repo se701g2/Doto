@@ -1,8 +1,8 @@
-# Register
+# Add new user
 
 Used to register the user for the application
 
-**URL** : `/api/register/post`
+**URL** : `/api/users/add`
 
 **Method** : POST
 
@@ -48,51 +48,34 @@ For user that wants to register their account again
 
 User should not be able to register twice, and the username (email) of the account must be unique
 
-# Login
+# Get all users
 
-Used to log the user into the application
+Get users registerd
 
-**URL** : `/api/login`
+**URL** : `/api/users`
 
-**Method** : `POST`
+**Method** : `GET`
 
-**Auth required** : YES
+**Auth required** : `YES`
 
-**Data constraints**:
-```json
-{
-	"Username" : "[Unique email address]",
-	"Password"  : "[Password the user chooses]"
-}
-```
-**Data example**:
-```json
-{
-	"Username" : "jyao413@aucklanduni.ac.nz",
-	"Password"  : "softwareengineering"	
-}
-```
 ## Success response
 
-**Code** : 200 OK
+**Code** : `200 OK`
 
 **Content examples**
 
-For a user with ID 1234 on the database where the user has saved their login information:
+Returns all registered users
 ```json
 {
-    	"name": "Jason",
-    	"email": "jyao413@aucklanduni.ac.nz",
-    	"_id": "1234", 
-        "Picture": "imgur.com/ao12r",
-        "Preferences": "blue",
-    	"__v": "0"
+
+		"name" : "Someone",
+        "email" : "someone@gmail.com",
+        "password"  : "",
+        "_id" : "325235",
+        "_v" : ""
+
 }
 ```
-Notes: 
-
-User first has to register
-
 
 # Schedule a task
 
@@ -300,5 +283,30 @@ If the user enters an invalid task ID
 {
     "task_id" : "1234",
     "Deleted" : "False"
+}
+```
+
+# Get Google Authentication
+
+Get authentication token for user
+
+**URL** : `/api/auth/google`
+
+**URL parameters** : `email = the email of the user`
+
+**Method** : `GET`
+
+**Auth required** : `YES`
+
+## Success response
+
+**Code** : `200 OK`
+
+**Content examples**
+
+Returns all the tasks the current user has
+```json
+{
+	"response" : "OK"
 }
 ```
