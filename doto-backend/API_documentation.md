@@ -68,7 +68,7 @@ Returns all registered users
 ```json
 {
 
-		"name" : "Someone",
+	"name" : "Someone",
         "email" : "someone@gmail.com",
         "password"  : "",
         "_id" : "325235",
