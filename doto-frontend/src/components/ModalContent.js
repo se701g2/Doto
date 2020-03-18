@@ -89,7 +89,7 @@ const ModalContent = props => {
     };
 
     return (
-        <div className="modal">
+        <div className={props.modalBackground ? "modal-p" : "modal-g"}>
             <div className="forum-content">
                 <form className={classes.root} noValidate autoComplete="off">
                     <div>
