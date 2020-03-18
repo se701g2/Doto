@@ -136,7 +136,7 @@ const Calendar = () => {
                 >
                     <Fade in={open}>
                         <div className={classes.paper}>
-                            <ModalConent addTask={addTask} backgroundColor={theme} />
+                            <ModalConent addTask={addTask} />
                         </div>
                     </Fade>
                 </Modal>
