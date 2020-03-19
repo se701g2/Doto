@@ -10,9 +10,10 @@ const CalendarListView = ({ tasks }) => {
         <div className="list-view">
             <div className="ml-3 mb-5 text-4xl font-bold">Tasks for Today</div>
             {tasks.map(task => {
+                const dueDate = new Date(task.endDate);
                 const isTaskToday =
-                    task.dueDate.getYear() === today.getYear() && task.dueDate.getMonth() === today.getMonth()
-                        ? task.dueDate.getDate() === today.getDate()
+                    dueDate.getYear() === today.getYear() && dueDate.getMonth() === today.getMonth()
+                        ? dueDate.getDate() === today.getDate()
                         : false;
 
                 return (
