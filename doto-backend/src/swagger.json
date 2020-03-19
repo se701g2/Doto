@@ -1,0 +1,271 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Yet Another Node.js Blogg Application API",
+    "description": "Yet Another Node.js Blogg Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+   
+    "/schedule" : {
+      "post" : {
+        "tags": [
+          "Task"
+        ],
+        "description": "Create new task in system",
+        "parameters": [
+          {
+            
+              
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "returns" : [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New Task is created"
+          }
+        }
+
+      },
+      "put" :{
+        "tags": [
+          "Task"
+        ],
+        "description": "Edit Task in System",
+        "parameters": [
+          {
+            
+            
+            "in": "body",
+            
+            
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "returns" : [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Task Details Edited"
+          }
+        }
+
+
+      },
+      "get" :{
+        "tags": [
+          "Task"
+        ],
+        "description": "Get all Tasks for user",
+        "parameters": [
+          {
+            
+            "in": "User",
+            "description" : " The user (String)"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "returns" : [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Here are all the Tasks",
+            "schema": {
+              "$ref": "#/definitions/Tasks"
+            }
+          }
+        }
+
+      },
+      "delete":{
+        "tags": [
+          "Task"
+        ],
+        "description": "Delete Task in System",
+        "parameters": [
+        
+          {
+            "in" : "taskId",
+            "description" : "The task to delete"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "returns" : [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Task Deleted"
+          }
+        }
+
+      }
+    },
+
+    "/login" :{
+      "post" : {
+
+      }
+    },
+
+    "/register" : {
+      "post" :{
+        "tags": [
+          "Task"
+        ],
+        "description": "Create new User in system",
+        "parameters": [
+          {
+            
+              
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "returns" : [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New User is created"
+          }
+        }
+
+      }
+    }
+
+    
+  },
+  "definitions": {
+    "User": {
+      "required": [
+        "email"
+       
+      ],
+      "properties": {
+        
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string",
+          "uniqueItems": false
+        },
+        "picture": {
+          "type": "string"
+        }
+      }
+    },
+    "Users": {
+      "type": "array",
+      "$ref": "#/definitions/User"
+    },
+    "Task" : {
+      "required": [
+        "_id",
+        "user",
+        ""
+      ],
+     
+      "properties": {
+        "user" :{
+          "type": "User",
+        
+          "uniqueItems" : true
+        },
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "title" : {
+          "type" : "string",
+          "uniqueItems" : false
+        },
+        "description" : {
+          "type" : "string",
+          "uniqueItems" : false
+        },
+        "location": {
+          "type" : "string",
+          "uniqueItems" : false
+        },
+        "priority" : {
+          "type" : "integer",
+          "uniqueItems" : false
+        },
+        "duration" : {
+          "type" : "integer",
+          "uniqueItems" : false
+        },
+        "startDate" : {
+          "type" : "date",
+          "uniqueItems" : false
+        },
+        "endDate" : {
+          "type" : "date",
+          "uniqueItems" : false
+        }
+
+        
+
+        }
+      
+     
+    },
+    "Tasks": {
+      "type": "array",
+      "$ref": "#/definitions/Task"
+    }
+
+    
+  }
+}
