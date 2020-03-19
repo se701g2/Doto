@@ -26,9 +26,6 @@ Please check the front end [readme](https://github.com/se701g2/Doto/blob/master/
 ### Link to the API
 [doto-backend.azurewebsites.net](https://doto-backend.azurewebsites.net)
 
-## Usage Examples
-(will do once more of the website is done)
-
 ## Contributing to this Project
 Please refer to our [wiki](https://github.com/se701g2/Doto/wiki) for an outline of our coding conventions and git workflow
 
