@@ -5,8 +5,8 @@ const User = require('../models/User');
 passport.use(
     new GoogleStrategy({
         callbackURL: '/auth/google/redirect',
-        clientID: '181904764798-mbguideg0blo89p18ibhjkknh6e2chsd.apps.googleusercontent.com',
-        clientSecret: '73Tk75zlPqvruJmUAYdO1igD'
+        clientID: process.env.GOOGLE_API_CLIENT,
+        clientSecret: process.env.GOOGLE_API_SECRET
     }, (accessToken, refreshToken, profile, email, done) => { 
         var user
         //Check if user already exists in database
