@@ -24,22 +24,22 @@ describe('User Model Test', () => {
 
     it('create  user and save  successfully.', async () => {
         const validUser = new UserModel({
-            name:'john',
+            email:'john',
             picture: 'profile.png',
             themePreference: 'dark'
         });
         const savedUser = await validUser.save();
-        assert(savedUser.name === 'john')
+        assert(savedUser.email === 'john')
     });
 
     it('gets user information', async () => {
-        let userinfo = await UserModel.find({"name": 'john'})
-        assert(userinfo[0].name === 'john')
+        let userinfo = await UserModel.find({"email": 'john'})
+        assert(userinfo[0].email === 'john')
     });
 
     it('create user with same name & throws error.', async () => {
         const invalidUser = new UserModel({
-            name:'john',
+            email:'john',
             picture: 'profile.png',
             themePreference: 'light'
         });
@@ -56,7 +56,7 @@ describe('User Model Test', () => {
         });
 
         var error = invalidUser.validateSync();
-        assert.equal(error.errors['name'].message,'Path `name` is required.');
+        assert.equal(error.errors['email'].message,'Path `email` is required.');
     });
 
     it('delete user successfully.', async () => {
