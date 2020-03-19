@@ -4,7 +4,7 @@ const authenticateToken = require('../config/token-setup').authenticateToken
 const Task = require('../models/Task');
 
 //GET ALL task
-router.get('get/', authenticateToken, (req,res) => {
+router.get('/get', authenticateToken, (req,res) => {
     let tasks = Task.find({"user": req.user.email})
     .then(tasks => res.status(200).json(tasks))
     .catch(err => res.status(400).json('Error: ' + err));
