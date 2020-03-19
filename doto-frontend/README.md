@@ -60,7 +60,7 @@ test("Settings page should be loaded correctly", () => {
 
 All new components should include relevant tests using the thes two toolchains.
 
-More documenation [here](https://jestjs.io/) & [here](https://enzymejs.github.io/enzyme/)
+More documentation [here](https://jestjs.io/) & [here](https://enzymejs.github.io/enzyme/)
 
 ### Material UI
 
@@ -78,7 +78,7 @@ Implementation example:
 
 Where possible, material ui components should be adopted and implemented according to the provided documentation.
 
-More documenation [here](https://material-ui.com/)
+More documentation [here](https://material-ui.com/)
 
 ### React Router
 
@@ -98,7 +98,7 @@ Implementation example:
 
 New pages that are added should following the same routing structure setup in `Route.js`.
 
-More documenation [here](https://reacttraining.com/react-router/web/guides/quick-start)
+More documentation [here](https://reacttraining.com/react-router/web/guides/quick-start)
 
 ### Tailwind
 
@@ -113,7 +113,7 @@ Implementation example:
 
 The root level `tailwind.js` file contains a list of the different CSS variants.
 
-More documenation [here](https://tailwindcss.com/)
+More documentation [here](https://tailwindcss.com/)
 
 ## Learn More
 
