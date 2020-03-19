@@ -37,6 +37,84 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+## Libraries & Toolchains
+
+The frontend system utilizes multiple libraries and tools that provide benefits in different aspects of the user interface. When committing to the frontend repository these tools should be used properly and where applicable. The content below gives short descriptions of the tooling.
+
+### JEST & Enzyme Testing
+
+Both of these utilities provide an isolated JavaScript testing framework that is used for frontend testing.
+
+Implementation example:
+
+```
+test("Settings page should be loaded correctly", () => {
+    const wrapper = mount(
+        <MemoryRouter initialEntries={["/settings"]}>
+            <Route />
+        </MemoryRouter>,
+    );
+    expect(wrapper.find(SettingsPage)).toHaveLength(1);
+});
+```
+
+All new components should include relevant tests using the thes two toolchains.
+
+More documentation [here](https://jestjs.io/) & [here](https://enzymejs.github.io/enzyme/)
+
+### Material UI
+
+To keep the UI consistent the team has used the Material UI library where possible.
+Implementation example:
+
+```
+<TextField
+  className="text-area spacing"
+  id="standard-basic"
+  label="Location"
+  onChange={handleLocationChange}
+/>
+```
+
+Where possible, material ui components should be adopted and implemented according to the provided documentation.
+
+More documentation [here](https://material-ui.com/)
+
+### React Router
+
+React router is a common library used to handle routing between pages in a webapp.
+
+Implementation example:
+
+```
+<Switch>
+  <Route exact path="/" component={Login} />
+    <Route path="/settings">
+      <ThemeContext.Provider value={[theme, setTheme]}>
+        <SettingsPage />
+      </ThemeContext.Provider>
+    </Route>
+```
+
+New pages that are added should following the same routing structure setup in `Route.js`.
+
+More documentation [here](https://reacttraining.com/react-router/web/guides/quick-start)
+
+### Tailwind
+
+Tailwind is a CSS framework that the team has used to add consistency styling.
+
+Implementation example:
+
+```
+<h2 class="text-lg">Calendar</h2>
+<div class="text-purple-500">Support</div>
+```
+
+The root level `tailwind.js` file contains a list of the different CSS variants.
+
+More documentation [here](https://tailwindcss.com/)
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).

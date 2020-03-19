@@ -17,42 +17,9 @@ import { addTaskToSchedule } from "./TaskScheduler";
 import "./Calendar.css";
 import "../Pages.css";
 import { ThemeContext } from "../../../context/ThemeContext";
+import DotoService from "../../../helpers/DotoService";
 
 const classnames = require("classnames");
-
-const DUMMY_TASKS = [
-    /* Commented this out as data can be inputted via the modal */
-    // {
-    //     title: "Lecture-1",
-    //     descrition: "Lecture at Auckland Uni",
-    //     startDate: new Date(2020, 2, 12, 9, 0), // 0 is January
-    //     endDate: new Date(2020, 2, 12, 11, 0),
-    //     id: 0,
-    //     priority: 3,
-    //     location: "Room 1",
-    //     color: "blue",
-    // },
-    // {
-    //     title: "Lecture-2",
-    //     descrition: "Lecture at Auckland Uni",
-    //     startDate: new Date(2020, 2, 10, 10, 0),
-    //     endDate: new Date(2020, 2, 10, 12, 0),
-    //     id: 1,
-    //     priority: 2,
-    //     location: "Room 2",
-    //     color: "green",
-    // },
-    // {
-    //     title: "James' Birthday",
-    //     descrition: "James' day of birth",
-    //     startDate: new Date(2020, 2, 13, 0, 0),
-    //     endDate: new Date(2020, 2, 14, 0, 0),
-    //     id: 2,
-    //     priority: 1,
-    //     location: "Room 3",
-    //     color: "pink",
-    // },
-];
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -85,13 +52,18 @@ const Calendar = () => {
 
     const addTask = (newTask, currentDate) => {
         // Schedule the new task
-        const scheduledTasks = addTaskToSchedule(newTask, tasks, currentDate);
-        setTasks(scheduledTasks);
+        const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks, currentDate);
+        DotoService.setNewTask(updatedTask);
+        setTasks(newTaskOrder);
         handleClose();
     };
 
     useEffect(() => {
-        setTasks(DUMMY_TASKS);
+        const fetchTasks = async () => {
+            const tasks = await DotoService.getTasks();
+            setTasks(tasks);
+        };
+        fetchTasks();
     }, []);
 
     return (

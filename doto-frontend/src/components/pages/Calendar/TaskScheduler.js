@@ -57,7 +57,10 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
 
             // Insert the new task at the specified index
             competingTasks.splice(i, 0, newTask);
-            return [...oldTasks, ...competingTasks];
+            return {
+                newTaskOrder: [...oldTasks, ...competingTasks],
+                updatedTask: newTask,
+            };
         }
     }
 
@@ -67,7 +70,10 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
         (cTask && new Date(cTask.endDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE)) ||
         new Date(minDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE);
 
-    return [...existingTasks, newTask];
+    return {
+        newTaskOrder: [...existingTasks, newTask],
+        updatedTask: newTask,
+    };
 };
 
 export { addTaskToSchedule };

@@ -1,9 +1,9 @@
 const express = require('express')
 const cors = require('cors')
+require('dotenv').config();
 const passportSetUp = require('./src/config/passport-setup.js')
 const app = express()
 const apiPort = process.env.PORT || 3001
-require('dotenv').config();
 const passport = require('passport')
 
 // Mongoose connection
