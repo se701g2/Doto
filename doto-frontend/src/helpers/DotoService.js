@@ -35,7 +35,6 @@ const DotoService = {
         }
     },
     setNewTask: async task => {
-        console.log(task);
         const newTask = {
             user: CookieManager.get("email"),
             taskId: uuidv4(),
