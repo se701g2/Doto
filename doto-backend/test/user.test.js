@@ -32,6 +32,11 @@ describe('User Model Test', () => {
         assert(savedUser.name === 'john')
     });
 
+    it('gets user information', async () => {
+        let userinfo = await UserModel.find({"name": 'john'})
+        assert(userinfo[0].name === 'john')
+    });
+
     it('create user with same name & throws error.', async () => {
         const invalidUser = new UserModel({
             name:'john',

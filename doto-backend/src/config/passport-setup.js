@@ -10,15 +10,15 @@ passport.use(
     }, (accessToken, refreshToken, profile, email, done) => {
         var user
         //Check if user already exists in database
-        User.findOne({name: email._json.email}).then((currentUser)=>{
-            if(currentUser){
+        User.findOne({ name: email._json.email }).then((currentUser) => {
+            if (currentUser) {
                 console.log('User already exists ' + currentUser.name)
                 user = currentUser
-            }else{
+            } else {
                 user = new User({
                     name: email._json.email
                 })
-                user.save().then((newUser)=>{
+                user.save().then((newUser) => {
                     console.log('Created New User ' + newUser.name)
                 })
             }

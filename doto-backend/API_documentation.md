@@ -2,7 +2,7 @@
 
 Used to register the user for the application
 
-**URL** : `/api/register/post`
+**URL** : `/auth/register/post`
 
 **Method** : POST
 
@@ -52,7 +52,7 @@ User should not be able to register twice, and the username (email) of the accou
 
 Used to log the user into the application
 
-**URL** : `/api/login`
+**URL** : `/auth/login`
 
 **Method** : `POST`
 
@@ -93,12 +93,37 @@ Notes:
 
 User first has to register
 
+# Get user info
+
+Get the user information such as email, id, profile pic string etc
+
+**URL** : `/task/get/:username`
+
+**URL parameters** : `username = the username (email) of the current login`
+
+**Method** : `GET`
+
+**Auth required** : `YES`
+
+## Success response
+
+**Code** : `200 OK`
+
+**Content examples**
+
+Returns the information of the user
+```json
+{
+	"id" : "1234",
+	"email": "test@gmail.com"
+}
+```
 
 # Schedule a task
 
 Used to schedule a task
 
-**URL** : `/api/schedule/post`
+**URL** : `/task/post`
 
 **Method** : `POST`
 
@@ -170,7 +195,7 @@ For an unsuccessful task scheduled
 
 Used to update a user’s task
 
-**URL** : `/api/schedule/:taskid`
+**URL** : `/task/:taskid`
 
 **URL parameters** : `taskid = the id of the task the user wants to change`
 
@@ -219,7 +244,7 @@ If the user enters a valid update and task ID
 
 Get the tasks of a user 
 
-**URL** : `/api/schedule/get/:username`
+**URL** : `/task/get/:username`
 
 **URL parameters** : `username = the username of the current login`
 
@@ -261,7 +286,7 @@ Returns all the tasks the current user has
 
 Used to delete a user’s task
 
-**URL** : `/api/schedule/:taskid`
+**URL** : `/task/:taskid`
 
 **URL parameters** : `taskid = the id of the task the user wants to change`
 
