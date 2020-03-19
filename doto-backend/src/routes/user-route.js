@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const authenticateToken = require('../config/token-setup').authenticateToken
 const User = require('../models/User');
 
 // GET User information, returns 400 error if no user found with the name
-router.get('/get/:email', function (req, res) {
-    let userinfo = User.find({ "email": req.params.email }, function (err, userinfo) {
+router.get('/get', authenticateToken, function (req, res) {
+    const email = req.user.email
+    User.find({ "email": email }, function (err, userinfo) {
         if (err) {
             console.log(err);
             res.status(400).json('Error: ' + err);
@@ -19,14 +21,15 @@ router.get('/get/:email', function (req, res) {
 })
 
 // UPDATE USER INFORMATION
-router.put('/:email', function (req, res) {
-    User.updateOne({ email: req.params.email }, req.body, { new: true }, function (err, updatedUser) {
+router.put('/update', authenticateToken, function (req, res) {
+    const email = req.user.email
+    User.updateOne({ email: email }, req.body, { new: true }, function (err, updatedUser) {
         console.log(updatedUser);
         if (err || !updatedUser) {
             console.log(err);
-            res.status(400).json({ email: req.params.email, Successful: "False" });
+            res.status(400).json({ email: email, Successful: "False" });
         } else {
-            res.status(200).json({ email: req.params.email, Successful: "True" })
+            res.status(200).json({ email: email, Successful: "True" })
         }
     });
 })

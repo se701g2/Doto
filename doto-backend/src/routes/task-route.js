@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const authenticateToken = require('../config/token-setup').authenticateToken
 const Task = require('../models/Task');
 
 //GET ALL task
-router.route('/get/:user').get((req,res) => {
-    let tasks = Task.find({"user": req.params.user})
+router.get('get/', authenticateToken, (req,res) => {
+    let tasks = Task.find({"user": req.user.email})
     .then(tasks => res.status(200).json(tasks))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 //ADD task 
-router.post('/post', function(req, res){
-
+router.post('/post', authenticateToken, function(req, res){
     let task = new Task();
-    task.user = req.body.user;
+    task.user = req.user.email;
     task.taskId = req.body.taskId;
     task.title = req.body.title;
     task.description = req.body.description;
@@ -48,7 +48,14 @@ router.put('/:taskId', function(req, res){
 });
 
 //DELETE task
-router.delete('/:taskId', function(req, res){
+router.delete('/:taskId', authenticateToken, function(req, res){
+    const task = Task.findOne({ taskId: req.params.taskId }, function(err) {
+        if(err) { res.sendStatus(400) }
+    })
+    console.log('task ' + task.user)
+    console.log('return ' + req.user.email)
+    if (task.user != req.user.email) return res.sendStatus(403)
+ 
     Task.remove({"taskId": req.params.taskId}, function(err){
         if(err){
             console.log(err);
