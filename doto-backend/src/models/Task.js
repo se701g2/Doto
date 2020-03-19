@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 var uniqueValidator = require('mongoose-unique-validator');
 
+// Schema for Task objects (which are associated with a User)
+// REQUIRED PROPERTIES: user, taskId, duration, startDate, endDate
 const taskSchema = mongoose.Schema({
     user: {
         type: String,
@@ -29,11 +31,11 @@ const taskSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    startDate: {
+    startDate: {        // Date for start of scheduling period
         type: Date,
         required: true
     },
-    endDate: {
+    endDate: {          // Date for end of scheduling period
         type: Date,
         required: true
     },
