@@ -13,7 +13,7 @@ const Header = ({ title }) => {
             <h1 className="Title">{title}</h1>
 
             <ul className="IconList">
-                <Tooltip title="Log Out">
+                <Tooltip title="Log Out" onClick={() => console.log("logged out")}>
                     <li className="Account">
                         <Link to="/login">
                             <ExitToAppIcon className="IconLarge" />
