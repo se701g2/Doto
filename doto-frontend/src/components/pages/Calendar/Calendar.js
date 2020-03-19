@@ -122,24 +122,26 @@ const Calendar = () => {
                     </div>
                     {listView && <CalendarListView tasks={tasks} />}
                 </div>
-                <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    className={classes.modal}
-                    open={open}
-                    onClose={handleClose}
-                    closeAfterTransition
-                    BackdropComponent={Backdrop}
-                    BackdropProps={{
-                        timeout: 500,
-                    }}
-                >
-                    <Fade in={open}>
-                        <div className={classes.paper}>
-                            <ModalConent addTask={addTask} modalBackground={theme} />
-                        </div>
-                    </Fade>
-                </Modal>
+                <div className="AddTaskModal">
+                    <Modal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        className={classes.modal}
+                        open={open}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}
+                    >
+                        <Fade in={open}>
+                            <div className={classes.paper}>
+                                <ModalConent addTask={addTask} modalBackground={theme} />
+                            </div>
+                        </Fade>
+                    </Modal>
+                </div>
             </span>
         </div>
     );

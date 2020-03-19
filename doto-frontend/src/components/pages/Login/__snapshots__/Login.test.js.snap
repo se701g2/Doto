@@ -51,7 +51,7 @@ exports[`<Login /> component being rendered Make sure render matches snapshot 1`
           className="google-btn-container mt-2"
         >
           <a
-            href="/auth/google"
+            href="https://doto-backend.azurewebsites.net/auth/google"
           >
             <div
               className="google-btn"
