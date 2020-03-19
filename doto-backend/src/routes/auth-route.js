@@ -9,8 +9,11 @@ router.get('/google', passport.authenticate('google', {
 
 router.get('/google/redirect', passport.authenticate('google', {session: false},), 
 function(req, res){
+    const email = req.user.email
+    const buffer = new Buffer(email)
+    const encode = buffer.toString('base64')
     //Replace with actual URL in frontend
-    res.redirect(url + '/calendar')
+    res.redirect(url + '/calendar?=' + encode);
 })
 
 module.exports = router;

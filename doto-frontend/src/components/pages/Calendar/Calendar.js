@@ -12,11 +12,47 @@ import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import AddIcon from "@material-ui/icons/Add";
 import Tooltip from "@material-ui/core/Tooltip";
 import Header from "../Header";
+import { addTaskToSchedule } from "./TaskScheduler";
+
 import "./Calendar.css";
 import "../Pages.css";
 import { ThemeContext } from "../../../context/ThemeContext";
 
 const classnames = require("classnames");
+
+const DUMMY_TASKS = [
+    /* Commented this out as data can be inputted via the modal */
+    // {
+    //     title: "Lecture-1",
+    //     descrition: "Lecture at Auckland Uni",
+    //     startDate: new Date(2020, 2, 12, 9, 0), // 0 is January
+    //     endDate: new Date(2020, 2, 12, 11, 0),
+    //     id: 0,
+    //     priority: 3,
+    //     location: "Room 1",
+    //     color: "blue",
+    // },
+    // {
+    //     title: "Lecture-2",
+    //     descrition: "Lecture at Auckland Uni",
+    //     startDate: new Date(2020, 2, 10, 10, 0),
+    //     endDate: new Date(2020, 2, 10, 12, 0),
+    //     id: 1,
+    //     priority: 2,
+    //     location: "Room 2",
+    //     color: "green",
+    // },
+    // {
+    //     title: "James' Birthday",
+    //     descrition: "James' day of birth",
+    //     startDate: new Date(2020, 2, 13, 0, 0),
+    //     endDate: new Date(2020, 2, 14, 0, 0),
+    //     id: 2,
+    //     priority: 1,
+    //     location: "Room 3",
+    //     color: "pink",
+    // },
+];
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -35,11 +71,10 @@ const useStyles = makeStyles(theme => ({
 const Calendar = () => {
     const classes = useStyles();
     const [listView, setListView] = useState();
-    const [appointments, setAppointments] = useState([]);
-    const [open, setOpen] = useState(false);
+    const [tasks, setTasks] = useState([]);
+    const [open, setOpen] = React.useState(false);
     const [theme] = useContext(ThemeContext);
 
-    console.log(theme);
     const handleOpen = () => {
         setOpen(true);
     };
@@ -48,46 +83,20 @@ const Calendar = () => {
         setOpen(false);
     };
 
-    useEffect(() => {
-        const tempAppointments = [
-            {
-                title: "Lecture-1",
-                descrition: "Lecture at Auckland Uni",
-                startDate: new Date(2020, 2, 12, 9, 0), // 0 is January
-                endDate: new Date(2020, 2, 12, 11, 0),
-                id: 0,
-                priority: 3,
-                location: "Room 1",
-                color: "blue",
-            },
-            {
-                title: "Lecture-2",
-                descrition: "Lecture at Auckland Uni",
-                startDate: new Date(2020, 2, 10, 10, 0),
-                endDate: new Date(2020, 2, 10, 12, 0),
-                id: 1,
-                priority: 2,
-                location: "Room 2",
-                color: "green",
-            },
-            {
-                title: "James' Birthday",
-                descrition: "James' day of birth",
-                startDate: new Date(2020, 2, 13, 0, 0),
-                endDate: new Date(2020, 2, 14, 0, 0),
-                id: 2,
-                priority: 1,
-                location: "Room 3",
-                color: "pink",
-            },
-        ];
+    const addTask = (newTask, currentDate) => {
+        // Schedule the new task
+        const scheduledTasks = addTaskToSchedule(newTask, tasks, currentDate);
+        setTasks(scheduledTasks);
+        handleClose();
+    };
 
-        setAppointments(tempAppointments);
+    useEffect(() => {
+        setTasks(DUMMY_TASKS);
     }, []);
 
     return (
         <div className="PageLayout">
-            <div className={classnames("left-side-bar", theme ? "right-side-bg-blue" : "right-side-bg-green")} />
+            <div className={classnames("left-side-bar", theme ? "left-side-bg-blue" : "left-side-bg-green")} />
             <div className="calendar-buttons">
                 <div className="mb-3">
                     <Tooltip title="Add Task">
@@ -109,9 +118,9 @@ const Calendar = () => {
                 <Header title="Calendar" />
                 <div className="flex">
                     <div className="Calendar">
-                        <CalendarComponent appointments={appointments} />
+                        <CalendarComponent tasks={tasks} />
                     </div>
-                    {listView && <CalendarListView appointments={appointments} />}
+                    {listView && <CalendarListView tasks={tasks} />}
                 </div>
                 <Modal
                     aria-labelledby="transition-modal-title"
@@ -127,7 +136,7 @@ const Calendar = () => {
                 >
                     <Fade in={open}>
                         <div className={classes.paper}>
-                            <ModalConent />
+                            <ModalConent addTask={addTask} modalBackground={theme} />
                         </div>
                     </Fade>
                 </Modal>
