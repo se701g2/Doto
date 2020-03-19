@@ -7,7 +7,7 @@ const CookieManager = {
     get: key => {
         return Cookies.get(key);
     },
-    clearAll: key => {
+    clearAll: () => {
         Cookies.remove("jwt");
         Cookies.remove("email");
     },

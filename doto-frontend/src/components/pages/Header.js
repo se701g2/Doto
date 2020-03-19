@@ -6,6 +6,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Tooltip from "@material-ui/core/Tooltip";
 import "./Header.css";
 import { Link } from "react-router-dom";
+import CookieManager from "../../helpers/CookieManager";
 
 const Header = ({ title }) => {
     return (
@@ -13,7 +14,7 @@ const Header = ({ title }) => {
             <h1 className="Title">{title}</h1>
 
             <ul className="IconList">
-                <Tooltip title="Log Out" onClick={() => console.log("logged out")}>
+                <Tooltip title="Log Out" onClick={() => CookieManager.clearAll()}>
                     <li className="Account">
                         <Link to="/login">
                             <ExitToAppIcon className="IconLarge" />
