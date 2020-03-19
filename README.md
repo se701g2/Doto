@@ -1,6 +1,8 @@
 # Doto
 
-![](https://github.com/se701g2/Doto/workflows/doto-CI/badge.svg?event=push) ![](https://github.com/se701g2/Doto/workflows/doto-backend-deploy/badge.svg?event=push) ![](https://github.com/se701g2/Doto/workflows/doto-frontend-deploy/badge.svg?event=push)
+![](https://github.com/se701g2/Doto/workflows/doto-CI/badge.svg?event=push) 
+![](https://github.com/se701g2/Doto/workflows/doto-backend-deploy/badge.svg?event=push) 
+![](https://github.com/se701g2/Doto/workflows/doto-frontend-deploy/badge.svg?event=push)
 
 Welcome to Doto. The open-source software (OSS) project for a smart scheduling calendar app. Doto is an online calendar and to-do app. It has all of the basic functionality of any calendar app and can be used to make to-do lists. It also has smart scheduling capabilities, meaning that if the user wants to do a task, it can input it into our app and the app will allocate this task in a suitable time in the user’s calendar. Doto uses Google to sign up, meaning that to use this app, the user must have a google account. The development of Doto is done using the M.E.R.N (MongoDB, Express, React, Node) tech stack (more info about the tech stack can be found in the Wiki).
 
@@ -24,7 +26,7 @@ To get the project up and running locally, you will need to change directory to 
 
 ### `npm start`
 
-Once your local backend server is up, in a separate terminal, change directory into `doto-backend` and once again run the same commands to run the react-app locally. By default, the react-app is hosted on port 3000 and the local server is hosted on port 3001. Do not change these numbers as we have added the addresses as authorized redirect uri's in our google credentials.
+Once your local backend server is up, in a separate terminal, change directory into `doto-frontend` and once again run the same commands to run the react-app locally. By default, the react-app is hosted on port 3000 and the local server is hosted on port 3001. Do not change these numbers as we have added the addresses as authorized redirect uri's in our google credentials.
 
 Please check the front end [readme](https://github.com/se701g2/Doto/blob/master/doto-frontend/README.md) for more information on running the front end of the code.
 
