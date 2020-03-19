@@ -81,7 +81,7 @@ Returns all registered users
 
 Used to schedule a task
 
-**URL** : `/api/schedule/post`
+**URL** : `/task/post`
 
 **Method** : `POST`
 
@@ -153,7 +153,7 @@ For an unsuccessful task scheduled
 
 Used to update a user’s task
 
-**URL** : `/api/schedule/:taskid`
+**URL** : `/task/:taskid`
 
 **URL parameters** : `taskid = the id of the task the user wants to change`
 
@@ -202,7 +202,7 @@ If the user enters a valid update and task ID
 
 Get the tasks of a user 
 
-**URL** : `/api/schedule/get/:username`
+**URL** : `/task/get/:username`
 
 **URL parameters** : `username = the username of the current login`
 
@@ -244,7 +244,7 @@ Returns all the tasks the current user has
 
 Used to delete a user’s task
 
-**URL** : `/api/schedule/:taskid`
+**URL** : `/task/:taskid`
 
 **URL parameters** : `taskid = the id of the task the user wants to change`
 

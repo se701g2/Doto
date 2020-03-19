@@ -35,8 +35,10 @@ app.use(express.json())
 app.use(passport.initialize());
 
 // exporting Routes 
-const users = require('./src/routes/router');
-app.use('/api', users);
+const task = require('./src/routes/task-route');
+app.use('/task', task);
+const user = require('./src/routes/user-route');
+app.use('/user', user);
 const authRoute = require('./src/routes/auth-route')
 app.use('/auth', authRoute)
 
