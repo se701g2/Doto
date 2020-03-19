@@ -10,11 +10,11 @@ router.get('/users', function(req, res){
     let users = User.find({}, function(err, users){
         if(err){
             console.log(err);
-            res.json({msg: "failed"})
+            res.status(400).json({msg: "failed"})
         }
         else {
             console.log(users)
-            res.json(users);
+            res.status(200).json(users);
         }
     })
 })
@@ -30,10 +30,10 @@ router.post('/users/add', function (req, res) {
     user.save(function(err){
         if(err){
             console.log(err);
-            res.json({msg: "failed..."})
+            res.status(400).json({msg: "failed..."})
         }
         else{   
-            res.json(user)
+            res.status(200).json(user)
         }
     });
 });
@@ -41,7 +41,7 @@ router.post('/users/add', function (req, res) {
 //GET ALL task
 router.route('/schedule/get/:user').get((req,res) => {
     let tasks = Task.find({"user": req.params.user})
-    .then(tasks => res.json(tasks))
+    .then(tasks => res.status(200).json(tasks))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -63,34 +63,22 @@ router.post('/schedule/post', function(req, res){
     task.save(function(err){
         if(err){
             console.log(err);
-            res.json({taskId: req.params.taskId, Successful: "False"});
+            res.status(400).json({taskId: req.params.taskId, Successful: "False"});
         } else {
-            res.json({taskId: req.params.taskId, Successful: "True"})
+            res.status(200).json({taskId: req.params.taskId, Successful: "True"})
         }
     });
 });
 
-//UPDATE task (WIP - Not currently usable)
+//UPDATE task
 router.put('/schedule/:taskId', function(req, res){
-
-    let task = new Task();
-    task.user = req.body.user;
-    task.taskId = req.params.taskId;
-    task.title = req.body.title;
-    task.description = req.body.description;
-    task.location = req.body.location;
-    task.priority = req.body.priority;
-    task.duration = req.body.duration;
-    task.startDate = req.body.startDate;
-    task.endDate = req.body.endDate;
-    task.reminderDate = req.body.reminderDate;
-
-    task.updateOne({"taskId":req.params.taskId},function(err){
-        if(err){
+    Task.updateOne({taskId: req.params.taskId}, req.body, {new: true}, function(err, updatedTask){
+        console.log(updatedTask);
+        if(err || !updatedTask){
             console.log(err);
-            res.json({taskId: req.params.taskId, Successful: "False"});
+            res.status(400).json({taskId: req.params.taskId, Successful: "False"});
         } else {
-            res.json({taskId: req.params.taskId, Successful: "True"})
+            res.status(200).json({taskId: req.params.taskId, Successful: "True"})
         }
     });
 });
@@ -100,9 +88,9 @@ router.delete('/schedule/:taskId', function(req, res){
     Task.remove({"taskId": req.params.taskId}, function(err){
         if(err){
             console.log(err);
-            res.json({taskId: req.params.taskId, Deleted: "False"});
+            res.status(400).json({taskId: req.params.taskId, Deleted: "False"});
         } else {
-            res.json({taskId: req.params.taskId, Deleted: "True"});
+            res.status(200).json({taskId: req.params.taskId, Deleted: "True"});
         }
     });
 });
