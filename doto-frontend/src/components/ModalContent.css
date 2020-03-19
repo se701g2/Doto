@@ -1,6 +1,15 @@
-.modal {
-    background-image: url("./images//modal-background.jpg");
+.modal-p {
+    background-image: url("./images//modal-background-purple.jpg");
     background-size: cover;
+}
+
+.modal-g {
+    background-image: url("./images//modal-background-green.jpg");
+    background-size: cover;
+}
+
+.makeStyles-paper-507 {
+    padding: 0px !important;
 }
 
 .makeStyles-paper-2 {
