@@ -97,7 +97,7 @@ User first has to register
 
 Get the user information such as email, id, profile pic string etc
 
-**URL** : `/task/get/:username`
+**URL** : `/user/:username`
 
 **URL parameters** : `username = the username (email) of the current login`
 
@@ -115,7 +115,50 @@ Returns the information of the user
 ```json
 {
 	"id" : "1234",
-	"email": "test@gmail.com"
+	"email": "test@gmail.com", 
+	"name": "Lucy"
+}
+```
+
+# UpdateUser
+
+Used to update a user’s task
+
+**URL** : `/user/:name`
+
+**URL parameters** : `name = the email of the user that needs update`
+
+**Method** : `PUT`
+
+**Auth required** : `YES`
+
+**Data constraints**:
+```json
+{
+	"email": "[email]", 
+	"name": "[name]", 
+	"picture": "[pic]", 
+	"themePreference": "[theme]"
+}
+```
+## Success response
+
+**Code** : `200 OK`
+
+**Content examples**
+
+For a successful update
+```json
+{
+    "email" : "1234",
+    "Successful" : "True"
+}
+```
+For an unsuccessful update
+```json
+{
+    "email" : "1234",
+    "Successful" : "False"
 }
 ```
 
