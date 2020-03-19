@@ -9,7 +9,7 @@ const passport = require('passport')
 // Mongoose connection
 const mongoose = require('mongoose');
 // db connection string will point to Azure string only in production, fallbacks to dev database string 
-const connectionString = process.env.AZURE_CONN || process.env.mongodb_uri;
+const connectionString = process.env.AZURE_CONN || process.env.DEVELOPMENT_DB_CONN;
 // Add authentication strings only in production environment
 const connParams = { useNewUrlParser: true }
 if(process.env.AZURE_USER && process.env.AZURE_PW){
