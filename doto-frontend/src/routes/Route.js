@@ -27,7 +27,6 @@ const extractEmailAndJwt = url => {
 };
 
 const saveToCookies = params => {
-    console.log(params);
     if (!params) return;
     const [email, jwt] = params;
     CookieManager.set("email", email);
