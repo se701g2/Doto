@@ -95,7 +95,7 @@ User first has to register
 
 # Get user info
 
-Get the tasks of a user 
+Get the user information such as email, id, profile pic string etc
 
 **URL** : `/task/get/:username`
 
