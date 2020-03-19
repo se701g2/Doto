@@ -14,7 +14,8 @@ const userschema = mongoose.Schema({
         type: String
     },
     themePreference: {
-        type: String
+        type: String,
+        default: 'dark'
     }
 });
 

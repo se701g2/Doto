@@ -5,7 +5,10 @@ const generateAccessToken = require('../config/token-setup').generateAccessToken
 const url = process.env.FRONTEND_URL || 'http://localhost:3000';
 
 router.get('/google', passport.authenticate('google', {
-    scope:['profile', 'email']
+    scope:[
+        'https://www.googleapis.com/auth/userinfo.profile',
+        'https://www.googleapis.com/auth/userinfo.email'
+    ]
 }))
 
 router.get('/google/redirect', passport.authenticate('google', {session: false},), 
