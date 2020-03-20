@@ -5,7 +5,7 @@ const Task = require('../models/Task');
 
 // GET ALL tasks for user
 router.get('/get', authenticateToken, (req, res) => {
-    Task.find({ "user": req.user.email })
+   Task.find({ "user": req.user.email })
         .then(tasks => res.status(200).json(tasks))
         .catch(err => res.status(400).json('Error: ' + err));
 });
