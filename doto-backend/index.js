@@ -26,7 +26,7 @@ db.once('open', function(){
     console.log("Connected to MongoDB.");
 });
 db.on('error', function(){
-    console.log(err);
+    
 });
 
 app.use(express.urlencoded({ extended: true }))
@@ -42,8 +42,9 @@ app.use('/user', user);
 const authRoute = require('./src/routes/auth-route')
 app.use('/auth', authRoute)
 
-app.get('/', (req, res) => {
-    res.send('Hello world!')
-})
+//Swagger UI Setup
+var swaggerUi = require('swagger-ui-express');
+swaggerDocument = require('./swagger.json');
+app.use('/',swaggerUi.serve,swaggerUi.setup(swaggerDocument));
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
