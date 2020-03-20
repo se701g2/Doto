@@ -10,7 +10,7 @@
     }
   },
   "host": "localhost:3001",
-  "basePath": "",
+  "basePath": "/",
   "tags": [
     {
       "name": "Users",
