@@ -3,7 +3,7 @@ const router = express.Router();
 const authenticateToken = require('../config/token-setup').authenticateToken
 const User = require('../models/User');
 
-// GET User information, returns 400 error if no user found with the name
+// GET User information
 router.get('/get', authenticateToken, function (req, res) {
     const email = req.user.email
     User.find({ "email": email }, function (err, userinfo) {
@@ -20,7 +20,7 @@ router.get('/get', authenticateToken, function (req, res) {
     });
 })
 
-// UPDATE USER INFORMATION
+// UPDATE User information
 router.put('/update', authenticateToken, function (req, res) {
     const email = req.user.email
     User.updateOne({ email: email }, req.body, { new: true }, function (err, updatedUser) {
@@ -34,9 +34,9 @@ router.put('/update', authenticateToken, function (req, res) {
     });
 })
 
-//GET ALL USERS IN THE SYSTEMS
+// GET ALL Users in the system
 router.get('/email', function (req, res) {
-    let users = User.find({}, function (err, users) {
+    User.find({}, function (err, users) {
         if (err) {
             console.log(err);
             res.status(400).json({ msg: "failed" })

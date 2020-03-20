@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 var uniqueValidator = require('mongoose-unique-validator');
 
+// Schema for Task objects (which are associated with a User)
+// REQUIRED PROPERTIES: user, taskId, duration, startDate, endDate
+// Refer to https://github.com/se701g2/Doto/wiki/Database-Schema for details
 const taskSchema = mongoose.Schema({
     user: {
         type: String,
