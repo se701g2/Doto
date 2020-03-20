@@ -8,7 +8,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import AddIcon from "@material-ui/icons/Add";
-import ModalConent from "../../ModalContent";
+import ModalContent from "../../ModalContent";
 import CalendarComponent from "./CalendarComponent";
 import CalendarListView from "./CalendarListView";
 import Header from "../Header";
@@ -112,7 +112,7 @@ const Calendar = () => {
                 >
                     <Fade in={open}>
                         <div className={classes.paper}>
-                            <ModalConent addNewTask={addNewTask} modalBackground={theme} />
+                            <ModalContent addNewTask={addNewTask} modalBackground={theme} />
                         </div>
                     </Fade>
                 </Modal>

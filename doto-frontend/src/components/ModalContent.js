@@ -35,7 +35,7 @@ const ModalContent = props => {
     const classes = useStyles();
 
     const [selectedName, setSelectedName] = useState("TASK - " + new Date());
-    const [selectedDescription, setSelectedDescription] = useState("Cry in anguish");
+    const [selectedDescription, setSelectedDescription] = useState("");
     const [selectedDueDate, setSelectedDueDate] = useState(new Date());
     const [selectedDuration, setSelectedDuration] = useState(0);
     const [selectedLocation, setSelectedLocation] = useState("");

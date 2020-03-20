@@ -64,7 +64,6 @@ const DotoService = {
                 headers: { Authorization: "Bearer " + CookieManager.get("jwt") },
             });
             const userInfo = response.data;
-            console.log(userInfo.themePreference);
             return userInfo;
         } catch (e) {
             // Todo; Check for errors
