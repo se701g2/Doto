@@ -56,6 +56,36 @@ const DotoService = {
 
         // Todo; catch for errors depending if it didn't post properly or maybe retry mechanism
     },
+    getUserInfo: async () => {
+        const path = baseUrl + "/user/get";
+
+        try {
+            const response = await axios.get(path, {
+                headers: { Authorization: "Bearer " + CookieManager.get("jwt") },
+            });
+            const userInfo = response.data;
+            console.log(userInfo.themePreference);
+            return userInfo;
+        } catch (e) {
+            // Todo; Check for errors
+            console.log(e);
+        }
+    },
+    updateUserInfo: async theme => {
+        const updatedUserInfo = {
+            user: CookieManager.get("email"),
+            themePreference: theme,
+        };
+
+        axios({
+            method: "put",
+            url: baseUrl + "/user/update",
+            headers: { Authorization: "Bearer " + CookieManager.get("jwt") },
+            data: updatedUserInfo,
+        });
+
+        // Todo; catch for errors depending if it didn't post properly or maybe retry mechanism
+    },
 };
 
 export default DotoService;

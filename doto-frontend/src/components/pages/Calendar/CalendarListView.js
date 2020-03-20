@@ -1,23 +1,24 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import Radio from "@material-ui/core/Radio";
 import "./Calendar.css";
+import PropTypes from "prop-types";
 
-const CalendarListView = ({ tasks }) => {
+const CalendarListView = props => {
     const today = new Date();
 
     return (
         <div className="list-view">
             <div className="ml-3 mb-5 text-4xl font-bold">Tasks for Today</div>
-            {tasks.map(task => {
+
+            {props.tasks.map(task => {
                 const dueDate = new Date(task.endDate);
-                const isTaskToday =
+                const isTaskScheduledToday =
                     dueDate.getYear() === today.getYear() && dueDate.getMonth() === today.getMonth()
                         ? dueDate.getDate() === today.getDate()
                         : false;
 
                 return (
-                    isTaskToday && (
+                    isTaskScheduledToday && (
                         <div key className="list-view-components">
                             <Radio
                                 disableRipple
@@ -35,6 +36,10 @@ const CalendarListView = ({ tasks }) => {
             })}
         </div>
     );
+};
+
+CalendarListView.propTypes = {
+    tasks: PropTypes.array.isRequired,
 };
 
 export default CalendarListView;

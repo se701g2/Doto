@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "date-fns";
 import Button from "@material-ui/core/Button";
 import DateFnsUtils from "@date-io/date-fns";
@@ -34,13 +34,13 @@ const useStyles = makeStyles(theme => ({
 const ModalContent = props => {
     const classes = useStyles();
 
-    const [selectedName, setSelectedName] = React.useState("TASK - " + new Date());
-    const [selectedDescription, setSelectedDescription] = React.useState("Cry in anguish");
-    const [selectedDueDate, setSelectedDueDate] = React.useState(new Date());
-    const [selectedDuration, setSelectedDuration] = React.useState(0);
-    const [selectedLocation, setSelectedLocation] = React.useState("");
-    const [selectedPriority, setSelectedPriority] = React.useState("");
-    const [selectedReminder, setSelectedReminder] = React.useState("");
+    const [selectedName, setSelectedName] = useState("TASK - " + new Date());
+    const [selectedDescription, setSelectedDescription] = useState("Cry in anguish");
+    const [selectedDueDate, setSelectedDueDate] = useState(new Date());
+    const [selectedDuration, setSelectedDuration] = useState(0);
+    const [selectedLocation, setSelectedLocation] = useState("");
+    const [selectedPriority, setSelectedPriority] = useState("");
+    const [selectedReminder, setSelectedReminder] = useState("");
 
     const handleNameChange = event => {
         setSelectedName(event.target.value);
@@ -85,11 +85,11 @@ const ModalContent = props => {
             reminder: selectedReminder,
         };
 
-        props.addTask(task, new Date());
+        props.addNewTask(task, new Date());
     };
 
     return (
-        <div className={props.modalBackground ? "modal-p" : "modal-g"}>
+        <div className={props.modalBackground === "dark" ? "modal-p" : "modal-g"}>
             <div className="forum-content">
                 <form className={classes.root} noValidate autoComplete="off">
                     <div>
@@ -194,7 +194,7 @@ const ModalContent = props => {
 };
 
 ModalContent.propTypes = {
-    addTask: PropTypes.func.isRequired,
+    addNewTask: PropTypes.func.isRequired,
 };
 
 export default ModalContent;

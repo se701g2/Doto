@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import "./Calendar.css";
 import { ViewState } from "@devexpress/dx-react-scheduler";
+import PropTypes from "prop-types";
 import {
     Scheduler,
     WeekView,
@@ -12,11 +12,12 @@ import {
     DateNavigator,
     TodayButton,
     Appointments,
+    AppointmentTooltip,
 } from "@devexpress/dx-react-scheduler-material-ui";
 
-const CalendarComponent = ({ tasks }) => {
+const CalendarComponent = props => {
     return (
-        <Scheduler data={tasks} currentView={MonthView} editable={true}>
+        <Scheduler data={props.tasks} currentView={MonthView} editable={true}>
             <ViewState />
             <DayView />
             <WeekView />
@@ -26,8 +27,13 @@ const CalendarComponent = ({ tasks }) => {
             <DateNavigator />
             <TodayButton />
             <Appointments />
+            <AppointmentTooltip />
         </Scheduler>
     );
+};
+
+CalendarComponent.propTypes = {
+    tasks: PropTypes.array.isRequired,
 };
 
 export default CalendarComponent;

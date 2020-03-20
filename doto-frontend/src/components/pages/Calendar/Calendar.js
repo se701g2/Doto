@@ -3,22 +3,20 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import ModalConent from "../../ModalContent";
-import CalendarComponent from "./CalendarComponent";
-import CalendarListView from "./CalendarListView";
 import Fab from "@material-ui/core/Fab";
+import Tooltip from "@material-ui/core/Tooltip";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import AddIcon from "@material-ui/icons/Add";
-import Tooltip from "@material-ui/core/Tooltip";
+import ModalConent from "../../ModalContent";
+import CalendarComponent from "./CalendarComponent";
+import CalendarListView from "./CalendarListView";
 import Header from "../Header";
+import { ThemeContext } from "../../../context/ThemeContext";
 import { addTaskToSchedule } from "./TaskScheduler";
-
+import DotoService from "../../../helpers/DotoService";
 import "./Calendar.css";
 import "../Pages.css";
-import { ThemeContext } from "../../../context/ThemeContext";
-import DotoService from "../../../helpers/DotoService";
-
 const classnames = require("classnames");
 
 const useStyles = makeStyles(theme => ({
@@ -39,8 +37,8 @@ const Calendar = () => {
     const classes = useStyles();
     const [listView, setListView] = useState();
     const [tasks, setTasks] = useState([]);
-    const [open, setOpen] = React.useState(false);
-    const [theme] = useContext(ThemeContext);
+    const [open, setOpen] = useState(false);
+    const [theme, setTheme] = useContext(ThemeContext);
 
     const handleOpen = () => {
         setOpen(true);
@@ -50,8 +48,7 @@ const Calendar = () => {
         setOpen(false);
     };
 
-    const addTask = (newTask, currentDate) => {
-        // Schedule the new task
+    const addNewTask = (newTask, currentDate) => {
         const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks, currentDate);
         DotoService.setNewTask(updatedTask);
         setTasks(newTaskOrder);
@@ -63,12 +60,19 @@ const Calendar = () => {
             const tasks = await DotoService.getTasks();
             setTasks(tasks);
         };
+        const fetchUserInfo = async () => {
+            const userInfo = await DotoService.getUserInfo();
+            setTheme(userInfo.themePreference);
+        };
+        fetchUserInfo();
         fetchTasks();
     }, []);
 
     return (
-        <div className="PageLayout">
-            <div className={classnames("left-side-bar", theme ? "left-side-bg-blue" : "left-side-bg-green")} />
+        <div className="page-layout">
+            <div
+                className={classnames("left-side-bar", theme === "dark" ? "left-side-bg-blue" : "left-side-bg-green")}
+            />
             <div className="calendar-buttons">
                 <div className="mb-3">
                     <Tooltip title="Add Task">
@@ -89,7 +93,7 @@ const Calendar = () => {
             <span className="content-container">
                 <Header title="Calendar" />
                 <div className="flex">
-                    <div className="Calendar">
+                    <div className="calendar-component">
                         <CalendarComponent tasks={tasks} />
                     </div>
                     {listView && <CalendarListView tasks={tasks} />}
@@ -108,7 +112,7 @@ const Calendar = () => {
                 >
                     <Fade in={open}>
                         <div className={classes.paper}>
-                            <ModalConent addTask={addTask} modalBackground={theme} />
+                            <ModalConent addNewTask={addNewTask} modalBackground={theme} />
                         </div>
                     </Fade>
                 </Modal>
