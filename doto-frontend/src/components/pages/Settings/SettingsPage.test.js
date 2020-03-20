@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { mount } from "enzyme";
+import renderer from "react-test-renderer";
 import { BrowserRouter as Router } from "react-router-dom";
 import SettingsPage from "./SettingsPage";
 import { ThemeContext } from "../../../context/ThemeContext";
@@ -10,8 +10,6 @@ describe("<SettingsPage /> component being rendered", () => {
     const setTheme = jest.fn();
     const useStateSpy = jest.spyOn(React, "useState");
     useStateSpy.mockImplementation(theme => [theme, setTheme]);
-
-    let subject;
 
     const Wrapper = () => {
         return (
@@ -25,13 +23,10 @@ describe("<SettingsPage /> component being rendered", () => {
 
     beforeEach(() => {
         useStateSpy.mockImplementation(theme => [theme, setTheme]);
-
-        subject = mount(<Wrapper />);
     });
 
     afterEach(() => {
         jest.clearAllMocks();
-        subject.unmount();
     });
 
     it("SettingsPage component rendered without crashing", () => {
@@ -40,6 +35,7 @@ describe("<SettingsPage /> component being rendered", () => {
     });
 
     it("Make sure render matches snapshot", () => {
-        expect(subject).toMatchSnapshot();
+        const tree = renderer.create(<Wrapper />).toJSON();
+        expect(tree).toMatchSnapshot();
     });
 });
