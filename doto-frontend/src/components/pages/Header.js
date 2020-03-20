@@ -8,11 +8,15 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 import CookieManager from "../../helpers/CookieManager";
 
+// A common header file for the page titles with associated links to settings, calendar and logout pages.
+// This file takes the input of the page name as a prop.
 const Header = props => {
     return (
         <nav>
             <h1 className="Title">{props.title}</h1>
             <ul className="IconList">
+                {/* Tooltips used to enhance user-experience and user-friendliness */}
+                {/* Clears google-email cookies on logout */}
                 <Tooltip title="Log Out" onClick={() => CookieManager.clearAll()}>
                     <li className="Account">
                         <Link to="/login">

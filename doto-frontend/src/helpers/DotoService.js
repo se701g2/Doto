@@ -2,6 +2,7 @@ import CookieManager from "./CookieManager";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
+// This file integrates the front-end and back-end together using GET and POST methods.
 const baseUrl =
     process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://doto-backend.azurewebsites.net";
 

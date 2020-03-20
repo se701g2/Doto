@@ -16,6 +16,7 @@ import "../Pages.css";
 
 const classnames = require("classnames");
 
+// TODO: Use input name field and display it on the calendar header page as [name]'s calendar
 const InputNameField = props => {
     return (
         <FormControl id="input-field">
@@ -32,6 +33,7 @@ const InputNameField = props => {
     );
 };
 
+// TODO: Use this field is to add any other email address's calendars
 const InputEmailField = props => {
     return (
         <FormControl id="input-field">
@@ -51,11 +53,13 @@ const InputEmailField = props => {
 const ProfilePhoto = props => {
     return (
         <div className="flex">
+            {/* Profile photo is taken from the associated google account */}
             <img className="profile-photo" src={props.profilePic} alt="profile-pic-from-google" />
         </div>
     );
 };
 
+// TODO: Implement logic for working hours in sync with task-scheduling algorithm
 const WorkingHoursPicker = () => {
     const [selectedStartTime, setSelectedStartTime] = useState(new Date("2020-03-15T09:00:00"));
     const [selectedEndTime, setSelectedEndTime] = useState(new Date("2020-03-15T17:00:00"));
@@ -102,20 +106,21 @@ const WorkingHoursPicker = () => {
     );
 };
 
+// Using props to change the colour theme of the webpage when changed by the user
 const ThemePicker = props => {
     return (
         <div className="flex">
             <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
             <ThemeProvider>
                 <Button
-                    onClick={() => props.changeTheme(Themes.dark)}
+                    onClick={() => props.changeTheme(Themes.DARK)}
                     id="color-palette"
                     style={{ backgroundColor: "#3700b3" }}
                 />
             </ThemeProvider>
             <ThemeProvider>
                 <Button
-                    onClick={() => props.changeTheme(Themes.light)}
+                    onClick={() => props.changeTheme(Themes.LIGHT)}
                     id="color-palette"
                     style={{ backgroundColor: "#2e7d32" }}
                 />
@@ -151,7 +156,7 @@ const SettingsPage = () => {
             <div
                 className={classnames(
                     "left-side-bar",
-                    theme === Themes.dark ? "left-side-bg-blue" : "left-side-bg-green",
+                    theme === Themes.DARK ? "left-side-bg-blue" : "left-side-bg-green",
                 )}
             />
             <span className="content-container">
@@ -159,7 +164,7 @@ const SettingsPage = () => {
                 <div
                     className={classnames(
                         "right-side-bar",
-                        theme === Themes.dark ? "right-side-bg-blue" : "right-side-bg-green",
+                        theme === Themes.DARK ? "right-side-bg-blue" : "right-side-bg-green",
                     )}
                 >
                     <ProfilePhoto profilePic={profilePic} />

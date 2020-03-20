@@ -43,6 +43,7 @@ const ModalContent = props => {
     const [selectedPriority, setSelectedPriority] = useState("");
     const [selectedReminder, setSelectedReminder] = useState("");
 
+    // ----- HANDLERS FOR INPUT FIELDS -----
     const handleNameChange = event => {
         setSelectedName(event.target.value);
     };
@@ -75,6 +76,9 @@ const ModalContent = props => {
         setSelectedReminder(event.target.value);
     };
 
+    // ----- END HANDLERS FOR INPUT FIELDS -----
+
+    // Task variables passed into calendar.js to add new task to the calendar
     const handleAdd = event => {
         const task = {
             title: selectedName,
@@ -90,7 +94,8 @@ const ModalContent = props => {
     };
 
     return (
-        <div className={props.modalBackground === Themes.dark ? "modal-p" : "modal-g"}>
+        // Setting .css properties based on theme selected
+        <div className={props.modalBackground === Themes.DARK ? "modal-p" : "modal-g"}>
             <div className="forum-content">
                 <form className={classes.root} noValidate autoComplete="off">
                     <div>
@@ -161,6 +166,9 @@ const ModalContent = props => {
                         />
                     </div>
                     <div className="drop-down">
+                        {/* Scheduling based on priority. Hight priority will schedule the task closer to current time. Low priority will
+                        schedule task closer to deadline. */}
+                        {/* TODO: Improve algorithm for more smarter Scheduling */}
                         <FormControl className={classes.formControl}>
                             <InputLabel id="priority-label">Priority</InputLabel>
                             <Select value={selectedPriority} onChange={handlePriority}>
@@ -171,6 +179,7 @@ const ModalContent = props => {
                         </FormControl>
                     </div>
                     <div className="drop-down">
+                        {/* TODO: Send a reminder email to associated gmail address */}
                         <FormControl className={classes.formControl}>
                             <InputLabel id="reminder-label">Reminders</InputLabel>
                             <Select value={selectedReminder} onChange={handleReminder}>
