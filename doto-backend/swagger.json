@@ -45,9 +45,6 @@
         "produces": [
           "application/json"
         ],
-        "returns" : [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "List of tasks associated with this user",
@@ -77,9 +74,6 @@
           }
         ],
         "produces": [
-          "application/json"
-        ],
-        "returns" : [
           "application/json"
         ],
         "responses": {
@@ -115,9 +109,6 @@
         "produces": [
           "application/json"
         ],
-        "returns" : [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "taskId: 'taskId', Successful: 'True'"
@@ -145,9 +136,6 @@
         "produces": [
           "application/json"
         ],
-        "returns" : [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "taskId: 'taskId', Deleted: 'True'"
@@ -173,9 +161,6 @@
           }
         ],
         "produces": [
-          "application/json"
-        ],
-        "returns" : [
           "application/json"
         ],
         "responses": {
@@ -213,9 +198,6 @@
         "produces": [
           "application/json"
         ],
-        "returns" : [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "email: 'email', Successful: 'True'"
@@ -236,9 +218,6 @@
         "parameters": [
         ],
         "produces": [
-          "application/json"
-        ],
-        "returns" : [
           "application/json"
         ],
         "responses": {
