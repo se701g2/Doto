@@ -8,11 +8,10 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 import CookieManager from "../../helpers/CookieManager";
 
-const Header = ({ title }) => {
+const Header = props => {
     return (
         <nav>
-            <h1 className="Title">{title}</h1>
-
+            <h1 className="Title">{props.title}</h1>
             <ul className="IconList">
                 <Tooltip title="Log Out" onClick={() => CookieManager.clearAll()}>
                     <li className="Account">

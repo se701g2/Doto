@@ -1,54 +1,56 @@
-import React, { useState, useContext } from "react";
-import "date-fns";
-
-import { FormControl, Button, Input, InputLabel, InputAdornment, Avatar } from "@material-ui/core";
-import { AccountCircle } from "@material-ui/icons";
-import EmailIcon from "@material-ui/icons/Email";
+import React, { useState, useContext, useEffect } from "react";
+import { FormControl, Button, Input, InputAdornment } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
+import { MuiPickersUtilsProvider, KeyboardTimePicker } from "@material-ui/pickers";
+import EmailIcon from "@material-ui/icons/Email";
+import { AccountCircle } from "@material-ui/icons";
+import PropTypes from "prop-types";
+import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import Header from "../Header";
-import { MuiPickersUtilsProvider, KeyboardTimePicker } from "@material-ui/pickers";
+import DotoService from "../../../helpers/DotoService";
+import { ThemeContext } from "../../../context/ThemeContext";
 import "./SettingsPage.css";
 import "../Pages.css";
-import { ThemeContext } from "../../../context/ThemeContext";
 
 const classnames = require("classnames");
 
-const InputNameField = () => {
+const InputNameField = props => {
     return (
         <FormControl id="input-field">
-            <InputLabel>Name</InputLabel>
             <Input
                 startAdornment={
                     <InputAdornment position="start">
                         <AccountCircle />
                     </InputAdornment>
                 }
+                value={props.name}
+                disabled={true}
             />
         </FormControl>
     );
 };
 
-const InputEmailField = () => {
+const InputEmailField = props => {
     return (
         <FormControl id="input-field">
-            <InputLabel>Email</InputLabel>
             <Input
                 startAdornment={
                     <InputAdornment position="start">
                         <EmailIcon />
                     </InputAdornment>
                 }
+                value={props.email}
+                disabled={true}
             />
         </FormControl>
     );
 };
 
-const UploadPhoto = () => {
+const ProfilePhoto = props => {
     return (
         <div className="flex">
-            <Avatar id="profile-photo" alt="John Smith" src="/upload.jpg" variant="square" />
-            <input id="upload-photo" type="file" />
+            <img className="profile-photo" src={props.profilePic} alt="profile-pic-from-google" />
         </div>
     );
 };
@@ -99,37 +101,89 @@ const WorkingHoursPicker = () => {
     );
 };
 
+const ThemePicker = props => {
+    return (
+        <div className="flex">
+            <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
+            <ThemeProvider>
+                <Button
+                    onClick={() => props.changeTheme("dark")}
+                    id="color-palette"
+                    style={{ backgroundColor: "#3700b3" }}
+                />
+            </ThemeProvider>
+            <ThemeProvider>
+                <Button
+                    onClick={() => props.changeTheme("light")}
+                    id="color-palette"
+                    style={{ backgroundColor: "#2e7d32" }}
+                />
+            </ThemeProvider>
+        </div>
+    );
+};
+
 const SettingsPage = () => {
     const [theme, setTheme] = useContext(ThemeContext);
-    const ThemePicker = () => {
-        return (
-            <div className="flex">
-                <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
-                <ThemeProvider>
-                    <Button onClick={() => setTheme(true)} id="color-palette" style={{ backgroundColor: "#3700b3" }} />
-                </ThemeProvider>
-                <ThemeProvider>
-                    <Button onClick={() => setTheme(false)} id="color-palette" style={{ backgroundColor: "#2e7d32" }} />
-                </ThemeProvider>
-            </div>
-        );
+    const [profilePic, setProfilePic] = useState();
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            const userInfo = await DotoService.getUserInfo();
+            setTheme(userInfo.themePreference);
+            setProfilePic(userInfo.picture);
+            setName(userInfo.name);
+            setEmail(userInfo.email);
+        };
+        fetchUserInfo();
+    });
+
+    const changeTheme = newTheme => {
+        DotoService.updateUserInfo(newTheme);
+        setTheme(newTheme);
     };
 
     return (
-        <div className="PageLayout">
-            <div className={classnames("left-side-bar", theme ? "left-side-bg-blue" : "left-side-bg-green")} />
+        <div className="page-layout">
+            <div
+                className={classnames("left-side-bar", theme === "dark" ? "left-side-bg-blue" : "left-side-bg-green")}
+            />
             <span className="content-container">
                 <Header title="Settings" />
-                <div className={classnames("right-side-bar", theme ? "right-side-bg-blue" : "right-side-bg-green")}>
-                    <InputNameField />
-                    <InputEmailField />
-                    <UploadPhoto />
-                    <ThemePicker />
+                <div
+                    className={classnames(
+                        "right-side-bar",
+                        theme === "dark" ? "right-side-bg-blue" : "right-side-bg-green",
+                    )}
+                >
+                    <ProfilePhoto profilePic={profilePic} />
+                    <InputNameField name={name} />
+                    <InputEmailField email={email} />
+
+                    <ThemePicker changeTheme={changeTheme} />
                     <WorkingHoursPicker />
                 </div>
             </span>
         </div>
     );
+};
+
+ThemePicker.propTypes = {
+    changeTheme: PropTypes.func.isRequired,
+};
+
+ProfilePhoto.propTypes = {
+    profilePic: PropTypes.string.isRequired,
+};
+
+InputNameField.propTypes = {
+    name: PropTypes.string.isRequired,
+};
+
+InputEmailField.propTypes = {
+    email: PropTypes.string.isRequired,
 };
 
 export default SettingsPage;
