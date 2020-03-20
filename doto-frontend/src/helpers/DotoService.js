@@ -31,7 +31,7 @@ const DotoService = {
             const tasks = response.data.map(task => taskMapper(task));
             return tasks;
         } catch (e) {
-            // Todo; Check for errors
+            // TODO: Check for errors
             console.log(e);
         }
     },
@@ -55,7 +55,7 @@ const DotoService = {
             data: newTask,
         });
 
-        // Todo; catch for errors depending if it didn't post properly or maybe retry mechanism
+        // TODO: catch for errors depending if it didn't post properly or maybe retry mechanism
     },
     getUserInfo: async () => {
         const path = baseUrl + "/user/get";
@@ -67,7 +67,7 @@ const DotoService = {
             const userInfo = response.data;
             return userInfo;
         } catch (e) {
-            // Todo; Check for errors
+            // TODO: Check for errors
             console.log(e);
         }
     },
@@ -84,7 +84,7 @@ const DotoService = {
             data: updatedUserInfo,
         });
 
-        // Todo; catch for errors depending if it didn't post properly or maybe retry mechanism
+        // TODO: catch for errors depending if it didn't post properly or maybe retry mechanism
     },
 };
 
