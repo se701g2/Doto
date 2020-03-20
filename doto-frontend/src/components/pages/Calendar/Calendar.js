@@ -17,6 +17,7 @@ import { addTaskToSchedule } from "./TaskScheduler";
 import DotoService from "../../../helpers/DotoService";
 import "./Calendar.css";
 import "../Pages.css";
+import { Themes } from "../../../constants/Themes";
 const classnames = require("classnames");
 
 const useStyles = makeStyles(theme => ({
@@ -71,7 +72,10 @@ const Calendar = () => {
     return (
         <div className="page-layout">
             <div
-                className={classnames("left-side-bar", theme === "dark" ? "left-side-bg-blue" : "left-side-bg-green")}
+                className={classnames(
+                    "left-side-bar",
+                    theme === Themes.dark ? "left-side-bg-blue" : "left-side-bg-green",
+                )}
             />
             <div className="calendar-buttons">
                 <div className="mb-3">

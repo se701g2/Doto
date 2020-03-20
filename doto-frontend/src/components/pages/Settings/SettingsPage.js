@@ -10,6 +10,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import Header from "../Header";
 import DotoService from "../../../helpers/DotoService";
 import { ThemeContext } from "../../../context/ThemeContext";
+import { Themes } from "../../../constants/Themes";
 import "./SettingsPage.css";
 import "../Pages.css";
 
@@ -107,14 +108,14 @@ const ThemePicker = props => {
             <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
             <ThemeProvider>
                 <Button
-                    onClick={() => props.changeTheme("dark")}
+                    onClick={() => props.changeTheme(Themes.dark)}
                     id="color-palette"
                     style={{ backgroundColor: "#3700b3" }}
                 />
             </ThemeProvider>
             <ThemeProvider>
                 <Button
-                    onClick={() => props.changeTheme("light")}
+                    onClick={() => props.changeTheme(Themes.light)}
                     id="color-palette"
                     style={{ backgroundColor: "#2e7d32" }}
                 />
@@ -148,14 +149,17 @@ const SettingsPage = () => {
     return (
         <div className="page-layout">
             <div
-                className={classnames("left-side-bar", theme === "dark" ? "left-side-bg-blue" : "left-side-bg-green")}
+                className={classnames(
+                    "left-side-bar",
+                    theme === Themes.dark ? "left-side-bg-blue" : "left-side-bg-green",
+                )}
             />
             <span className="content-container">
                 <Header title="Settings" />
                 <div
                     className={classnames(
                         "right-side-bar",
-                        theme === "dark" ? "right-side-bg-blue" : "right-side-bg-green",
+                        theme === Themes.dark ? "right-side-bg-blue" : "right-side-bg-green",
                     )}
                 >
                     <ProfilePhoto profilePic={profilePic} />
