@@ -2,15 +2,15 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Yet Another Node.js Blogg Application API",
-    "description": "Yet Another Node.js Blogg Application API",
+    "title": "Doto",
+    "description": "A brief visual description of backend API. NB. Authorization Header required for using API.",
     "license": {
-      "name": "MIT",
+      "name": "Swagger UI License: MIT",
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "localhost:3000",
-  "basePath": "/api",
+  "host": "localhost:3001",
+  "basePath": "",
   "tags": [
     {
       "name": "Users",
@@ -28,7 +28,38 @@
   ],
   "paths": {
    
-    "/schedule" : {
+    
+    "/task/get":{
+      "get" :{
+        "tags": [
+          "Task"
+        ],
+        "description": "Get all Tasks for user",
+        "parameters": [
+          {
+            
+            "in": "User",
+            "description" : "email (String)"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "returns" : [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of tasks associated with this user",
+            "schema": {
+              "$ref": "#/definitions/Tasks"
+            }
+          }
+        }
+
+      }
+    },
+    "/task/post":{
       "post" : {
         "tags": [
           "Task"
@@ -53,11 +84,17 @@
         ],
         "responses": {
           "200": {
-            "description": "New Task is created"
+            "description": "taskId: 'taskId', Successful: 'True'"
+          },
+          "400": {
+            "description": "taskId: 'taskId', Successful: 'False'"
           }
         }
 
-      },
+      }
+    },
+    "/task" : {
+      
       "put" :{
         "tags": [
           "Task"
@@ -65,11 +102,11 @@
         "description": "Edit Task in System",
         "parameters": [
           {
-            
-            
+            "in" : "taskId",
+            "description" : "taskId (String)"
+          },
+          {
             "in": "body",
-            
-            
             "schema": {
               "$ref": "#/definitions/Task"
             }
@@ -83,40 +120,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Task Details Edited"
+            "description": "taskId: 'taskId', Successful: 'True'"
+          },
+          "400": {
+            "description": "taskId: 'taskId', Successful: 'False'"
           }
         }
 
 
       },
-      "get" :{
-        "tags": [
-          "Task"
-        ],
-        "description": "Get all Tasks for user",
-        "parameters": [
-          {
-            
-            "in": "User",
-            "description" : " The user (String)"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "returns" : [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Here are all the Tasks",
-            "schema": {
-              "$ref": "#/definitions/Tasks"
-            }
-          }
-        }
-
-      },
+      
       "delete":{
         "tags": [
           "Task"
@@ -126,7 +139,7 @@
         
           {
             "in" : "taskId",
-            "description" : "The task to delete"
+            "description" : "taskId (String)"
           }
         ],
         "produces": [
@@ -137,34 +150,64 @@
         ],
         "responses": {
           "200": {
-            "description": "Task Deleted"
+            "description": "taskId: 'taskId', Deleted: 'True'"
+          },
+          "400": {
+            "description": "taskId: 'taskId', Deleted: 'False'"
           }
         }
 
       }
     },
-
-    "/login" :{
-      "post" : {
-
-      }
-    },
-
-    "/register" : {
-      "post" :{
+    "/user/get" :{
+      "get" :{
         "tags": [
-          "Task"
+          "Users"
         ],
-        "description": "Create new User in system",
+        "description": "Get user details",
         "parameters": [
           {
             
-              
+            "in": "email",
+            "description" : "email (String)"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "returns" : [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Here are all the User Details",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Error: could not find user with specified email."
+          }
+        }
+
+      }
+    },
+    "/user/update":{
+      "put" :{
+        "tags": [
+          "Users"
+        ],
+        "description": "Update user details",
+        "parameters": [
+          {
+            "in": "email",
+            "description": "email (String)"
+          },
+          {
             "in": "body",
             "schema": {
               "$ref": "#/definitions/User"
             }
-
           }
         ],
         "produces": [
@@ -175,11 +218,43 @@
         ],
         "responses": {
           "200": {
-            "description": "New User is created"
+            "description": "email: 'email', Successful: 'True'"
+          },
+          "400": {
+            "description": "email: 'email', Successful: 'False'"
           }
         }
 
       }
+    },
+    "/user/email":{
+      "get" :{
+        "tags": [
+          "Users"
+        ],
+        "description": "Get all users details",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "returns" : [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Here are all the Users and their Details",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          },
+          "400": {
+            "description": "msg: failed"
+          }
+        }
+
+      }
+
     }
 
     
@@ -202,6 +277,10 @@
         },
         "picture": {
           "type": "string"
+        },"themePreference":{
+          "type": "string",
+          "uniqueItems": false,
+          "default": "dark"
         }
       }
     },
@@ -211,18 +290,20 @@
     },
     "Task" : {
       "required": [
-        "_id",
         "user",
-        ""
+        "taskId",
+        "title",
+        "duration",
+        "startDate",
+        "endDate"
       ],
      
       "properties": {
         "user" :{
           "type": "User",
-        
           "uniqueItems" : true
         },
-        "_id": {
+        "taskId": {
           "type": "string",
           "uniqueItems": true
         },
@@ -253,13 +334,12 @@
         "endDate" : {
           "type" : "date",
           "uniqueItems" : false
+        },
+        "reminderDate" : {
+          "type" : "date",
+          "uniqueItems" : false
         }
-
-        
-
-        }
-      
-     
+      }
     },
     "Tasks": {
       "type": "array",
