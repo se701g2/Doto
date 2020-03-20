@@ -11,6 +11,7 @@ import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from "@material-ui/pi
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import "./ModalContent.css";
+import { Themes } from "../constants/Themes";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -89,7 +90,7 @@ const ModalContent = props => {
     };
 
     return (
-        <div className={props.modalBackground === "dark" ? "modal-p" : "modal-g"}>
+        <div className={props.modalBackground === Themes.dark ? "modal-p" : "modal-g"}>
             <div className="forum-content">
                 <form className={classes.root} noValidate autoComplete="off">
                     <div>
