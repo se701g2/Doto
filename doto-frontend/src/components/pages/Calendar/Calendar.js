@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import ModalConent from "../../ModalContent";
+import ModalContent from "../../ModalContent";
 import CalendarComponent from "./CalendarComponent";
 import CalendarListView from "./CalendarListView";
 import Fab from "@material-ui/core/Fab";
@@ -108,7 +108,7 @@ const Calendar = () => {
                 >
                     <Fade in={open}>
                         <div className={classes.paper}>
-                            <ModalConent addTask={addTask} modalBackground={theme} />
+                            <ModalContent addTask={addTask} modalBackground={theme} />
                         </div>
                     </Fade>
                 </Modal>
