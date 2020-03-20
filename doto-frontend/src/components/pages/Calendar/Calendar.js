@@ -20,6 +20,8 @@ import "../Pages.css";
 import { Themes } from "../../../constants/Themes";
 const classnames = require("classnames");
 
+// This file bases the basic functionality of a calendar page, rendering a calendar with relevant added tasks.
+// Also handling list view of tasks to-do-today
 const useStyles = makeStyles(theme => ({
     modal: {
         display: "flex",
@@ -49,6 +51,7 @@ const Calendar = () => {
         setOpen(false);
     };
 
+    // Adds new task based on input fields from Modal
     const addNewTask = (newTask, currentDate) => {
         const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks, currentDate);
         DotoService.setNewTask(updatedTask);
@@ -74,7 +77,7 @@ const Calendar = () => {
             <div
                 className={classnames(
                     "left-side-bar",
-                    theme === Themes.dark ? "left-side-bg-blue" : "left-side-bg-green",
+                    theme === Themes.DARK ? "left-side-bg-blue" : "left-side-bg-green",
                 )}
             />
             <div className="calendar-buttons">
@@ -88,6 +91,7 @@ const Calendar = () => {
                 <div className="mb-3">
                     <Tooltip title="List View">
                         <Fab onClick={() => setListView(!listView)} size="small">
+                            {/* Toggle on list view icon to show/hide to-do tasks */}
                             {!listView && <FormatListBulletedIcon />}
                             {listView && <CalendarTodayIcon />}
                         </Fab>
@@ -114,6 +118,7 @@ const Calendar = () => {
                         timeout: 500,
                     }}
                 >
+                    {/* Transition effects for list view of to-do tasks for today */}
                     <Fade in={open}>
                         <div className={classes.paper}>
                             <ModalContent addNewTask={addNewTask} modalBackground={theme} />

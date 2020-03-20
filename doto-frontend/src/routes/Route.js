@@ -26,6 +26,7 @@ const extractEmailAndJwt = url => {
     return [email, isUoAEmail ? jwt : jwt.substring(0, jwt.length - 1)];
 };
 
+// Saving the email and jwt cookies to the current session
 const saveToCookies = params => {
     if (!params) return;
     const [email, jwt] = params;
@@ -33,6 +34,7 @@ const saveToCookies = params => {
     CookieManager.set("jwt", jwt);
 };
 
+// Sets the routing to the appropriate pages, passing in the colour theme based on user setting
 const Routes = () => {
     const [theme, setTheme] = React.useState(true);
     // Only when backend returns JWT and email then we save

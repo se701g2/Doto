@@ -3,6 +3,7 @@ import Radio from "@material-ui/core/Radio";
 import "./Calendar.css";
 import PropTypes from "prop-types";
 
+// This file provides a checklist of items on today's to-do list. The user is able to select tasks completed for the day
 const CalendarListView = props => {
     const today = new Date();
 
@@ -12,11 +13,13 @@ const CalendarListView = props => {
 
             {props.tasks.map(task => {
                 const dueDate = new Date(task.endDate);
+                // Checks to see if scheduled task is for today
                 const isTaskScheduledToday =
                     dueDate.getYear() === today.getYear() && dueDate.getMonth() === today.getMonth()
                         ? dueDate.getDate() === today.getDate()
                         : false;
 
+                // If the task is scheduled for today, add it as an item in the checklist of things to do today
                 return (
                     isTaskScheduledToday && (
                         <div key className="list-view-components">
