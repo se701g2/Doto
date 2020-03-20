@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { BrowserRouter as Router } from "react-router-dom";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
@@ -14,8 +14,6 @@ describe("<Calendar /> component being rendered", () => {
     const useStateSpy = jest.spyOn(React, "useState");
     useStateSpy.mockImplementation(theme => [theme, setTheme]);
 
-    let subject;
-
     const Wrapper = () => {
         return (
             <Router>
@@ -28,13 +26,10 @@ describe("<Calendar /> component being rendered", () => {
 
     beforeEach(() => {
         useStateSpy.mockImplementation(theme => [theme, setTheme]);
-
-        subject = mount(<Wrapper />);
     });
 
     afterEach(() => {
         jest.clearAllMocks();
-        subject.unmount();
     });
 
     it("Calendar component rendered without crashing", () => {
@@ -43,10 +38,14 @@ describe("<Calendar /> component being rendered", () => {
     });
 
     it("Make sure render matches snapshot", () => {
-        expect(subject).toMatchSnapshot();
+        const tree = shallow(<Wrapper />);
+        expect(tree.debug()).toMatchSnapshot();
+        tree.unmount();
     });
 
     it("Click on List View button should open CalendarListView while changing its icon", () => {
+        const subject = mount(<Wrapper />);
+
         const button = () => {
             // search for List View button
             return subject.find('button[title="List View"]');
@@ -61,5 +60,7 @@ describe("<Calendar /> component being rendered", () => {
         expect(subject.find(CalendarListView)).toHaveLength(1);
         expect(button().find(FormatListBulletedIcon)).toHaveLength(0);
         expect(button().find(CalendarTodayIcon)).toHaveLength(1);
+
+        subject.unmount();
     });
 });

@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Calendar /> component being rendered Make sure render matches snapshot 1`] = `ReactWrapper {}`;
+exports[`<Calendar /> component being rendered Make sure render matches snapshot 1`] = `
+"<BrowserRouter>
+  <ContextProvider value={{...}}>
+    <Calendar />
+  </ContextProvider>
+</BrowserRouter>"
+`;
