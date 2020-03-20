@@ -27,8 +27,6 @@
     "application/json"
   ],
   "paths": {
-   
-    
     "/task/get":{
       "get" :{
         "tags": [
@@ -37,7 +35,6 @@
         "description": "Get all Tasks for user",
         "parameters": [
           {
-            
             "in": "User",
             "description" : "email (String)"
           }
@@ -53,7 +50,6 @@
             }
           }
         }
-
       }
     },
     "/task/post":{
@@ -64,13 +60,10 @@
         "description": "Create new task in system",
         "parameters": [
           {
-            
-              
             "in": "body",
             "schema": {
               "$ref": "#/definitions/Task"
             }
-
           }
         ],
         "produces": [
@@ -84,11 +77,9 @@
             "description": "taskId: 'taskId', Successful: 'False'"
           }
         }
-
       }
     },
     "/task" : {
-      
       "put" :{
         "tags": [
           "Task"
@@ -117,17 +108,13 @@
             "description": "taskId: 'taskId', Successful: 'False'"
           }
         }
-
-
       },
-      
       "delete":{
         "tags": [
           "Task"
         ],
         "description": "Delete Task in System",
         "parameters": [
-        
           {
             "in" : "taskId",
             "description" : "taskId (String)"
@@ -144,7 +131,6 @@
             "description": "taskId: 'taskId', Deleted: 'False'"
           }
         }
-
       }
     },
     "/user/get" :{
@@ -155,7 +141,6 @@
         "description": "Get user details",
         "parameters": [
           {
-            
             "in": "email",
             "description" : "email (String)"
           }
@@ -174,7 +159,6 @@
             "description": "Error: could not find user with specified email."
           }
         }
-
       }
     },
     "/user/update":{
@@ -206,7 +190,6 @@
             "description": "email: 'email', Successful: 'False'"
           }
         }
-
       }
     },
     "/user/email":{
@@ -231,21 +214,15 @@
             "description": "msg: failed"
           }
         }
-
       }
-
     }
-
-    
   },
   "definitions": {
     "User": {
       "required": [
         "email"
-       
       ],
       "properties": {
-        
         "email": {
           "type": "string",
           "uniqueItems": true
@@ -276,7 +253,6 @@
         "startDate",
         "endDate"
       ],
-     
       "properties": {
         "user" :{
           "type": "User",
@@ -324,7 +300,5 @@
       "type": "array",
       "$ref": "#/definitions/Task"
     }
-
-    
   }
 }
