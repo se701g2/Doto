@@ -22,9 +22,9 @@ We are using npm for this particular project (https://www.npmjs.com/get-npm).
 ### `cd doto-frontend/backend`
 To get the project up and running locally, you will need to change directory to `doto-backend` and start up the local server, to do this simply run the following commands: 
 
-### `npm install`
+### `yarn install --frozen-lockfile`
 
-### `npm start`
+### `yarn start`
 
 Once your local backend server is up, in a separate terminal, change directory into `doto-frontend` and once again run the same commands to run the react-app locally. By default, the react-app is hosted on port 3000 and the local server is hosted on port 3001. Do not change these numbers as we have added the addresses as authorized redirect uri's in our google credentials.
 
