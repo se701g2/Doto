@@ -1,6 +1,7 @@
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20')
 const User = require('../models/User');
+const { logging } = require('../common/logging');
 
 // This function applies the Google strategy to passport. Used in auth-route.
 passport.use(
@@ -20,7 +21,7 @@ passport.use(
         //Check if user already exists in database. Creates a new database entry if they don't exist.
         User.findOne({ email }).then((currentUser) => {
             if (currentUser) {
-                console.log('User already exists ' + currentUser.email)
+                logger.info('User already exists ' + currentUser.email)
                 user = currentUser
             } else {
                 user = new User({
@@ -30,7 +31,7 @@ passport.use(
                 })
 
                 user.save().then((newUser) => {
-                    console.log('Created New User ' + newUser.email)
+                    logger.info('Created New User ' + newUser.email)
                 })
             }
 
