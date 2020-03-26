@@ -5,6 +5,8 @@ const passportSetUp = require('./src/config/passport-setup.js')
 const app = express()
 const apiPort = process.env.PORT || 3001
 const passport = require('passport')
+const winston = require('winston');
+const expressWinston = require('express-winston');
 
 // Mongoose connection
 const mongoose = require('mongoose');
@@ -28,6 +30,21 @@ db.once('open', function(){
 db.on('error', function(){
     
 });
+
+// logging
+app.use(
+  expressWinston.logger({
+    transports: [new winston.transports.Console()],
+    format: winston.format.combine(
+      winston.format.timestamp(),
+      winston.format.colorize(),
+      winston.format.printf(
+        info =>
+          `${info.timestamp} [${info.level}] ${info.message} ${info.meta.res.statusCode}`
+      )
+    ),
+  })
+);
 
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
