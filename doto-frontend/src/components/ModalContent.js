@@ -43,7 +43,7 @@ const ModalContent = props => {
     var initialDuration = new Date();
     initialDuration.setHours(1);
     initialDuration.setMinutes(0);
-    const [selectedDuration, setselectedDuration] = React.useState(initialDuration);
+    const [selectedDuration, setSelectedDuration] = React.useState(initialDuration);
 
     const [selectedLocation, setSelectedLocation] = useState("");
     const [selectedPriority, setSelectedPriority] = useState("");
@@ -157,7 +157,7 @@ const ModalContent = props => {
                                 margin="normal"
                                 id="time-picker"
                                 value={selectedDuration}
-                                onChange={setselectedDuration}
+                                onChange={setSelectedDuration}
                                 KeyboardButtonProps={{
                                     "aria-label": "change time",
                                 }}
