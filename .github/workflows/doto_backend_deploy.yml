@@ -22,7 +22,7 @@ jobs:
       run: |
         cd doto-backend 
         yarn install --frozen-lockfile
-        yarn build 
+        yarn run build 
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v1
