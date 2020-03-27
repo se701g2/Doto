@@ -38,9 +38,13 @@ const ModalContent = props => {
     const [selectedName, setSelectedName] = useState("TASK - " + new Date());
     const [selectedDescription, setSelectedDescription] = useState("");
     const [selectedDueDate, setSelectedDueDate] = useState(new Date());
-    const [selectedDuration, setselectedDuration] = React.useState(
-        new Date("2020-08-18T01:00:00"), // duration default is 1 hour
-    );
+
+    // default duration is 1 hour
+    var initialDuration = new Date();
+    initialDuration.setHours(1);
+    initialDuration.setMinutes(0);
+    const [selectedDuration, setselectedDuration] = React.useState(initialDuration);
+
     const [selectedLocation, setSelectedLocation] = useState("");
     const [selectedPriority, setSelectedPriority] = useState("");
     const [selectedReminder, setSelectedReminder] = useState("");
@@ -60,10 +64,6 @@ const ModalContent = props => {
         } else {
             setSelectedDueDate("invalid beans");
         }
-    };
-
-    const handleDurationChange = date => {
-        setselectedDuration(date);
     };
 
     const handleLocationChange = event => {
@@ -157,7 +157,7 @@ const ModalContent = props => {
                                 margin="normal"
                                 id="time-picker"
                                 value={selectedDuration}
-                                onChange={handleDurationChange}
+                                onChange={setselectedDuration}
                                 KeyboardButtonProps={{
                                     "aria-label": "change time",
                                 }}
