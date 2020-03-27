@@ -29,11 +29,11 @@ jobs:
       uses: supercharge/mongodb-github-action@1.1.0
       with:
         mongodb-version: ${{ matrix.mongodb-version }}
-    - run: cd doto-backend && npm ci
-    - run: cd doto-backend && npm run build --if-present
-    - run: cd doto-backend && npm test
-    - run: cd doto-frontend && npm ci
-    - run: cd doto-frontend && npm run build --if-present
-    - run: cd doto-frontend && npm test
+    - run: cd doto-backend && yarn install --frozen-lockfile
+    - run: cd doto-backend && yarn build
+    - run: cd doto-backend && yarn test
+    - run: cd doto-frontend && yarn install --frozen-lockfile
+    - run: cd doto-frontend && yarn build
+    - run: cd doto-frontend && yarn test
       env:
         CI: true
