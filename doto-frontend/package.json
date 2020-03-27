@@ -25,8 +25,8 @@
         "uuid": "^7.0.2"
     },
     "scripts": {
-        "start": "npm run watch:css && react-scripts start",
-        "build": "npm run build:css && react-scripts build",
+        "start": "yarn run watch:css && react-scripts start",
+        "build": "yarn run build:css && react-scripts build",
         "test": "react-scripts test --updateSnapshot",
         "eject": "react-scripts eject",
         "build:css": "postcss src/tailwind.css -o src/tailwind-generated.css",
