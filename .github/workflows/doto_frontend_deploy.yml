@@ -24,7 +24,7 @@ jobs:
       run: |
         cd doto-frontend
         yarn install
-        yarn run build
+        yarn build
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v1
