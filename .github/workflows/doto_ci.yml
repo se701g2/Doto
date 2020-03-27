@@ -47,15 +47,15 @@ jobs:
 
       - name: Yarn Install
         working-directory: ./doto-backend
-        runs: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile
 
       - name: Yarn Tests
         working-directory: ./doto-backend
-        runs: CI=true yarn test --passWithNoTests
+        run: CI=true yarn test --passWithNoTests
 
       - name: Yarn Build
         working-directory: ./doto-backend
-        runs: yarn build
+        run: yarn build
 
   frontend:
     runs-on: ubuntu-latest
@@ -88,12 +88,12 @@ jobs:
 
       - name: Yarn Install
         working-directory: ./doto-frontend
-        runs: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile
 
       - name: Yarn Tests
         working-directory: ./doto-frontend
-        runs: CI=true yarn test --passWithNoTests
+        run: CI=true yarn test --passWithNoTests
 
       - name: Yarn Build
         working-directory: ./doto-frontend
-        runs: yarn build
+        run: yarn build
