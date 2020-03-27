@@ -31,9 +31,9 @@ jobs:
         mongodb-version: ${{ matrix.mongodb-version }}
     - run: cd doto-backend && yarn install --frozen-lockfile
     - run: cd doto-backend && yarn run build
-    - run: cd doto-backend && yarn test
+    - run: cd doto-backend && yarn test --passWithNoTests
     - run: cd doto-frontend && yarn install --frozen-lockfile
     - run: cd doto-frontend && yarn run build
-    - run: cd doto-frontend && yarn test
+    - run: cd doto-frontend && yarn test --passWithNoTests
       env:
         CI: true
