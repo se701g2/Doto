@@ -10,8 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  backend:
     runs-on: ubuntu-latest
 
     strategy:
@@ -20,20 +19,81 @@ jobs:
         mongodb-version: [4.2]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Start MongoDB ${{ matrix.mongodb-version }}
-      uses: supercharge/mongodb-github-action@1.1.0
-      with:
-        mongodb-version: ${{ matrix.mongodb-version }}
-    - run: cd doto-backend && yarn install --frozen-lockfile
-    - run: cd doto-backend && yarn run build
-    - run: cd doto-backend && yarn test --passWithNoTests
-    - run: cd doto-frontend && yarn install --frozen-lockfile
-    - run: cd doto-frontend && yarn run build
-    - run: cd doto-frontend && yarn test --passWithNoTests
-      env:
-        CI: true
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Start MongoDB ${{ matrix.mongodb-version }}
+        uses: supercharge/mongodb-github-action@1.1.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+
+      - name: Get Yarn Cache
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node_modules for Yarn
+        uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/doto-backend/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn--
+
+      - name: Yarn Install
+        working-directory: ./doto-backend
+        runs: yarn install --frozen-lockfile
+
+      - name: Yarn Tests
+        working-directory: ./doto-backend
+        runs: CI=true yarn test --passWithNoTests
+
+      - name: Yarn Build
+        working-directory: ./doto-backend
+        runs: yarn build
+
+  frontend:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Get Yarn Cache
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node_modules for Yarn
+        uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/doto-frontend/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn--
+
+      - name: Yarn Install
+        working-directory: ./doto-frontend
+        runs: yarn install --frozen-lockfile
+
+      - name: Yarn Tests
+        working-directory: ./doto-frontend
+        runs: CI=true yarn test --passWithNoTests
+
+      - name: Yarn Build
+        working-directory: ./doto-frontend
+        runs: yarn build
