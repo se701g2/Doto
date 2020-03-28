@@ -64,10 +64,10 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
         }
     }
 
-    // Minutes
-    const travelTime = 10;
-
     newTask.startDate = cTask ? cTask.endDate : minDate;
+
+    // Minutes
+    const travelTime = newTask.travelTime;
 
     newTask.startDate = new Date(newTask.startDate.getTime() + travelTime * MILLISECONDS_PER_MINUTE);
 

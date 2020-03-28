@@ -45,6 +45,12 @@ const ModalContent = props => {
     initialDuration.setMinutes(0);
     const [selectedDuration, setSelectedDuration] = React.useState(initialDuration);
 
+    // default travel time is 10 minutes unless specified
+    const travelTime = new Date();
+    travelTime.setHours(0);
+    travelTime.setMinutes(10);
+    const [selectedTravelTime, setSelectedTravelTime] = React.useState(travelTime);
+
     const [selectedLocation, setSelectedLocation] = useState("");
     const [selectedPriority, setSelectedPriority] = useState("");
     const [selectedReminder, setSelectedReminder] = useState("");
@@ -87,6 +93,7 @@ const ModalContent = props => {
             description: selectedDescription,
             dueDate: selectedDueDate,
             duration: selectedDuration.getHours() * 60 + selectedDuration.getMinutes(),
+            travelTime: selectedTravelTime.getHours() * 60 + selectedTravelTime.getMinutes(),
             location: selectedLocation,
             priority: selectedPriority,
             reminder: selectedReminder,
@@ -158,6 +165,21 @@ const ModalContent = props => {
                                 id="time-picker"
                                 value={selectedDuration}
                                 onChange={setSelectedDuration}
+                                KeyboardButtonProps={{
+                                    "aria-label": "change time",
+                                }}
+                            />
+                        </MuiPickersUtilsProvider>
+                    </div>
+                    <div>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardTimePicker
+                                ampm={false}
+                                label="Travel Duration (hours : minutes)"
+                                margin="normal"
+                                id="travel-time-picker"
+                                value={selectedTravelTime}
+                                onChange={setSelectedTravelTime}
                                 KeyboardButtonProps={{
                                     "aria-label": "change time",
                                 }}
