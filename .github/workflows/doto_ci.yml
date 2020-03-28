@@ -86,10 +86,11 @@ jobs:
         working-directory: ./doto-frontend
         run: yarn install --frozen-lockfile
 
+      - name: Yarn Build
+        working-directory: ./doto-frontend
+        run: yarn build
+
       - name: Yarn Tests
         working-directory: ./doto-frontend
         run: CI=true yarn test --passWithNoTests
 
-      - name: Yarn Build
-        working-directory: ./doto-frontend
-        run: yarn build
