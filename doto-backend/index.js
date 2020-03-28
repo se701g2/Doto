@@ -5,6 +5,9 @@ const passportSetUp = require('./src/config/passport-setup.js')
 const app = express()
 const apiPort = process.env.PORT || 3001
 const passport = require('passport')
+const winston = require('winston');
+const expressWinston = require('express-winston');
+const { logger } = require('./src/common/logging');
 
 // Mongoose connection
 const mongoose = require('mongoose');
@@ -23,11 +26,26 @@ const db = mongoose.connection;
 
 // Checking for DB connection
 db.once('open', function(){
-    console.log("Connected to MongoDB.");
+    logger.info("Connected to MongoDB.");
 });
 db.on('error', function(){
-    
+    logger.error("Database error");
 });
+
+// logging
+app.use(
+  expressWinston.logger({
+    transports: [new winston.transports.Console()],
+    format: winston.format.combine(
+      winston.format.timestamp(),
+      winston.format.colorize(),
+      winston.format.printf(
+        info =>
+          `${info.timestamp} [${info.level}] ${info.message} ${info.meta.res.statusCode}`
+      )
+    ),
+  })
+);
 
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
@@ -47,4 +65,4 @@ var swaggerUi = require('swagger-ui-express');
 swaggerDocument = require('./swagger.json');
 app.use('/',swaggerUi.serve,swaggerUi.setup(swaggerDocument));
 
-app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
+app.listen(apiPort, () => logger.info(`Server running on port ${apiPort}`))

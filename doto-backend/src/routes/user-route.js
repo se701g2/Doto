@@ -2,13 +2,14 @@ const express = require('express');
 const router = express.Router();
 const authenticateToken = require('../config/token-setup').authenticateToken
 const User = require('../models/User');
+const { logger } = require('../common/logging');
 
 // GET User information
 router.get('/get', authenticateToken, function (req, res) {
     const email = req.user.email
     User.find({ "email": email }, function (err, userinfo) {
         if (err) {
-            console.log(err);
+            logger.error(err);
             res.status(400).json('Error: ' + err);
         }
         else {
@@ -24,9 +25,9 @@ router.get('/get', authenticateToken, function (req, res) {
 router.put('/update', authenticateToken, function (req, res) {
     const email = req.user.email
     User.updateOne({ email: email }, req.body, { new: true }, function (err, updatedUser) {
-        console.log(updatedUser);
+        logger.info(updatedUser);
         if (err || !updatedUser) {
-            console.log(err);
+            logger.error(err);
             res.status(400).json({ email: email, Successful: "False" });
         } else {
             res.status(200).json({ email: email, Successful: "True" })
@@ -38,11 +39,11 @@ router.put('/update', authenticateToken, function (req, res) {
 router.get('/email', function (req, res) {
     User.find({}, function (err, users) {
         if (err) {
-            console.log(err);
+            logger.error(err);
             res.status(400).json({ msg: "failed" })
         }
         else {
-            console.log(users)
+            logger.info(users)
             res.status(200).json(users);
         }
     })

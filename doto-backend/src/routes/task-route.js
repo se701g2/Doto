@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authenticateToken = require('../config/token-setup').authenticateToken
 const Task = require('../models/Task');
+const { logger } = require('../common/logging')
 
 // GET ALL tasks for user
 router.get('/get', authenticateToken, (req, res) => {
@@ -26,7 +27,7 @@ router.post('/post', authenticateToken, function (req, res) {
 
     task.save(function (err) {
         if (err) {
-            console.log(err);
+            logger.error(err)
             res.status(400).json({ taskId: req.params.taskId, Successful: "False" });
         } else {
             res.status(200).json({ taskId: req.params.taskId, Successful: "True" })
@@ -39,9 +40,9 @@ router.post('/post', authenticateToken, function (req, res) {
 //        Authentication should be applied to this route too.
 router.put('/:taskId', function (req, res) {
     Task.updateOne({ taskId: req.params.taskId }, req.body, { new: true }, function (err, updatedTask) {
-        console.log(updatedTask);
+        logger.info(updatedTask)
         if (err || !updatedTask) {
-            console.log(err);
+            logger.error(err)
             res.status(400).json({ taskId: req.params.taskId, Successful: "False" });
         } else {
             res.status(200).json({ taskId: req.params.taskId, Successful: "True" })
@@ -54,14 +55,14 @@ router.delete('/:taskId', authenticateToken, function (req, res) {
     const task = Task.findOne({ taskId: req.params.taskId }, function (err) {
         if (err) { res.sendStatus(400) }
     })
-    console.log('task ' + task.user)
-    console.log('return ' + req.user.email)
+    logger.info('task ' + task.user)
+    logger.info('return ' + req.user.email)
 
     if (task.user != req.user.email) { return res.sendStatus(403) }
 
     Task.remove({ "taskId": req.params.taskId }, function (err) {
         if (err) {
-            console.log(err);
+            logger.error(err);
             res.status(400).json({ taskId: req.params.taskId, Deleted: "False" });
         } else {
             res.status(200).json({ taskId: req.params.taskId, Deleted: "True" });
