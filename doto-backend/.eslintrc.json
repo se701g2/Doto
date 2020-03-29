@@ -1,0 +1,23 @@
+{
+    "env": {
+        "browser": false,
+        "es6": true,
+        "jest": true
+    },
+    "extends": ["standard", "plugin:prettier/recommended"],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": 0,
+        "quotes": "off",
+        "space-before-function-paren": "off",
+        "semi": "off",
+        "comma-dangle": "off"
+    }
+}
