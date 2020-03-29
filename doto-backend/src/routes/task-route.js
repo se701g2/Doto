@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const authenticateToken = require('../config/token-setup').authenticateToken
-const Task = require('../models/Task');
-const { logger } = require('../common/logging')
+const authenticateToken = require("../config/token-setup").authenticateToken;
+const Task = require("../models/Task");
+const { logger } = require("../common/logging");
 
 // GET ALL tasks for user
 router.get("/get", authenticateToken, (req, res) => {
@@ -27,7 +27,7 @@ router.post("/post", authenticateToken, function (req, res) {
 
     task.save(function (err) {
         if (err) {
-            logger.error(err)
+            logger.error(err);
             res.status(400).json({ taskId: req.params.taskId, Successful: "False" });
         } else {
             res.status(200).json({ taskId: req.params.taskId, Successful: "True" });
@@ -40,9 +40,9 @@ router.post("/post", authenticateToken, function (req, res) {
 //        Authentication should be applied to this route too.
 router.put("/:taskId", function (req, res) {
     Task.updateOne({ taskId: req.params.taskId }, req.body, { new: true }, function (err, updatedTask) {
-        logger.info(updatedTask)
+        logger.info(updatedTask);
         if (err || !updatedTask) {
-            logger.error(err)
+            logger.error(err);
             res.status(400).json({ taskId: req.params.taskId, Successful: "False" });
         } else {
             res.status(200).json({ taskId: req.params.taskId, Successful: "True" });
@@ -53,10 +53,12 @@ router.put("/:taskId", function (req, res) {
 // DELETE task
 router.delete("/:taskId", authenticateToken, function (req, res) {
     const task = Task.findOne({ taskId: req.params.taskId }, function (err) {
-        if (err) { res.sendStatus(400) }
-    })
-    logger.info('task ' + task.user)
-    logger.info('return ' + req.user.email)
+        if (err) {
+            res.sendStatus(400);
+        }
+    });
+    logger.info("task " + task.user);
+    logger.info("return " + req.user.email);
 
     if (task.user !== req.user.email) {
         return res.sendStatus(403);

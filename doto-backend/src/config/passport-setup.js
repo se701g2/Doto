@@ -1,7 +1,7 @@
-const passport = require('passport')
-const GoogleStrategy = require('passport-google-oauth20')
-const User = require('../models/User');
-const { logger } = require('../common/logging');
+const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth20");
+const User = require("../models/User");
+const { logger } = require("../common/logging");
 
 // This function applies the Google strategy to passport. Used in auth-route.
 passport.use(
@@ -20,22 +20,22 @@ passport.use(
             const email = profile.emails[0].value;
             var user;
 
-        //Check if user already exists in database. Creates a new database entry if they don't exist.
-        User.findOne({ email }).then((currentUser) => {
-            if (currentUser) {
-                logger.info('User already exists ' + currentUser.email)
-                user = currentUser
-            } else {
-                user = new User({
-                    email,
-                    name: profile._json.name,
-                    picture: profile._json.picture
-                })
+            // Check if user already exists in database. Creates a new database entry if they don't exist.
+            User.findOne({ email }).then((currentUser) => {
+                if (currentUser) {
+                    logger.info("User already exists " + currentUser.email);
+                    user = currentUser;
+                } else {
+                    user = new User({
+                        email,
+                        name: profile._json.name,
+                        picture: profile._json.picture,
+                    });
 
-                user.save().then((newUser) => {
-                    logger.info('Created New User ' + newUser.email)
-                })
-            }
+                    user.save().then((newUser) => {
+                        logger.info("Created New User " + newUser.email);
+                    });
+                }
 
                 // User Callback function complete, User is returned.
                 done(null, user);

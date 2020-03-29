@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const authenticateToken = require('../config/token-setup').authenticateToken
-const User = require('../models/User');
-const { logger } = require('../common/logging');
+const authenticateToken = require("../config/token-setup").authenticateToken;
+const User = require("../models/User");
+const { logger } = require("../common/logging");
 
 // GET User information
 router.get("/get", authenticateToken, function (req, res) {
@@ -10,11 +10,10 @@ router.get("/get", authenticateToken, function (req, res) {
     User.find({ email: email }, function (err, userinfo) {
         if (err) {
             logger.error(err);
-            res.status(400).json('Error: ' + err);
-        }
-        else {
+            res.status(400).json("Error: " + err);
+        } else {
             if (userinfo.length === 0) {
-                res.status(400).json('Error: could not find user with specified email.');
+                res.status(400).json("Error: could not find user with specified email.");
             }
             res.status(200).json(userinfo[0]);
         }
@@ -40,10 +39,9 @@ router.get("/email", function (req, res) {
     User.find({}, function (err, users) {
         if (err) {
             logger.error(err);
-            res.status(400).json({ msg: "failed" })
-        }
-        else {
-            logger.info(users)
+            res.status(400).json({ msg: "failed" });
+        } else {
+            logger.info(users);
             res.status(200).json(users);
         }
     });
