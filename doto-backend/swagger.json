@@ -1,304 +1,261 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "version": "1.0.0",
-    "title": "Doto",
-    "description": "A brief visual description of backend API. NB. Authorization Header required for using API.",
-    "license": {
-      "name": "Swagger UI License: MIT",
-      "url": "https://opensource.org/licenses/MIT"
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Doto",
+        "description": "A brief visual description of backend API. NB. Authorization Header required for using API.",
+        "license": {
+            "name": "Swagger UI License: MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3001",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Users",
+            "description": "API for users in the system"
+        }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/task/get": {
+            "get": {
+                "tags": ["Task"],
+                "description": "Get all Tasks for user",
+                "parameters": [
+                    {
+                        "in": "User",
+                        "description": "email (String)"
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "List of tasks associated with this user",
+                        "schema": {
+                            "$ref": "#/definitions/Tasks"
+                        }
+                    }
+                }
+            }
+        },
+        "/task/post": {
+            "post": {
+                "tags": ["Task"],
+                "description": "Create new task in system",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "taskId: 'taskId', Successful: 'True'"
+                    },
+                    "400": {
+                        "description": "taskId: 'taskId', Successful: 'False'"
+                    }
+                }
+            }
+        },
+        "/task": {
+            "put": {
+                "tags": ["Task"],
+                "description": "Edit Task in System",
+                "parameters": [
+                    {
+                        "in": "taskId",
+                        "description": "taskId (String)"
+                    },
+                    {
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "taskId: 'taskId', Successful: 'True'"
+                    },
+                    "400": {
+                        "description": "taskId: 'taskId', Successful: 'False'"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Task"],
+                "description": "Delete Task in System",
+                "parameters": [
+                    {
+                        "in": "taskId",
+                        "description": "taskId (String)"
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "taskId: 'taskId', Deleted: 'True'"
+                    },
+                    "400": {
+                        "description": "taskId: 'taskId', Deleted: 'False'"
+                    }
+                }
+            }
+        },
+        "/user/get": {
+            "get": {
+                "tags": ["Users"],
+                "description": "Get user details",
+                "parameters": [
+                    {
+                        "in": "email",
+                        "description": "email (String)"
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Here are all the User Details",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Error: could not find user with specified email."
+                    }
+                }
+            }
+        },
+        "/user/update": {
+            "put": {
+                "tags": ["Users"],
+                "description": "Update user details",
+                "parameters": [
+                    {
+                        "in": "email",
+                        "description": "email (String)"
+                    },
+                    {
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "email: 'email', Successful: 'True'"
+                    },
+                    "400": {
+                        "description": "email: 'email', Successful: 'False'"
+                    }
+                }
+            }
+        },
+        "/user/email": {
+            "get": {
+                "tags": ["Users"],
+                "description": "Get all users details",
+                "parameters": [],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Here are all the Users and their Details",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    },
+                    "400": {
+                        "description": "msg: failed"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "required": ["email"],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "picture": {
+                    "type": "string"
+                },
+                "themePreference": {
+                    "type": "string",
+                    "uniqueItems": false,
+                    "default": "dark"
+                }
+            }
+        },
+        "Users": {
+            "type": "array",
+            "$ref": "#/definitions/User"
+        },
+        "Task": {
+            "required": ["user", "taskId", "title", "duration", "startDate", "endDate"],
+            "properties": {
+                "user": {
+                    "type": "User",
+                    "uniqueItems": true
+                },
+                "taskId": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "title": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "description": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "location": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "priority": {
+                    "type": "integer",
+                    "uniqueItems": false
+                },
+                "duration": {
+                    "type": "integer",
+                    "uniqueItems": false
+                },
+                "startDate": {
+                    "type": "date",
+                    "uniqueItems": false
+                },
+                "endDate": {
+                    "type": "date",
+                    "uniqueItems": false
+                },
+                "reminderDate": {
+                    "type": "date",
+                    "uniqueItems": false
+                }
+            }
+        },
+        "Tasks": {
+            "type": "array",
+            "$ref": "#/definitions/Task"
+        }
     }
-  },
-  "host": "localhost:3001",
-  "basePath": "/",
-  "tags": [
-    {
-      "name": "Users",
-      "description": "API for users in the system"
-    }
-  ],
-  "schemes": [
-    "http"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "paths": {
-    "/task/get":{
-      "get" :{
-        "tags": [
-          "Task"
-        ],
-        "description": "Get all Tasks for user",
-        "parameters": [
-          {
-            "in": "User",
-            "description" : "email (String)"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "List of tasks associated with this user",
-            "schema": {
-              "$ref": "#/definitions/Tasks"
-            }
-          }
-        }
-      }
-    },
-    "/task/post":{
-      "post" : {
-        "tags": [
-          "Task"
-        ],
-        "description": "Create new task in system",
-        "parameters": [
-          {
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Task"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "taskId: 'taskId', Successful: 'True'"
-          },
-          "400": {
-            "description": "taskId: 'taskId', Successful: 'False'"
-          }
-        }
-      }
-    },
-    "/task" : {
-      "put" :{
-        "tags": [
-          "Task"
-        ],
-        "description": "Edit Task in System",
-        "parameters": [
-          {
-            "in" : "taskId",
-            "description" : "taskId (String)"
-          },
-          {
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Task"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "taskId: 'taskId', Successful: 'True'"
-          },
-          "400": {
-            "description": "taskId: 'taskId', Successful: 'False'"
-          }
-        }
-      },
-      "delete":{
-        "tags": [
-          "Task"
-        ],
-        "description": "Delete Task in System",
-        "parameters": [
-          {
-            "in" : "taskId",
-            "description" : "taskId (String)"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "taskId: 'taskId', Deleted: 'True'"
-          },
-          "400": {
-            "description": "taskId: 'taskId', Deleted: 'False'"
-          }
-        }
-      }
-    },
-    "/user/get" :{
-      "get" :{
-        "tags": [
-          "Users"
-        ],
-        "description": "Get user details",
-        "parameters": [
-          {
-            "in": "email",
-            "description" : "email (String)"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Here are all the User Details",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          },
-          "400": {
-            "description": "Error: could not find user with specified email."
-          }
-        }
-      }
-    },
-    "/user/update":{
-      "put" :{
-        "tags": [
-          "Users"
-        ],
-        "description": "Update user details",
-        "parameters": [
-          {
-            "in": "email",
-            "description": "email (String)"
-          },
-          {
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "email: 'email', Successful: 'True'"
-          },
-          "400": {
-            "description": "email: 'email', Successful: 'False'"
-          }
-        }
-      }
-    },
-    "/user/email":{
-      "get" :{
-        "tags": [
-          "Users"
-        ],
-        "description": "Get all users details",
-        "parameters": [
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Here are all the Users and their Details",
-            "schema": {
-              "$ref": "#/definitions/Users"
-            }
-          },
-          "400": {
-            "description": "msg: failed"
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "User": {
-      "required": [
-        "email"
-      ],
-      "properties": {
-        "email": {
-          "type": "string",
-          "uniqueItems": true
-        },
-        "name": {
-          "type": "string",
-          "uniqueItems": false
-        },
-        "picture": {
-          "type": "string"
-        },"themePreference":{
-          "type": "string",
-          "uniqueItems": false,
-          "default": "dark"
-        }
-      }
-    },
-    "Users": {
-      "type": "array",
-      "$ref": "#/definitions/User"
-    },
-    "Task" : {
-      "required": [
-        "user",
-        "taskId",
-        "title",
-        "duration",
-        "startDate",
-        "endDate"
-      ],
-      "properties": {
-        "user" :{
-          "type": "User",
-          "uniqueItems" : true
-        },
-        "taskId": {
-          "type": "string",
-          "uniqueItems": true
-        },
-        "title" : {
-          "type" : "string",
-          "uniqueItems" : false
-        },
-        "description" : {
-          "type" : "string",
-          "uniqueItems" : false
-        },
-        "location": {
-          "type" : "string",
-          "uniqueItems" : false
-        },
-        "priority" : {
-          "type" : "integer",
-          "uniqueItems" : false
-        },
-        "duration" : {
-          "type" : "integer",
-          "uniqueItems" : false
-        },
-        "startDate" : {
-          "type" : "date",
-          "uniqueItems" : false
-        },
-        "endDate" : {
-          "type" : "date",
-          "uniqueItems" : false
-        },
-        "reminderDate" : {
-          "type" : "date",
-          "uniqueItems" : false
-        }
-      }
-    },
-    "Tasks": {
-      "type": "array",
-      "$ref": "#/definitions/Task"
-    }
-  }
 }
