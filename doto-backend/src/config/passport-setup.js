@@ -1,7 +1,7 @@
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20')
 const User = require('../models/User');
-const { logging } = require('../common/logging');
+const { logger } = require('../common/logging');
 
 // This function applies the Google strategy to passport. Used in auth-route.
 passport.use(
