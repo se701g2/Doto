@@ -1,10 +1,10 @@
 {
     "env": {
-        "browser": false,
+        "node": true,
         "es6": true,
-        "jest": true
+        "mocha": true
     },
-    "extends": ["standard", "plugin:prettier/recommended"],
+    "extends": ["standard", "plugin:mocha/recommended", "plugin:prettier/recommended"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -13,11 +13,20 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
+    "plugins": ["mocha"],
     "rules": {
         "indent": 0,
         "quotes": "off",
         "space-before-function-paren": "off",
         "semi": "off",
         "comma-dangle": "off"
-    }
+    },
+    "overrides": [
+        {
+            "files": ["**/*.test.js"],
+            "rules": {
+                "no-undef": "off"
+            }
+        }
+    ]
 }
