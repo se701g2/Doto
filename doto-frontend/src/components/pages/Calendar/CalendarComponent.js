@@ -15,6 +15,7 @@ import {
     AppointmentTooltip,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { Checkbox, Grid } from "@material-ui/core";
+import DoneIcon from "@material-ui/icons/Done";
 
 const CalendarComponent = ({ tasks, onTaskStatusUpdated }) => {
     return (
@@ -27,7 +28,7 @@ const CalendarComponent = ({ tasks, onTaskStatusUpdated }) => {
             <ViewSwitcher />
             <DateNavigator />
             <TodayButton />
-            <Appointments />
+            <Appointments appointmentComponent={Appointment} />
             <AppointmentTooltip
                 contentComponent={props => <Content {...props} onTaskStatusUpdated={onTaskStatusUpdated} />}
             />
@@ -49,6 +50,27 @@ const Content = ({ children, appointmentData, style, onTaskStatusUpdated, ...res
         </AppointmentTooltip.Content>
     );
 };
+
+const Appointment = ({ children, style, ...restProps }) => (
+    <Appointments.Appointment
+        {...restProps}
+        style={
+            restProps.data.completed
+                ? { ...style, backgroundColor: "#adadad" }
+                : {
+                      style,
+                  }
+        }
+    >
+        {children}
+        <Grid container alignItems="center" justify="space-between">
+            <span style={{ color: "white", paddingLeft: "10px" }}>
+                {restProps.data.completed ? "Task complete" : "Task incomplete"}
+            </span>
+            {restProps.data.completed && <DoneIcon style={{ marginRight: "26px", fontSize: 26, color: "white" }} />}
+        </Grid>
+    </Appointments.Appointment>
+);
 
 CalendarComponent.propTypes = {
     tasks: PropTypes.array.isRequired,
