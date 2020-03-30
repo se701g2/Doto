@@ -14,10 +14,11 @@ import {
     Appointments,
     AppointmentTooltip,
 } from "@devexpress/dx-react-scheduler-material-ui";
+import { Checkbox, Grid } from "@material-ui/core";
 
-const CalendarComponent = props => {
+const CalendarComponent = ({ tasks, onTaskStatusUpdated }) => {
     return (
-        <Scheduler data={props.tasks} currentView={MonthView} editable={true}>
+        <Scheduler data={tasks} currentView={MonthView} editable={true}>
             <ViewState />
             <DayView />
             <WeekView />
@@ -27,8 +28,25 @@ const CalendarComponent = props => {
             <DateNavigator />
             <TodayButton />
             <Appointments />
-            <AppointmentTooltip />
+            <AppointmentTooltip
+                contentComponent={props => <Content {...props} onTaskStatusUpdated={onTaskStatusUpdated} />}
+            />
         </Scheduler>
+    );
+};
+
+const Content = ({ children, appointmentData, style, onTaskStatusUpdated, ...restProps }) => {
+    return (
+        <AppointmentTooltip.Content {...restProps} appointmentData={appointmentData}>
+            <Grid container alignItems="center">
+                <Checkbox
+                    checked={appointmentData.completed}
+                    color="primary"
+                    onClick={() => onTaskStatusUpdated(appointmentData.id)}
+                />
+                <span>{appointmentData.completed ? "Task complete" : "Task incomplete"}</span>
+            </Grid>
+        </AppointmentTooltip.Content>
     );
 };
 

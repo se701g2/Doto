@@ -1,7 +1,7 @@
 import React from "react";
-import Radio from "@material-ui/core/Radio";
 import "./Calendar.css";
 import PropTypes from "prop-types";
+import { Checkbox } from "@material-ui/core";
 
 // This file provides a checklist of items on today's to-do list. The user is able to select tasks completed for the day
 const CalendarListView = props => {
@@ -23,14 +23,10 @@ const CalendarListView = props => {
                 return (
                     isTaskScheduledToday && (
                         <div key className="list-view-components">
-                            <Radio
-                                disableRipple
-                                checkedIcon={
-                                    <span
-                                        className={"radio-checked bg-" + (task.color ? task.color : "blue") + "-600"}
-                                    />
-                                }
-                                icon={<span className="radio-unchecked" />}
+                            <Checkbox
+                                checked={task.completed}
+                                color="primary"
+                                onChange={() => props.onTaskStatusUpdated(task.id)}
                             />
                             <div className="text-base">{task.title}</div>
                         </div>
