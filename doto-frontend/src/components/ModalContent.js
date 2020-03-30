@@ -7,7 +7,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
-import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from "@material-ui/pickers";
+import { MuiPickersUtilsProvider, KeyboardDateTimePicker, KeyboardTimePicker } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import "./ModalContent.css";
@@ -38,7 +38,13 @@ const ModalContent = props => {
     const [selectedName, setSelectedName] = useState("TASK - " + new Date());
     const [selectedDescription, setSelectedDescription] = useState("");
     const [selectedDueDate, setSelectedDueDate] = useState(new Date());
-    const [selectedDuration, setSelectedDuration] = useState(0);
+
+    // default duration is 1 hour
+    var initialDuration = new Date();
+    initialDuration.setHours(1);
+    initialDuration.setMinutes(0);
+    const [selectedDuration, setSelectedDuration] = React.useState(initialDuration);
+
     const [selectedLocation, setSelectedLocation] = useState("");
     const [selectedPriority, setSelectedPriority] = useState("");
     const [selectedReminder, setSelectedReminder] = useState("");
@@ -58,10 +64,6 @@ const ModalContent = props => {
         } else {
             setSelectedDueDate("invalid beans");
         }
-    };
-
-    const handleDurationChange = event => {
-        setSelectedDuration(event.target.value);
     };
 
     const handleLocationChange = event => {
@@ -84,7 +86,7 @@ const ModalContent = props => {
             title: selectedName,
             description: selectedDescription,
             dueDate: selectedDueDate,
-            duration: parseInt(selectedDuration),
+            duration: selectedDuration.getHours() * 60 + selectedDuration.getMinutes(),
             location: selectedLocation,
             priority: selectedPriority,
             reminder: selectedReminder,
@@ -148,14 +150,19 @@ const ModalContent = props => {
                         </MuiPickersUtilsProvider>
                     </div>
                     <div>
-                        <TextField
-                            className="small-text-area group-spacing"
-                            id="standard-basic"
-                            type="number"
-                            inputProps={{ min: "0" }}
-                            label="Duration (in minutes)"
-                            onChange={handleDurationChange}
-                        />
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardTimePicker
+                                ampm={false}
+                                label="Duration of task (hours : minutes)"
+                                margin="normal"
+                                id="time-picker"
+                                value={selectedDuration}
+                                onChange={setSelectedDuration}
+                                KeyboardButtonProps={{
+                                    "aria-label": "change time",
+                                }}
+                            />
+                        </MuiPickersUtilsProvider>
                     </div>
                     <div>
                         <TextField

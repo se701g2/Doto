@@ -1,0 +1,6 @@
+{
+  "packages": ["doto-frontend", "doto-backend"],
+  "npmClient": "yarn",
+  "useWorkspaces": false,
+  "version": "independent"
+}

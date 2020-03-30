@@ -20,11 +20,11 @@ jobs:
       with:
         node-version: '12.13.0'
 
-    - name: npm install, build, and test
+    - name: yarn install and build
       run: |
         cd doto-frontend
-        npm install
-        npm run build --if-present
+        yarn install
+        yarn build
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v1
