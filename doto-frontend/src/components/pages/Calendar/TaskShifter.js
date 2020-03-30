@@ -1,0 +1,55 @@
+/**
+ * shift tasks within working hours
+ *
+ * NOTE: This function assumes the duration of tasks is not exceeding the working hours
+ *
+ * @param {Array<object>} scheduledTasks The scheduled tasks to be shifted, without considering working hours
+ * @param {Date} startTime the start working hour
+ * @param {Date} endTime the end working hour
+ * @returns An array of tasks and their startDate and endDate are modified based on working hours.
+ */
+const shiftTasks = (scheduledTasks, startTime, endTime) => {
+    // TODO: Take into account the active hours the user specifies in the settings menu
+    const tasks = scheduledTasks;
+    const MILLI_SECONDS_PER_MINUTE = 60000;
+    const HOURS_PER_MINUTE = 60;
+    const MINUTES_PER_DAY = 1440;
+
+    // transforming startTime and endTime to minitues format
+    const startActingHour = startTime.getHours() * HOURS_PER_MINUTE + startTime.getMinutes();
+    const endActingHour = endTime.getHours() * HOURS_PER_MINUTE + endTime.getMinutes();
+
+    for (let i = 0; i < tasks.length; i++) {
+        const taskStart = tasks[i].startDate.getHours() * HOURS_PER_MINUTE + tasks[i].startDate.getMinutes();
+        const taskEnd = tasks[i].endDate.getHours() * HOURS_PER_MINUTE + tasks[i].endDate.getMinutes();
+        // console.log(tasks[i].startDate);
+        // console.log(tasks[i].endDate);
+        // if the start time of task is earlier than start working time, then shift it and all tasks after it based on startActingHour - taskStart
+        // if the end time of task is later than end working time, then shift it and all tasks after it based on startActingHour + MINUTES_PER_DAY - taskStart
+        if (taskStart < startActingHour) {
+            for (let j = i; j < tasks.length; j++) {
+                tasks[j].startDate = new Date(
+                    tasks[j].startDate.getTime() + (startActingHour - taskStart) * MILLI_SECONDS_PER_MINUTE,
+                );
+                tasks[j].endDate = new Date(
+                    tasks[j].endDate.getTime() + (startActingHour - taskStart) * MILLI_SECONDS_PER_MINUTE,
+                );
+            }
+        } else if (taskEnd > endActingHour) {
+            for (let j = i; j < tasks.length; j++) {
+                tasks[j].startDate = new Date(
+                    tasks[j].startDate.getTime() +
+                        (startActingHour + MINUTES_PER_DAY - taskStart) * MILLI_SECONDS_PER_MINUTE,
+                );
+                tasks[j].endDate = new Date(
+                    tasks[j].endDate.getTime() +
+                        (startActingHour + MINUTES_PER_DAY - taskStart) * MILLI_SECONDS_PER_MINUTE,
+                );
+            }
+        }
+    }
+    return {
+        shiftedTasks: tasks,
+    };
+};
+export { shiftTasks };

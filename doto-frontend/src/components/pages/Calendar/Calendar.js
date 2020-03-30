@@ -13,6 +13,7 @@ import CalendarComponent from "./CalendarComponent";
 import CalendarListView from "./CalendarListView";
 import Header from "../Header";
 import { ThemeContext } from "../../../context/ThemeContext";
+import { ActiveHoursContext } from "../../../context/ActiveHoursContext";
 import { addTaskToSchedule } from "./TaskScheduler";
 import DotoService from "../../../helpers/DotoService";
 import "./Calendar.css";
@@ -42,6 +43,14 @@ const Calendar = () => {
     const [tasks, setTasks] = useState([]);
     const [open, setOpen] = useState(false);
     const [theme, setTheme] = useContext(ThemeContext);
+<<<<<<< HEAD
+    const { activeHoursStart, activeHoursEnd } = useContext(ActiveHoursContext);
+    const [startTime, setStartTime] = activeHoursStart;
+    const [endTime, setEndTime] = activeHoursEnd;
+=======
+    const [startTime, setStartTime] = useState();
+    const [endTime, setEndTime] = useState();
+>>>>>>> 5a96640... Added startTime and endTime to taskscheduler can use it
 
     const handleOpen = () => {
         setOpen(true);
@@ -53,7 +62,17 @@ const Calendar = () => {
 
     // Adds new task based on input fields from Modal
     const addNewTask = (newTask, currentDate) => {
-        const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks, currentDate);
+<<<<<<< HEAD
+        const { newTaskOrder, updatedTask } = addTaskToSchedule(
+            newTask,
+            tasks,
+            currentDate,
+            new Date(startTime),
+            new Date(endTime),
+        );
+=======
+        const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks, currentDate, startTime, endTime);
+>>>>>>> 5a96640... Added startTime and endTime to taskscheduler can use it
         DotoService.setNewTask(updatedTask);
         setTasks(newTaskOrder);
         handleClose();
@@ -67,6 +86,8 @@ const Calendar = () => {
         const fetchUserInfo = async () => {
             const userInfo = await DotoService.getUserInfo();
             setTheme(userInfo.themePreference);
+            setStartTime(userInfo.startTime);
+            setEndTime(userInfo.endTime);
         };
         fetchUserInfo();
         fetchTasks();

@@ -1,3 +1,5 @@
+import { shiftTasks } from "./TaskShifter";
+
 const MILLISECONDS_PER_MINUTE = 60000;
 
 /**
@@ -10,13 +12,16 @@ const MILLISECONDS_PER_MINUTE = 60000;
  * @param {object} newTasks The new tasks to schedule, with no start/end datetimes present
  * @param {Array<object>} existingTasks The existing scheduled tasks, with start/end datetimes present
  * @param {Date} currDate The datetime after which the task should be scheduled (usually the current datetime)
+ * @param startTime
+ * @param endTime
  * @returns A chronologically ordered (based on startDate) array of all tasks scheduled with start/end
  * datetimes - essentially existingTasks + newTasks
  */
-const addTaskToSchedule = (newTask, existingTasks, currDate) => {
+const addTaskToSchedule = (newTask, existingTasks, currDate, startTime, endTime) => {
     // TODO: Take into account any possible gap between datetime and startDate of the first task in oldTasks
     // TODO: Take into account priority of tasks
     // TODO: Take into account location of tasks, add time gaps to allow for travel
+    // TODO: Take into account the active hours the user specifies in the settings menu
 
     const competingTasks = [];
     const oldTasks = [];
@@ -57,8 +62,12 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
 
             // Insert the new task at the specified index
             competingTasks.splice(i, 0, newTask);
+
+            // Shift the Tasks based on working hours 
+            let {shiftedTasks} = shiftTasks([...oldTasks, ...competingTasks],startTime,endTime);
+
             return {
-                newTaskOrder: [...oldTasks, ...competingTasks],
+                newTaskOrder: shiftedTasks,
                 updatedTask: newTask,
             };
         }
@@ -69,9 +78,12 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
     newTask.endDate =
         (cTask && new Date(cTask.endDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE)) ||
         new Date(minDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE);
+        
+    // Shift the Tasks based on working hours 
+    let {shiftedTasks} = shiftTasks([...existingTasks, newTask],startTime,endTime);
 
     return {
-        newTaskOrder: [...existingTasks, newTask],
+        newTaskOrder: shiftedTasks,
         updatedTask: newTask,
     };
 };

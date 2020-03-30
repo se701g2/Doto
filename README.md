@@ -18,15 +18,15 @@ It is recommended that you use **VsCode** when contributing to this project. Ple
 There are a number of application secrets and credentials which are needed before you begin development. These secrets will be given to you by the Repo maintainer when you start contributing. To set up these envrionment variables you will need to make a `.env` file sitting in the doto-backend folder. An example of this file can be found in the repository `.env.example` contains all the variables that will need to be set (just make a copy of the file and rename to `.env` then copy and paste all the secrets given by the repo maintainer)
 
 ## Running the code
-We are using npm for this particular project (https://www.npmjs.com/get-npm).
-### `cd doto-frontend/backend`
-To get the project up and running locally, you will need to change directory to `doto-backend` and start up the local server, to do this simply run the following commands: 
+We are using [lerna](https://lerna.js.org/) and [yarn](https://yarnpkg.com/) for this project.
 
-### `yarn install --frozen-lockfile`
+### Installing dependencies
+Run `yarn install --frozen-lockfile` in the project root.
 
-### `yarn start`
+### Starting the frontend and backend
+To get the project running locally, run `yarn start` in both `doto-backend` and `doto-frontend` (in separate terminals).
 
-Once your local backend server is up, in a separate terminal, change directory into `doto-frontend` and once again run the same commands to run the react-app locally. By default, the react-app is hosted on port 3000 and the local server is hosted on port 3001. Do not change these numbers as we have added the addresses as authorized redirect uri's in our google credentials.
+By default, the react-app is hosted on port 3000 and the local server is hosted on port 3001. Do not change these numbers as we have added the addresses as authorized redirect uri's in our google credentials.
 
 Please check the front end [readme](https://github.com/se701g2/Doto/blob/master/doto-frontend/README.md) for more information on running the front end of the code.
 
@@ -45,5 +45,3 @@ Distributed under the MIT license. Check the [wiki](https://github.com/se701g2/D
 
 ## Where to Get More Help
 If you have run into any issues, you can contact our lecturer Kelly Blincoe and she will be able to point you in the right direction. 
-
-

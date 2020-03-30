@@ -10,6 +10,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import Header from "../Header";
 import DotoService from "../../../helpers/DotoService";
 import { ThemeContext } from "../../../context/ThemeContext";
+import { ActiveHoursContext } from "../../../context/ActiveHoursContext";
 import { Themes } from "../../../constants/Themes";
 import "./SettingsPage.css";
 import "../Pages.css";
@@ -60,16 +61,13 @@ const ProfilePhoto = props => {
 };
 
 // TODO: Implement logic for working hours in sync with task-scheduling algorithm
-const WorkingHoursPicker = () => {
-    const [selectedStartTime, setSelectedStartTime] = useState(new Date("2020-03-15T09:00:00"));
-    const [selectedEndTime, setSelectedEndTime] = useState(new Date("2020-03-15T17:00:00"));
-
+const WorkingHoursPicker = props => {
     const handleStartTimeChange = date => {
-        setSelectedStartTime(date);
+        props.changeStartTime(date);
     };
 
     const handleEndTimeChange = date => {
-        setSelectedEndTime(date);
+        props.changeEndTime(date);
     };
 
     return (
@@ -80,8 +78,8 @@ const WorkingHoursPicker = () => {
                     <KeyboardTimePicker
                         margin="normal"
                         label="Start Time"
-                        value={selectedStartTime}
                         onChange={handleStartTimeChange}
+                        value={props.StartTime}
                         KeyboardButtonProps={{
                             "aria-label": "change time",
                         }}
@@ -94,8 +92,8 @@ const WorkingHoursPicker = () => {
                     <KeyboardTimePicker
                         margin="normal"
                         label="End Time"
-                        value={selectedEndTime}
                         onChange={handleEndTimeChange}
+                        value={props.EndTime}
                         KeyboardButtonProps={{
                             "aria-label": "change time",
                         }}
@@ -131,9 +129,21 @@ const ThemePicker = props => {
 
 const SettingsPage = () => {
     const [theme, setTheme] = useContext(ThemeContext);
+    const { activeHoursStart, activeHoursEnd } = useContext(ActiveHoursContext);
     const [profilePic, setProfilePic] = useState();
     const [name, setName] = useState();
     const [email, setEmail] = useState();
+<<<<<<< HEAD
+    const [StartTime, SetStartTime] = useState();
+    const [EndTime, SetEndTime] = useState();
+=======
+    const [startTime, setStartTime] = activeHoursStart;
+<<<<<<< HEAD
+    const [endTime, setStartTime] = activeHoursEnd;
+>>>>>>> e3ecc7a... Created a new ActiveHoursContext. Passed the context to the settings and calender page. State for the times are maintained in Route.js file instead of SettingsPage.js file
+=======
+    const [endTime, setEndTime] = activeHoursEnd;
+>>>>>>> 5a038f3... Fixed import for ActiveHoursContext. Changed PropType for WorkingHoursPicker.
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -142,13 +152,43 @@ const SettingsPage = () => {
             setProfilePic(userInfo.picture);
             setName(userInfo.name);
             setEmail(userInfo.email);
+<<<<<<< HEAD
+            // console.log(userInfo.StartTime);
+            SetStartTime(userInfo.StartTime);
+            SetEndTime(userInfo.EndTime);
+            // WorkingHoursPicker.setSelectedStartTime(userInfo.StartTime);
+            // WorkingHoursPicker.setSelectedEndTime(userInfo.EndTime);
+=======
+            setStartTime(userInfo.startTime);
+            setEndTime(userInfo.endTime);
+>>>>>>> eb5e13e... Forgot to change variable names in DotoServices and fixed conflict issue in User.js
         };
         fetchUserInfo();
     });
 
     const changeTheme = newTheme => {
-        DotoService.updateUserInfo(newTheme);
+        DotoService.updateUserInfo(newTheme, StartTime, EndTime);
         setTheme(newTheme);
+    };
+
+    const changeStartTime = newTime => {
+<<<<<<< HEAD
+        DotoService.updateUserInfo(theme, newTime, EndTime);
+        SetStartTime(newTime);
+    };
+
+    const changeEndTime = newTime => {
+        DotoService.updateUserInfo(theme, StartTime, newTime);
+        SetEndTime(newTime);
+=======
+        DotoService.updateUserInfo(theme, newTime, endTime);
+        setStartTime(newTime);
+    };
+
+    const changeEndTime = newTime => {
+        DotoService.updateUserInfo(theme, startTime, newTime);
+        setEndTime(newTime);
+>>>>>>> 5a038f3... Fixed import for ActiveHoursContext. Changed PropType for WorkingHoursPicker.
     };
 
     return (
@@ -172,7 +212,12 @@ const SettingsPage = () => {
                     <InputEmailField email={email} />
 
                     <ThemePicker changeTheme={changeTheme} />
-                    <WorkingHoursPicker />
+                    <WorkingHoursPicker
+                        StartTime={StartTime}
+                        EndTime={EndTime}
+                        changeStartTime={changeStartTime}
+                        changeEndTime={changeEndTime}
+                    />
                 </div>
             </span>
         </div>

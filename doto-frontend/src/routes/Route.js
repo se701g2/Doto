@@ -5,6 +5,7 @@ import Login from "../components/pages/Login/Login";
 import Calendar from "../components/pages/Calendar/Calendar";
 import NotFound from "../components/pages/NotFound";
 import { ThemeContext } from "../context/ThemeContext";
+import { ActiveHoursContext } from "../context/ActiveHoursContext";
 import CookieManager from "../helpers/CookieManager";
 import "../tailwind-generated.css";
 
@@ -37,6 +38,8 @@ const saveToCookies = params => {
 // Sets the routing to the appropriate pages, passing in the colour theme based on user setting
 const Routes = () => {
     const [theme, setTheme] = React.useState(true);
+    const [activeHourStartTime, setActiveHourStartTime] = React.useState(new Date("2020-03-15T09:00:00"));
+    const [activeHourEndTime, setActiveHourEndTime] = React.useState(new Date("2020-03-15T17:00:00"));
     // Only when backend returns JWT and email then we save
     saveToCookies(extractEmailAndJwt(window.location.href));
     return (
@@ -44,12 +47,26 @@ const Routes = () => {
             <Route exact path="/" component={Login} />
             <Route path="/settings">
                 <ThemeContext.Provider value={[theme, setTheme]}>
-                    <SettingsPage />
+                    <ActiveHoursContext.Provider
+                        value={{
+                            activeHoursStart: [activeHourStartTime, setActiveHourStartTime],
+                            activeHoursEnd: [activeHourEndTime, setActiveHourEndTime],
+                        }}
+                    >
+                        <SettingsPage />
+                    </ActiveHoursContext.Provider>
                 </ThemeContext.Provider>
             </Route>
             <Route path="/calendar">
                 <ThemeContext.Provider value={[theme, setTheme]}>
-                    <Calendar />
+                    <ActiveHoursContext.Provider
+                        value={{
+                            activeHoursStart: [activeHourStartTime, setActiveHourStartTime],
+                            activeHoursEnd: [activeHourEndTime, setActiveHourEndTime],
+                        }}
+                    >
+                        <Calendar />
+                    </ActiveHoursContext.Provider>
                 </ThemeContext.Provider>
             </Route>
             <Route path="/login" component={Login} />
