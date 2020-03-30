@@ -3,12 +3,12 @@ const router = express.Router();
 const authenticateToken = require("../config/token-setup").authenticateToken;
 const Task = require("../models/Task");
 const { logger } = require("../common/logging");
-
+const response = require("../Constants/http-response.js");
 // GET ALL tasks for user
 router.get("/get", authenticateToken, (req, res) => {
     Task.find({ user: req.user.email })
-        .then((tasks) => res.status(200).json(tasks))
-        .catch((err) => res.status(400).json("Error: " + err));
+        .then((tasks) => res.status(response.successful).json(tasks))
+        .catch((err) => res.status(response.badReq).json("Error: " + err));
 });
 
 // ADD task
@@ -28,9 +28,9 @@ router.post("/post", authenticateToken, function (req, res) {
     task.save(function (err) {
         if (err) {
             logger.error(err);
-            res.status(400).json({ taskId: req.params.taskId, Successful: "False" });
+            res.status(response.badReq).json({ taskId: req.params.taskId, Successful: "False" });
         } else {
-            res.status(200).json({ taskId: req.params.taskId, Successful: "True" });
+            res.status(response.successful).json({ taskId: req.params.taskId, Successful: "True" });
         }
     });
 });
@@ -43,9 +43,9 @@ router.put("/:taskId", function (req, res) {
         logger.info(updatedTask);
         if (err || !updatedTask) {
             logger.error(err);
-            res.status(400).json({ taskId: req.params.taskId, Successful: "False" });
+            res.status(response.badReq).json({ taskId: req.params.taskId, Successful: "False" });
         } else {
-            res.status(200).json({ taskId: req.params.taskId, Successful: "True" });
+            res.status(response.successful).json({ taskId: req.params.taskId, Successful: "True" });
         }
     });
 });
@@ -54,22 +54,22 @@ router.put("/:taskId", function (req, res) {
 router.delete("/:taskId", authenticateToken, function (req, res) {
     const task = Task.findOne({ taskId: req.params.taskId }, function (err) {
         if (err) {
-            res.sendStatus(400);
+            res.sendStatus(response.badReq);
         }
     });
     logger.info("task " + task.user);
     logger.info("return " + req.user.email);
 
     if (task.user !== req.user.email) {
-        return res.sendStatus(403);
+        return res.sendStatus(response.forbid);
     }
 
     Task.remove({ taskId: req.params.taskId }, function (err) {
         if (err) {
             logger.error(err);
-            res.status(400).json({ taskId: req.params.taskId, Deleted: "False" });
+            res.status(response.badReq).json({ taskId: req.params.taskId, Deleted: "False" });
         } else {
-            res.status(200).json({ taskId: req.params.taskId, Deleted: "True" });
+            res.status(response.successful).json({ taskId: req.params.taskId, Deleted: "True" });
         }
     });
 });

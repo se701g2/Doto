@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-const jwt = require('jsonwebtoken')
-=======
 const jwt = require("jsonwebtoken");
-
->>>>>>> upstream/master
+const response = require("../Constants/http-response.js");
 function generateAccessToken(user) {
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
 }
@@ -12,21 +8,14 @@ function authenticateToken(req, res, next) {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(" ")[1];
 
-<<<<<<< HEAD
-    if (token == null) { return res.sendStatus(runauth) }
-
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err) { res.sendStatus(forbid) }    // Error if mismatch between user and token
-=======
     if (token == null) {
-        return res.sendStatus(401);
+        return res.sendStatus(response.unauth);
     }
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
         if (err) {
-            res.sendStatus(403);
+            res.sendStatus(response.forbid);
         } // Error if mismatch between user and token
->>>>>>> upstream/master
 
         req.user = user;
         next();

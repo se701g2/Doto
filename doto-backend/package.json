@@ -16,11 +16,7 @@
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
-<<<<<<< HEAD
-        "funding": "^1.0.9",
-=======
         "express-winston": "^4.0.3",
->>>>>>> upstream/master
         "jsonwebtoken": "^8.5.1",
         "mocha": "^7.1.0",
         "mongoose": "^5.9.4",
