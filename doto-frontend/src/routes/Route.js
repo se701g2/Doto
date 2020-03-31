@@ -7,6 +7,7 @@ import NotFound from "../components/pages/NotFound";
 import { ThemeContext } from "../context/ThemeContext";
 import CookieManager from "../helpers/CookieManager";
 import "../tailwind-generated.css";
+import PrivateRoute from "../helpers/PrivateRoute";
 import DotoService from "../helpers/DotoService";
 
 /**
@@ -71,18 +72,12 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path="/" component={Login} />
-            <Route path="/settings">
-                <ThemeContext.Provider value={[theme, setTheme]}>
-                    <SettingsPage />
-                </ThemeContext.Provider>
-            </Route>
-            <Route path="/calendar">
-                <ThemeContext.Provider value={[theme, setTheme]}>
-                    <Calendar />
-                </ThemeContext.Provider>
-            </Route>
             <Route path="/login" component={Login} />
-            <Route component={NotFound} />
+            <ThemeContext.Provider value={[theme, setTheme]}>
+                <PrivateRoute path="/calendar" exact component={Calendar}/>
+                <PrivateRoute path="/settings" exact component={SettingsPage}/>
+                <Route component={NotFound} />
+            </ThemeContext.Provider>
         </Switch>
     );
 };
