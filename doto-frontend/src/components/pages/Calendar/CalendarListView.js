@@ -27,7 +27,7 @@ const CalendarListView = props => {
                                 color="primary"
                                 onChange={() => props.onTaskStatusUpdated(task.id)}
                             />
-                            <div className="text-base">{task.title}</div>
+                            <div className={task.completed ? "completed" : ""}>{task.title}</div>
                         </div>
                     )
                 );
@@ -39,5 +39,4 @@ const CalendarListView = props => {
 CalendarListView.propTypes = {
     tasks: PropTypes.array.isRequired,
 };
-
 export default CalendarListView;

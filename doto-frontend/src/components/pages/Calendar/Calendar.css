@@ -23,6 +23,10 @@
     border-bottom: 1px solid #e2e8f0;
 }
 
+.completed {
+    text-decoration: line-through;
+}
+
 .radio-unchecked {
     border: 2px solid #dddddd;
     border-radius: 50%;
