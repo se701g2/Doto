@@ -26,28 +26,3 @@
 .completed {
     text-decoration: line-through;
 }
-
-.radio-unchecked {
-    border: 2px solid #dddddd;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-}
-
-.radio-unchecked:disabled .radio-checked:disabled {
-    background: rgba(206, 217, 244, 0.5);
-}
-
-.radio-checked {
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-}
-
-.radio-checked::before {
-    display: block;
-    width: 20px;
-    height: 20px;
-    background-image: radial-gradient(#fff, #fff 28%, transparent 32%);
-    content: " ";
-}
