@@ -21,11 +21,11 @@ const CalendarListView = props => {
                 // If the task is scheduled for today, add it as an item in the checklist of things to do today
                 return (
                     isTaskScheduledToday && (
-                        <div key={task.id} className="list-view-components">
+                        <div key={task.taskId} className="list-view-components">
                             <Checkbox
                                 checked={task.isComplete}
                                 color="primary"
-                                onChange={() => props.onTaskStatusUpdated(task.id)}
+                                onChange={() => props.onTaskStatusUpdated(task.taskId)}
                             />
                             <div className={task.isComplete ? "isComplete" : ""}>{task.title}</div>
                         </div>

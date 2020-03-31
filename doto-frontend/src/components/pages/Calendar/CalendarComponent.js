@@ -43,7 +43,7 @@ const Content = ({ children, appointmentData, style, onTaskStatusUpdated, ...res
                 <Checkbox
                     checked={appointmentData.isComplete}
                     color="primary"
-                    onClick={() => onTaskStatusUpdated(appointmentData.id)}
+                    onClick={() => onTaskStatusUpdated(appointmentData.taskId)}
                 />
                 <span>{appointmentData.isComplete ? "Task complete" : "Task incomplete"}</span>
             </Grid>

@@ -73,12 +73,11 @@ const Calendar = () => {
     };
 
     const handleTaskStatusUpdated = taskId => {
-        setTasks(prev => {
-            const newTasks = [...prev];
-            const taskIndex = newTasks.findIndex(task => task.id === taskId);
-            newTasks[taskIndex].isComplete = !prev[taskIndex].isComplete;
-            return newTasks;
-        });
+        const newTasks = [...tasks];
+        const taskToUpdate = newTasks.find(task => task.taskId === taskId);
+        taskToUpdate.isComplete = !taskToUpdate.isComplete;
+        DotoService.updateTask(taskToUpdate);
+        setTasks(newTasks);
     };
 
     return (
