@@ -18,11 +18,10 @@ const CalendarListView = props => {
                     dueDate.getYear() === today.getYear() && dueDate.getMonth() === today.getMonth()
                         ? dueDate.getDate() === today.getDate()
                         : false;
-
                 // If the task is scheduled for today, add it as an item in the checklist of things to do today
                 return (
                     isTaskScheduledToday && (
-                        <div key className="list-view-components">
+                        <div key={task.id} className="list-view-components">
                             <Checkbox
                                 checked={task.completed}
                                 color="primary"
