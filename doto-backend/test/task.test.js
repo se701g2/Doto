@@ -22,6 +22,7 @@ const validTask = new TaskModel({
     reminderDate: "2020-07-14T07:50:00+12:00",
     startDate: "2020-08-14T08:50:00+12:00",
     endDate: "2020-08-14T07:50:00+12:00",
+    isComplete: false,
 });
 
 process.env.TEST_SUITE = "task-test";
@@ -136,7 +137,7 @@ describe("Task Model Tests", function () {
     it("populating user field from user model.", async function () {
         await validTask.save();
 
-        TaskModel.findOne({ _id: validTask._id })
+        TaskModel.findOne({ taskId: validTask.taskId })
             .populate("user")
             .then((task) => {
                 assert(task.user.name === "john");
@@ -149,5 +150,29 @@ describe("Task Model Tests", function () {
             assert(task === null);
             done();
         });
+    });
+
+    it("update one isComplete status to true", async function () {
+        TaskModel.updateOne({ taskId: validTask.taskId }, { isComplete: true })
+            .then(() => TaskModel.findOne({ taskId: validTask.taskId }))
+            .then((task) => {
+                assert(task.isComplete === true);
+            });
+    });
+
+    it("update one isComplete status to false", async function () {
+        TaskModel.updateOne({ taskId: validTask.taskId }, { isComplete: false })
+            .then(() => TaskModel.findOne({ taskId: validTask.taskId }))
+            .then((task) => {
+                assert(task.isComplete === false);
+            });
+    });
+
+    it("update all isComplete status to true", async function () {
+        TaskModel.update({ isComplete: true })
+            .then(() => TaskModel.find({}))
+            .then((task) => {
+                assert(task.isComplete === true);
+            });
     });
 });
