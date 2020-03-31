@@ -23,11 +23,11 @@ const CalendarListView = props => {
                     isTaskScheduledToday && (
                         <div key={task.id} className="list-view-components">
                             <Checkbox
-                                checked={task.completed}
+                                checked={task.isComplete}
                                 color="primary"
                                 onChange={() => props.onTaskStatusUpdated(task.id)}
                             />
-                            <div className={task.completed ? "completed" : ""}>{task.title}</div>
+                            <div className={task.isComplete ? "isComplete" : ""}>{task.title}</div>
                         </div>
                     )
                 );

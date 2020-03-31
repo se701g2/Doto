@@ -41,11 +41,11 @@ const Content = ({ children, appointmentData, style, onTaskStatusUpdated, ...res
         <AppointmentTooltip.Content {...restProps} appointmentData={appointmentData}>
             <Grid container alignItems="center">
                 <Checkbox
-                    checked={appointmentData.completed}
+                    checked={appointmentData.isComplete}
                     color="primary"
                     onClick={() => onTaskStatusUpdated(appointmentData.id)}
                 />
-                <span>{appointmentData.completed ? "Task complete" : "Task incomplete"}</span>
+                <span>{appointmentData.isComplete ? "Task complete" : "Task incomplete"}</span>
             </Grid>
         </AppointmentTooltip.Content>
     );
@@ -55,7 +55,7 @@ const Appointment = ({ children, style, ...restProps }) => (
     <Appointments.Appointment
         {...restProps}
         style={
-            restProps.data.completed
+            restProps.data.isComplete
                 ? { ...style, backgroundColor: "#adadad" }
                 : {
                       style,
@@ -65,9 +65,9 @@ const Appointment = ({ children, style, ...restProps }) => (
         {children}
         <Grid container alignItems="center" justify="space-between">
             <span style={{ color: "white", paddingLeft: "10px" }}>
-                {restProps.data.completed ? "Task complete" : "Task incomplete"}
+                {restProps.data.isComplete ? "Task complete" : "Task incomplete"}
             </span>
-            {restProps.data.completed && <DoneIcon style={{ marginRight: "26px", fontSize: 26, color: "white" }} />}
+            {restProps.data.isComplete && <DoneIcon style={{ marginRight: "26px", fontSize: 26, color: "white" }} />}
         </Grid>
     </Appointments.Appointment>
 );

@@ -23,6 +23,6 @@
     border-bottom: 1px solid #e2e8f0;
 }
 
-.completed {
+.isComplete {
     text-decoration: line-through;
 }

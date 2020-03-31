@@ -15,8 +15,7 @@ const taskMapper = data => {
         ...(data.description && { description: data.description }),
         ...(data.priority && { priority: data.priority }),
         ...(data.location && { location: data.location }),
-        color: "blue",
-        completed: false,
+        isComplete: false,
     };
 };
 

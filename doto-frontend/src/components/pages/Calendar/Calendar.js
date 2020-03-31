@@ -76,7 +76,7 @@ const Calendar = () => {
         setTasks(prev => {
             const newTasks = [...prev];
             const taskIndex = newTasks.findIndex(task => task.id === taskId);
-            newTasks[taskIndex].completed = !prev[taskIndex].completed;
+            newTasks[taskIndex].isComplete = !prev[taskIndex].isComplete;
             return newTasks;
         });
     };
