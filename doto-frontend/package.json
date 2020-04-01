@@ -3,37 +3,35 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "@date-io/date-fns": "^1.3.13",
+        "@date-io/date-fns": "^1.3.11",
         "@devexpress/dx-react-core": "^2.5.1",
         "@devexpress/dx-react-scheduler": "^2.5.1",
         "@devexpress/dx-react-scheduler-material-ui": "^2.5.1",
-        "@material-ui/core": "^4.9.7",
+        "@material-ui/core": "^4.9.5",
         "@material-ui/icons": "^4.9.1",
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.5.0",
         "@testing-library/user-event": "^7.2.1",
         "axios": "^0.19.2",
         "classnames": "^2.2.6",
-        "date-fns": "^2.11.1",
+        "date-fns": "^2.0.0-beta.5",
         "js-cookie": "^2.2.1",
         "minimist": ">=1.2.2",
-        "react": "^16.13.1",
-        "react-dom": "^16.13.1",
+        "react": "^16.13.0",
+        "react-dom": "^16.13.0",
         "react-router-dom": "^5.1.2",
         "react-scripts": "3.4.0",
         "typeface-roboto": "0.0.75",
         "uuid": "^7.0.2"
     },
     "scripts": {
-        "start": "npm run watch:css && react-scripts start",
-        "build": "npm run build:css && react-scripts build",
+        "precommit": "lint-staged",
+        "start": "yarn run watch:css && react-scripts start",
+        "build": "yarn run build:css && react-scripts build",
         "test": "react-scripts test --updateSnapshot",
         "eject": "react-scripts eject",
         "build:css": "postcss src/tailwind.css -o src/tailwind-generated.css",
         "watch:css": "postcss src/tailwind.css -o src/tailwind-generated.css"
-    },
-    "eslintConfig": {
-        "extends": "react-app"
     },
     "browserslist": {
         "production": [
@@ -48,30 +46,26 @@
         ]
     },
     "devDependencies": {
-        "autoprefixer": "^9.7.5",
+        "autoprefixer": "^9.7.4",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.2",
         "eslint": "^6.8.0",
-        "eslint-config-standard": "^14.1.1",
+        "eslint-config-prettier": "^6.10.1",
+        "eslint-config-standard": "^14.1.0",
         "eslint-plugin-import": "^2.20.1",
         "eslint-plugin-node": "^11.0.0",
+        "eslint-plugin-prettier": "^3.1.2",
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-react": "^7.19.0",
         "eslint-plugin-standard": "^4.0.1",
-        "husky": "^4.2.3",
-        "lint-staged": "^10.0.9",
+        "lint-staged": "^10.0.8",
         "postcss-cli": "^7.1.0",
         "prettier": "1.19.1",
         "pretty-quick": "^2.0.1",
         "tailwindcss": "^1.2.0"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
     "lint-staged": {
-        "*.js": "eslint --cache --fix",
-        "*.{js,css,md}": "prettier --write"
+        "*.+(js|jsx)": "eslint --fix",
+        "*.+(html|css|json|md)": "prettier --write"
     }
 }
