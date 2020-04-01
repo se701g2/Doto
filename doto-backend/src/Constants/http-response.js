@@ -1,6 +1,6 @@
 module.exports = {
-    unauthorized: Number(401),
-    forbidden: Number(403),
-    successful: Number(200),
-    badRequest: Number(400),
+    UNAUTHORIZED: Number(401),
+    FORBIDDEN: Number(403),
+    SUCCESSFUL: Number(200),
+    BADREQUEST: Number(400),
 };
