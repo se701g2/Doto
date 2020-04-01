@@ -1,29 +1,32 @@
 {
     "env": {
-        "browser": true,
+        "node": true,
         "es6": true,
-        "jest": true
+        "mocha": true
     },
-    "extends": ["plugin:react/recommended", "standard", "plugin:prettier/recommended"],
+    "extends": ["standard", "plugin:mocha/recommended", "plugin:prettier/recommended"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": ["react"],
+    "plugins": ["mocha"],
     "rules": {
         "indent": 0,
         "quotes": "off",
         "space-before-function-paren": "off",
         "semi": "off",
-        "comma-dangle": "off",
-        "quote-props": "off",
-        "react/prop-types": "off"
-    }
+        "comma-dangle": "off"
+    },
+    "overrides": [
+        {
+            "files": ["**/*.test.js"],
+            "rules": {
+                "no-undef": "off"
+            }
+        }
+    ]
 }

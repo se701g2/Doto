@@ -1,22 +1,26 @@
-const jwt = require('jsonwebtoken')
-
+const jwt = require("jsonwebtoken");
+const response = require("../constants/http-response");
 function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
 }
 
 function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(" ")[1];
 
-    if (token == null) { return res.sendStatus(401) }
+    if (token == null) {
+        return res.sendStatus(response.UNAUTHORIZED);
+    }
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err) { res.sendStatus(403) }    // Error if mismatch between user and token
+        if (err) {
+            res.sendStatus(response.FORBIDDEN);
+        } // Error if mismatch between user and token
 
-        req.user = user
-        next()
+        req.user = user;
+        next();
     });
 }
 
-module.exports.generateAccessToken = generateAccessToken
-module.exports.authenticateToken = authenticateToken
+module.exports.generateAccessToken = generateAccessToken;
+module.exports.authenticateToken = authenticateToken;
