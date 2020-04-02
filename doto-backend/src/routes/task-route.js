@@ -52,18 +52,6 @@ router.put("/:taskId", authenticateToken, function (req, res) {
 
 // DELETE task
 router.delete("/:taskId", authenticateToken, function (req, res) {
-    const task = Task.findOne({ taskId: req.params.taskId }, function (err) {
-        if (err) {
-            res.sendStatus(400);
-        }
-    });
-    logger.info("task " + task.user);
-    logger.info("return " + req.user.email);
-
-    if (task.user !== req.user.email) {
-        return res.sendStatus(403);
-    }
-
     Task.remove({ taskId: req.params.taskId }, function (err) {
         if (err) {
             logger.error(err);
