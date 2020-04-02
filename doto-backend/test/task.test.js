@@ -150,4 +150,14 @@ describe("Task Model Tests", function () {
             done();
         });
     });
+
+    it('update task sucessfully', async function () {
+        await validTask.save();
+        const savedTask = await TaskModel.findOne({_id: validTask._id});
+        
+        await savedTask.update({ title: 'updated title' });
+
+        const updatedTask = await TaskModel.findOne({_id: validTask._id});
+        assert(updatedTask.title === 'updated title');
+    });
 });
