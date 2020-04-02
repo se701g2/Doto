@@ -64,8 +64,13 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
         }
     }
 
-    // Schedule the new task after all others
     newTask.startDate = cTask ? cTask.endDate : minDate;
+
+    // Minutes
+    const travelTime = newTask.travelTime;
+
+    newTask.startDate = new Date(newTask.startDate.getTime() + travelTime * MILLISECONDS_PER_MINUTE);
+
     newTask.endDate =
         (cTask && new Date(cTask.endDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE)) ||
         new Date(minDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE);
