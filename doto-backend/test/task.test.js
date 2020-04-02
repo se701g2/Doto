@@ -160,4 +160,14 @@ describe("Task Model Tests", function () {
         const updatedTask = await TaskModel.findOne({_id: validTask._id});
         assert(updatedTask.title === 'updated title');
     });
+
+    it("delete task successfully.", async function () {
+        await validTask.save();
+        const savedTask = await TaskModel.findOne();
+
+        await savedTask.remove();
+        const newSavedTask = await TaskModel.findOne({_id: validTask._id});
+
+        assert(newSavedTask === null);
+    });
 });
