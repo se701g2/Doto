@@ -38,7 +38,7 @@ router.post("/post", authenticateToken, function (req, res) {
 // UPDATE task
 // TO DO: This is not integrated with the frontend.
 //        Authentication should be applied to this route too.
-router.put("/:taskId", function (req, res) {
+router.put("/:taskId", authenticateToken, function (req, res) {
     Task.updateOne({ taskId: req.params.taskId }, req.body, { new: true }, function (err, updatedTask) {
         logger.info(updatedTask);
         if (err || !updatedTask) {
