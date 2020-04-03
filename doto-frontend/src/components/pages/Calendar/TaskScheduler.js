@@ -63,8 +63,8 @@ const addTaskToSchedule = (newTask, existingTasks, currDate, startTime, endTime)
             // Insert the new task at the specified index
             competingTasks.splice(i, 0, newTask);
 
-            // Shift the Tasks based on working hours 
-            let {shiftedTasks} = shiftTasks([...oldTasks, ...competingTasks],startTime,endTime);
+            // Shift the Tasks based on working hours
+            const { shiftedTasks } = shiftTasks([...oldTasks, ...competingTasks], startTime, endTime);
 
             return {
                 newTaskOrder: shiftedTasks,
@@ -73,14 +73,19 @@ const addTaskToSchedule = (newTask, existingTasks, currDate, startTime, endTime)
         }
     }
 
-    // Schedule the new task after all others
     newTask.startDate = cTask ? cTask.endDate : minDate;
+
+    // Minutes
+    const travelTime = newTask.travelTime;
+
+    newTask.startDate = new Date(newTask.startDate.getTime() + travelTime * MILLISECONDS_PER_MINUTE);
+
     newTask.endDate =
         (cTask && new Date(cTask.endDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE)) ||
         new Date(minDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE);
-        
-    // Shift the Tasks based on working hours 
-    let {shiftedTasks} = shiftTasks([...existingTasks, newTask],startTime,endTime);
+
+    // Shift the Tasks based on working hours
+    const { shiftedTasks } = shiftTasks([...existingTasks, newTask], startTime, endTime);
 
     return {
         newTaskOrder: shiftedTasks,

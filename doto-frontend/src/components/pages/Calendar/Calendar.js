@@ -84,6 +84,14 @@ const Calendar = () => {
         fetchTasks();
     }, []);
 
+    const handleTaskStatusUpdated = taskId => {
+        const newTasks = [...tasks];
+        const taskToUpdate = newTasks.find(task => task.taskId === taskId);
+        taskToUpdate.isComplete = !taskToUpdate.isComplete;
+        DotoService.updateTask(taskToUpdate);
+        setTasks(newTasks);
+    };
+
     return (
         <div className="page-layout">
             <div
@@ -114,9 +122,9 @@ const Calendar = () => {
                 <Header title="Calendar" />
                 <div className="flex">
                     <div className="calendar-component">
-                        <CalendarComponent tasks={tasks} />
+                        <CalendarComponent tasks={tasks} onTaskStatusUpdated={handleTaskStatusUpdated} />
                     </div>
-                    {listView && <CalendarListView tasks={tasks} />}
+                    {listView && <CalendarListView tasks={tasks} onTaskStatusUpdated={handleTaskStatusUpdated} />}
                 </div>
                 <Modal
                     aria-labelledby="transition-modal-title"
