@@ -212,12 +212,12 @@ const ModalContent = props => {
                         <FormControl className={classes.formControl}>
                             <InputLabel id="reminder-label">Reminders</InputLabel>
                             <Select value={selectedReminder} onChange={handleReminder}>
-                                <MenuItem value={10}>1 Week Before</MenuItem>
-                                <MenuItem value={20}>1 Day Before</MenuItem>
-                                <MenuItem value={30}>1 Hour Before</MenuItem>
-                                <MenuItem value={40}>30 Minutes Before</MenuItem>
-                                <MenuItem value={50}>15 Minutes Before</MenuItem>
-                                <MenuItem value={60}>5 Minutes Before</MenuItem>
+                                <MenuItem value={10080}>1 Week Before</MenuItem>
+                                <MenuItem value={1440}>1 Day Before</MenuItem>
+                                <MenuItem value={60}>1 Hour Before</MenuItem>
+                                <MenuItem value={30}>30 Minutes Before</MenuItem>
+                                <MenuItem value={15}>15 Minutes Before</MenuItem>
+                                <MenuItem value={5}>5 Minutes Before</MenuItem>
                             </Select>
                         </FormControl>
                     </div>

@@ -69,6 +69,10 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
     // Minutes
     const travelTime = newTask.travelTime;
 
+    if (newTask.reminder) {
+        newTask.reminderDate = new Date(newTask.startDate.getTime() - newTask.reminder * MILLISECONDS_PER_MINUTE);
+    }
+
     newTask.startDate = new Date(newTask.startDate.getTime() + travelTime * MILLISECONDS_PER_MINUTE);
 
     newTask.endDate =
