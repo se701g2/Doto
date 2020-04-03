@@ -28,10 +28,6 @@ const userschema = mongoose.Schema({
         type: Date,
         default: "2020-03-15T17:00:00",
     },
-<<<<<<< HEAD
->>>>>>> 75b491a... issue/210 - Extend formatting toolchain to work with both projects (#217)
-=======
->>>>>>> eb5e13e... Forgot to change variable names in DotoServices and fixed conflict issue in User.js
 });
 
 userschema.plugin(uniqueValidator);
