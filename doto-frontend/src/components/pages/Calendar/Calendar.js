@@ -82,7 +82,7 @@ const Calendar = () => {
         };
         fetchUserInfo();
         fetchTasks();
-    }, []);
+    }, [setTasks, setTheme, setStartTime, setEndTime]);
 
     const handleTaskStatusUpdated = taskId => {
         const newTasks = [...tasks];
