@@ -102,6 +102,14 @@ const DotoService = {
 
         // TODO: catch for errors depending if it didn't post properly or maybe retry mechanism
     },
+    subscribeToReminders: async subscription => {
+        axios({
+            method: "post",
+            url: baseUrl + "/reminders/subscribe",
+            headers: { Authorization: "Bearer " + CookieManager.get("jwt") },
+            data: subscription,
+        });
+    },
 };
 
 export default DotoService;

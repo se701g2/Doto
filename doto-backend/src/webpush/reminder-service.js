@@ -18,24 +18,23 @@ webpush.setVapidDetails("mailto:asdfasdfasdf@gmail.com", process.env.VAPID_PUBLI
     }
 })();
 
-// Every minute check if the earliest task should fire off reminder
+// Every minute check if the earliest task(s) should fire off a reminder
 cron.schedule("* * * * *", () => {
     const currDate = new Date();
-    const payload = JSON.stringify({ title: "test" });
-    webpush.sendNotification(subscription, payload).catch((err) => {
-        console.error(err.stack);
-    });
-    // while (reminderQueue.peek().reminderDate <= currDate) {
-    //     const subscription = subscriptions.get(reminderQueue.poll().user);
-    //     webpush.sendNotification(subscription, payload).catch((err) => {
-    //         console.error(err.stack);
-    //     });
-    // }
+    while (reminderQueue.peek().reminderDate <= currDate) {
+        const task = reminderQueue.poll();
+        const subscription = subscriptions.get(task.user);
+        const payload = JSON.stringify({ title: task.title });
+        webpush.sendNotification(subscription, payload).catch((err) => {
+            console.error(err.stack);
+        });
+    }
 });
 
 module.exports.subscribe = (id, subscription) => {
-    console.log(subscription);
-    subscriptions.set(id, subscription);
+    if (typeof id === "string" && subscription && subscription.endpoint) {
+        subscriptions.set(id, subscription);
+    }
 };
 
 module.exports.unsubscribe = (id) => {

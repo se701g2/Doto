@@ -7,3 +7,5 @@ router.post("/subscribe", authenticateToken, (req, res) => {
     subscribe(req.user.email, req.body);
     res.status(201).json({});
 });
+
+module.exports = router;
