@@ -34,11 +34,22 @@ const saveToCookies = params => {
     CookieManager.set("jwt", jwt);
 };
 
+const setupReminders = params => {
+    if (!params) return;
+    // navigator.serviceWorker.getRegistration().then(function(registration) {
+    //     if (registration) {
+    //         console.log("found service worker registration", registration);
+    //     }
+    // });
+};
+
 // Sets the routing to the appropriate pages, passing in the colour theme based on user setting
 const Routes = () => {
     const [theme, setTheme] = React.useState(true);
     // Only when backend returns JWT and email then we save
-    saveToCookies(extractEmailAndJwt(window.location.href));
+    const params = extractEmailAndJwt(window.location.href);
+    saveToCookies(params);
+    setupReminders(params);
     return (
         <Switch>
             <Route exact path="/" component={Login} />
