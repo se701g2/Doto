@@ -2,7 +2,7 @@
 
 exports[`<SettingsPage /> component being rendered Make sure render matches snapshot 1`] = `
 <div
-  className="PageLayout"
+  className="page-layout"
 >
   <div
     className="left-side-bar left-side-bg-green"
@@ -111,17 +111,19 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
       className="right-side-bar right-side-bg-green"
     >
       <div
+        className="flex"
+      >
+        <img
+          alt="profile-pic-from-google"
+          className="profile-photo"
+        />
+      </div>
+      <div
         className="MuiFormControl-root"
         id="input-field"
       >
-        <label
-          className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-          data-shrink={true}
-        >
-          Name
-        </label>
         <div
-          className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart"
+          className="MuiInputBase-root MuiInput-root MuiInput-underline Mui-disabled Mui-disabled MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart"
           onClick={[Function]}
         >
           <div
@@ -141,8 +143,8 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
           </div>
           <input
             aria-invalid={false}
-            className="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart"
-            disabled={false}
+            className="MuiInputBase-input MuiInput-input Mui-disabled Mui-disabled MuiInputBase-inputAdornedStart"
+            disabled={true}
             onAnimationStart={[Function]}
             onBlur={[Function]}
             onChange={[Function]}
@@ -156,14 +158,8 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
         className="MuiFormControl-root"
         id="input-field"
       >
-        <label
-          className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-          data-shrink={true}
-        >
-          Email
-        </label>
         <div
-          className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart"
+          className="MuiInputBase-root MuiInput-root MuiInput-underline Mui-disabled Mui-disabled MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart"
           onClick={[Function]}
         >
           <div
@@ -183,8 +179,8 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
           </div>
           <input
             aria-invalid={false}
-            className="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart"
-            disabled={false}
+            className="MuiInputBase-input MuiInput-input Mui-disabled Mui-disabled MuiInputBase-inputAdornedStart"
+            disabled={true}
             onAnimationStart={[Function]}
             onBlur={[Function]}
             onChange={[Function]}
@@ -193,24 +189,6 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
             type="text"
           />
         </div>
-      </div>
-      <div
-        className="flex"
-      >
-        <div
-          className="MuiAvatar-root MuiAvatar-square"
-          id="profile-photo"
-        >
-          <img
-            alt="John Smith"
-            className="MuiAvatar-img"
-            src="/upload.jpg"
-          />
-        </div>
-        <input
-          id="upload-photo"
-          type="file"
-        />
       </div>
       <div
         className="flex"
@@ -334,7 +312,7 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
                 onFocus={[Function]}
                 required={false}
                 type="text"
-                value="09:00 AM"
+                value="05:28 PM"
               />
               <div
                 className="MuiInputAdornment-root MuiInputAdornment-positionEnd"
@@ -428,7 +406,7 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
                 onFocus={[Function]}
                 required={false}
                 type="text"
-                value="05:00 PM"
+                value="05:28 PM"
               />
               <div
                 className="MuiInputAdornment-root MuiInputAdornment-positionEnd"

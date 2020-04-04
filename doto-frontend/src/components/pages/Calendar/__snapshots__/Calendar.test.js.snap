@@ -3,7 +3,9 @@
 exports[`<Calendar /> component being rendered Make sure render matches snapshot 1`] = `
 "<BrowserRouter>
   <ContextProvider value={{...}}>
-    <Calendar />
+    <ContextProvider value={{...}}>
+      <Calendar />
+    </ContextProvider>
   </ContextProvider>
 </BrowserRouter>"
 `;
