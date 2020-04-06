@@ -21,11 +21,11 @@ cron.schedule("* * * * *", () => {
         for (let task of tasks) {
             const subscription = subscriptions.get(task.user);
             if (subscription) {
-                const payload = JSON.stringify({ title: task.title });
+                // const payload = JSON.stringify({ title: task.title, description: task.description });
                 webpush
-                    .sendNotification(subscription, payload)
+                    .sendNotification(subscription, JSON.stringify(task))
                     .then(() => {
-                        logger.info(`Fired notification for ${task.id}`);
+                        logger.info(`Fired notification id=${task.id} title=${task.title}`);
 
                         // This is a bit of a hack.
                         // Unsetting the field means the notification is fired
