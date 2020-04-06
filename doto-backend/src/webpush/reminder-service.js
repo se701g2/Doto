@@ -13,34 +13,34 @@ const subscriptions = new Map();
 // fired off via notification. Note this means in the worst case a notification
 // will be delivered one minute late.
 cron.schedule("* * * * *", () => {
-    Task.find({ reminderDate: { $lte: new Date() }, user: { $in: [...subscriptions.keys()] } }, (err, tasks) => {
-        if (err) {
-            logger.error(err);
-            return;
-        }
-        for (let task of tasks) {
-            const subscription = subscriptions.get(task.user);
-            if (subscription) {
-                // const payload = JSON.stringify({ title: task.title, description: task.description });
-                webpush
-                    .sendNotification(subscription, JSON.stringify(task))
-                    .then(() => {
-                        logger.info(`Fired notification id=${task.id} title=${task.title}`);
-
-                        // This is a bit of a hack.
-                        // Unsetting the field means the notification is fired
-                        // so we can avoid duplicating.
-                        task.reminderDate = undefined;
-                        task.save();
-                    })
-                    .catch((err) => {
-                        console.error(err.stack);
-                    });
-            } else {
-                logger.error("Subscription not found. This should never occur.");
+    Task.find(
+        { reminderDate: { $lte: new Date() }, user: { $in: [...subscriptions.keys()] }, isComplete: false },
+        (err, tasks) => {
+            if (err) {
+                logger.error(err);
+                return;
             }
-        }
-    });
+            for (let task of tasks) {
+                const subscription = subscriptions.get(task.user);
+                if (subscription) {
+                    webpush
+                        .sendNotification(subscription, JSON.stringify(task))
+                        .then(() => {
+                            logger.info(`Fired notification id=${task.id} title=${task.title}`);
+                            // This is a bit of a hack.
+                            // Unsetting the field means the notification is fired so we can avoid duplicating.
+                            task.reminderDate = undefined;
+                            task.save();
+                        })
+                        .catch((err) => {
+                            logger.error(err.stack);
+                        });
+                } else {
+                    logger.error("Subscription not found. This should never occur.");
+                }
+            }
+        },
+    );
 });
 
 const reminderService = {
