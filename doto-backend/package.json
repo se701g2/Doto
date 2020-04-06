@@ -17,7 +17,6 @@
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "express-winston": "^4.0.3",
-        "google-closure-library": "^20200315.0.0",
         "jsonwebtoken": "^8.5.1",
         "mocha": "^7.1.0",
         "mongoose": "^5.9.4",
