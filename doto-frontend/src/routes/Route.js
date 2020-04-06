@@ -35,8 +35,6 @@ const saveToCookies = params => {
     CookieManager.set("jwt", jwt);
 };
 
-const VAPID_PUBLIC_KEY = "BMrqPPmr4rLA7gfX8rxPFp2m_ZMu-3MDritxySyWJ7jZQ-5cd-sdHDWVR2lUVqBO5MpKshyCeurBaaL5cwv7OYc";
-
 // Boilerplate from https://www.npmjs.com/package/web-push#using-vapid-key-for-applicationserverkey
 const urlBase64ToUint8Array = base64String => {
     const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
@@ -57,7 +55,7 @@ const setupReminders = async params => {
     if (registration && registration.active) {
         const subscription = await registration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
+            applicationServerKey: urlBase64ToUint8Array(process.env.REACT_APP_VAPID_PUBLIC_KEY),
         });
         DotoService.subscribeToReminders(subscription);
     }
