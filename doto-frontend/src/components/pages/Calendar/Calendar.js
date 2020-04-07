@@ -7,6 +7,8 @@ import Fab from "@material-ui/core/Fab";
 import Tooltip from "@material-ui/core/Tooltip";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import ScoreIcon from "@material-ui/icons/Score";
+import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import AddIcon from "@material-ui/icons/Add";
 import ModalContent from "../../ModalContent";
 import CalendarComponent from "./CalendarComponent";
@@ -39,6 +41,7 @@ const useStyles = makeStyles(theme => ({
 const Calendar = () => {
     const classes = useStyles();
     const [listView, setListView] = useState();
+    const [scoreView, setScoreView] = useState();
     const [tasks, setTasks] = useState([]);
     const [open, setOpen] = useState(false);
     const [theme, setTheme] = useContext(ThemeContext);
@@ -102,6 +105,15 @@ const Calendar = () => {
                             {/* Toggle on list view icon to show/hide to-do tasks */}
                             {!listView && <FormatListBulletedIcon />}
                             {listView && <CalendarTodayIcon />}
+                        </Fab>
+                    </Tooltip>
+                </div>
+                <div className="mb-3">
+                    <Tooltip title="Productivity Score View">
+                        <Fab onClick={() => setScoreView(!scoreView)} size="small">
+                            {/* Toggle on list view icon to show/hide to-do tasks */}
+                            {!scoreView && <DirectionsRunIcon />}
+                            {scoreView && <ScoreIcon />}
                         </Fab>
                     </Tooltip>
                 </div>
