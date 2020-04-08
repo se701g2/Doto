@@ -1,10 +1,10 @@
 .score-p {
-    background-image: url("./images//score-background-purple.jpg");
+    background-image: url("./images/score-background-purple.jpg");
     background-size: cover;
 }
 
 .score-g {
-    background-image: url("./images//score-background-green.jpg");
+    background-image: url("./images/score-background-green.jpg");
     background-size: cover;
 }
 
