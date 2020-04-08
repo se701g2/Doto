@@ -4,8 +4,10 @@
 }
 
 .google-btn {
-    width: 184px;
-    height: 42px;
+    /* width: 184px;
+    height: 42px; */
+    width: 30vh;
+    height: 6vh;
     background-color: #4285f4;
     border-radius: 2px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
@@ -13,23 +15,30 @@
 }
 .google-btn .google-icon-wrapper {
     position: absolute;
-    margin-top: 1px;
-    margin-left: 1px;
-    width: 40px;
-    height: 40px;
+    /* margin-top: 1px;
+    margin-left: 1px; */
+    /* width: 40px;
+    height: 40px; */
+    width: 6vh;
+    height: 6vh;
     border-radius: 2px;
     background-color: #fff;
 }
 .google-btn .google-icon {
-    margin-top: 11px;
-    width: 18px;
-    height: 18px;
+    /* margin-top: 11px; */
+    /* width: 18px;
+    height: 18px; */
+    margin-top: 1vh;
+    margin-left: 1vh;
+    width: 4vh;
+    height: 4vh;
 }
 .google-btn .btn-text {
-    float: right;
-    margin: 11px 11px 0 0;
+    padding-top: 1vh;
+    margin-left: 7vh;
     color: #fff;
-    font-size: 14px;
+    /* font-size: 14px; */
+    font-size: 2.5vh;
     letter-spacing: 0.2px;
 }
 .google-btn:hover {
