@@ -62,7 +62,7 @@ const Calendar = () => {
         };
         fetchUserInfo();
         fetchTasks();
-    }, []);
+    });
 
     // Adds new task based on input fields from Modal
     const addNewTask = (newTask, currentDate) => {
