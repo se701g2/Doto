@@ -9,12 +9,6 @@ webpush.setVapidDetails("mailto:Se701group2@gmail.com", process.env.VAPID_PUBLIC
 // send a reminder to.
 const subscriptions = new Map();
 
-(async () => {
-    const tasks = await Task.find({ user: { $in: ["no exist"] } }).exec();
-    console.log(tasks);
-    console.log("yeet");
-})();
-
 // Every minute query the database to check if there are tasks that should be
 // fired off via web push. Note this means a notification will be delivered
 // one minute late in the worst case.
