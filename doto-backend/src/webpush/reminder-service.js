@@ -9,9 +9,15 @@ webpush.setVapidDetails("mailto:Se701group2@gmail.com", process.env.VAPID_PUBLIC
 // send a reminder to.
 const subscriptions = new Map();
 
+(async () => {
+    const tasks = await Task.find({ user: { $in: ["no exist"] } }).exec();
+    console.log(tasks);
+    console.log("yeet");
+})();
+
 // Every minute query the database to check if there are tasks that should be
-// fired off via notification. Note this means in the worst case a notification
-// will be delivered one minute late.
+// fired off via web push. Note this means a notification will be delivered
+// one minute late in the worst case.
 cron.schedule("* * * * *", () => {
     Task.find(
         { reminderDate: { $lte: new Date() }, user: { $in: [...subscriptions.keys()] }, isComplete: false },
@@ -43,17 +49,15 @@ cron.schedule("* * * * *", () => {
     );
 });
 
-const reminderService = {
-    subscribe: (id, subscription) => {
-        if (typeof id === "string" && subscription && subscription.endpoint) {
-            subscriptions.set(id, subscription);
-            logger.info(`Registered subscription for ${id}`);
-        }
-    },
-    unsubscribe: (id) => {
-        subscriptions.delete(id);
-        logger.info(`Removed subscription for ${id}`);
-    },
+const subscribe = (id, subscription) => {
+    if (typeof id === "string" && subscription && subscription.endpoint) {
+        subscriptions.set(id, subscription);
+        logger.info(`Registered subscription for ${id}`);
+    }
+};
+const unsubscribe = (id) => {
+    subscriptions.delete(id);
+    logger.info(`Removed subscription for ${id}`);
 };
 
-module.exports = reminderService;
+module.exports = { subscribe, unsubscribe };

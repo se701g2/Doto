@@ -25,10 +25,10 @@ ReactDOM.render(<RouteWrapper />, document.getElementById("root"));
 Notification.requestPermission(perm => {
     if (perm === "granted" && "serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-            navigator.serviceWorker.register("reminderWorker.js").then(
-                reg => reg && reg.active && console.log("Service worker registered", reg),
-                err => console.err(err),
-            );
+            navigator.serviceWorker
+                .register("reminderWorker.js")
+                .then(reg => reg && reg.active && console.log("Service worker registered", reg))
+                .catch(console.err);
         });
     }
 });

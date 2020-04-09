@@ -6,6 +6,7 @@ const UserModel = require("../src/models/User");
 const assert = require("assert");
 
 const validUser = new UserModel({
+    email: "john@mail.com",
     name: "john",
     picture: "profile.png",
     themePreference: "dark",
@@ -174,5 +175,111 @@ describe("Task Model Tests", function () {
             .then((task) => {
                 assert(task.isComplete === true);
             });
+    });
+
+    // Begin reminder service tests
+    //
+    // TODO - We should clear the database after each unit test.
+    //
+    // Current workaround is to create new model objects and
+    // increment the (unique) id so that tests are 'stateless'
+    // i.e. do not depend on order of execution.
+    it("retrieves tasks with reminderDate lte to current date", async function () {
+        const testTask = new TaskModel({
+            user: "john@mail.com",
+            taskId: "2",
+            title: "title",
+            description: "Re-Doing all the things",
+            location: "science building",
+            priority: 0,
+            duration: 120,
+            reminderDate: "2020-07-14T07:50:00+12:00",
+            startDate: "2020-08-14T08:50:00+12:00",
+            endDate: "2020-08-14T07:50:00+12:00",
+            isComplete: false,
+        });
+        await testTask.save();
+        const [retrievedTask] = await TaskModel.find({
+            taskId: "2",
+            reminderDate: { $lte: new Date(testTask.reminderDate.getTime() + 1) },
+            user: { $in: [testTask.user] },
+            isComplete: false,
+        }).exec();
+
+        assert.equal(retrievedTask.taskID, testTask.taskID);
+    });
+
+    it("does not retrieve tasks with unset reminder date", async function () {
+        const testTask = new TaskModel({
+            user: "john@mail.com",
+            taskId: "3",
+            title: "title",
+            description: "Re-Doing all the things",
+            location: "science building",
+            priority: 0,
+            duration: 120,
+            startDate: "2020-08-14T08:50:00+12:00",
+            endDate: "2020-08-14T07:50:00+12:00",
+            isComplete: false,
+        });
+        await testTask.save();
+        const retrievedTasks = await TaskModel.find({
+            taskId: "3",
+            reminderDate: { $lte: new Date(validTask.reminderDate) },
+            user: { $in: [testTask.user] },
+            isComplete: false,
+        }).exec();
+
+        assert(retrievedTasks.length === 0);
+    });
+
+    it("does not retrieve tasks with future reminder date", async function () {
+        const testTask = new TaskModel({
+            user: "john@mail.com",
+            taskId: "4",
+            title: "title",
+            description: "Re-Doing all the things",
+            location: "science building",
+            priority: 0,
+            duration: 120,
+            reminderDate: "2020-07-14T07:50:00+12:00",
+            startDate: "2020-08-14T08:50:00+12:00",
+            endDate: "2020-08-14T07:50:00+12:00",
+            isComplete: false,
+        });
+        await testTask.save();
+        const retrievedTasks = await TaskModel.find({
+            taskId: "4",
+            reminderDate: { $lte: new Date(testTask.reminderDate.getTime() - 1) },
+            user: { $in: [testTask.user] },
+            isComplete: false,
+        }).exec();
+
+        assert(retrievedTasks.length === 0);
+    });
+
+    it("does not retrieve tasks which are completed", async function () {
+        const testTask = new TaskModel({
+            user: "john@mail.com",
+            taskId: "5",
+            title: "title",
+            description: "Re-Doing all the things",
+            location: "science building",
+            priority: 0,
+            duration: 120,
+            reminderDate: "2020-07-14T07:50:00+12:00",
+            startDate: "2020-08-14T08:50:00+12:00",
+            endDate: "2020-08-14T07:50:00+12:00",
+            isComplete: true,
+        });
+        await testTask.save();
+        const retrievedTasks = await TaskModel.find({
+            taskId: "5",
+            reminderDate: { $lte: new Date(testTask.reminderDate) },
+            user: { $in: [testTask.user] },
+            isComplete: false,
+        }).exec();
+
+        assert(retrievedTasks.length === 0);
     });
 });
