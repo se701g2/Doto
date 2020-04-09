@@ -15,9 +15,7 @@ const Header = props => {
     return (
         <nav>
             <h1 className="Title">{props.title}</h1>
-            <Grid container spacing={3} alignItems="center" justify="flex-end" style={{
-                marginRight: '10vw',
-            }}>
+            <Grid container spacing={3} alignItems="center" justify="flex-end">
                 {/* Tooltips used to enhance user-experience and user-friendliness */}
                 {/* Clears google-email cookies on logout */}
                 <Tooltip title="Calendar">
@@ -42,29 +40,6 @@ const Header = props => {
                     </Grid>
                 </Tooltip>
             </Grid>
-            {/* <ul className="IconList">
-                <Tooltip title="Log Out" onClick={() => CookieManager.clearAll()}>
-                    <li className="Account">
-                        <Link to="/login">
-                            <ExitToAppIcon className="IconLarge" />
-                        </Link>
-                    </li>
-                </Tooltip>
-                <Tooltip title="Settings">
-                    <li className="IconList">
-                        <Link to="/settings">
-                            <SettingsIcon className="IconLarge" />
-                        </Link>
-                    </li>
-                </Tooltip>
-                <Tooltip title="Calender">
-                    <li className="IconList">
-                        <Link to="/calendar">
-                            <DateRangeIcon className="IconLarge" />
-                        </Link>
-                    </li>
-                </Tooltip>
-            </ul> */}
         </nav>
     );
 };
