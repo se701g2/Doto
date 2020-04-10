@@ -14,10 +14,11 @@
 .list-view {
     width: 100%;
     margin-left: 10px;
+    margin-right: 10vw;
 }
 
 .list-view-components {
-    height: 48px;
+    width: 35vw;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #e2e8f0;

@@ -9,7 +9,7 @@ const CalendarListView = props => {
 
     return (
         <div className="list-view">
-            <div className="ml-3 mb-5 text-4xl font-bold">Tasks for Today</div>
+            <div className="md:ml-3 md:mb-5 text-4xl font-bold">Tasks for Today</div>
 
             {props.tasks.map(task => {
                 const dueDate = new Date(task.endDate);
