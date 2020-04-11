@@ -58,6 +58,11 @@ const user = require("./src/routes/user-route");
 app.use("/user", user);
 const authRoute = require("./src/routes/auth-route");
 app.use("/auth", authRoute);
+const reminders = require("./src/routes/reminder-route");
+app.use("/reminders", reminders);
+
+// Setup reminder service
+require("./src/webpush/reminder-service");
 
 // Swagger UI Setup
 const swaggerUi = require("swagger-ui-express");

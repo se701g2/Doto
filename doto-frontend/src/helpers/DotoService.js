@@ -57,6 +57,7 @@ const DotoService = {
             startDate: task.startDate.toString(),
             endDate: task.endDate.toString(),
             duration: task.duration,
+            ...(task.reminderDate && { reminderDate: task.reminderDate.toString() }),
             ...(task.description && { description: task.description }),
             ...(task.priority && { priority: task.priority }),
             ...(task.location && { location: task.location }),
@@ -100,6 +101,14 @@ const DotoService = {
         });
 
         // TODO: catch for errors depending if it didn't post properly or maybe retry mechanism
+    },
+    subscribeToReminders: async subscription => {
+        axios({
+            method: "post",
+            url: baseUrl + "/reminders/subscribe",
+            headers: { Authorization: "Bearer " + CookieManager.get("jwt") },
+            data: subscription,
+        });
     },
 };
 

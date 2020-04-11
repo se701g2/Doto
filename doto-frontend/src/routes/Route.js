@@ -7,6 +7,7 @@ import NotFound from "../components/pages/NotFound";
 import { ThemeContext } from "../context/ThemeContext";
 import CookieManager from "../helpers/CookieManager";
 import "../tailwind-generated.css";
+import DotoService from "../helpers/DotoService";
 
 /**
  * When the user is redirected after they are logged in to their google account
@@ -34,11 +35,39 @@ const saveToCookies = params => {
     CookieManager.set("jwt", jwt);
 };
 
+// Boilerplate from https://www.npmjs.com/package/web-push#using-vapid-key-for-applicationserverkey
+const urlBase64ToUint8Array = base64String => {
+    const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+    const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+};
+
+const setupReminders = async params => {
+    if (!params) return;
+    const registration = await navigator.serviceWorker.getRegistration();
+    if (registration && registration.active) {
+        const subscription = await registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(process.env.REACT_APP_VAPID_PUBLIC_KEY),
+        });
+        DotoService.subscribeToReminders(subscription);
+    }
+};
+
 // Sets the routing to the appropriate pages, passing in the colour theme based on user setting
 const Routes = () => {
     const [theme, setTheme] = React.useState(true);
     // Only when backend returns JWT and email then we save
-    saveToCookies(extractEmailAndJwt(window.location.href));
+    const params = extractEmailAndJwt(window.location.href);
+    saveToCookies(params);
+    setupReminders(params);
     return (
         <Switch>
             <Route exact path="/" component={Login} />
