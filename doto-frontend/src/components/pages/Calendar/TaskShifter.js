@@ -22,8 +22,6 @@ const shiftTasks = (scheduledTasks, startTime, endTime) => {
     for (let i = 0; i < tasks.length; i++) {
         const taskStart = tasks[i].startDate.getHours() * HOURS_PER_MINUTE + tasks[i].startDate.getMinutes();
         const taskEnd = tasks[i].endDate.getHours() * HOURS_PER_MINUTE + tasks[i].endDate.getMinutes();
-        // console.log(tasks[i].startDate);
-        // console.log(tasks[i].endDate);
         // if the start time of task is earlier than start working time, then shift it and all tasks after it based on startActingHour - taskStart
         // if the end time of task is later than end working time, then shift it and all tasks after it based on startActingHour + MINUTES_PER_DAY - taskStart
         if (taskStart < startActingHour) {
