@@ -13,7 +13,10 @@ const BlueBubble = () => {
     const url =
         process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://doto-backend.azurewebsites.net";
     return (
-        <div className="h-full sm:mr-16 lg:mr-32" style={{ borderRadius: "0px 79px 0px 0px", backgroundColor: "#3700b3" }}>
+        <div
+            className="h-full sm:mr-16 lg:mr-32"
+            style={{ borderRadius: "0px 79px 0px 0px", backgroundColor: "#3700b3" }}
+        >
             <div className="flex flex-col ml-32 mt-10">
                 <div>
                     <span className="text-white font-bold text-5xl">Your life</span>
@@ -37,13 +40,21 @@ const BlueBubble = () => {
                         </div>
                     </a>
                 </div>
+
+                <div className="signup-btn-container mt-5">
+                    <a href={"https://accounts.google.com/SignUp?continue=https://myaccount.google.com/intro"}>
+                        <span className="text-white text-2.5vh font-light mr-2">Create Google Account</span>
+                    </a>
+                </div>
             </div>
         </div>
     );
 };
 
 const PurpleBubble = () => {
-    return <div className="md:w-1/3 md:mt-64" style={{ borderRadius: "79px 0px 0px 0px", backgroundColor: "#8d6cd9" }} />;
+    return (
+        <div className="md:w-1/3 md:mt-64" style={{ borderRadius: "79px 0px 0px 0px", backgroundColor: "#8d6cd9" }} />
+    );
 };
 
 const Login = () => {
