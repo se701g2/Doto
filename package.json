@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "start": "lerna run --parallel start",
     "postinstall": "lerna bootstrap"
   },
   "devDependencies": {
