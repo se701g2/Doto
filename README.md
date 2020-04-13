@@ -30,7 +30,7 @@ We are using [lerna](https://lerna.js.org/) and [yarn](https://yarnpkg.com/) for
 Run `yarn install --frozen-lockfile` in the project root.
 
 ### Starting the frontend and backend
-To get the project running locally, run `yarn start` in both `doto-backend` and `doto-frontend` (in separate terminals).
+To get the project running locally, run `yarn start` in the project root.
 
 By default, the react-app is hosted on port 3000 and the local server is hosted on port 3001. Do not change these numbers as we have added the addresses as authorized redirect uri's in our google credentials.
 
