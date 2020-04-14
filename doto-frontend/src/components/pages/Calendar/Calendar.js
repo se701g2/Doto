@@ -18,6 +18,8 @@ import DotoService from "../../../helpers/DotoService";
 import "./Calendar.css";
 import "../Pages.css";
 import { Themes } from "../../../constants/Themes";
+
+
 const classnames = require("classnames");
 
 // This file bases the basic functionality of a calendar page, rendering a calendar with relevant added tasks.
@@ -72,6 +74,14 @@ const Calendar = () => {
         handleClose();
     };
 
+    const deleteTask = async taskId => {
+        console.log("YYET");
+        await DotoService.deleteTask(taskId);
+        const tasks = await DotoService.getTasks();
+        setTasks(tasks);
+        handleClose();
+    };
+
     const handleTaskStatusUpdated = taskId => {
         const newTasks = [...tasks];
         const taskToUpdate = newTasks.find(task => task.taskId === taskId);
@@ -110,7 +120,7 @@ const Calendar = () => {
                 <Header title="Calendar" />
                 <div className="flex">
                     <div className="calendar-component">
-                        <CalendarComponent tasks={tasks} onTaskStatusUpdated={handleTaskStatusUpdated} />
+                        <CalendarComponent tasks={tasks} onTaskDeleted={deleteTask} onTaskStatusUpdated={handleTaskStatusUpdated} />
                     </div>
                     {listView && <CalendarListView tasks={tasks} onTaskStatusUpdated={handleTaskStatusUpdated} />}
                 </div>
