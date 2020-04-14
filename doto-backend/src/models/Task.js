@@ -42,6 +42,10 @@ const taskSchema = mongoose.Schema({
     reminderDate: {
         type: Date,
     },
+    isComplete: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 taskSchema.plugin(uniqueValidator);

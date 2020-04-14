@@ -3,12 +3,12 @@ const router = express.Router();
 const authenticateToken = require("../config/token-setup").authenticateToken;
 const Task = require("../models/Task");
 const { logger } = require("../common/logging");
-
+const response = require("../constants/http-response");
 // GET ALL tasks for user
 router.get("/get", authenticateToken, (req, res) => {
     Task.find({ user: req.user.email })
-        .then((tasks) => res.status(200).json(tasks))
-        .catch((err) => res.status(400).json("Error: " + err));
+        .then((tasks) => res.status(response.SUCCESSFUL).json(tasks))
+        .catch((err) => res.status(response.BADREQUEST).json("Error: " + err));
 });
 
 // ADD task
@@ -28,9 +28,9 @@ router.post("/post", authenticateToken, function (req, res) {
     task.save(function (err) {
         if (err) {
             logger.error(err);
-            res.status(400).json({ taskId: req.params.taskId, Successful: "False" });
+            res.status(response.BADREQUEST).json({ taskId: req.params.taskId, Successful: "False" });
         } else {
-            res.status(200).json({ taskId: req.params.taskId, Successful: "True" });
+            res.status(response.SUCCESSFUL).json({ taskId: req.params.taskId, Successful: "True" });
         }
     });
 });
@@ -43,9 +43,9 @@ router.put("/:taskId", authenticateToken, function (req, res) {
         logger.info(updatedTask);
         if (err || !updatedTask) {
             logger.error(err);
-            res.status(400).json({ taskId: req.params.taskId, Successful: "False" });
+            res.status(response.BADREQUEST).json({ taskId: req.params.taskId, Successful: "False" });
         } else {
-            res.status(200).json({ taskId: req.params.taskId, Successful: "True" });
+            res.status(response.SUCCESSFUL).json({ taskId: req.params.taskId, Successful: "True" });
         }
     });
 });
@@ -57,7 +57,7 @@ router.delete("/:taskId", authenticateToken, function (req, res) {
             logger.error(err);
             res.status(400).json({ taskId: req.params.taskId, Deleted: "False" });
         } else {
-            res.status(200).json({ taskId: req.params.taskId, Deleted: "True" });
+            res.status(response.SUCCESSFUL).json({ taskId: req.params.taskId, Deleted: "True" });
         }
     });
 });

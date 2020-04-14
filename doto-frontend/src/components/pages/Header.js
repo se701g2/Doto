@@ -4,6 +4,7 @@ import DateRangeIcon from "@material-ui/icons/DateRange";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Tooltip from "@material-ui/core/Tooltip";
+import { Grid } from "@material-ui/core"
 import "./Header.css";
 import { Link } from "react-router-dom";
 import CookieManager from "../../helpers/CookieManager";
@@ -14,31 +15,31 @@ const Header = props => {
     return (
         <nav>
             <h1 className="Title">{props.title}</h1>
-            <ul className="IconList">
+            <Grid container spacing={3} alignItems="center" justify="flex-end">
                 {/* Tooltips used to enhance user-experience and user-friendliness */}
                 {/* Clears google-email cookies on logout */}
-                <Tooltip title="Log Out" onClick={() => CookieManager.clearAll()}>
-                    <li className="Account">
-                        <Link to="/login">
-                            <ExitToAppIcon className="IconLarge" />
-                        </Link>
-                    </li>
-                </Tooltip>
-                <Tooltip title="Settings">
-                    <li className="IconList">
-                        <Link to="/settings">
-                            <SettingsIcon className="IconLarge" />
-                        </Link>
-                    </li>
-                </Tooltip>
-                <Tooltip title="Calender">
-                    <li className="IconList">
+                <Tooltip title="Calendar">
+                    <Grid item>
                         <Link to="/calendar">
                             <DateRangeIcon className="IconLarge" />
                         </Link>
-                    </li>
+                    </Grid>
                 </Tooltip>
-            </ul>
+                <Tooltip title="Settings">
+                    <Grid item>
+                        <Link to="/settings">
+                            <SettingsIcon className="IconLarge" />
+                        </Link>
+                    </Grid>
+                </Tooltip>
+                <Tooltip title="Log Out" onClick={() => CookieManager.clearAll()}>
+                    <Grid item>
+                        <Link to="/login">
+                            <ExitToAppIcon className="IconLarge" />
+                        </Link>
+                    </Grid>
+                </Tooltip>
+            </Grid>
         </nav>
     );
 };

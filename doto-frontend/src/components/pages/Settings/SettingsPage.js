@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { FormControl, Button, Input, InputAdornment } from "@material-ui/core";
+import { FormControl, Button, Input, InputAdornment, Grid } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from "@material-ui/pickers";
 import EmailIcon from "@material-ui/icons/Email";
@@ -73,7 +73,7 @@ const WorkingHoursPicker = () => {
     };
 
     return (
-        <div className="flex">
+        <Grid container>
             <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Working Hours:</h2>
             <div style={{ marginLeft: "3vw" }}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -102,7 +102,7 @@ const WorkingHoursPicker = () => {
                     />
                 </MuiPickersUtilsProvider>
             </div>
-        </div>
+        </Grid>
     );
 };
 
@@ -156,7 +156,7 @@ const SettingsPage = () => {
             <div
                 className={classnames(
                     "left-side-bar",
-                    theme === Themes.DARK ? "left-side-bg-blue" : "left-side-bg-green",
+                    theme === Themes.DARK ? "left-side-bg-blue" : "left-side-bg-green"
                 )}
             />
             <span className="content-container">

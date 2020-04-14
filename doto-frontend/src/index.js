@@ -4,7 +4,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "typeface-roboto";
 import "./index.css";
 import Routes from "./routes/Route";
-import * as serviceWorker from "./serviceWorker";
 
 const RouteWrapper = () => {
     return (
@@ -16,7 +15,20 @@ const RouteWrapper = () => {
 
 ReactDOM.render(<RouteWrapper />, document.getElementById("root"));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+/**
+ * We disable the service worker from CRA and use a custom service worker
+ * which will handle displaying notifications for reminders
+ */
+
+// serviceWorker.unregister();
+
+Notification.requestPermission(perm => {
+    if (perm === "granted" && "serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker
+                .register("reminderWorker.js")
+                .then(reg => reg && reg.active && console.log("Service worker registered", reg))
+                .catch(console.err);
+        });
+    }
+});

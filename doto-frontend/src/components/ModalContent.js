@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         "& > *": {
             margin: theme.spacing(1),
-            width: 400,
+            width: '55vw',
         },
     },
     taskNameInput: {
@@ -44,6 +44,12 @@ const ModalContent = props => {
     initialDuration.setHours(1);
     initialDuration.setMinutes(0);
     const [selectedDuration, setSelectedDuration] = React.useState(initialDuration);
+
+    // default travel time is 10 minutes unless specified
+    const travelTime = new Date();
+    travelTime.setHours(0);
+    travelTime.setMinutes(10);
+    const [selectedTravelTime, setSelectedTravelTime] = React.useState(travelTime);
 
     const [selectedLocation, setSelectedLocation] = useState("");
     const [selectedPriority, setSelectedPriority] = useState("");
@@ -87,6 +93,7 @@ const ModalContent = props => {
             description: selectedDescription,
             dueDate: selectedDueDate,
             duration: selectedDuration.getHours() * 60 + selectedDuration.getMinutes(),
+            travelTime: selectedTravelTime.getHours() * 60 + selectedTravelTime.getMinutes(),
             location: selectedLocation,
             priority: selectedPriority,
             reminder: selectedReminder,
@@ -165,6 +172,21 @@ const ModalContent = props => {
                         </MuiPickersUtilsProvider>
                     </div>
                     <div>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardTimePicker
+                                ampm={false}
+                                label="Travel Duration (hours : minutes)"
+                                margin="normal"
+                                id="travel-time-picker"
+                                value={selectedTravelTime}
+                                onChange={setSelectedTravelTime}
+                                KeyboardButtonProps={{
+                                    "aria-label": "change time",
+                                }}
+                            />
+                        </MuiPickersUtilsProvider>
+                    </div>
+                    <div>
                         <TextField
                             className="text-area spacing"
                             id="standard-basic"
@@ -190,12 +212,12 @@ const ModalContent = props => {
                         <FormControl className={classes.formControl}>
                             <InputLabel id="reminder-label">Reminders</InputLabel>
                             <Select value={selectedReminder} onChange={handleReminder}>
-                                <MenuItem value={10}>1 Week Before</MenuItem>
-                                <MenuItem value={20}>1 Day Before</MenuItem>
-                                <MenuItem value={30}>1 Hour Before</MenuItem>
-                                <MenuItem value={40}>30 Minutes Before</MenuItem>
-                                <MenuItem value={50}>15 Minutes Before</MenuItem>
-                                <MenuItem value={60}>5 Minutes Before</MenuItem>
+                                <MenuItem value={10080}>1 Week Before</MenuItem>
+                                <MenuItem value={1440}>1 Day Before</MenuItem>
+                                <MenuItem value={60}>1 Hour Before</MenuItem>
+                                <MenuItem value={30}>30 Minutes Before</MenuItem>
+                                <MenuItem value={15}>15 Minutes Before</MenuItem>
+                                <MenuItem value={5}>5 Minutes Before</MenuItem>
                             </Select>
                         </FormControl>
                     </div>

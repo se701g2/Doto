@@ -13,13 +13,16 @@ const BlueBubble = () => {
     const url =
         process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://doto-backend.azurewebsites.net";
     return (
-        <div className="h-full mr-16" style={{ borderRadius: "0px 79px 0px 0px", backgroundColor: "#3700b3" }}>
+        <div
+            className="h-full sm:mr-16 lg:mr-32"
+            style={{ borderRadius: "0px 79px 0px 0px", backgroundColor: "#3700b3" }}
+        >
             <div className="flex flex-col ml-32 mt-10">
                 <div>
                     <span className="text-white font-bold text-5xl">Your life</span>
                 </div>
                 <div>
-                    <span className="text-white text-5xl font-light">Planned for you</span>
+                    <span className="text-white text-5xl font-light mr-2">Planned for you</span>
                 </div>
                 <div className="google-btn-container mt-2">
                     <a href={url + "/auth/google"}>
@@ -37,19 +40,27 @@ const BlueBubble = () => {
                         </div>
                     </a>
                 </div>
+
+                <div className="signup-btn-container mt-5">
+                    <a href={"https://accounts.google.com/SignUp?continue=https://myaccount.google.com/intro"}>
+                        <span className="text-white text-2.5vh font-light mr-2">Create Google Account</span>
+                    </a>
+                </div>
             </div>
         </div>
     );
 };
 
 const PurpleBubble = () => {
-    return <div className="w-1/3 mt-64" style={{ borderRadius: "79px 0px 0px 0px", backgroundColor: "#8d6cd9" }} />;
+    return (
+        <div className="md:w-1/3 md:mt-64" style={{ borderRadius: "79px 0px 0px 0px", backgroundColor: "#8d6cd9" }} />
+    );
 };
 
 const Login = () => {
     return (
         <div className="flex flex-row bg-white w-full overflow-hidden max-h-screen">
-            <div className="flex flex-col h-screen w-2/3 mt-32">
+            <div className="flex flex-col h-screen md:w-2/3 md:mt-32">
                 <DotoTitle />
                 <BlueBubble />
             </div>

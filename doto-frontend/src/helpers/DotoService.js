@@ -8,14 +8,14 @@ const baseUrl =
 
 const taskMapper = data => {
     return {
-        id: data._id,
+        taskId: data.taskId,
         title: data.title,
         startDate: new Date(data.startDate),
         endDate: new Date(data.endDate),
         ...(data.description && { description: data.description }),
         ...(data.priority && { priority: data.priority }),
         ...(data.location && { location: data.location }),
-        color: "blue",
+        isComplete: data.isComplete,
     };
 };
 
@@ -35,6 +35,20 @@ const DotoService = {
             console.log(e);
         }
     },
+    updateTask: async task => {
+        const updatedTask = {
+            user: CookieManager.get("email"),
+            ...task,
+        };
+        axios({
+            method: "put",
+            url: baseUrl + `/task/${task.taskId}`,
+            headers: { Authorization: "Bearer " + CookieManager.get("jwt") },
+            data: updatedTask,
+        });
+
+        // TODO: add error handling
+    },
     setNewTask: async task => {
         const newTask = {
             user: CookieManager.get("email"),
@@ -43,9 +57,11 @@ const DotoService = {
             startDate: task.startDate.toString(),
             endDate: task.endDate.toString(),
             duration: task.duration,
+            ...(task.reminderDate && { reminderDate: task.reminderDate.toString() }),
             ...(task.description && { description: task.description }),
             ...(task.priority && { priority: task.priority }),
             ...(task.location && { location: task.location }),
+            isComplete: false,
         };
 
         axios({
@@ -85,6 +101,14 @@ const DotoService = {
         });
 
         // TODO: catch for errors depending if it didn't post properly or maybe retry mechanism
+    },
+    subscribeToReminders: async subscription => {
+        axios({
+            method: "post",
+            url: baseUrl + "/reminders/subscribe",
+            headers: { Authorization: "Bearer " + CookieManager.get("jwt") },
+            data: subscription,
+        });
     },
 };
 
