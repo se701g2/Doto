@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         "& > *": {
             margin: theme.spacing(1),
-            width: '55vw',
+            width: "55vw",
         },
     },
     taskNameInput: {
@@ -220,14 +220,13 @@ const ModalContent = props => {
                                 <MenuItem value={5}>5 Minutes Before</MenuItem>
                             </Select>
                         </FormControl>
+                        <Button id="add-button" variant="contained" color="default" onClick={handleAdd}>
+                            ADD
+                        </Button>
                     </div>
                 </form>
             </div>
-            <div id="add-button">
-                <Button variant="contained" color="default" onClick={handleAdd}>
-                    ADD
-                </Button>
-            </div>
+            <div></div>
         </div>
     );
 };
