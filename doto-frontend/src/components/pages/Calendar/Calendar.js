@@ -69,17 +69,19 @@ const Calendar = () => {
     // Adds new task based on input fields from Modal
     const addNewTask = (newTask, currentDate) => {
         const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks, currentDate);
-        DotoService.setNewTask(updatedTask);
         setTasks(newTaskOrder);
         handleClose();
+
+        DotoService.setNewTask(updatedTask);
     };
 
     const deleteTask = async taskId => {
-        console.log("YYET");
+        const taskList = [...tasks];
+        const index = taskList.findIndex(task => task.taskId === taskId);
+        taskList.splice(index,1);
+        setTasks(taskList);
+
         await DotoService.deleteTask(taskId);
-        const tasks = await DotoService.getTasks();
-        setTasks(tasks);
-        handleClose();
     };
 
     const handleTaskStatusUpdated = taskId => {

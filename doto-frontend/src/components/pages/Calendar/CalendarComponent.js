@@ -54,6 +54,7 @@ export function Content ({ children, appointmentData, style, onTaskStatusUpdated
 
     const deleteTask = (taskId) => {
         onTaskDeleted(taskId);
+        document.getElementById("grid").click();
     };
 
     return (
@@ -105,7 +106,7 @@ const Appointment = ({ children, style, ...restProps }) => (
         }
     >
         {children}
-        <Grid container alignItems="center" justify="space-between">
+        <Grid id="grid" container alignItems="center" justify="space-between">
             <span style={{ color: "white", paddingLeft: "10px" }}>
                 {restProps.data.isComplete ? "Task complete" : "Task incomplete"}
             </span>
