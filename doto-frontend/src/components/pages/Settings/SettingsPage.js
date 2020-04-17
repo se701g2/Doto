@@ -144,7 +144,7 @@ const SettingsPage = () => {
             setEmail(userInfo.email);
         };
         fetchUserInfo();
-    }, []);
+    }, [setTheme]);
 
     const changeTheme = newTheme => {
         DotoService.updateUserInfo(newTheme).then(setTheme(newTheme));
