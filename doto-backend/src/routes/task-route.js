@@ -13,7 +13,6 @@ router.get("/get", authenticateToken, (req, res) => {
 
 // ADD task
 router.post("/post", authenticateToken, function (req, res) {
-    console.log(req.body);
     const task = new Task();
     task.user = req.user.email;
     task.taskId = req.body.taskId;
