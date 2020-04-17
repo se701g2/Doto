@@ -27,3 +27,11 @@
 .isComplete {
     text-decoration: line-through;
 }
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 11px;
+}

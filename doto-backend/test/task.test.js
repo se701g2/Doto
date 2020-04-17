@@ -153,6 +153,26 @@ describe("Task Model Tests", function () {
         });
     });
 
+    it('update task sucessfully', async function () {
+        await validTask.save();
+        const savedTask = await TaskModel.findOne({_id: validTask._id});
+        
+        await savedTask.update({ title: 'updated title' });
+
+        const updatedTask = await TaskModel.findOne({_id: validTask._id});
+        assert(updatedTask.title === 'updated title');
+    });
+
+    it("delete task successfully.", async function () {
+        await validTask.save();
+        const savedTask = await TaskModel.findOne();
+
+        await savedTask.remove();
+        const newSavedTask = await TaskModel.findOne({_id: validTask._id});
+
+        assert(newSavedTask === null);
+    });
+    
     it("update one isComplete status to true", async function () {
         TaskModel.updateOne({ taskId: validTask.taskId }, { isComplete: true })
             .then(() => TaskModel.findOne({ taskId: validTask.taskId }))
