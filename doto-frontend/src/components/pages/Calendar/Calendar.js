@@ -17,6 +17,7 @@ import { addTaskToSchedule } from "./TaskScheduler";
 import DotoService from "../../../helpers/DotoService";
 import "./Calendar.css";
 import "../Pages.css";
+import { v4 as uuidv4 } from "uuid";
 import { Themes } from "../../../constants/Themes";
 
 const classnames = require("classnames");
@@ -68,6 +69,7 @@ const Calendar = () => {
     // Adds new task based on input fields from Modal
     const addNewTask = (newTask, currentDate) => {
         const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks, currentDate);
+        newTask.taskId = uuidv4();
         setTasks(newTaskOrder);
         handleClose();
 
