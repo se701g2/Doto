@@ -56,7 +56,7 @@ const taskSchema = mongoose.Schema({
     },
     reminderType: {
         type: Number,
-        required: true,
+        required: false,
     },
 });
 

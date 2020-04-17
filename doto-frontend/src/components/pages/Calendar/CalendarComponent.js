@@ -30,7 +30,7 @@ import UpdateModalContent from "../../updateModal/UpdateModalContent";
 import { makeStyles } from "@material-ui/core/styles";
 import { ThemeContext } from "../../../context/ThemeContext";
 
-const CalendarComponent = ({ tasks, onTaskStatusUpdated, onTaskDeleted }) => {
+const CalendarComponent = ({ tasks, onTaskStatusUpdated, onTaskDeleted, onTaskUpdated }) => {
     return (
         <Scheduler data={tasks} currentView={MonthView} editable={true}>
             <ViewState />
@@ -44,7 +44,12 @@ const CalendarComponent = ({ tasks, onTaskStatusUpdated, onTaskDeleted }) => {
             <Appointments appointmentComponent={Appointment} />
             <AppointmentTooltip
                 contentComponent={props => (
-                    <Content {...props} onTaskStatusUpdated={onTaskStatusUpdated} onTaskDeleted={onTaskDeleted} />
+                    <Content
+                        {...props}
+                        onTaskStatusUpdated={onTaskStatusUpdated}
+                        onTaskDeleted={onTaskDeleted}
+                        onTaskUpdated={onTaskUpdated}
+                    />
                 )}
             />
         </Scheduler>
@@ -65,7 +70,15 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export function Content({ children, appointmentData, style, onTaskStatusUpdated, onTaskDeleted, ...restProps }) {
+export function Content({
+    children,
+    appointmentData,
+    style,
+    onTaskStatusUpdated,
+    onTaskDeleted,
+    onTaskUpdated,
+    ...restProps
+}) {
     const [open, setOpen] = useState(false);
     const [openUpdateModal, setOpenUpdateModal] = useState(false);
     const classes = useStyles();
@@ -145,7 +158,11 @@ export function Content({ children, appointmentData, style, onTaskStatusUpdated,
                         {/* Transition effects for list view of to-do tasks for today */}
                         <Fade in={openUpdateModal}>
                             <div className={classes.paper}>
-                                <UpdateModalContent taskToUpdate={appointmentData} modalBackground={theme} />
+                                <UpdateModalContent
+                                    taskToUpdate={appointmentData}
+                                    modalBackground={theme}
+                                    onTaskUpdated={onTaskUpdated}
+                                />
                             </div>
                         </Fade>
                     </Modal>

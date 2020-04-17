@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "date-fns";
 import Button from "@material-ui/core/Button";
 import DateFnsUtils from "@date-io/date-fns";
@@ -35,8 +35,8 @@ const useStyles = makeStyles(theme => ({
 const UpdateModalContent = props => {
     const classes = useStyles();
 
-    const [selectedName, setSelectedName] = useState("TASK - " + new Date());
-    const [selectedDescription, setSelectedDescription] = useState("");
+    const [selectedName, setSelectedName] = useState(props.taskToUpdate.title);
+    const [selectedDescription, setSelectedDescription] = useState(props.taskToUpdate.description);
     const [selectedDueDate, setSelectedDueDate] = useState(new Date());
 
     // default duration is 1 hour
@@ -51,9 +51,20 @@ const UpdateModalContent = props => {
     travelTime.setMinutes(10);
     const [selectedTravelTime, setSelectedTravelTime] = React.useState(travelTime);
 
-    const [selectedLocation, setSelectedLocation] = useState("");
+    const [selectedLocation, setSelectedLocation] = useState(props.taskToUpdate.location);
     const [selectedPriority, setSelectedPriority] = useState("");
     const [selectedReminder, setSelectedReminder] = useState("");
+
+    useEffect(() => {
+        setSelectedName(props.taskToUpdate.title);
+        setSelectedDescription(props.taskToUpdate.description);
+        setSelectedDueDate(props.taskToUpdate.dueDate);
+        setSelectedDuration(convertMinutesToDateTime(props.taskToUpdate.duration));
+        setSelectedTravelTime(convertMinutesToDateTime(props.taskToUpdate.travelTime));
+        setSelectedLocation(props.taskToUpdate.location);
+        setSelectedPriority(props.taskToUpdate.priority);
+        setSelectedReminder(props.taskToUpdate.reminderType);
+    }, [props.taskToUpdate]);
 
     // ----- HANDLERS FOR INPUT FIELDS -----
     const handleNameChange = event => {
@@ -63,7 +74,6 @@ const UpdateModalContent = props => {
     const handleDescriptionChange = event => {
         setSelectedDescription(event.target.value);
     };
-    console.log(props.taskToUpdate.duration);
 
     const handleDateChange = date => {
         if (date > new Date()) {
@@ -85,11 +95,19 @@ const UpdateModalContent = props => {
         setSelectedReminder(event.target.value);
     };
 
+    const convertMinutesToDateTime = minutes => {
+        const date = new Date();
+        date.setMinutes(minutes % 60);
+        date.setHours((minutes - (minutes % 60)) / 60);
+        return date;
+    };
+
     // ----- END HANDLERS FOR INPUT FIELDS -----
 
     // Task variables passed into calendar.js to add new task to the calendar
-    const handleAdd = event => {
+    const handleUpdate = event => {
         const task = {
+            taskId: props.taskToUpdate.taskId,
             title: selectedName,
             description: selectedDescription,
             dueDate: selectedDueDate,
@@ -100,7 +118,7 @@ const UpdateModalContent = props => {
             reminder: selectedReminder,
         };
 
-        props.addNewTask(task, new Date());
+        props.onTaskUpdated(task);
     };
 
     return (
@@ -125,7 +143,7 @@ const UpdateModalContent = props => {
                                 },
                             }}
                             onChange={handleNameChange}
-                            defaultValue={props.taskToUpdate.title}
+                            defaultValue={selectedName}
                         />
                     </div>
                     <div>
@@ -134,7 +152,7 @@ const UpdateModalContent = props => {
                             id="standard-basic"
                             label="Task description"
                             onChange={handleDescriptionChange}
-                            defaultValue={props.taskToUpdate.description}
+                            defaultValue={selectedDescription}
                         />
                     </div>
                     <div>
@@ -151,7 +169,7 @@ const UpdateModalContent = props => {
                                 margin="normal"
                                 id="date-picker-inline"
                                 label="Due Date"
-                                value={props.taskToUpdate.endDate}
+                                value={selectedDueDate}
                                 onChange={handleDateChange}
                                 KeyboardButtonProps={{
                                     "aria-label": "Change date/time",
@@ -166,7 +184,7 @@ const UpdateModalContent = props => {
                                 label="Duration of task (hours : minutes)"
                                 margin="normal"
                                 id="time-picker"
-                                value={props.taskToUpdate.duration}
+                                value={selectedDuration}
                                 onChange={setSelectedDuration}
                                 KeyboardButtonProps={{
                                     "aria-label": "change time",
@@ -181,7 +199,7 @@ const UpdateModalContent = props => {
                                 label="Travel Duration (hours : minutes)"
                                 margin="normal"
                                 id="travel-time-picker"
-                                value={props.taskToUpdate.travelTime}
+                                value={selectedTravelTime}
                                 onChange={setSelectedTravelTime}
                                 KeyboardButtonProps={{
                                     "aria-label": "change time",
@@ -195,7 +213,7 @@ const UpdateModalContent = props => {
                             id="standard-basic"
                             label="Location"
                             onChange={handleLocationChange}
-                            defaultValue={props.taskToUpdate.location}
+                            defaultValue={selectedLocation}
                         />
                     </div>
                     <div className="drop-down">
@@ -204,7 +222,7 @@ const UpdateModalContent = props => {
                         {/* TODO: Improve algorithm for more smarter Scheduling */}
                         <FormControl className={classes.formControl}>
                             <InputLabel id="priority-label">Priority</InputLabel>
-                            <Select value={props.taskToUpdate.priority} onChange={handlePriority}>
+                            <Select value={selectedPriority} onChange={handlePriority}>
                                 <MenuItem value={10}>High</MenuItem>
                                 <MenuItem value={20}>Medium</MenuItem>
                                 <MenuItem value={30}>Low</MenuItem>
@@ -215,7 +233,7 @@ const UpdateModalContent = props => {
                         {/* TODO: Send a reminder email to associated gmail address */}
                         <FormControl className={classes.formControl}>
                             <InputLabel id="reminder-label">Reminders</InputLabel>
-                            <Select value={props.taskToUpdate.reminderType} onChange={handleReminder}>
+                            <Select value={selectedReminder} onChange={handleReminder}>
                                 <MenuItem value={10080}>1 Week Before</MenuItem>
                                 <MenuItem value={1440}>1 Day Before</MenuItem>
                                 <MenuItem value={60}>1 Hour Before</MenuItem>
@@ -228,7 +246,7 @@ const UpdateModalContent = props => {
                 </form>
             </div>
             <div id="add-button">
-                <Button variant="contained" color="default" onClick={handleAdd}>
+                <Button variant="contained" color="default" onClick={handleUpdate}>
                     Update
                 </Button>
             </div>
@@ -238,6 +256,7 @@ const UpdateModalContent = props => {
 
 UpdateModalContent.propTypes = {
     taskToUpdate: PropTypes.object.isRequired,
+    onTaskUpdated: PropTypes.func.isRequired,
 };
 
 export default UpdateModalContent;

@@ -72,7 +72,6 @@ const Calendar = () => {
         newTask.taskId = uuidv4();
         setTasks(newTaskOrder);
         handleClose();
-        console.log(updatedTask);
         DotoService.setNewTask(updatedTask);
     };
 
@@ -91,6 +90,15 @@ const Calendar = () => {
         taskToUpdate.isComplete = !taskToUpdate.isComplete;
         DotoService.updateTask(taskToUpdate);
         setTasks(newTasks);
+    };
+
+    const handleTaskUpdated = task => {
+        const taskList = [...tasks];
+        const index = taskList.findIndex(currentTask => currentTask.taskId === task.taskId);
+        taskList.splice(index, 1);
+        const { newTaskOrder, updatedTask } = addTaskToSchedule(task, taskList, new Date());
+        setTasks(newTaskOrder);
+        DotoService.updateTask(updatedTask);
     };
 
     return (
@@ -127,6 +135,7 @@ const Calendar = () => {
                             tasks={tasks}
                             onTaskDeleted={deleteTask}
                             onTaskStatusUpdated={handleTaskStatusUpdated}
+                            onTaskUpdated={handleTaskUpdated}
                         />
                     </div>
                     {listView && <CalendarListView tasks={tasks} onTaskStatusUpdated={handleTaskStatusUpdated} />}
