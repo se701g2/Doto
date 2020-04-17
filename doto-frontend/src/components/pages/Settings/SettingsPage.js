@@ -18,7 +18,7 @@ import "../Pages.css";
 const classnames = require("classnames");
 
 // TODO: Use input name field and display it on the calendar header page as [name]'s calendar
-const InputNameField = (props) => {
+const InputNameField = props => {
     return (
         <FormControl id="input-field">
             <Input
@@ -35,7 +35,7 @@ const InputNameField = (props) => {
 };
 
 // TODO: Use this field is to add any other email address's calendars
-const InputEmailField = (props) => {
+const InputEmailField = props => {
     return (
         <FormControl id="input-field">
             <Input
@@ -51,7 +51,7 @@ const InputEmailField = (props) => {
     );
 };
 
-const ProfilePhoto = (props) => {
+const ProfilePhoto = props => {
     return (
         <div className="flex">
             {/* Profile photo is taken from the associated google account */}
@@ -61,15 +61,12 @@ const ProfilePhoto = (props) => {
 };
 
 // TODO: Implement logic for working hours in sync with task-scheduling algorithm
-const WorkingHoursPicker = (props) => {
-    const [selectedStartTime, setSelectedStartTime] = useState(new Date("2020-03-15T09:00:00"));
-    const [selectedEndTime, setSelectedEndTime] = useState(new Date("2020-03-15T17:00:00"));
-
-    const handleStartTimeChange = (date) => {
+const WorkingHoursPicker = props => {
+    const handleStartTimeChange = date => {
         props.changeStartTime(date);
     };
 
-    const handleEndTimeChange = (date) => {
+    const handleEndTimeChange = date => {
         props.changeEndTime(date);
     };
 
@@ -108,7 +105,6 @@ const WorkingHoursPicker = (props) => {
 };
 
 // Using props to change the colour theme of the webpage when changed by the user
-<<<<<<< HEAD
 const ThemePicker = props => {
     const handleChangeThemeToDark = () => {
         props.changeTheme(Themes.DARK);
@@ -118,9 +114,6 @@ const ThemePicker = props => {
         props.changeTheme(Themes.LIGHT);
     };
 
-=======
-const ThemePicker = (props) => {
->>>>>>> Updated settings page to use the activeHours states
     return (
         <div className="flex">
             <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
@@ -160,12 +153,12 @@ const SettingsPage = () => {
         DotoService.updateUserInfo(newTheme).then(setTheme(newTheme));
     };
 
-    const changeStartTime = (newTime) => {
+    const changeStartTime = newTime => {
         DotoService.updateUserInfo(theme, newTime, endTime);
         setStartTime(newTime);
     };
 
-    const changeEndTime = (newTime) => {
+    const changeEndTime = newTime => {
         DotoService.updateUserInfo(theme, startTime, newTime);
         setEndTime(newTime);
     };
