@@ -98,7 +98,7 @@ const DotoService = {
             user: CookieManager.get("email"),
             themePreference: theme,
             startTime: startTime,
-            endTime: endTime;
+            endTime: endTime,
         };
 
         axios({
