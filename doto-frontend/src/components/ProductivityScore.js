@@ -52,12 +52,10 @@ const ProductivityScore = props => {
             <div className={classes.root}>
                 <Slider
                     defaultValue={10}
-                    // getAriaValueText={valuetext}
                     orientation="vertical"
                     aria-labelledby="discrete-slider-custom"
                     step={10}
                     max={40}
-                    // valueLabelDisplay="auto"
                     marks={marks}
                 />
             </div>
