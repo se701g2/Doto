@@ -147,20 +147,18 @@ const SettingsPage = () => {
             setEndTime(userInfo.endTime);
         };
         fetchUserInfo();
-    }, [setTheme]);
+    }, [setTheme, setStartTime, setEndTime]);
 
     const changeTheme = newTheme => {
-        DotoService.updateUserInfo(newTheme).then(setTheme(newTheme));
+        DotoService.updateUserInfo(newTheme, startTime, endTime).then(setTheme(newTheme));
     };
 
     const changeStartTime = newTime => {
-        DotoService.updateUserInfo(theme, newTime, endTime);
-        setStartTime(newTime);
+        DotoService.updateUserInfo(theme, newTime, endTime).then(setStartTime(newTime));
     };
 
     const changeEndTime = newTime => {
-        DotoService.updateUserInfo(theme, startTime, newTime);
-        setEndTime(newTime);
+        DotoService.updateUserInfo(theme, startTime, newTime).then(setEndTime(newTime));
     };
 
     return (
