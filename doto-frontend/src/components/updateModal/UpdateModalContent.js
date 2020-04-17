@@ -63,7 +63,7 @@ const UpdateModalContent = props => {
     const handleDescriptionChange = event => {
         setSelectedDescription(event.target.value);
     };
-    console.log(props.taskToUpdate);
+    console.log(props.taskToUpdate.duration);
 
     const handleDateChange = date => {
         if (date > new Date()) {
@@ -166,7 +166,7 @@ const UpdateModalContent = props => {
                                 label="Duration of task (hours : minutes)"
                                 margin="normal"
                                 id="time-picker"
-                                value={props.taskToUpdate.endDate - props.taskToUpdate.startDate}
+                                value={props.taskToUpdate.duration}
                                 onChange={setSelectedDuration}
                                 KeyboardButtonProps={{
                                     "aria-label": "change time",
@@ -181,7 +181,7 @@ const UpdateModalContent = props => {
                                 label="Travel Duration (hours : minutes)"
                                 margin="normal"
                                 id="travel-time-picker"
-                                value={selectedTravelTime}
+                                value={props.taskToUpdate.travelTime}
                                 onChange={setSelectedTravelTime}
                                 KeyboardButtonProps={{
                                     "aria-label": "change time",
@@ -195,6 +195,7 @@ const UpdateModalContent = props => {
                             id="standard-basic"
                             label="Location"
                             onChange={handleLocationChange}
+                            defaultValue={props.taskToUpdate.location}
                         />
                     </div>
                     <div className="drop-down">
@@ -203,7 +204,7 @@ const UpdateModalContent = props => {
                         {/* TODO: Improve algorithm for more smarter Scheduling */}
                         <FormControl className={classes.formControl}>
                             <InputLabel id="priority-label">Priority</InputLabel>
-                            <Select value={selectedPriority} onChange={handlePriority}>
+                            <Select value={props.taskToUpdate.priority} onChange={handlePriority}>
                                 <MenuItem value={10}>High</MenuItem>
                                 <MenuItem value={20}>Medium</MenuItem>
                                 <MenuItem value={30}>Low</MenuItem>
@@ -214,7 +215,7 @@ const UpdateModalContent = props => {
                         {/* TODO: Send a reminder email to associated gmail address */}
                         <FormControl className={classes.formControl}>
                             <InputLabel id="reminder-label">Reminders</InputLabel>
-                            <Select value={selectedReminder} onChange={handleReminder}>
+                            <Select value={props.taskToUpdate.reminderType} onChange={handleReminder}>
                                 <MenuItem value={10080}>1 Week Before</MenuItem>
                                 <MenuItem value={1440}>1 Day Before</MenuItem>
                                 <MenuItem value={60}>1 Hour Before</MenuItem>

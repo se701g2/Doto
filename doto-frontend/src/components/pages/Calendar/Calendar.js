@@ -72,7 +72,7 @@ const Calendar = () => {
         newTask.taskId = uuidv4();
         setTasks(newTaskOrder);
         handleClose();
-
+        console.log(updatedTask);
         DotoService.setNewTask(updatedTask);
     };
 
