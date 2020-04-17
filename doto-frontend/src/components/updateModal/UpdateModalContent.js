@@ -10,8 +10,8 @@ import Select from "@material-ui/core/Select";
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker, KeyboardTimePicker } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import "./ModalContent.css";
-import { Themes } from "../constants/Themes";
+import "./UpdateModalContent.css";
+import { Themes } from "../../constants/Themes";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const ModalContent = props => {
+const UpdateModalContent = props => {
     const classes = useStyles();
 
     const [selectedName, setSelectedName] = useState("TASK - " + new Date());
@@ -63,6 +63,7 @@ const ModalContent = props => {
     const handleDescriptionChange = event => {
         setSelectedDescription(event.target.value);
     };
+    console.log(props.taskToUpdate);
 
     const handleDateChange = date => {
         if (date > new Date()) {
@@ -124,6 +125,7 @@ const ModalContent = props => {
                                 },
                             }}
                             onChange={handleNameChange}
+                            defaultValue={props.taskToUpdate.title}
                         />
                     </div>
                     <div>
@@ -132,6 +134,7 @@ const ModalContent = props => {
                             id="standard-basic"
                             label="Task description"
                             onChange={handleDescriptionChange}
+                            defaultValue={props.taskToUpdate.description}
                         />
                     </div>
                     <div>
@@ -148,7 +151,7 @@ const ModalContent = props => {
                                 margin="normal"
                                 id="date-picker-inline"
                                 label="Due Date"
-                                value={selectedDueDate}
+                                value={props.taskToUpdate.endDate}
                                 onChange={handleDateChange}
                                 KeyboardButtonProps={{
                                     "aria-label": "Change date/time",
@@ -163,7 +166,7 @@ const ModalContent = props => {
                                 label="Duration of task (hours : minutes)"
                                 margin="normal"
                                 id="time-picker"
-                                value={selectedDuration}
+                                value={props.taskToUpdate.endDate - props.taskToUpdate.startDate}
                                 onChange={setSelectedDuration}
                                 KeyboardButtonProps={{
                                     "aria-label": "change time",
@@ -225,15 +228,15 @@ const ModalContent = props => {
             </div>
             <div id="add-button">
                 <Button variant="contained" color="default" onClick={handleAdd}>
-                    ADD
+                    Update
                 </Button>
             </div>
         </div>
     );
 };
 
-ModalContent.propTypes = {
-    addNewTask: PropTypes.func.isRequired,
+UpdateModalContent.propTypes = {
+    taskToUpdate: PropTypes.object.isRequired,
 };
 
-export default ModalContent;
+export default UpdateModalContent;
