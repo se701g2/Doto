@@ -13,6 +13,7 @@ const CalendarListView = props => {
 
             {props.tasks.map(task => {
                 const dueDate = new Date(task.endDate);
+                const taskComplete = task.isComplete;
                 // Checks to see if scheduled task is for today
                 const isTaskScheduledToday =
                     dueDate.getYear() === today.getYear() && dueDate.getMonth() === today.getMonth()
@@ -23,11 +24,11 @@ const CalendarListView = props => {
                     isTaskScheduledToday && (
                         <div key={task.taskId} className="list-view-components">
                             <Checkbox
-                                checked={task.isComplete}
+                                checked={taskComplete}
                                 color="primary"
                                 onChange={() => props.onTaskStatusUpdated(task.taskId)}
                             />
-                            <div className={task.isComplete ? "isComplete" : ""}>{task.title}</div>
+                            <div className={taskComplete ? "isComplete" : ""}>{task.title}</div>
                         </div>
                     )
                 );
