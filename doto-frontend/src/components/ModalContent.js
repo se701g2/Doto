@@ -226,7 +226,6 @@ const ModalContent = props => {
                     </div>
                 </form>
             </div>
-            <div></div>
         </div>
     );
 };
