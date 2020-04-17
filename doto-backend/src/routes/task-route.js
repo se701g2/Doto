@@ -36,8 +36,9 @@ router.post("/post", authenticateToken, function (req, res) {
 });
 
 // UPDATE task
-// TO DO: Authentication should be applied to this route too.
-router.put("/:taskId", function (req, res) {
+// TO DO: This is not integrated with the frontend.
+//        Authentication should be applied to this route too.
+router.put("/:taskId", authenticateToken, function (req, res) {
     Task.updateOne({ taskId: req.params.taskId }, req.body, { new: true }, function (err, updatedTask) {
         logger.info(updatedTask);
         if (err || !updatedTask) {
@@ -51,18 +52,6 @@ router.put("/:taskId", function (req, res) {
 
 // DELETE task
 router.delete("/:taskId", authenticateToken, function (req, res) {
-    const task = Task.findOne({ taskId: req.params.taskId }, function (err) {
-        if (err) {
-            res.sendStatus(response.BADREQUEST);
-        }
-    });
-    logger.info("task " + task.user);
-    logger.info("return " + req.user.email);
-
-    if (task.user !== req.user.email) {
-        return res.sendStatus(response.FORBIDDEN);
-    }
-
     Task.remove({ taskId: req.params.taskId }, function (err) {
         if (err) {
             logger.error(err);
