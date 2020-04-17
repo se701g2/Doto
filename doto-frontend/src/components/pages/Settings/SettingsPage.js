@@ -10,6 +10,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import Header from "../Header";
 import DotoService from "../../../helpers/DotoService";
 import { ThemeContext } from "../../../context/ThemeContext";
+import { ActiveHoursContext } from "../../../context/ActiveHoursContext";
 import { Themes } from "../../../constants/Themes";
 import "./SettingsPage.css";
 import "../Pages.css";
@@ -17,7 +18,7 @@ import "../Pages.css";
 const classnames = require("classnames");
 
 // TODO: Use input name field and display it on the calendar header page as [name]'s calendar
-const InputNameField = props => {
+const InputNameField = (props) => {
     return (
         <FormControl id="input-field">
             <Input
@@ -34,7 +35,7 @@ const InputNameField = props => {
 };
 
 // TODO: Use this field is to add any other email address's calendars
-const InputEmailField = props => {
+const InputEmailField = (props) => {
     return (
         <FormControl id="input-field">
             <Input
@@ -50,7 +51,7 @@ const InputEmailField = props => {
     );
 };
 
-const ProfilePhoto = props => {
+const ProfilePhoto = (props) => {
     return (
         <div className="flex">
             {/* Profile photo is taken from the associated google account */}
@@ -60,16 +61,16 @@ const ProfilePhoto = props => {
 };
 
 // TODO: Implement logic for working hours in sync with task-scheduling algorithm
-const WorkingHoursPicker = () => {
+const WorkingHoursPicker = (props) => {
     const [selectedStartTime, setSelectedStartTime] = useState(new Date("2020-03-15T09:00:00"));
     const [selectedEndTime, setSelectedEndTime] = useState(new Date("2020-03-15T17:00:00"));
 
-    const handleStartTimeChange = date => {
-        setSelectedStartTime(date);
+    const handleStartTimeChange = (date) => {
+        props.changeStartTime(date);
     };
 
-    const handleEndTimeChange = date => {
-        setSelectedEndTime(date);
+    const handleEndTimeChange = (date) => {
+        props.changeEndTime(date);
     };
 
     return (
@@ -80,7 +81,7 @@ const WorkingHoursPicker = () => {
                     <KeyboardTimePicker
                         margin="normal"
                         label="Start Time"
-                        value={selectedStartTime}
+                        value={props.startTime}
                         onChange={handleStartTimeChange}
                         KeyboardButtonProps={{
                             "aria-label": "change time",
@@ -94,7 +95,7 @@ const WorkingHoursPicker = () => {
                     <KeyboardTimePicker
                         margin="normal"
                         label="End Time"
-                        value={selectedEndTime}
+                        value={props.endTime}
                         onChange={handleEndTimeChange}
                         KeyboardButtonProps={{
                             "aria-label": "change time",
@@ -107,6 +108,7 @@ const WorkingHoursPicker = () => {
 };
 
 // Using props to change the colour theme of the webpage when changed by the user
+<<<<<<< HEAD
 const ThemePicker = props => {
     const handleChangeThemeToDark = () => {
         props.changeTheme(Themes.DARK);
@@ -116,6 +118,9 @@ const ThemePicker = props => {
         props.changeTheme(Themes.LIGHT);
     };
 
+=======
+const ThemePicker = (props) => {
+>>>>>>> Updated settings page to use the activeHours states
     return (
         <div className="flex">
             <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
@@ -131,9 +136,12 @@ const ThemePicker = props => {
 
 const SettingsPage = () => {
     const [theme, setTheme] = useContext(ThemeContext);
+    const { activeHoursStart, activeHoursEnd } = useContext(ActiveHoursContext);
     const [profilePic, setProfilePic] = useState();
     const [name, setName] = useState();
     const [email, setEmail] = useState();
+    const [startTime, setStartTime] = activeHoursStart;
+    const [endTime, setEndTime] = activeHoursEnd;
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -142,12 +150,24 @@ const SettingsPage = () => {
             setProfilePic(userInfo.picture);
             setName(userInfo.name);
             setEmail(userInfo.email);
+            setStartTime(userInfo.startTime);
+            setEndTime(userInfo.endTime);
         };
         fetchUserInfo();
     }, [setTheme]);
 
     const changeTheme = newTheme => {
         DotoService.updateUserInfo(newTheme).then(setTheme(newTheme));
+    };
+
+    const changeStartTime = (newTime) => {
+        DotoService.updateUserInfo(theme, newTime, endTime);
+        setStartTime(newTime);
+    };
+
+    const changeEndTime = (newTime) => {
+        DotoService.updateUserInfo(theme, startTime, newTime);
+        setEndTime(newTime);
     };
 
     return (
@@ -171,7 +191,12 @@ const SettingsPage = () => {
                     <InputEmailField email={email} />
 
                     <ThemePicker changeTheme={changeTheme} />
-                    <WorkingHoursPicker />
+                    <WorkingHoursPicker
+                        startTime={startTime}
+                        endTime={endTime}
+                        changeStartTime={changeStartTime}
+                        changeEndTime={changeEndTime}
+                    />
                 </div>
             </span>
         </div>
