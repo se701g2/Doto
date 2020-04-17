@@ -108,22 +108,22 @@ const WorkingHoursPicker = () => {
 
 // Using props to change the colour theme of the webpage when changed by the user
 const ThemePicker = props => {
+    const handleChangeThemeToDark = () => {
+        props.changeTheme(Themes.DARK);
+    };
+
+    const handleChangeThemeToLight = () => {
+        props.changeTheme(Themes.LIGHT);
+    };
+
     return (
         <div className="flex">
             <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
             <ThemeProvider>
-                <Button
-                    onClick={() => props.changeTheme(Themes.DARK)}
-                    id="color-palette"
-                    style={{ backgroundColor: "#3700b3" }}
-                />
+                <Button onClick={handleChangeThemeToDark} id="color-palette" style={{ backgroundColor: "#3700b3" }} />
             </ThemeProvider>
             <ThemeProvider>
-                <Button
-                    onClick={() => props.changeTheme(Themes.LIGHT)}
-                    id="color-palette"
-                    style={{ backgroundColor: "#2e7d32" }}
-                />
+                <Button onClick={handleChangeThemeToLight} id="color-palette" style={{ backgroundColor: "#2e7d32" }} />
             </ThemeProvider>
         </div>
     );
@@ -144,11 +144,10 @@ const SettingsPage = () => {
             setEmail(userInfo.email);
         };
         fetchUserInfo();
-    });
+    }, []);
 
     const changeTheme = newTheme => {
-        DotoService.updateUserInfo(newTheme);
-        setTheme(newTheme);
+        DotoService.updateUserInfo(newTheme).then(setTheme(newTheme));
     };
 
     return (
@@ -156,7 +155,7 @@ const SettingsPage = () => {
             <div
                 className={classnames(
                     "left-side-bar",
-                    theme === Themes.DARK ? "left-side-bg-blue" : "left-side-bg-green"
+                    theme === Themes.DARK ? "left-side-bg-blue" : "left-side-bg-green",
                 )}
             />
             <span className="content-container">
