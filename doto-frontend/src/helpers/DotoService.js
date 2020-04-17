@@ -93,10 +93,12 @@ const DotoService = {
             console.log(e);
         }
     },
-    updateUserInfo: async theme => {
+    updateUserInfo: async (theme, startTime, endTime) => {
         const updatedUserInfo = {
             user: CookieManager.get("email"),
             themePreference: theme,
+            startTime: startTime,
+            endTime: endTime;
         };
 
         axios({
