@@ -59,12 +59,12 @@ const UpdateModalContent = props => {
         setSelectedName(props.taskToUpdate.title || "");
         setSelectedDescription(props.taskToUpdate.description || "");
         setSelectedDueDate(props.taskToUpdate.dueDate || "");
-        setSelectedDuration(convertMinutesToDateTime(props.taskToUpdate.duration) || initialDuration);
-        setSelectedTravelTime(convertMinutesToDateTime(props.taskToUpdate.travelTime) || travelTime);
+        setSelectedDuration(convertMinutesToDateTime(props.taskToUpdate.duration));
+        setSelectedTravelTime(convertMinutesToDateTime(props.taskToUpdate.travelTime));
         setSelectedLocation(props.taskToUpdate.location || "");
         setSelectedPriority(props.taskToUpdate.priority || "");
         setSelectedReminder(props.taskToUpdate.reminderType || "");
-    }, [props.taskToUpdate, initialDuration, travelTime]);
+    }, [props.taskToUpdate]);
 
     // ----- HANDLERS FOR INPUT FIELDS -----
     const handleNameChange = event => {
