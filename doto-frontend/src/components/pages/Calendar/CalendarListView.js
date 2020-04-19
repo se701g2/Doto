@@ -1,38 +1,38 @@
 import React from "react";
 import "./Calendar.css";
 import PropTypes from "prop-types";
-import { Checkbox } from "@material-ui/core";
+import { Checkbox, Typography } from "@material-ui/core";
+import moment from "moment";
+
+const isToday = ({ endDate }) => {
+    const today = new Date();
+    return (
+        endDate.getYear() === today.getYear() &&
+        endDate.getMonth() === today.getMonth() &&
+        endDate.getDate() === today.getDate()
+    );
+};
 
 // This file provides a checklist of items on today's to-do list. The user is able to select tasks completed for the day
 const CalendarListView = props => {
-    const today = new Date();
-
     return (
         <div className="list-view">
             <div className="md:ml-3 md:mb-5 text-4xl font-bold">Tasks for Today</div>
-
-            {props.tasks.map(task => {
-                const dueDate = new Date(task.endDate);
-                const taskComplete = task.isComplete;
-                // Checks to see if scheduled task is for today
-                const isTaskScheduledToday =
-                    dueDate.getYear() === today.getYear() && dueDate.getMonth() === today.getMonth()
-                        ? dueDate.getDate() === today.getDate()
-                        : false;
-                // If the task is scheduled for today, add it as an item in the checklist of things to do today
-                return (
-                    isTaskScheduledToday && (
-                        <div key={task.taskId} className="list-view-components">
-                            <Checkbox
-                                checked={taskComplete}
-                                color="primary"
-                                onChange={() => props.onTaskStatusUpdated(task.taskId)}
-                            />
-                            <div className={taskComplete ? "isComplete" : ""}>{task.title}</div>
-                        </div>
-                    )
-                );
-            })}
+            {props.tasks.filter(isToday).map(task => (
+                <div key={task.taskId} className="list-view-components">
+                    <Checkbox
+                        checked={task.isComplete}
+                        color="primary"
+                        onChange={() => props.onTaskStatusUpdated(task.taskId)}
+                    />
+                    <div className={task.isComplete ? "isComplete" : ""}>
+                        <Typography>{task.title}</Typography>
+                        {!task.isComplete && (
+                            <Typography color="primary">{moment(task.startDate).fromNow()}</Typography>
+                        )}
+                    </div>
+                </div>
+            ))}
         </div>
     );
 };
