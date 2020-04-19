@@ -1,6 +1,5 @@
 import CookieManager from "./CookieManager";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 
 // This file integrates the front-end and back-end together using GET and POST methods.
 const baseUrl =
@@ -52,11 +51,12 @@ const DotoService = {
     setNewTask: async task => {
         const newTask = {
             user: CookieManager.get("email"),
-            taskId: uuidv4(),
+            taskId: task.taskId,
             title: task.title,
             startDate: task.startDate.toString(),
             endDate: task.endDate.toString(),
             duration: task.duration,
+            ...(task.reminderDate && { reminderDate: task.reminderDate.toString() }),
             ...(task.description && { description: task.description }),
             ...(task.priority && { priority: task.priority }),
             ...(task.location && { location: task.location }),
@@ -71,6 +71,13 @@ const DotoService = {
         });
 
         // TODO: catch for errors depending if it didn't post properly or maybe retry mechanism
+    },
+    deleteTask: async taskId => {
+        axios({
+            method: "delete",
+            url: baseUrl + `/task/${taskId}`,
+            headers: { Authorization: "Bearer " + CookieManager.get("jwt") },
+        });
     },
     getUserInfo: async () => {
         const path = baseUrl + "/user/get";
@@ -100,6 +107,14 @@ const DotoService = {
         });
 
         // TODO: catch for errors depending if it didn't post properly or maybe retry mechanism
+    },
+    subscribeToReminders: async subscription => {
+        axios({
+            method: "post",
+            url: baseUrl + "/reminders/subscribe",
+            headers: { Authorization: "Bearer " + CookieManager.get("jwt") },
+            data: subscription,
+        });
     },
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { FormControl, Button, Input, InputAdornment } from "@material-ui/core";
+import { FormControl, Button, Input, InputAdornment, Grid } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from "@material-ui/pickers";
 import EmailIcon from "@material-ui/icons/Email";
@@ -73,7 +73,7 @@ const WorkingHoursPicker = () => {
     };
 
     return (
-        <div className="flex">
+        <Grid container>
             <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Working Hours:</h2>
             <div style={{ marginLeft: "3vw" }}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -102,28 +102,28 @@ const WorkingHoursPicker = () => {
                     />
                 </MuiPickersUtilsProvider>
             </div>
-        </div>
+        </Grid>
     );
 };
 
 // Using props to change the colour theme of the webpage when changed by the user
 const ThemePicker = props => {
+    const handleChangeThemeToDark = () => {
+        props.changeTheme(Themes.DARK);
+    };
+
+    const handleChangeThemeToLight = () => {
+        props.changeTheme(Themes.LIGHT);
+    };
+
     return (
         <div className="flex">
             <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
             <ThemeProvider>
-                <Button
-                    onClick={() => props.changeTheme(Themes.DARK)}
-                    id="color-palette"
-                    style={{ backgroundColor: "#3700b3" }}
-                />
+                <Button onClick={handleChangeThemeToDark} id="color-palette" style={{ backgroundColor: "#3700b3" }} />
             </ThemeProvider>
             <ThemeProvider>
-                <Button
-                    onClick={() => props.changeTheme(Themes.LIGHT)}
-                    id="color-palette"
-                    style={{ backgroundColor: "#2e7d32" }}
-                />
+                <Button onClick={handleChangeThemeToLight} id="color-palette" style={{ backgroundColor: "#2e7d32" }} />
             </ThemeProvider>
         </div>
     );
@@ -144,11 +144,10 @@ const SettingsPage = () => {
             setEmail(userInfo.email);
         };
         fetchUserInfo();
-    });
+    }, [setTheme]);
 
     const changeTheme = newTheme => {
-        DotoService.updateUserInfo(newTheme);
-        setTheme(newTheme);
+        DotoService.updateUserInfo(newTheme).then(setTheme(newTheme));
     };
 
     return (

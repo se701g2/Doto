@@ -53,8 +53,11 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
 
             // Schedule the new task in place of the existing one
             newTask.startDate = newTaskStartDate;
-            newTask.endDate = new Date(newTaskStartDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE);
-
+            newTask.endDate = new Date(
+                newTaskStartDate.getTime() +
+                    newTask.duration * MILLISECONDS_PER_MINUTE +
+                    newTask.travelTime * MILLISECONDS_PER_MINUTE,
+            );
             // Insert the new task at the specified index
             competingTasks.splice(i, 0, newTask);
             return {
@@ -66,10 +69,11 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
 
     newTask.startDate = cTask ? newTask.dueDate : minDate;
 
-    // Minutes
-    const travelTime = newTask.travelTime;
+    newTask.startDate = new Date(newTask.startDate.getTime());
 
-    newTask.startDate = new Date(newTask.startDate.getTime() + travelTime * MILLISECONDS_PER_MINUTE);
+    if (newTask.reminder) {
+        newTask.reminderDate = new Date(newTask.startDate.getTime() - newTask.reminder * MILLISECONDS_PER_MINUTE);
+    }
 
     newTask.endDate =
         (cTask && new Date(newTask.dueDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE)) ||

@@ -14,10 +14,11 @@
 .list-view {
     width: 100%;
     margin-left: 10px;
+    margin-right: 10vw;
 }
 
 .list-view-components {
-    height: 48px;
+    width: 35vw;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #e2e8f0;
@@ -25,4 +26,12 @@
 
 .isComplete {
     text-decoration: line-through;
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 11px;
 }

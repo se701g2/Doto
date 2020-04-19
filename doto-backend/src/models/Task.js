@@ -44,6 +44,7 @@ const taskSchema = mongoose.Schema({
     },
     isComplete: {
         type: Boolean,
+        default: false,
     },
 });
 
