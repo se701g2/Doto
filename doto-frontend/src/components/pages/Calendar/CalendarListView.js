@@ -1,7 +1,8 @@
 import React from "react";
 import "./Calendar.css";
 import PropTypes from "prop-types";
-import { Checkbox } from "@material-ui/core";
+import { Checkbox, Typography } from "@material-ui/core";
+import moment from "moment";
 
 const isToday = ({ endDate }) => {
     const today = new Date();
@@ -25,7 +26,12 @@ const CalendarListView = props => {
                         color="primary"
                         onChange={() => props.onTaskStatusUpdated(task.taskId)}
                     />
-                    <div className={task.isComplete ? "isComplete" : ""}>{task.title}</div>
+                    <div className={task.isComplete ? "isComplete" : ""}>
+                        <Typography>{task.title}</Typography>
+                        {!task.isComplete && (
+                            <Typography color="primary">{moment(task.startDate).fromNow()}</Typography>
+                        )}
+                    </div>
                 </div>
             ))}
         </div>
