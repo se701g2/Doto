@@ -22,11 +22,11 @@ const userschema = mongoose.Schema({
     },
     startTime: {
         type: Date,
-        default: new Date(new Date().setHours(9)),
+        default: new Date(new Date().setHours(9, 0, 0, 0)),
     },
     endTime: {
         type: Date,
-        default: new Date(new Date().setHours(19)),
+        default: new Date(new Date().setHours(19, 0, 0, 0)),
     },
 });
 
