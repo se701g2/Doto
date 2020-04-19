@@ -9,10 +9,12 @@ import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ScoreIcon from "@material-ui/icons/Score";
 import AddIcon from "@material-ui/icons/Add";
+import PieChartIcon from "@material-ui/icons/PieChart"
 import ModalContent from "../../ModalContent";
 import ProductivityScore from "../../ProductivityScore";
 import CalendarComponent from "./CalendarComponent";
 import CalendarListView from "./CalendarListView";
+import UserStats from "../../UserStats";
 import Header from "../Header";
 import { ThemeContext } from "../../../context/ThemeContext";
 import { addTaskToSchedule } from "./TaskScheduler";
@@ -41,11 +43,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Calendar = () => {
+    var points = 20;
+
     const classes = useStyles();
     const [listView, setListView] = useState();
     const [isOpenScore, setIsOpenScore] = useState(false);
     const [tasks, setTasks] = useState([]);
     const [open, setOpen] = useState(false);
+    const [statsOpen, setStatsOpen] = useState(false);
     const [theme, setTheme] = useContext(ThemeContext);
 
     const handleIsScoreOpen = () => {
@@ -63,6 +68,14 @@ const Calendar = () => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleStatsOpen = () => {
+        if (statsOpen) {
+            setStatsOpen(false);
+        } else {
+            setStatsOpen(true);
+        }
+    }
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -130,6 +143,13 @@ const Calendar = () => {
                     </Tooltip>
                 </div>
                 <div className="mb-3">
+                    <Tooltip title="View Your Stats">
+                        <Fab onClick={handleStatsOpen} size="small">
+                            <PieChartIcon />
+                        </Fab>
+                    </Tooltip>
+                </div>
+                <div className="mb-3">
                     <Tooltip title="Productivity Score View">
                         <Fab onClick={handleIsScoreOpen} size="small">
                             <ScoreIcon />
@@ -165,6 +185,33 @@ const Calendar = () => {
                     <Fade in={open}>
                         <div className={classes.paper}>
                             <ModalContent addNewTask={addNewTask} modalBackground={theme} />
+                        </div>
+                    </Fade>
+                </Modal>
+                <Modal
+                    aria-labelledby="stats-modal"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={statsOpen}
+                    onClose={handleStatsOpen}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={statsOpen}>
+                        <div className={classes.paper}>
+                            <UserStats
+                                modalBackground={theme}
+                                // TODO: get real values for these.
+                                tasksCompleted='5'
+                                hoursWorked='10.5'
+                                dayRecord='4'
+                                highTasks='2'
+                                medTasks='2'
+                                lowTasks='1'
+                            />
                         </div>
                     </Fade>
                 </Modal>
