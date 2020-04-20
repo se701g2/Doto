@@ -8,6 +8,7 @@ const baseUrl =
 const taskMapper = data => {
     return {
         taskId: data.taskId,
+        id: data.taskId,
         title: data.title,
         startDate: new Date(data.startDate),
         endDate: new Date(data.endDate),

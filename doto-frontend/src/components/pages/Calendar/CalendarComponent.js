@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Calendar.css";
-import { ViewState } from "@devexpress/dx-react-scheduler";
+import { ViewState, EditingState, IntegratedEditing } from "@devexpress/dx-react-scheduler";
 import PropTypes from "prop-types";
 import {
     Scheduler,
@@ -13,17 +13,18 @@ import {
     TodayButton,
     Appointments,
     AppointmentTooltip,
+    DragDropProvider,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { Checkbox, Grid } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
-const CalendarComponent = ({ tasks, onTaskStatusUpdated, onTaskDeleted }) => {
+const CalendarComponent = ({ tasks, onTaskStatusUpdated, onTaskDeleted, onCommitChanges }) => {
     return (
         <Scheduler data={tasks} currentView={MonthView} editable={true}>
             <ViewState />
@@ -35,14 +36,19 @@ const CalendarComponent = ({ tasks, onTaskStatusUpdated, onTaskDeleted }) => {
             <DateNavigator />
             <TodayButton />
             <Appointments appointmentComponent={Appointment} />
+            <EditingState onCommitChanges={onCommitChanges} />
+            <IntegratedEditing />
+            <DragDropProvider />
             <AppointmentTooltip
-                contentComponent={props => <Content {...props} onTaskStatusUpdated={onTaskStatusUpdated} onTaskDeleted={onTaskDeleted} />}
+                contentComponent={props => (
+                    <Content {...props} onTaskStatusUpdated={onTaskStatusUpdated} onTaskDeleted={onTaskDeleted} />
+                )}
             />
         </Scheduler>
     );
 };
 
-export function Content ({ children, appointmentData, style, onTaskStatusUpdated, onTaskDeleted, ...restProps }) {
+export function Content({ children, appointmentData, style, onTaskStatusUpdated, onTaskDeleted, ...restProps }) {
     const [open, setOpen] = useState(false);
     const handleClickOpen = () => {
         setOpen(true);
@@ -52,7 +58,7 @@ export function Content ({ children, appointmentData, style, onTaskStatusUpdated
         setOpen(false);
     };
 
-    const deleteTask = (taskId) => {
+    const deleteTask = taskId => {
         onTaskDeleted(taskId);
         document.getElementById("grid").click();
     };
@@ -60,13 +66,12 @@ export function Content ({ children, appointmentData, style, onTaskStatusUpdated
     return (
         <AppointmentTooltip.Content {...restProps} appointmentData={appointmentData}>
             <Grid container alignItems="center">
-                
                 <div className="footer-container">
                     <div>
-                       <Checkbox
-                        checked={appointmentData.isComplete}
-                        color="primary"
-                        onClick={() => onTaskStatusUpdated(appointmentData.taskId)}
+                        <Checkbox
+                            checked={appointmentData.isComplete}
+                            color="primary"
+                            onClick={() => onTaskStatusUpdated(appointmentData.taskId)}
                         />
                         <span>{appointmentData.isComplete ? "Task complete" : "Task incomplete"}</span>
                     </div>
@@ -77,22 +82,25 @@ export function Content ({ children, appointmentData, style, onTaskStatusUpdated
                         open={open}
                         onClose={handleClose}
                         aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description">
-                        <DialogTitle id="alert-dialog-title">{"Are you sure you want to delete this task?"}</DialogTitle>
+                        aria-describedby="alert-dialog-description"
+                    >
+                        <DialogTitle id="alert-dialog-title">
+                            {"Are you sure you want to delete this task?"}
+                        </DialogTitle>
                         <DialogActions>
-                        <Button onClick={() => deleteTask(appointmentData.taskId)} color="primary" autoFocus>
-                            Yes
-                        </Button>
-                        <Button onClick={handleClose} color="primary">
-                            No
-                        </Button>
+                            <Button onClick={() => deleteTask(appointmentData.taskId)} color="primary" autoFocus>
+                                Yes
+                            </Button>
+                            <Button onClick={handleClose} color="primary">
+                                No
+                            </Button>
                         </DialogActions>
                     </Dialog>
                 </div>
             </Grid>
         </AppointmentTooltip.Content>
     );
-};
+}
 
 const Appointment = ({ children, style, ...restProps }) => (
     <Appointments.Appointment

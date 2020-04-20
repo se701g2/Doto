@@ -93,6 +93,14 @@ const Calendar = () => {
         setTasks(newTasks);
     };
 
+    const onCommitChanges = ({ added, changed, deleted }) => {
+        // Currently adding and deleting are both no-ops
+        // TODO - consider refactoring adding and deleting to use built-in components and pass logic through here
+        if (changed) {
+            setTasks(tasks.map(task => (changed[task.id] ? { ...task, ...changed[task.id] } : task)));
+        }
+    };
+
     return (
         <div className="page-layout">
             <div
@@ -127,6 +135,7 @@ const Calendar = () => {
                             tasks={tasks}
                             onTaskDeleted={deleteTask}
                             onTaskStatusUpdated={handleTaskStatusUpdated}
+                            onCommitChanges={onCommitChanges}
                         />
                     </div>
                     {listView && <CalendarListView tasks={tasks} onTaskStatusUpdated={handleTaskStatusUpdated} />}
