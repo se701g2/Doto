@@ -97,7 +97,9 @@ const Calendar = () => {
         // Currently adding and deleting are both no-ops
         // TODO - consider refactoring adding and deleting to use built-in components and pass logic through here
         if (changed) {
-            setTasks(tasks.map(task => (changed[task.id] ? { ...task, ...changed[task.id] } : task)));
+            const updatedTasks = tasks.map(task => (changed[task.id] ? { ...task, ...changed[task.id] } : task));
+            updatedTasks.filter(task => changed[task.id]).forEach(task => DotoService.updateTask(task));
+            setTasks(updatedTasks);
         }
     };
 
