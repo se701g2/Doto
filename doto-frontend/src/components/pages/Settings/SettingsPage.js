@@ -10,7 +10,6 @@ import DateFnsUtils from "@date-io/date-fns";
 import Header from "../Header";
 import DotoService from "../../../helpers/DotoService";
 import { ThemeContext } from "../../../context/ThemeContext";
-import { ActiveHoursContext } from "../../../context/ActiveHoursContext";
 import { Themes } from "../../../constants/Themes";
 import "./SettingsPage.css";
 import "../Pages.css";
@@ -61,13 +60,16 @@ const ProfilePhoto = props => {
 };
 
 // TODO: Implement logic for working hours in sync with task-scheduling algorithm
-const WorkingHoursPicker = props => {
+const WorkingHoursPicker = () => {
+    const [selectedStartTime, setSelectedStartTime] = useState(new Date("2020-03-15T09:00:00"));
+    const [selectedEndTime, setSelectedEndTime] = useState(new Date("2020-03-15T17:00:00"));
+
     const handleStartTimeChange = date => {
-        props.changeStartTime(date);
+        setSelectedStartTime(date);
     };
 
     const handleEndTimeChange = date => {
-        props.changeEndTime(date);
+        setSelectedEndTime(date);
     };
 
     return (
@@ -78,7 +80,7 @@ const WorkingHoursPicker = props => {
                     <KeyboardTimePicker
                         margin="normal"
                         label="Start Time"
-                        value={props.startTime}
+                        value={selectedStartTime}
                         onChange={handleStartTimeChange}
                         KeyboardButtonProps={{
                             "aria-label": "change time",
@@ -92,7 +94,7 @@ const WorkingHoursPicker = props => {
                     <KeyboardTimePicker
                         margin="normal"
                         label="End Time"
-                        value={props.endTime}
+                        value={selectedEndTime}
                         onChange={handleEndTimeChange}
                         KeyboardButtonProps={{
                             "aria-label": "change time",
@@ -129,12 +131,9 @@ const ThemePicker = props => {
 
 const SettingsPage = () => {
     const [theme, setTheme] = useContext(ThemeContext);
-    const { activeHoursStart, activeHoursEnd } = useContext(ActiveHoursContext);
     const [profilePic, setProfilePic] = useState();
     const [name, setName] = useState();
     const [email, setEmail] = useState();
-    const [startTime, setStartTime] = activeHoursStart;
-    const [endTime, setEndTime] = activeHoursEnd;
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -143,22 +142,12 @@ const SettingsPage = () => {
             setProfilePic(userInfo.picture);
             setName(userInfo.name);
             setEmail(userInfo.email);
-            setStartTime(userInfo.startTime);
-            setEndTime(userInfo.endTime);
         };
         fetchUserInfo();
-    }, [setTheme, setStartTime, setEndTime]);
+    }, [setTheme]);
 
     const changeTheme = newTheme => {
-        DotoService.updateUserInfo(newTheme, startTime, endTime).then(setTheme(newTheme));
-    };
-
-    const changeStartTime = newTime => {
-        DotoService.updateUserInfo(theme, newTime, endTime).then(setStartTime(newTime));
-    };
-
-    const changeEndTime = newTime => {
-        DotoService.updateUserInfo(theme, startTime, newTime).then(setEndTime(newTime));
+        DotoService.updateUserInfo(newTheme).then(setTheme(newTheme));
     };
 
     return (
@@ -182,12 +171,7 @@ const SettingsPage = () => {
                     <InputEmailField email={email} />
 
                     <ThemePicker changeTheme={changeTheme} />
-                    <WorkingHoursPicker
-                        startTime={startTime}
-                        endTime={endTime}
-                        changeStartTime={changeStartTime}
-                        changeEndTime={changeEndTime}
-                    />
+                    <WorkingHoursPicker />
                 </div>
             </span>
         </div>

@@ -312,7 +312,7 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
                 onFocus={[Function]}
                 required={false}
                 type="text"
-                value="09:47 PM"
+                value="09:00 AM"
               />
               <div
                 className="MuiInputAdornment-root MuiInputAdornment-positionEnd"
@@ -406,7 +406,7 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
                 onFocus={[Function]}
                 required={false}
                 type="text"
-                value="09:47 PM"
+                value="05:00 PM"
               />
               <div
                 className="MuiInputAdornment-root MuiInputAdornment-positionEnd"
