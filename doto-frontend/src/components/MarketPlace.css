@@ -1,0 +1,17 @@
+
+.market-content-box {
+    display: inline-block;
+    /* border: 1px solid; */
+    margin: 1px auto;
+}
+
+.theme-content-box {
+    /* border: 1px solid; */
+    display: inline-block;
+}
+
+#color-palette {
+    margin-top: 3vh;
+    height: 40px;
+    margin: 1px auto;
+}

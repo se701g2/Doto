@@ -10,6 +10,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import Header from "../Header";
 import DotoService from "../../../helpers/DotoService";
 import { ThemeContext } from "../../../context/ThemeContext";
+import MarketPlace from "../../MarketPlace";
 import { ActiveHoursContext } from "../../../context/ActiveHoursContext";
 import { Themes } from "../../../constants/Themes";
 import "./SettingsPage.css";
@@ -104,25 +105,70 @@ const WorkingHoursPicker = props => {
     );
 };
 
+
 // Using props to change the colour theme of the webpage when changed by the user
 const ThemePicker = props => {
-    const handleChangeThemeToDark = () => {
-        props.changeTheme(Themes.DARK);
-    };
+    
+    const handleThemeClick = (themeAttributes) => {
+        /* @param (JSON) themeAttributes.colour and themeAttributes.cost
+        * TODO: Handle purchase and lock
+        */
 
-    const handleChangeThemeToLight = () => {
-        props.changeTheme(Themes.LIGHT);
-    };
+
+        themeAttributes = JSON.parse(themeAttributes)
+      
+        switch (themeAttributes.colour) {
+
+            case "blue":
+                props.changeTheme(Themes.DARK);
+                break;
+            case "green":
+                props.changeTheme(Themes.LIGHT);
+                break;
+
+            case "gray":
+
+                break;
+            case "magenta":
+
+                break;
+            case "purple":
+
+                break;
+            case "crimson":
+
+                break;
+            case "black":
+
+                break;
+            case "red":
+
+                break;
+            case "darkSeaGreen":
+
+                break;
+            case "antiqueWhite":
+
+                break;
+            case "darkKhaki":
+
+                break;
+            case "darkSlateBlue":
+
+                break;
+        }
+
+    }
 
     return (
+        /* TODO ADD Locks */
         <div className="flex">
             <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
-            <ThemeProvider>
-                <Button onClick={handleChangeThemeToDark} id="color-palette" style={{ backgroundColor: "#3700b3" }} />
-            </ThemeProvider>
-            <ThemeProvider>
-                <Button onClick={handleChangeThemeToLight} id="color-palette" style={{ backgroundColor: "#2e7d32" }} />
-            </ThemeProvider>
+
+           
+            <MarketPlace handleThemeClick={handleThemeClick}></MarketPlace>
+
+
         </div>
     );
 };
@@ -209,5 +255,7 @@ InputNameField.propTypes = {
 InputEmailField.propTypes = {
     email: PropTypes.string.isRequired,
 };
+
+
 
 export default SettingsPage;
