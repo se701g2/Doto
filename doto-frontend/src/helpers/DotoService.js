@@ -12,6 +12,7 @@ const taskMapper = data => {
         title: data.title,
         startDate: new Date(data.startDate),
         endDate: new Date(data.endDate),
+        duration: data.duration,
         ...(data.description && { description: data.description }),
         ...(data.priority && { priority: data.priority }),
         ...(data.location && { location: data.location }),

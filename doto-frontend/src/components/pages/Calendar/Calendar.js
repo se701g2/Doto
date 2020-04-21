@@ -70,6 +70,7 @@ const Calendar = () => {
     const addNewTask = (newTask, currentDate) => {
         const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks, currentDate);
         newTask.taskId = uuidv4();
+        newTask.id = newTask.taskId;
         setTasks(newTaskOrder);
         handleClose();
 
@@ -106,11 +107,13 @@ const Calendar = () => {
                         task.reminderDate = new Date(reminderDate.getTime() + (newStartDate - oldStartDate));
                     }
                     const updatedTask = { ...task, ...changed[task.id] };
+                    updatedTask.duration = Math.ceil((updatedTask.endDate - updatedTask.startDate) / 60000);
                     DotoService.updateTask(updatedTask);
                     return updatedTask;
                 }
                 return task;
             });
+            updatedTasks.sort((a, b) => a.startDate - b.startDate);
             setTasks(updatedTasks);
         }
     };
