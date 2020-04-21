@@ -14,6 +14,11 @@ import { ActiveHoursContext } from "../../../context/ActiveHoursContext";
 import { Themes } from "../../../constants/Themes";
 import "./SettingsPage.css";
 import "../Pages.css";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const classnames = require("classnames");
 
@@ -62,6 +67,16 @@ const ProfilePhoto = props => {
 
 // TODO: Implement logic for working hours in sync with task-scheduling algorithm
 const WorkingHoursPicker = props => {
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const handleStartTimeChange = date => {
         props.changeStartTime(date);
     };
@@ -99,6 +114,33 @@ const WorkingHoursPicker = props => {
                         }}
                     />
                 </MuiPickersUtilsProvider>
+            </div>
+            <div style={{ marginLeft: "3vw", marginTop: "4vh", textAlign: "left" }}>
+                <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+                    Save
+                </Button>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Let Google help apps determine location. This means sending anonymous location data to
+                            Google, even when no apps are running.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                            Disagree
+                        </Button>
+                        <Button onClick={handleClose} color="primary" autoFocus>
+                            Agree
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         </Grid>
     );
