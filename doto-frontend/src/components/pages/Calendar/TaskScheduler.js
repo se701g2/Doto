@@ -1,3 +1,4 @@
+import { shiftTasks } from "./TaskShifter";
 const MILLISECONDS_PER_MINUTE = 60000;
 
 /**
@@ -13,7 +14,7 @@ const MILLISECONDS_PER_MINUTE = 60000;
  * @returns A chronologically ordered (based on startDate) array of all tasks scheduled with start/end
  * datetimes - essentially existingTasks + newTasks
  */
-const addTaskToSchedule = (newTask, existingTasks, currDate) => {
+const addTaskToSchedule = (newTask, existingTasks, currDate, startTime, endTime) => {
     // TODO: Take into account any possible gap between datetime and startDate of the first task in oldTasks
     // TODO: Take into account priority of tasks
     // TODO: Take into account location of tasks, add time gaps to allow for travel
@@ -60,8 +61,18 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
             );
             // Insert the new task at the specified index
             competingTasks.splice(i, 0, newTask);
+
+            for (let i = 0; i < [...oldTasks, ...competingTasks].length; i++) {
+                console.log([...oldTasks, ...competingTasks][i].startDate);
+            }
+            // Shift the Tasks based on working hours
+            const { shiftedTasks } = shiftTasks([...oldTasks, ...competingTasks], startTime, endTime);
+            for (let i = 0; i < shiftedTasks.length; i++) {
+                console.log(shiftedTasks[i].startDate);
+            }
+
             return {
-                newTaskOrder: [...oldTasks, ...competingTasks],
+                newTaskOrder: shiftedTasks,
                 updatedTask: newTask,
             };
         }
@@ -70,7 +81,7 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
     newTask.startDate = cTask ? cTask.endDate : minDate;
 
     newTask.startDate = new Date(newTask.startDate.getTime());
-
+    console.log(newTask.startDate);
     if (newTask.reminder) {
         newTask.reminderDate = new Date(newTask.startDate.getTime() - newTask.reminder * MILLISECONDS_PER_MINUTE);
     }
@@ -88,8 +99,16 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
                 newTask.travelTime * MILLISECONDS_PER_MINUTE,
         );
 
+    // Shift the Tasks based on working hours
+    const { shiftedTasks } = shiftTasks([...existingTasks, newTask], startTime, endTime);
+    console.log("传出来后");
+    for (let i = 0; i < shiftedTasks.length; i++) {
+        console.log(shiftedTasks[i].startDate);
+    }
+    console.log("new task得知");
+    console.log(newTask.startDate);
     return {
-        newTaskOrder: [...existingTasks, newTask],
+        newTaskOrder: shiftedTasks,
         updatedTask: newTask,
     };
 };

@@ -19,6 +19,7 @@ import "./Calendar.css";
 import "../Pages.css";
 import { v4 as uuidv4 } from "uuid";
 import { Themes } from "../../../constants/Themes";
+import { ActiveHoursContext } from "../../../context/ActiveHoursContext";
 
 const classnames = require("classnames");
 
@@ -44,6 +45,9 @@ const Calendar = () => {
     const [tasks, setTasks] = useState([]);
     const [open, setOpen] = useState(false);
     const [theme, setTheme] = useContext(ThemeContext);
+    const { activeHoursStart, activeHoursEnd } = useContext(ActiveHoursContext);
+    const [startTime, setStartTime] = activeHoursStart;
+    const [endTime, setEndTime] = activeHoursEnd;
 
     const handleOpen = () => {
         setOpen(true);
@@ -61,6 +65,8 @@ const Calendar = () => {
         const fetchUserInfo = async () => {
             const userInfo = await DotoService.getUserInfo();
             setTheme(userInfo.themePreference);
+            setStartTime(userInfo.startTime);
+            setEndTime(userInfo.endTime);
         };
         fetchUserInfo();
         fetchTasks();
@@ -68,12 +74,21 @@ const Calendar = () => {
 
     // Adds new task based on input fields from Modal
     const addNewTask = (newTask, currentDate) => {
-        const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks, currentDate);
+        const { newTaskOrder, updatedTask } = addTaskToSchedule(
+            newTask,
+            tasks,
+            currentDate,
+            new Date(startTime),
+            new Date(endTime),
+        );
         newTask.taskId = uuidv4();
-        setTasks(newTaskOrder);
-        handleClose();
-
         DotoService.setNewTask(updatedTask);
+        setTasks(newTaskOrder);
+        console.log("传出来后");
+        for (let i = 0; i < newTaskOrder.length; i++) {
+            console.log(newTaskOrder[i].startDate);
+        }
+        handleClose();
     };
 
     const deleteTask = async taskId => {
