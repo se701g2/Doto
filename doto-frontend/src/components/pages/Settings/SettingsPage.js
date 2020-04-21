@@ -67,14 +67,19 @@ const ProfilePhoto = props => {
 
 // TODO: Implement logic for working hours in sync with task-scheduling algorithm
 const WorkingHoursPicker = props => {
-    const [open, setOpen] = useState(false);
+    const [dialog, setDialog] = useState(false);
 
     const handleClickOpen = () => {
-        setOpen(true);
+        setDialog(true);
     };
 
     const handleClose = () => {
-        setOpen(false);
+        setDialog(false);
+    };
+
+    const handleCloseAndSave = () => {
+        setDialog(false);
+        props.saveChanges(props.startTime, props.endTime);
     };
 
     const handleStartTimeChange = date => {
@@ -115,28 +120,27 @@ const WorkingHoursPicker = props => {
                     />
                 </MuiPickersUtilsProvider>
             </div>
-            <div style={{ marginLeft: "3vw", marginTop: "4vh", textAlign: "left" }}>
+            <div style={{ marginLeft: "3vw", marginTop: "3vh", textAlign: "left" }}>
                 <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                     Save
                 </Button>
                 <Dialog
-                    open={open}
+                    open={dialog}
                     onClose={handleClose}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">{"Want to save those changes?"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            Let Google help apps determine location. This means sending anonymous location data to
-                            Google, even when no apps are running.
+                            Your time table will be re-managed automatically. Please check again.
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose} color="primary">
                             Disagree
                         </Button>
-                        <Button onClick={handleClose} color="primary" autoFocus>
+                        <Button onClick={handleCloseAndSave} color="primary" autoFocus>
                             Agree
                         </Button>
                     </DialogActions>
@@ -196,11 +200,15 @@ const SettingsPage = () => {
     };
 
     const changeStartTime = newTime => {
-        DotoService.updateUserInfo(theme, newTime, endTime).then(setStartTime(newTime));
+        setStartTime(newTime);
     };
 
     const changeEndTime = newTime => {
-        DotoService.updateUserInfo(theme, startTime, newTime).then(setEndTime(newTime));
+        setEndTime(newTime);
+    };
+
+    const saveChanges = (newStartTime, newEndTime) => {
+        DotoService.updateUserInfo(theme, newStartTime, newEndTime);
     };
 
     return (
@@ -229,6 +237,7 @@ const SettingsPage = () => {
                         endTime={endTime}
                         changeStartTime={changeStartTime}
                         changeEndTime={changeEndTime}
+                        saveChanges={saveChanges}
                     />
                 </div>
             </span>
