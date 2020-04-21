@@ -82,13 +82,10 @@ const Calendar = () => {
             new Date(endTime),
         );
         newTask.taskId = uuidv4();
-        DotoService.setNewTask(updatedTask);
         setTasks(newTaskOrder);
-        console.log("传出来后");
-        for (let i = 0; i < newTaskOrder.length; i++) {
-            console.log(newTaskOrder[i].startDate);
-        }
         handleClose();
+
+        DotoService.setNewTask(updatedTask);
     };
 
     const deleteTask = async taskId => {

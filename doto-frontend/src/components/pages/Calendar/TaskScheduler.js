@@ -62,14 +62,8 @@ const addTaskToSchedule = (newTask, existingTasks, currDate, startTime, endTime)
             // Insert the new task at the specified index
             competingTasks.splice(i, 0, newTask);
 
-            for (let i = 0; i < [...oldTasks, ...competingTasks].length; i++) {
-                console.log([...oldTasks, ...competingTasks][i].startDate);
-            }
             // Shift the Tasks based on working hours
             const { shiftedTasks } = shiftTasks([...oldTasks, ...competingTasks], startTime, endTime);
-            for (let i = 0; i < shiftedTasks.length; i++) {
-                console.log(shiftedTasks[i].startDate);
-            }
 
             return {
                 newTaskOrder: shiftedTasks,
@@ -101,12 +95,7 @@ const addTaskToSchedule = (newTask, existingTasks, currDate, startTime, endTime)
 
     // Shift the Tasks based on working hours
     const { shiftedTasks } = shiftTasks([...existingTasks, newTask], startTime, endTime);
-    console.log("传出来后");
-    for (let i = 0; i < shiftedTasks.length; i++) {
-        console.log(shiftedTasks[i].startDate);
-    }
-    console.log("new task得知");
-    console.log(newTask.startDate);
+
     return {
         newTaskOrder: shiftedTasks,
         updatedTask: newTask,

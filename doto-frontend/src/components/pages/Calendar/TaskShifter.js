@@ -17,12 +17,6 @@ const shiftTasks = (scheduledTasks, startTime, endTime) => {
     const startActingHour = startTime.getHours() * 60 + startTime.getMinutes();
     const endActingHour = endTime.getHours() * 60 + endTime.getMinutes();
 
-    console.log("没shift");
-    for (let i = 0; i < scheduledTasks.length; i++) {
-        console.log(scheduledTasks[i].startDate);
-        console.log(scheduledTasks[i].endDate);
-    }
-
     for (let i = 0; i < tasks.length; i++) {
         const taskStart = tasks[i].startDate.getHours() * 60 + tasks[i].startDate.getMinutes();
         const taskEnd = tasks[i].endDate.getHours() * 60 + tasks[i].endDate.getMinutes();
@@ -49,13 +43,6 @@ const shiftTasks = (scheduledTasks, startTime, endTime) => {
             }
         }
     }
-
-    console.log("shift后");
-    for (let i = 0; i < tasks.length; i++) {
-        console.log(tasks[i].startDate);
-        console.log(tasks[i].endDate);
-    }
-
     return {
         shiftedTasks: tasks,
     };
