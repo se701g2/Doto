@@ -36,9 +36,11 @@ const DotoService = {
         }
     },
     updateTask: async task => {
+        // Strip the 'id' property because its only needed by dev-express scheduler
+        const { id, ...mongoTask } = task;
         const updatedTask = {
             user: CookieManager.get("email"),
-            ...task,
+            ...mongoTask,
         };
         axios({
             method: "put",

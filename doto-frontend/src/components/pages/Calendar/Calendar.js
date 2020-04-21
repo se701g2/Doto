@@ -97,8 +97,20 @@ const Calendar = () => {
         // Currently adding and deleting are both no-ops
         // TODO - consider refactoring adding and deleting to use built-in components and pass logic through here
         if (changed) {
-            const updatedTasks = tasks.map(task => (changed[task.id] ? { ...task, ...changed[task.id] } : task));
-            updatedTasks.filter(task => changed[task.id]).forEach(task => DotoService.updateTask(task));
+            const updatedTasks = tasks.map(task => {
+                if (changed[task.id]) {
+                    const { startDate: newStartDate } = changed[task.id];
+                    const { reminderDate, startDate: oldStartDate } = task;
+                    if (newStartDate && reminderDate) {
+                        // Offset the reminder date by the difference of the start dates
+                        task.reminderDate = new Date(reminderDate.getTime() + (newStartDate - oldStartDate));
+                    }
+                    const updatedTask = { ...task, ...changed[task.id] };
+                    DotoService.updateTask(updatedTask);
+                    return updatedTask;
+                }
+                return task;
+            });
             setTasks(updatedTasks);
         }
     };
