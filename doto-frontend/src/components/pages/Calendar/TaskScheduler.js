@@ -18,6 +18,7 @@ const addTaskToSchedule = (newTask, existingTasks, currDate, startTime, endTime)
     // TODO: Take into account any possible gap between datetime and startDate of the first task in oldTasks
     // TODO: Take into account priority of tasks
     // TODO: Take into account location of tasks, add time gaps to allow for travel
+    // TODO: Take into account working hour restriction
 
     const competingTasks = [];
     const oldTasks = [];
@@ -95,9 +96,7 @@ const addTaskToSchedule = (newTask, existingTasks, currDate, startTime, endTime)
 
     // Shift the Tasks based on working hours
     const { shiftedTasks } = shiftTasks([...existingTasks, newTask], startTime, endTime);
-    for (let i = 0; i < shiftedTasks.length; i++) {
-        console.log(shiftedTasks[i].startDate);
-    }
+
     return {
         newTaskOrder: shiftedTasks,
         updatedTask: newTask,

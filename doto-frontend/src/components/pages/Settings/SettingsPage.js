@@ -216,8 +216,6 @@ const SettingsPage = () => {
 
     const saveChanges = (newStartTime, newEndTime) => {
         DotoService.updateUserInfo(theme, newStartTime, newEndTime);
-
-        // Shift the Tasks based on working hours
         const { shiftedTasks } = shiftTasks(tasks, new Date(newStartTime), new Date(newEndTime));
         for (let i = 0; i < shiftedTasks.length; i++) {
             DotoService.updateTask(shiftedTasks[i]);
