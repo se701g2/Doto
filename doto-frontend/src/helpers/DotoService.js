@@ -8,6 +8,7 @@ const baseUrl =
 const taskMapper = data => {
     return {
         taskId: data.taskId,
+        id: data.taskId,
         title: data.title,
         startDate: new Date(data.startDate),
         endDate: new Date(data.endDate),
@@ -40,9 +41,11 @@ const DotoService = {
         }
     },
     updateTask: async task => {
+        // Strip the 'id' property because its only needed by dev-express scheduler
+        const { id, ...mongoTask } = task;
         const updatedTask = {
             user: CookieManager.get("email"),
-            ...task,
+            ...mongoTask,
         };
         axios({
             method: "put",
@@ -101,10 +104,12 @@ const DotoService = {
             console.log(e);
         }
     },
-    updateUserInfo: async theme => {
+    updateUserInfo: async (theme, startTime, endTime) => {
         const updatedUserInfo = {
             user: CookieManager.get("email"),
             themePreference: theme,
+            startTime: startTime,
+            endTime: endTime,
         };
 
         axios({

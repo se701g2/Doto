@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./Calendar.css";
-import { ViewState } from "@devexpress/dx-react-scheduler";
+import { ViewState, EditingState, IntegratedEditing } from "@devexpress/dx-react-scheduler";
 import PropTypes from "prop-types";
 import {
     Scheduler,
@@ -13,6 +13,7 @@ import {
     TodayButton,
     Appointments,
     AppointmentTooltip,
+    DragDropProvider,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { Checkbox, Grid } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
@@ -42,6 +43,9 @@ const CalendarComponent = ({ tasks, onTaskStatusUpdated, onTaskDeleted, onTaskUp
             <DateNavigator />
             <TodayButton />
             <Appointments appointmentComponent={Appointment} />
+            <EditingState onCommitChanges={onCommitChanges} />
+            <IntegratedEditing />
+            <DragDropProvider />
             <AppointmentTooltip
                 contentComponent={props => (
                     <Content
