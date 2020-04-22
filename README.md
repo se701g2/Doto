@@ -1,4 +1,7 @@
 # Doto
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![](https://github.com/se701g2/Doto/workflows/doto-CI/badge.svg?event=push) 
 ![](https://github.com/se701g2/Doto/workflows/doto-backend-deploy/badge.svg?event=push) 
@@ -51,3 +54,24 @@ Distributed under the MIT license. Check the [wiki](https://github.com/se701g2/D
 
 ## Where to Get More Help
 If you have run into any issues, you can contact our lecturer Kelly Blincoe and she will be able to point you in the right direction. 
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/KimberleyEvans-Parker"><img src="https://avatars2.githubusercontent.com/u/45865186?v=4" width="100px;" alt=""/><br /><sub><b>Kimberley</b></sub></a><br /><a href="https://github.com/se701g2/Doto/commits?author=KimberleyEvans-Parker" title="Code">💻</a> <a href="https://github.com/se701g2/Doto/pulls?q=is%3Apr+reviewed-by%3AKimberleyEvans-Parker" title="Reviewed Pull Requests">👀</a> <a href="#design-KimberleyEvans-Parker" title="Design">🎨</a> <a href="#ideas-KimberleyEvans-Parker" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/AlexanderTheGrape"><img src="https://avatars0.githubusercontent.com/u/20546002?v=4" width="100px;" alt=""/><br /><sub><b>Alex Monk</b></sub></a><br /><a href="https://github.com/se701g2/Doto/commits?author=AlexanderTheGrape" title="Code">💻</a> <a href="https://github.com/se701g2/Doto/commits?author=AlexanderTheGrape" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://jordan.sim-smith.co.nz"><img src="https://avatars3.githubusercontent.com/u/18223858?v=4" width="100px;" alt=""/><br /><sub><b>Jordan Sim-Smith</b></sub></a><br /><a href="https://github.com/se701g2/Doto/commits?author=jordansimsmith" title="Code">💻</a> <a href="https://github.com/se701g2/Doto/pulls?q=is%3Apr+reviewed-by%3Ajordansimsmith" title="Reviewed Pull Requests">👀</a> <a href="#design-jordansimsmith" title="Design">🎨</a> <a href="https://github.com/se701g2/Doto/commits?author=jordansimsmith" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
