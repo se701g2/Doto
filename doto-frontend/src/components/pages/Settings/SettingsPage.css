@@ -36,3 +36,12 @@
     margin-left: 2vw;
     border-radius: 50px 50px 50px 50px;
 }
+
+.market-content-box {
+    margin: 20 auto;
+    display: inline-block;
+    vertical-align: top;
+    vertical-align: top;
+    margin: 20px 50px;
+    text-align: center;
+}

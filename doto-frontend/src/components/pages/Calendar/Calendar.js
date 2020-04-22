@@ -182,6 +182,7 @@ const Calendar = () => {
                     </Tooltip>
                 </div>
                 <div>
+                    <h2>Points</h2>
                     <Points ref={pointRef} avatarClass={classes.blue} />
                 </div>
                 <div>

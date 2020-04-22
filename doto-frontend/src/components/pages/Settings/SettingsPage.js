@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { FormControl, Button, Input, InputAdornment, Grid } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { FormControl, Input, InputAdornment, Grid } from "@material-ui/core";
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from "@material-ui/pickers";
 import EmailIcon from "@material-ui/icons/Email";
 import { AccountCircle } from "@material-ui/icons";
@@ -10,10 +9,14 @@ import DateFnsUtils from "@date-io/date-fns";
 import Header from "../Header";
 import DotoService from "../../../helpers/DotoService";
 import { ThemeContext } from "../../../context/ThemeContext";
+import MarketPlace from "../../MarketPlace";
 import { ActiveHoursContext } from "../../../context/ActiveHoursContext";
 import { Themes } from "../../../constants/Themes";
 import "./SettingsPage.css";
 import "../Pages.css";
+import Points from "../../Points";
+import { makeStyles } from "@material-ui/core/styles";
+import { blue } from "@material-ui/core/colors";
 
 const classnames = require("classnames");
 
@@ -104,25 +107,73 @@ const WorkingHoursPicker = props => {
     );
 };
 
+const useStyles = makeStyles(theme => ({
+    blue: {
+        color: theme.palette.getContrastText(blue[500]),
+        backgroundColor: blue[500],
+        boxShadow: theme.shadows[5],
+        marginLeft: "10vw",
+    },
+}));
+
 // Using props to change the colour theme of the webpage when changed by the user
 const ThemePicker = props => {
-    const handleChangeThemeToDark = () => {
-        props.changeTheme(Themes.DARK);
+    const classes = useStyles();
+    var pointRef = React.createRef();
+
+    const handleThemeClick = (themeColour, cost) => {
+        // console.log(themeColour, cost);
+        /* @params themeColour and cost
+         * TODO: Handle purchase and lock
+         */
+
+        // themeColour = JSON.parse(themeColour);
+
+        switch (themeColour) {
+            case "blue":
+                props.changeTheme(Themes.DARK);
+                break;
+            case "green":
+                props.changeTheme(Themes.LIGHT);
+                break;
+
+            case "gray":
+                break;
+            case "magenta":
+                break;
+            case "purple":
+                break;
+            case "crimson":
+                break;
+            case "black":
+                break;
+            case "red":
+                break;
+            case "darkSeaGreen":
+                break;
+            case "antiqueWhite":
+                break;
+            case "darkKhaki":
+                break;
+            case "darkSlateBlue":
+                break;
+        }
     };
 
-    const handleChangeThemeToLight = () => {
-        props.changeTheme(Themes.LIGHT);
+    const buyItem = cost => {
+        pointRef.current.changePoints(-cost);
     };
 
     return (
-        <div className="flex">
-            <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
-            <ThemeProvider>
-                <Button onClick={handleChangeThemeToDark} id="color-palette" style={{ backgroundColor: "#3700b3" }} />
-            </ThemeProvider>
-            <ThemeProvider>
-                <Button onClick={handleChangeThemeToLight} id="color-palette" style={{ backgroundColor: "#2e7d32" }} />
-            </ThemeProvider>
+        <div>
+            <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Available Points: </h2>
+            <Points ref={pointRef} avatarClass={classes.blue} />
+            <br></br>
+            <div className="flex">
+                <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
+
+                <MarketPlace handleThemeClick={handleThemeClick} buyItem={buyItem}></MarketPlace>
+            </div>
         </div>
     );
 };
