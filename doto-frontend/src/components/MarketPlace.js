@@ -10,7 +10,7 @@ import AvailableTheme from "./AvailableTheme";
 // @ref https://www.w3schools.com/colors/colors_names.asp
 const themeCost = {
     blue: 0,
-    green: 0,
+    green: 20,
     gray: 300,
     magenta: 100,
     purple: 200,
