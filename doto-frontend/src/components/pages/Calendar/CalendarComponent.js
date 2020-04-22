@@ -122,7 +122,7 @@ export function Content({
                         <span>{appointmentData.isComplete ? "Task complete" : "Task incomplete"}</span>
                     </div>
                     <div>
-                        <IconButton aria-label="delete" onClick={handleOpenUpdateModal}>
+                        <IconButton aria-label="update" onClick={handleOpenUpdateModal}>
                             <CreateIcon />
                         </IconButton>
                         <IconButton aria-label="delete" onClick={handleClickOpen}>
