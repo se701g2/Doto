@@ -31,7 +31,7 @@ import UpdateModalContent from "../../updateModal/UpdateModalContent";
 import { makeStyles } from "@material-ui/core/styles";
 import { ThemeContext } from "../../../context/ThemeContext";
 
-const CalendarComponent = ({ tasks, onTaskStatusUpdated, onTaskDeleted, onTaskUpdated }) => {
+const CalendarComponent = ({ tasks, onTaskStatusUpdated, onTaskDeleted, onTaskUpdated, onCommitChanges }) => {
     return (
         <Scheduler data={tasks} currentView={MonthView} editable={true}>
             <ViewState />
