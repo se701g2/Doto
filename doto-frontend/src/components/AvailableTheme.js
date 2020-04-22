@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
-// import lockImage from "./images/lock.png";
+import lockImage from "./images/lock.png";
 
 class AvailableTheme extends React.Component {
     constructor(props) {
@@ -20,16 +20,18 @@ class AvailableTheme extends React.Component {
     render() {
         return (
             <div className="theme-content-box">
-                <ThemeProvider>
-                    <Button
-                        value={JSON.stringify({ colour: this.props.colour, cost: this.props.cost })}
-                        onClick={event => this.props.handleThemeClick(event.target.value)}
-                        id="color-palette"
-                        style={{ backgroundColor: this.props.htmlColour }}
-                    >
-                        {/* {this.state.locked && <img src={lockImage} style={{ height: "2em" }} />} */}
-                    </Button>
-                </ThemeProvider>
+                <div className="available-theme-container">
+                    <ThemeProvider>
+                        <Button
+                            onClick={event => this.props.handleThemeClick(this.props.colour, this.props.cost)}
+                            id="color-palette"
+                            style={{ backgroundColor: this.props.htmlColour }}
+                        >
+                            {this.state.locked && <img src={lockImage} style={{ height: "2em" }} />}
+                        </Button>
+                    </ThemeProvider>
+                </div>
+
                 <h2 style={{ textAlign: "right" }}>Cost: {this.props.cost}</h2>
             </div>
         );

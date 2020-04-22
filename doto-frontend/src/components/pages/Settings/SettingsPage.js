@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { FormControl, Button, Input, InputAdornment, Grid } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { FormControl, Input, InputAdornment, Grid } from "@material-ui/core";
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from "@material-ui/pickers";
 import EmailIcon from "@material-ui/icons/Email";
 import { AccountCircle } from "@material-ui/icons";
@@ -105,20 +104,17 @@ const WorkingHoursPicker = props => {
     );
 };
 
-
 // Using props to change the colour theme of the webpage when changed by the user
 const ThemePicker = props => {
-    
-    const handleThemeClick = (themeAttributes) => {
-        /* @param (JSON) themeAttributes.colour and themeAttributes.cost
-        * TODO: Handle purchase and lock
-        */
+    const handleThemeClick = (themeColour, cost) => {
+        // console.log(themeColour, cost);
+        /* @params themeColour and cost
+         * TODO: Handle purchase and lock
+         */
 
+        // themeColour = JSON.parse(themeColour);
 
-        themeAttributes = JSON.parse(themeAttributes)
-      
-        switch (themeAttributes.colour) {
-
+        switch (themeColour) {
             case "blue":
                 props.changeTheme(Themes.DARK);
                 break;
@@ -127,48 +123,34 @@ const ThemePicker = props => {
                 break;
 
             case "gray":
-
                 break;
             case "magenta":
-
                 break;
             case "purple":
-
                 break;
             case "crimson":
-
                 break;
             case "black":
-
                 break;
             case "red":
-
                 break;
             case "darkSeaGreen":
-
                 break;
             case "antiqueWhite":
-
                 break;
             case "darkKhaki":
-
                 break;
             case "darkSlateBlue":
-
                 break;
         }
-
-    }
+    };
 
     return (
         /* TODO ADD Locks */
         <div className="flex">
             <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
 
-           
             <MarketPlace handleThemeClick={handleThemeClick}></MarketPlace>
-
-
         </div>
     );
 };
@@ -255,7 +237,5 @@ InputNameField.propTypes = {
 InputEmailField.propTypes = {
     email: PropTypes.string.isRequired,
 };
-
-
 
 export default SettingsPage;
