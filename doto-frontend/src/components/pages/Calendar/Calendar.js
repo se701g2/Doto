@@ -66,6 +66,7 @@ const Calendar = () => {
     const [open, setOpen] = useState(false);
     const [statsOpen, setStatsOpen] = useState(false);
     const [theme, setTheme] = useContext(ThemeContext);
+    const [priorityStats, setPriorityStats] = useState([]);
 
     const handleIsScoreOpen = () => {
         if (isOpenScore) {
@@ -87,6 +88,16 @@ const Calendar = () => {
         if (statsOpen) {
             setStatsOpen(false);
         } else {
+            var medTasks = tasks.filter(function(task) {
+                return task.priority === 20 && task.isComplete;
+            });
+            var lowTasks = tasks.filter(function(task) {
+                return task.priority === 30 && task.isComplete;
+            });
+            var highTasks = tasks.filter(function(task) {
+                return task.priority === 10 && task.isComplete;
+            });
+            setPriorityStats([highTasks.length, medTasks.length, lowTasks.length]);
             setStatsOpen(true);
         }
     };
@@ -237,12 +248,9 @@ const Calendar = () => {
                             <UserStats
                                 modalBackground={theme}
                                 // TODO: get real values for these.
-                                tasksCompleted="5"
                                 hoursWorked="10.5"
                                 dayRecord="4"
-                                highTasks="2"
-                                medTasks="2"
-                                lowTasks="1"
+                                priorityStats={priorityStats}
                             />
                         </div>
                     </Fade>
