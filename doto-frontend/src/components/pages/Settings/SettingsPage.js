@@ -122,12 +122,7 @@ const ThemePicker = props => {
     var pointRef = React.createRef();
 
     const handleThemeClick = (themeColour, cost) => {
-        // console.log(themeColour, cost);
-        /* @params themeColour and cost
-         * TODO: Handle purchase and lock
-         */
-
-        // themeColour = JSON.parse(themeColour);
+        // @params themeColour and cost
 
         switch (themeColour) {
             case "blue":
@@ -162,6 +157,7 @@ const ThemePicker = props => {
 
     const buyItem = cost => {
         pointRef.current.changePoints(-cost);
+        // TODO: Link this with the user stored points (when it gets stored)
     };
 
     return (

@@ -40,7 +40,6 @@ class Streak extends React.Component {
             if (!currentDateTime || task.endDate < currentDateTime) {
                 if (task.startDate >= latestDate) {
                     this.incrementStreak(1);
-                    console.log("^", task.title);
                 }
             }
         });
