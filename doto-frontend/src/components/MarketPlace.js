@@ -28,24 +28,28 @@ const MarketPlace = props => {
                     cost={themeCost.blue}
                     htmlColour="#3700b3"
                     handleThemeClick={props.handleThemeClick}
+                    buyItem={props.buyItem}
                 />
                 <AvailableTheme
                     colour="green"
                     cost={themeCost.green}
                     htmlColour="#2e7d32"
                     handleThemeClick={props.handleThemeClick}
+                    buyItem={props.buyItem}
                 />
                 <AvailableTheme
                     colour="gray"
                     cost={themeCost.gray}
                     htmlColour="gray"
                     handleThemeClick={props.handleThemeClick}
+                    buyItem={props.buyItem}
                 />
                 <AvailableTheme
                     colour="magenta"
                     cost={themeCost.magenta}
                     htmlColour="magenta"
                     handleThemeClick={props.handleThemeClick}
+                    buyItem={props.buyItem}
                 />
 
                 <br></br>
@@ -55,24 +59,28 @@ const MarketPlace = props => {
                     cost={themeCost.purple}
                     htmlColour="purple"
                     handleThemeClick={props.handleThemeClick}
+                    buyItem={props.buyItem}
                 />
                 <AvailableTheme
                     colour="crimson"
                     cost={themeCost.crimson}
                     htmlColour="crimson"
                     handleThemeClick={props.handleThemeClick}
+                    buyItem={props.buyItem}
                 />
                 <AvailableTheme
                     colour="red"
                     cost={themeCost.red}
                     htmlColour="red"
                     handleThemeClick={props.handleThemeClick}
+                    buyItem={props.buyItem}
                 />
                 <AvailableTheme
                     colour="black"
                     cost={themeCost.black}
                     htmlColour="black"
                     handleThemeClick={props.handleThemeClick}
+                    buyItem={props.buyItem}
                 />
 
                 <br></br>
@@ -82,24 +90,28 @@ const MarketPlace = props => {
                     cost={themeCost.darkSeaGreen}
                     htmlColour="darkSeaGreen"
                     handleThemeClick={props.handleThemeClick}
+                    buyItem={props.buyItem}
                 />
                 <AvailableTheme
                     colour="antiqueWhite"
                     cost={themeCost.antiqueWhite}
                     htmlColour="antiqueWhite"
                     handleThemeClick={props.handleThemeClick}
+                    buyItem={props.buyItem}
                 />
                 <AvailableTheme
                     colour="darkKhaki"
                     cost={themeCost.darkKhaki}
                     htmlColour="darkKhaki"
                     handleThemeClick={props.handleThemeClick}
+                    buyItem={props.buyItem}
                 />
                 <AvailableTheme
                     colour="darkSlateBlue"
                     cost={themeCost.darkSlateBlue}
                     htmlColour="darkSlateBlue"
                     handleThemeClick={props.handleThemeClick}
+                    buyItem={props.buyItem}
                 />
             </div>
         </div>

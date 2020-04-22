@@ -32,6 +32,7 @@ class AvailableTheme extends React.Component {
         if (!this.state.locked) {
             this.props.handleThemeClick(this.props.colour, this.props.cost);
         } else {
+            this.props.buyItem(this.props.cost);
             this.unlockTheme();
         }
     }
