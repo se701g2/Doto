@@ -24,7 +24,7 @@ router.post("/post", authenticateToken, function (req, res) {
     task.startDate = req.body.startDate;
     task.endDate = req.body.endDate;
     task.reminderDate = req.body.reminderDate;
-
+    task.dueDate = req.body.dueDate;
     task.save(function (err) {
         if (err) {
             logger.error(err);

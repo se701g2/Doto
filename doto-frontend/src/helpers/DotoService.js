@@ -15,6 +15,7 @@ const taskMapper = data => {
         ...(data.priority && { priority: data.priority }),
         ...(data.location && { location: data.location }),
         isComplete: data.isComplete,
+        dueDate: data.dueDate,
     };
 };
 
@@ -53,6 +54,7 @@ const DotoService = {
             user: CookieManager.get("email"),
             taskId: task.taskId,
             title: task.title,
+            dueDate: task.dueDate.toString(),
             startDate: task.startDate.toString(),
             endDate: task.endDate.toString(),
             duration: task.duration,

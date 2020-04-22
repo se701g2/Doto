@@ -46,6 +46,10 @@ const taskSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    dueDate: {
+        type: Date,
+        required: true,
+    },
 });
 
 taskSchema.plugin(uniqueValidator);
