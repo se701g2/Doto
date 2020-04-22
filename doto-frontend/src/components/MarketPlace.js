@@ -1,10 +1,6 @@
 /* @author: Utsav Trivedi */
 import React from "react";
-// import { Button } from "@material-ui/core";
-// import { ThemeProvider } from "@material-ui/core/styles";
 import "./MarketPlace.css";
-// import LockedThemes from "../constants/Themes";
-// import lockImage from "./images/lock.png";
 import AvailableTheme from "./AvailableTheme";
 
 // @ref https://www.w3schools.com/colors/colors_names.asp
@@ -28,7 +24,6 @@ const MarketPlace = props => {
      * @detail Returns theme colour and cost in JSON to SettingsPage onClick.
      *         TODO: Add lock/unlock
      */
-    // console.log(LockedThemes.state.blue, LockedThemes.state.green);
 
     return (
         <div>
