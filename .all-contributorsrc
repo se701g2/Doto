@@ -6,6 +6,7 @@
   "commit": false,
   "contributors": [
     {
+
       "login": "KimberleyEvans-Parker",
       "name": "Kimberley",
       "avatar_url": "https://avatars2.githubusercontent.com/u/45865186?v=4",
@@ -16,7 +17,17 @@
         "design",
         "ideas"
       ]
-    }
+    },
+    {
+      "login": "AlexanderTheGrape",
+      "name": "Alex Monk",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/20546002?v=4",
+      "profile": "https://github.com/AlexanderTheGrape",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
   ],
   "contributorsPerLine": 7,
   "projectName": "Doto",

@@ -65,6 +65,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/KimberleyEvans-Parker"><img src="https://avatars2.githubusercontent.com/u/45865186?v=4" width="100px;" alt=""/><br /><sub><b>Kimberley</b></sub></a><br /><a href="https://github.com/se701g2/Doto/commits?author=KimberleyEvans-Parker" title="Code">💻</a> <a href="https://github.com/se701g2/Doto/pulls?q=is%3Apr+reviewed-by%3AKimberleyEvans-Parker" title="Reviewed Pull Requests">👀</a> <a href="#design-KimberleyEvans-Parker" title="Design">🎨</a> <a href="#ideas-KimberleyEvans-Parker" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/AlexanderTheGrape"><img src="https://avatars0.githubusercontent.com/u/20546002?v=4" width="100px;" alt=""/><br /><sub><b>Alex Monk</b></sub></a><br /><a href="https://github.com/se701g2/Doto/commits?author=AlexanderTheGrape" title="Code">💻</a> <a href="https://github.com/se701g2/Doto/commits?author=AlexanderTheGrape" title="Tests">⚠️</a></td>
   </tr>
 </table>
 
