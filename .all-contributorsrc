@@ -1,0 +1,50 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+
+      "login": "KimberleyEvans-Parker",
+      "name": "Kimberley",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/45865186?v=4",
+      "profile": "https://github.com/KimberleyEvans-Parker",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "ideas"
+      ]
+    },
+    {
+      "login": "AlexanderTheGrape",
+      "name": "Alex Monk",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/20546002?v=4",
+      "profile": "https://github.com/AlexanderTheGrape",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "jordansimsmith",
+      "name": "Jordan Sim-Smith",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/18223858?v=4",
+      "profile": "https://jordan.sim-smith.co.nz",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Doto",
+  "projectOwner": "se701g2",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

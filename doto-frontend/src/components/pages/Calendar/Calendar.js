@@ -66,6 +66,7 @@ const Calendar = () => {
     const [open, setOpen] = useState(false);
     const [statsOpen, setStatsOpen] = useState(false);
     const [theme, setTheme] = useContext(ThemeContext);
+    const [priorityStats, setPriorityStats] = useState([]);
 
     const handleIsScoreOpen = () => {
         if (isOpenScore) {
@@ -87,6 +88,16 @@ const Calendar = () => {
         if (statsOpen) {
             setStatsOpen(false);
         } else {
+            var medTasks = tasks.filter(function(task) {
+                return task.priority === 20 && task.isComplete;
+            });
+            var lowTasks = tasks.filter(function(task) {
+                return task.priority === 30 && task.isComplete;
+            });
+            var highTasks = tasks.filter(function(task) {
+                return task.priority === 10 && task.isComplete;
+            });
+            setPriorityStats([highTasks.length, medTasks.length, lowTasks.length]);
             setStatsOpen(true);
         }
     };
@@ -108,6 +119,7 @@ const Calendar = () => {
     const addNewTask = (newTask, currentDate) => {
         const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks, currentDate);
         newTask.taskId = uuidv4();
+        newTask.id = newTask.taskId;
         setTasks(newTaskOrder);
         handleClose();
 
@@ -142,6 +154,30 @@ const Calendar = () => {
 
         // update streak
         streakRef.current.updateStreak();
+    };
+
+    const onCommitChanges = ({ added, changed, deleted }) => {
+        // Currently adding and deleting are both no-ops
+        // TODO - consider refactoring adding and deleting to use built-in components and pass logic through here
+        if (changed) {
+            const updatedTasks = tasks.map(task => {
+                if (changed[task.id]) {
+                    const { startDate: newStartDate } = changed[task.id];
+                    const { reminderDate, startDate: oldStartDate } = task;
+                    if (newStartDate && reminderDate) {
+                        // Offset the reminder date by the difference of the start dates
+                        task.reminderDate = new Date(reminderDate.getTime() + (newStartDate - oldStartDate));
+                    }
+                    const updatedTask = { ...task, ...changed[task.id] };
+                    updatedTask.duration = Math.ceil((updatedTask.endDate - updatedTask.startDate) / 60000);
+                    DotoService.updateTask(updatedTask);
+                    return updatedTask;
+                }
+                return task;
+            });
+            updatedTasks.sort((a, b) => a.startDate - b.startDate);
+            setTasks(updatedTasks);
+        }
     };
 
     return (
@@ -197,6 +233,7 @@ const Calendar = () => {
                             tasks={tasks}
                             onTaskDeleted={deleteTask}
                             onTaskStatusUpdated={handleTaskStatusUpdated}
+                            onCommitChanges={onCommitChanges}
                         />
                     </div>
                     {listView && <CalendarListView tasks={tasks} onTaskStatusUpdated={handleTaskStatusUpdated} />}
@@ -237,12 +274,9 @@ const Calendar = () => {
                             <UserStats
                                 modalBackground={theme}
                                 // TODO: get real values for these.
-                                tasksCompleted="5"
                                 hoursWorked="10.5"
                                 dayRecord="4"
-                                highTasks="2"
-                                medTasks="2"
-                                lowTasks="1"
+                                priorityStats={priorityStats}
                             />
                         </div>
                     </Fade>
