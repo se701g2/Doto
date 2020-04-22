@@ -1,6 +1,6 @@
 # Doto
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![](https://github.com/se701g2/Doto/workflows/doto-CI/badge.svg?event=push) 
@@ -65,6 +65,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/AlexanderTheGrape"><img src="https://avatars0.githubusercontent.com/u/20546002?v=4" width="100px;" alt=""/><br /><sub><b>Alex Monk</b></sub></a><br /><a href="https://github.com/se701g2/Doto/commits?author=AlexanderTheGrape" title="Code">💻</a> <a href="https://github.com/se701g2/Doto/commits?author=AlexanderTheGrape" title="Tests">⚠️</a></td>
+    <td align="center"><a href="http://matteas.nz"><img src="https://avatars0.githubusercontent.com/u/45587386?v=4" width="100px;" alt=""/><br /><sub><b>Matt Eden</b></sub></a><br /><a href="https://github.com/se701g2/Doto/commits?author=Matteas-Eden" title="Code">💻</a> <a href="https://github.com/se701g2/Doto/pulls?q=is%3Apr+reviewed-by%3AMatteas-Eden" title="Reviewed Pull Requests">👀</a> <a href="#design-Matteas-Eden" title="Design">🎨</a> <a href="https://github.com/se701g2/Doto/commits?author=Matteas-Eden" title="Documentation">📖</a> <a href="https://github.com/se701g2/Doto/commits?author=Matteas-Eden" title="Tests">⚠️</a></td>
   </tr>
 </table>
 
