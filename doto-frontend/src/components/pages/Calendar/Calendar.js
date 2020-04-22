@@ -82,6 +82,7 @@ const Calendar = () => {
             new Date(endTime),
         );
         newTask.taskId = uuidv4();
+        newTask.id = newTask.taskId;
         setTasks(newTaskOrder);
         handleClose();
 
@@ -103,6 +104,30 @@ const Calendar = () => {
         taskToUpdate.isComplete = !taskToUpdate.isComplete;
         DotoService.updateTask(taskToUpdate);
         setTasks(newTasks);
+    };
+
+    const onCommitChanges = ({ added, changed, deleted }) => {
+        // Currently adding and deleting are both no-ops
+        // TODO - consider refactoring adding and deleting to use built-in components and pass logic through here
+        if (changed) {
+            const updatedTasks = tasks.map(task => {
+                if (changed[task.id]) {
+                    const { startDate: newStartDate } = changed[task.id];
+                    const { reminderDate, startDate: oldStartDate } = task;
+                    if (newStartDate && reminderDate) {
+                        // Offset the reminder date by the difference of the start dates
+                        task.reminderDate = new Date(reminderDate.getTime() + (newStartDate - oldStartDate));
+                    }
+                    const updatedTask = { ...task, ...changed[task.id] };
+                    updatedTask.duration = Math.ceil((updatedTask.endDate - updatedTask.startDate) / 60000);
+                    DotoService.updateTask(updatedTask);
+                    return updatedTask;
+                }
+                return task;
+            });
+            updatedTasks.sort((a, b) => a.startDate - b.startDate);
+            setTasks(updatedTasks);
+        }
     };
 
     return (
@@ -139,6 +164,7 @@ const Calendar = () => {
                             tasks={tasks}
                             onTaskDeleted={deleteTask}
                             onTaskStatusUpdated={handleTaskStatusUpdated}
+                            onCommitChanges={onCommitChanges}
                         />
                     </div>
                     {listView && <CalendarListView tasks={tasks} onTaskStatusUpdated={handleTaskStatusUpdated} />}
