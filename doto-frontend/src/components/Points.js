@@ -16,12 +16,9 @@ class Points extends React.Component {
 
     render() {
         return (
-            <div>
-                <h2>Points</h2>
-                <Avatar className={this.props.avatarClass}>
-                    <span>{this.state.points}</span>
-                </Avatar>
-            </div>
+            <Avatar className={this.props.avatarClass}>
+                <span>{this.state.points}</span>
+            </Avatar>
         );
     }
 }
