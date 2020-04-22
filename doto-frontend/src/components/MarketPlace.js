@@ -20,11 +20,6 @@ const themeCost = {
 };
 
 const MarketPlace = props => {
-    /**
-     * @detail Returns theme colour and cost in JSON to SettingsPage onClick.
-     *         TODO: Add lock/unlock
-     */
-
     return (
         <div>
             <div className="market-content-box">

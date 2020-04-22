@@ -39,49 +39,43 @@ class AvailableTheme extends React.Component {
     render() {
         return (
             <div className="theme-content-box">
-                <div className="available-theme-container">
-                    <ThemeProvider>
-                        {this.state.locked ? (
-                            <PopupState variant="popper" popupId="demo-popup-popper">
-                                {popupState => (
-                                    <div>
-                                        <Button
-                                            id="color-palette"
-                                            style={{ backgroundColor: this.props.htmlColour }}
-                                            {...bindToggle(popupState)}
-                                        >
-                                            {this.state.locked && <img src={lockImage} style={{ height: "2em" }} />}
-                                        </Button>
-                                        {this.state.locked && (
-                                            <Popper {...bindPopper(popupState)} transition>
-                                                {({ TransitionProps }) => (
-                                                    <Fade {...TransitionProps} timeout={350}>
-                                                        <Paper>
-                                                            <Button
-                                                                startIcon={<VpnKeyIcon fontSize="small" />}
-                                                                onClick={() => this.handleClick()}
-                                                            >
-                                                                Unlock for {this.props.cost} points
-                                                            </Button>
-                                                        </Paper>
-                                                    </Fade>
-                                                )}
-                                            </Popper>
+                <ThemeProvider>
+                    {this.state.locked ? (
+                        <PopupState variant="popper" popupId="demo-popup-popper">
+                            {popupState => (
+                                <div>
+                                    <Button
+                                        id="color-palette"
+                                        style={{ backgroundColor: this.props.htmlColour }}
+                                        {...bindToggle(popupState)}
+                                    >
+                                        <img src={lockImage} style={{ height: "2em" }} />
+                                    </Button>
+                                    <Popper {...bindPopper(popupState)} transition>
+                                        {({ TransitionProps }) => (
+                                            <Fade {...TransitionProps} timeout={350}>
+                                                <Paper>
+                                                    <Button
+                                                        startIcon={<VpnKeyIcon fontSize="small" />}
+                                                        onClick={() => this.handleClick()}
+                                                    >
+                                                        Unlock for {this.props.cost} points
+                                                    </Button>
+                                                </Paper>
+                                            </Fade>
                                         )}
-                                    </div>
-                                )}
-                            </PopupState>
-                        ) : (
-                            <Button
-                                onClick={() => this.handleClick()}
-                                id="color-palette"
-                                style={{ backgroundColor: this.props.htmlColour }}
-                            >
-                                {this.state.locked && <img src={lockImage} style={{ height: "2em" }} />}
-                            </Button>
-                        )}
-                    </ThemeProvider>
-                </div>
+                                    </Popper>
+                                </div>
+                            )}
+                        </PopupState>
+                    ) : (
+                        <Button
+                            onClick={() => this.handleClick()}
+                            id="color-palette"
+                            style={{ backgroundColor: this.props.htmlColour }}
+                        />
+                    )}
+                </ThemeProvider>
 
                 <h2 style={{ textAlign: "right" }}>{this.state.locked ? "Cost:" + this.props.cost : "Owned"}</h2>
             </div>

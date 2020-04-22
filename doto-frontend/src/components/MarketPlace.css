@@ -14,17 +14,3 @@
     height: 40px;
     margin: 1px auto;
 }
-
-.centered {
-    font-size: larger;
-    position: absolute;
-    top: 0%;
-    left: 60%;
-    transform: translate(-50%, 50%);
-    /* height: 5em; */
-}
-
-.available-theme-container {
-    position: relative;
-    box-shadow: black;
-}
