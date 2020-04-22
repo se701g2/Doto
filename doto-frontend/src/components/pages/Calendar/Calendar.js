@@ -93,7 +93,6 @@ const Calendar = () => {
         setTasks(newTasks);
     };
 
-
     const handleTaskUpdated = async task => {
         const taskList = [...tasks];
         const index = taskList.findIndex(currentTask => currentTask.taskId === task.taskId);
@@ -102,7 +101,8 @@ const Calendar = () => {
         setTasks(newTaskOrder);
         await DotoService.deleteTask(task.taskId);
         await DotoService.setNewTask(updatedTask);
-      };
+        document.getElementById("grid").click(); // Debt: force close tool tip due to state not being updated
+    };
 
     const onCommitChanges = ({ added, changed, deleted }) => {
         // Currently adding and deleting are both no-ops
