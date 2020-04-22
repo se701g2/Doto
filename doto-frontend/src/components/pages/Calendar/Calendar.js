@@ -9,7 +9,7 @@ import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ScoreIcon from "@material-ui/icons/Score";
 import AddIcon from "@material-ui/icons/Add";
-import PieChartIcon from "@material-ui/icons/PieChart"
+import PieChartIcon from "@material-ui/icons/PieChart";
 import ModalContent from "../../ModalContent";
 import ProductivityScore from "../../ProductivityScore";
 import CalendarComponent from "./CalendarComponent";
@@ -43,8 +43,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Calendar = () => {
-    var points = 20;
-
     const classes = useStyles();
     const [listView, setListView] = useState();
     const [isOpenScore, setIsOpenScore] = useState(false);
@@ -75,7 +73,7 @@ const Calendar = () => {
         } else {
             setStatsOpen(true);
         }
-    }
+    };
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -205,12 +203,12 @@ const Calendar = () => {
                             <UserStats
                                 modalBackground={theme}
                                 // TODO: get real values for these.
-                                tasksCompleted='5'
-                                hoursWorked='10.5'
-                                dayRecord='4'
-                                highTasks='2'
-                                medTasks='2'
-                                lowTasks='1'
+                                tasksCompleted="5"
+                                hoursWorked="10.5"
+                                dayRecord="4"
+                                highTasks="2"
+                                medTasks="2"
+                                lowTasks="1"
                             />
                         </div>
                     </Fade>
