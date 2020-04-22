@@ -75,7 +75,7 @@ const addTaskToSchedule = (newTask, existingTasks, currDate, startTime, endTime)
     newTask.startDate = cTask ? cTask.endDate : minDate;
 
     newTask.startDate = new Date(newTask.startDate.getTime());
-    console.log(newTask.startDate);
+
     if (newTask.reminder) {
         newTask.reminderDate = new Date(newTask.startDate.getTime() - newTask.reminder * MILLISECONDS_PER_MINUTE);
     }
@@ -95,7 +95,9 @@ const addTaskToSchedule = (newTask, existingTasks, currDate, startTime, endTime)
 
     // Shift the Tasks based on working hours
     const { shiftedTasks } = shiftTasks([...existingTasks, newTask], startTime, endTime);
-
+    for (let i = 0; i < shiftedTasks.length; i++) {
+        console.log(shiftedTasks[i].startDate);
+    }
     return {
         newTaskOrder: shiftedTasks,
         updatedTask: newTask,

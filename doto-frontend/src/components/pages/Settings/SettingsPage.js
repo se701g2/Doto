@@ -19,6 +19,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { shiftTasks } from "../Calendar/TaskShifter";
 
 const classnames = require("classnames");
 
@@ -181,8 +182,13 @@ const SettingsPage = () => {
     const [email, setEmail] = useState();
     const [startTime, setStartTime] = activeHoursStart;
     const [endTime, setEndTime] = activeHoursEnd;
+    const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
+        const fetchTasks = async () => {
+            const tasks = await DotoService.getTasks();
+            setTasks(tasks);
+        };
         const fetchUserInfo = async () => {
             const userInfo = await DotoService.getUserInfo();
             setTheme(userInfo.themePreference);
@@ -193,6 +199,7 @@ const SettingsPage = () => {
             setEndTime(userInfo.endTime);
         };
         fetchUserInfo();
+        fetchTasks();
     }, [setTheme, setStartTime, setEndTime]);
 
     const changeTheme = newTheme => {
@@ -209,6 +216,12 @@ const SettingsPage = () => {
 
     const saveChanges = (newStartTime, newEndTime) => {
         DotoService.updateUserInfo(theme, newStartTime, newEndTime);
+
+        // Shift the Tasks based on working hours
+        const { shiftedTasks } = shiftTasks(tasks, new Date(newStartTime), new Date(newEndTime));
+        for (let i = 0; i < shiftedTasks.length; i++) {
+            DotoService.updateTask(shiftedTasks[i]);
+        }
     };
 
     return (
