@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { blue, yellow } from "@material-ui/core/colors";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -9,8 +10,10 @@ import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ScoreIcon from "@material-ui/icons/Score";
 import AddIcon from "@material-ui/icons/Add";
-import PieChartIcon from "@material-ui/icons/PieChart"
+import PieChartIcon from "@material-ui/icons/PieChart";
 import ModalContent from "../../ModalContent";
+import Points from "../../Points";
+import Streak from "../../Streak";
 import ProductivityScore from "../../ProductivityScore";
 import CalendarComponent from "./CalendarComponent";
 import CalendarListView from "./CalendarListView";
@@ -40,10 +43,21 @@ const useStyles = makeStyles(theme => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
+    blue: {
+        color: theme.palette.getContrastText(blue[500]),
+        backgroundColor: blue[500],
+        boxShadow: theme.shadows[5],
+    },
+    shadow: {
+        color: theme.palette.getContrastText(yellow[500]),
+        boxShadow: theme.shadows[5],
+        borderRadius: "50%",
+    },
 }));
 
 const Calendar = () => {
-    var points = 20;
+    var pointRef = React.createRef();
+    var streakRef = React.createRef();
 
     const classes = useStyles();
     const [listView, setListView] = useState();
@@ -75,7 +89,7 @@ const Calendar = () => {
         } else {
             setStatsOpen(true);
         }
-    }
+    };
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -112,9 +126,22 @@ const Calendar = () => {
     const handleTaskStatusUpdated = taskId => {
         const newTasks = [...tasks];
         const taskToUpdate = newTasks.find(task => task.taskId === taskId);
+
+        // update points
+        // if duration is passed in, use that, otherwise calculate it from start and end dates
+        const minutes = taskToUpdate.duration
+            ? taskToUpdate.duration
+            : Math.abs(taskToUpdate.startDate - taskToUpdate.endDate) / 1000 / 60;
+        // if task is completed, increase points, otherwise, decrease points
+        taskToUpdate.isComplete ? pointRef.current.changePoints(-minutes) : pointRef.current.changePoints(minutes);
+
+        // update task
         taskToUpdate.isComplete = !taskToUpdate.isComplete;
         DotoService.updateTask(taskToUpdate);
         setTasks(newTasks);
+
+        // update streak
+        streakRef.current.updateStreak();
     };
 
     return (
@@ -136,9 +163,7 @@ const Calendar = () => {
                 <div className="mb-3">
                     <Tooltip title="List View">
                         <Fab onClick={() => setListView(!listView)} size="small">
-                            {/* Toggle on list view icon to show/hide to-do tasks */}
-                            {!listView && <FormatListBulletedIcon />}
-                            {listView && <CalendarTodayIcon />}
+                            {listView ? <CalendarTodayIcon /> : <FormatListBulletedIcon />}
                         </Fab>
                     </Tooltip>
                 </div>
@@ -155,6 +180,13 @@ const Calendar = () => {
                             <ScoreIcon />
                         </Fab>
                     </Tooltip>
+                </div>
+                <div>
+                    <h2>Points</h2>
+                    <Points ref={pointRef} avatarClass={classes.blue} />
+                </div>
+                <div>
+                    <Streak tasks={[...tasks]} ref={streakRef} />
                 </div>
             </div>
             <span className="content-container">
@@ -205,12 +237,12 @@ const Calendar = () => {
                             <UserStats
                                 modalBackground={theme}
                                 // TODO: get real values for these.
-                                tasksCompleted='5'
-                                hoursWorked='10.5'
-                                dayRecord='4'
-                                highTasks='2'
-                                medTasks='2'
-                                lowTasks='1'
+                                tasksCompleted="5"
+                                hoursWorked="10.5"
+                                dayRecord="4"
+                                highTasks="2"
+                                medTasks="2"
+                                lowTasks="1"
                             />
                         </div>
                     </Fade>

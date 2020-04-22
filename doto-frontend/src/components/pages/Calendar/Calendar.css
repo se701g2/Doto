@@ -28,6 +28,20 @@
     text-decoration: line-through;
 }
 
+.centered {
+    font-size: larger;
+    /* font-size: large; */
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.streak-container {
+    position: relative;
+    box-shadow: black;
+}
+
 .footer-container {
     display: flex;
     align-items: center;
