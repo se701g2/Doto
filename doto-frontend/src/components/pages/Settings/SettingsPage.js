@@ -14,6 +14,9 @@ import { ActiveHoursContext } from "../../../context/ActiveHoursContext";
 import { Themes } from "../../../constants/Themes";
 import "./SettingsPage.css";
 import "../Pages.css";
+import Points from "../../Points";
+import { makeStyles } from "@material-ui/core/styles";
+import { blue } from "@material-ui/core/colors";
 
 const classnames = require("classnames");
 
@@ -104,8 +107,20 @@ const WorkingHoursPicker = props => {
     );
 };
 
+const useStyles = makeStyles(theme => ({
+    blue: {
+        color: theme.palette.getContrastText(blue[500]),
+        backgroundColor: blue[500],
+        boxShadow: theme.shadows[5],
+        marginLeft: "10vw",
+    },
+}));
+
 // Using props to change the colour theme of the webpage when changed by the user
 const ThemePicker = props => {
+    const classes = useStyles();
+    var pointRef = React.createRef();
+
     const handleThemeClick = (themeColour, cost) => {
         // console.log(themeColour, cost);
         /* @params themeColour and cost
@@ -145,12 +160,20 @@ const ThemePicker = props => {
         }
     };
 
-    return (
-        /* TODO ADD Locks */
-        <div className="flex">
-            <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
+    const buyItem = cost => {
+        pointRef.current.changePoints(-cost);
+    };
 
-            <MarketPlace handleThemeClick={handleThemeClick}></MarketPlace>
+    return (
+        <div>
+            <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Available Points: </h2>
+            <Points ref={pointRef} avatarClass={classes.blue} />
+            <br></br>
+            <div className="flex">
+                <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
+
+                <MarketPlace handleThemeClick={handleThemeClick} buyItem={buyItem}></MarketPlace>
+            </div>
         </div>
     );
 };
