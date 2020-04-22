@@ -23,16 +23,34 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
 
     // Separate existing tasks with a startDate > current datetime from older tasks (which won't be considered)
     existingTasks.forEach(task => {
-        task.startDate > currDate ? competingTasks.push(task) : oldTasks.push(task);
+        task.startDate > newTask.earliestDate ? competingTasks.push(task) : oldTasks.push(task);
     });
 
-    // If the endDate of the latest oldTask is after currDate, then the earliest any new task can be scheduled is oldTask.endDate
+    // If the endDate of the latest oldTask is after earliest start date, then the earliest any new task can be scheduled is oldTask.endDate
     const minDate =
-        (oldTasks[0] && oldTasks[oldTasks.length - 1].endDate) > currDate
+        (oldTasks[0] && oldTasks[oldTasks.length - 1].endDate) > newTask.earliestDate
             ? oldTasks[oldTasks.length - 1].endDate
-            : currDate;
+            : newTask.earliestDate;
 
     let cTask;
+
+    const earliestPossibleEnd = new Date(
+        newTask.earliestDate.getTime() +
+            newTask.duration * MILLISECONDS_PER_MINUTE +
+            newTask.travelTime * MILLISECONDS_PER_MINUTE,
+    );
+
+    if (competingTasks.length > 0) {
+        if (earliestPossibleEnd < competingTasks[0].startDate && newTask.dueDate < competingTasks[0].dueDate) {
+            newTask.startDate = new Date(newTask.earliestDate.getTime());
+            newTask.endDate = earliestPossibleEnd;
+
+            return {
+                newTaskOrder: [...oldTasks, newTask, ...competingTasks],
+                updatedTask: newTask,
+            };
+        }
+    }
 
     // Schedule tasks based on earliest dueDate (Earliest Deadline First)
     for (let i = 0; i < competingTasks.length; i++) {
@@ -44,10 +62,14 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
             // Shift all subsequent competing tasks forward and insert the new task at the start
             for (let j = i; j < competingTasks.length; j++) {
                 competingTasks[j].startDate = new Date(
-                    competingTasks[j].startDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE,
+                    competingTasks[j].startDate.getTime() +
+                        newTask.duration * MILLISECONDS_PER_MINUTE +
+                        newTask.travelTime * MILLISECONDS_PER_MINUTE,
                 );
                 competingTasks[j].endDate = new Date(
-                    competingTasks[j].endDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE,
+                    competingTasks[j].endDate.getTime() +
+                        newTask.duration * MILLISECONDS_PER_MINUTE +
+                        newTask.travelTime * MILLISECONDS_PER_MINUTE,
                 );
             }
 
