@@ -121,12 +121,14 @@ export function Content({
                         />
                         <span>{appointmentData.isComplete ? "Task complete" : "Task incomplete"}</span>
                     </div>
-                    <IconButton aria-label="delete" onClick={handleOpenUpdateModal}>
-                        <CreateIcon />
-                    </IconButton>
-                    <IconButton aria-label="delete" onClick={handleClickOpen}>
-                        <DeleteIcon />
-                    </IconButton>
+                    <div>
+                        <IconButton aria-label="delete" onClick={handleOpenUpdateModal}>
+                            <CreateIcon />
+                        </IconButton>
+                        <IconButton aria-label="delete" onClick={handleClickOpen}>
+                            <DeleteIcon />
+                        </IconButton>
+                    </div>
                     <Dialog
                         open={open}
                         onClose={handleClose}
