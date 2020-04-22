@@ -51,7 +51,7 @@ class AvailableTheme extends React.Component {
                                         style={{ backgroundColor: this.props.htmlColour }}
                                         {...bindToggle(popupState)}
                                     >
-                                        <img src={lockImage} style={{ height: "2em" }} />
+                                        <img src={lockImage} style={{ height: "2em" }} alt="locked" />
                                     </Button>
                                     <Popper {...bindPopper(popupState)} transition>
                                         {({ TransitionProps }) => (

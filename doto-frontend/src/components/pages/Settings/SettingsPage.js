@@ -152,6 +152,8 @@ const ThemePicker = props => {
                 break;
             case "darkSlateBlue":
                 break;
+            default:
+                break;
         }
     };
 
