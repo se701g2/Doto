@@ -4,7 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 class Points extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { points: 200 };
+        this.state = { points: 0 };
     }
 
     changePoints(change) {
