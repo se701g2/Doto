@@ -8,9 +8,15 @@ const baseUrl =
 const taskMapper = data => {
     return {
         taskId: data.taskId,
+        id: data.taskId,
         title: data.title,
         startDate: new Date(data.startDate),
         endDate: new Date(data.endDate),
+        duration: data.duration,
+        travelTime: data.travelTime,
+        reminderType: data.reminderType,
+        dueDate: data.dueDate,
+        reminderDate: data.reminderDate,
         ...(data.description && { description: data.description }),
         ...(data.priority && { priority: data.priority }),
         ...(data.location && { location: data.location }),
@@ -36,9 +42,11 @@ const DotoService = {
         }
     },
     updateTask: async task => {
+        // Strip the 'id' property because its only needed by dev-express scheduler
+        const { id, ...mongoTask } = task;
         const updatedTask = {
             user: CookieManager.get("email"),
-            ...task,
+            ...mongoTask,
         };
         axios({
             method: "put",
@@ -58,6 +66,9 @@ const DotoService = {
             startDate: task.startDate.toString(),
             endDate: task.endDate.toString(),
             duration: task.duration,
+            travelTime: task.travelTime,
+            reminderType: task.reminderType,
+            dueDate: task.dueDate,
             ...(task.reminderDate && { reminderDate: task.reminderDate.toString() }),
             ...(task.description && { description: task.description }),
             ...(task.priority && { priority: task.priority }),
@@ -95,10 +106,12 @@ const DotoService = {
             console.log(e);
         }
     },
-    updateUserInfo: async theme => {
+    updateUserInfo: async (theme, startTime, endTime) => {
         const updatedUserInfo = {
             user: CookieManager.get("email"),
             themePreference: theme,
+            startTime: startTime,
+            endTime: endTime,
         };
 
         axios({
