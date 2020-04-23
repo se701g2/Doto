@@ -250,6 +250,18 @@
                 "reminderDate": {
                     "type": "date",
                     "uniqueItems": false
+                },
+                "dueDate": {
+                    "type": "date",
+                    "uniqueItems": false
+                },
+                "travelTime": {
+                    "type": "integer",
+                    "uniqueItems": false
+                },
+                "reminderType": {
+                    "type": "integer",
+                    "uniqueItems": false
                 }
             }
         },

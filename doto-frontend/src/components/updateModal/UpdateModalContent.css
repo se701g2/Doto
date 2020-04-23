@@ -1,12 +1,12 @@
 .modal-p {
-    background-image: url("./images/modal-background-purple.jpg");
+    background-image: url("../images/modal-background-purple.jpg");
     background-size: cover;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
 .modal-g {
-    background-image: url("./images/modal-background-green.jpg");
+    background-image: url("../images/modal-background-green.jpg");
     background-size: cover;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -51,13 +51,10 @@
 }
 
 #add-button {
-    position: relative;
-    right: -20px;
     text-align: right;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-top: 40px;
+    padding-bottom: 15px;
+    padding-right: 15px;
 }
 
 .spacing {

@@ -6,7 +6,6 @@
   "commit": false,
   "contributors": [
     {
-
       "login": "KimberleyEvans-Parker",
       "name": "Kimberley",
       "avatar_url": "https://avatars2.githubusercontent.com/u/45865186?v=4",
@@ -25,6 +24,20 @@
       "profile": "https://github.com/AlexanderTheGrape",
       "contributions": [
         "code",
+        "test",
+        "doc"
+      ]
+    },
+    {
+      "login": "Matteas-Eden",
+      "name": "Matt Eden",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/45587386?v=4",
+      "profile": "http://matteas.nz",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "doc",
         "test"
       ]
     },

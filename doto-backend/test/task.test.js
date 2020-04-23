@@ -24,6 +24,8 @@ const validTask = new TaskModel({
     startDate: "2020-08-14T08:50:00+12:00",
     endDate: "2020-08-14T07:50:00+12:00",
     isComplete: false,
+    travelTime: 10,
+    dueDate: "2020-08-14T07:50:00+12:00",
 });
 
 process.env.TEST_SUITE = "task-test";
@@ -153,14 +155,14 @@ describe("Task Model Tests", function () {
         });
     });
 
-    it('update task sucessfully', async function () {
+    it("update task sucessfully", async function () {
         await validTask.save();
-        const savedTask = await TaskModel.findOne({_id: validTask._id});
-        
-        await savedTask.update({ title: 'updated title' });
+        const savedTask = await TaskModel.findOne({ _id: validTask._id });
 
-        const updatedTask = await TaskModel.findOne({_id: validTask._id});
-        assert(updatedTask.title === 'updated title');
+        await savedTask.update({ title: "updated title" });
+
+        const updatedTask = await TaskModel.findOne({ _id: validTask._id });
+        assert(updatedTask.title === "updated title");
     });
 
     it("delete task successfully.", async function () {
@@ -168,11 +170,11 @@ describe("Task Model Tests", function () {
         const savedTask = await TaskModel.findOne();
 
         await savedTask.remove();
-        const newSavedTask = await TaskModel.findOne({_id: validTask._id});
+        const newSavedTask = await TaskModel.findOne({ _id: validTask._id });
 
         assert(newSavedTask === null);
     });
-    
+
     it("update one isComplete status to true", async function () {
         TaskModel.updateOne({ taskId: validTask.taskId }, { isComplete: true })
             .then(() => TaskModel.findOne({ taskId: validTask.taskId }))
@@ -217,6 +219,8 @@ describe("Task Model Tests", function () {
             startDate: "2020-08-14T08:50:00+12:00",
             endDate: "2020-08-14T07:50:00+12:00",
             isComplete: false,
+            travelTime: 20,
+            dueDate: "2020-08-14T07:50:00+12:00",
         });
         await testTask.save();
         const [retrievedTask] = await TaskModel.find({
@@ -241,6 +245,8 @@ describe("Task Model Tests", function () {
             startDate: "2020-08-14T08:50:00+12:00",
             endDate: "2020-08-14T07:50:00+12:00",
             isComplete: false,
+            travelTime: 20,
+            dueDate: "2020-08-14T07:50:00+12:00",
         });
         await testTask.save();
         const retrievedTasks = await TaskModel.find({
@@ -266,6 +272,8 @@ describe("Task Model Tests", function () {
             startDate: "2020-08-14T08:50:00+12:00",
             endDate: "2020-08-14T07:50:00+12:00",
             isComplete: false,
+            travelTime: 20,
+            dueDate: "2020-08-14T07:50:00+12:00",
         });
         await testTask.save();
         const retrievedTasks = await TaskModel.find({
@@ -291,6 +299,8 @@ describe("Task Model Tests", function () {
             startDate: "2020-08-14T08:50:00+12:00",
             endDate: "2020-08-14T07:50:00+12:00",
             isComplete: true,
+            travelTime: 20,
+            dueDate: "2020-08-14T07:50:00+12:00",
         });
         await testTask.save();
         const retrievedTasks = await TaskModel.find({

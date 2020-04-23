@@ -117,14 +117,13 @@ const Calendar = () => {
     }, [setTheme]);
 
     // Adds new task based on input fields from Modal
-    const addNewTask = (newTask, currentDate) => {
-        const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks, currentDate);
+    const addNewTask = async newTask => {
+        const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks);
         newTask.taskId = uuidv4();
         newTask.id = newTask.taskId;
         setTasks(newTaskOrder);
         handleClose();
-
-        DotoService.setNewTask(updatedTask);
+        await DotoService.setNewTask(updatedTask);
     };
 
     const deleteTask = async taskId => {
@@ -160,6 +159,17 @@ const Calendar = () => {
 
         // update streak
         streakRef.current.updateStreak();
+    };
+
+    const handleTaskUpdated = async task => {
+        const taskList = [...tasks];
+        const index = taskList.findIndex(currentTask => currentTask.taskId === task.taskId);
+        taskList.splice(index, 1);
+        const { newTaskOrder, updatedTask } = addTaskToSchedule(task, taskList, new Date());
+        setTasks(newTaskOrder);
+        await DotoService.deleteTask(task.taskId);
+        await DotoService.setNewTask(updatedTask);
+        document.getElementById("grid").click(); // Debt: force close tool tip due to state not being updated
     };
 
     const onCommitChanges = ({ added, changed, deleted }) => {
@@ -239,6 +249,7 @@ const Calendar = () => {
                             tasks={tasks}
                             onTaskDeleted={deleteTask}
                             onTaskStatusUpdated={handleTaskStatusUpdated}
+                            onTaskUpdated={handleTaskUpdated}
                             onCommitChanges={onCommitChanges}
                         />
                     </div>
