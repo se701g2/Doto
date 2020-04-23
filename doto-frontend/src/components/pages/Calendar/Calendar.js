@@ -19,6 +19,7 @@ import "./Calendar.css";
 import "../Pages.css";
 import { v4 as uuidv4 } from "uuid";
 import { Themes } from "../../../constants/Themes";
+import { ActiveHoursContext } from "../../../context/ActiveHoursContext";
 
 const classnames = require("classnames");
 
@@ -44,8 +45,9 @@ const Calendar = () => {
     const [tasks, setTasks] = useState([]);
     const [open, setOpen] = useState(false);
     const [theme, setTheme] = useContext(ThemeContext);
-    const [startTime, setStartTime] = useState();
-    const [endTime, setEndTime] = useState();
+    const { activeHoursStart, activeHoursEnd } = useContext(ActiveHoursContext);
+    const [startTime, setStartTime] = activeHoursStart;
+    const [endTime, setEndTime] = activeHoursEnd;
 
     const handleOpen = () => {
         setOpen(true);

@@ -7,18 +7,32 @@ import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import Calendar from "./Calendar";
 import CalendarListView from "./CalendarListView";
 import { ThemeContext } from "../../../context/ThemeContext";
+import { ActiveHoursContext } from "../../../context/ActiveHoursContext";
 
 describe("<Calendar /> component being rendered", () => {
     let theme;
+    let activeHourStartTime;
+    let activeHourEndTime;
     const setTheme = jest.fn();
+    const setActiveHourStartTime = jest.fn();
+    const setActiveHourEndTime = jest.fn();
     const useStateSpy = jest.spyOn(React, "useState");
     useStateSpy.mockImplementation(theme => [theme, setTheme]);
+    useStateSpy.mockImplementation(activeHourStartTime => [activeHourStartTime, setActiveHourStartTime]);
+    useStateSpy.mockImplementation(activeHourEndTime => [activeHourEndTime, setActiveHourEndTime]);
 
     const Wrapper = () => {
         return (
             <Router>
                 <ThemeContext.Provider value={[theme, setTheme]}>
-                    <Calendar />
+                    <ActiveHoursContext.Provider
+                        value={{
+                            activeHoursStart: [activeHourStartTime, setActiveHourStartTime],
+                            activeHoursEnd: [activeHourEndTime, setActiveHourEndTime],
+                        }}
+                    >
+                        <Calendar />
+                    </ActiveHoursContext.Provider>
                 </ThemeContext.Provider>
             </Router>
         );
@@ -26,6 +40,8 @@ describe("<Calendar /> component being rendered", () => {
 
     beforeEach(() => {
         useStateSpy.mockImplementation(theme => [theme, setTheme]);
+        useStateSpy.mockImplementation(activeHourStartTime => [activeHourStartTime, setActiveHourStartTime]);
+        useStateSpy.mockImplementation(activeHourEndTime => [activeHourEndTime, setActiveHourEndTime]);
     });
 
     afterEach(() => {
