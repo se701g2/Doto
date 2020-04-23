@@ -213,10 +213,16 @@ const SettingsPage = () => {
     };
 
     const handleBuyItem = (cost, item) => {
-        const newUnlockedItems = [...unlockedItems, item];
-        DotoService.updateUserInfo({ points: userPoints - cost, unlockedItems: newUnlockedItems });
-        setUserPoints(userPoints - cost);
-        setUnlockedItems(newUnlockedItems);
+        const newPointsBalance = userPoints - cost;
+
+        // prevent user from purchasing items they cannot afford
+        if (newPointsBalance >= 0) {
+            const newUnlockedItems = [...unlockedItems, item];
+            DotoService.updateUserInfo({ points: newPointsBalance, unlockedItems: newUnlockedItems });
+            setUserPoints(newPointsBalance);
+            setUnlockedItems(newUnlockedItems);
+        }
+        // TODO: Display error message explaining why user cannot buy the item
     };
 
     return (

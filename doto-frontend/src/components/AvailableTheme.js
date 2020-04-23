@@ -13,7 +13,6 @@ const AvailableTheme = props => {
         if (!props.locked) {
             props.handleThemeClick(props.colour, props.cost);
         } else {
-            // TODO: Error if not enough points
             props.buyItem(props.cost, props.colour);
         }
     };
