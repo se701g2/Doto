@@ -73,7 +73,7 @@ const Calendar = () => {
     }, [setTheme, setStartTime, setEndTime]);
 
     // Adds new task based on input fields from Modal
-    const addNewTask = (newTask, currentDate) => {
+    const addNewTask = async (newTask, currentDate) => {
         const { newTaskOrder, updatedTask } = addTaskToSchedule(
             newTask,
             tasks,
@@ -85,8 +85,7 @@ const Calendar = () => {
         newTask.id = newTask.taskId;
         setTasks(newTaskOrder);
         handleClose();
-
-        DotoService.setNewTask(updatedTask);
+        await DotoService.setNewTask(updatedTask);
     };
 
     const deleteTask = async taskId => {
@@ -98,12 +97,23 @@ const Calendar = () => {
         await DotoService.deleteTask(taskId);
     };
 
-    const handleTaskStatusUpdated = taskId => {
+    const handleTaskStatusUpdated = async taskId => {
         const newTasks = [...tasks];
         const taskToUpdate = newTasks.find(task => task.taskId === taskId);
         taskToUpdate.isComplete = !taskToUpdate.isComplete;
-        DotoService.updateTask(taskToUpdate);
+        await DotoService.updateTask(taskToUpdate);
         setTasks(newTasks);
+    };
+
+    const handleTaskUpdated = async task => {
+        const taskList = [...tasks];
+        const index = taskList.findIndex(currentTask => currentTask.taskId === task.taskId);
+        taskList.splice(index, 1);
+        const { newTaskOrder, updatedTask } = addTaskToSchedule(task, taskList, new Date());
+        setTasks(newTaskOrder);
+        await DotoService.deleteTask(task.taskId);
+        await DotoService.setNewTask(updatedTask);
+        document.getElementById("grid").click(); // Debt: force close tool tip due to state not being updated
     };
 
     const onCommitChanges = ({ added, changed, deleted }) => {
@@ -164,6 +174,7 @@ const Calendar = () => {
                             tasks={tasks}
                             onTaskDeleted={deleteTask}
                             onTaskStatusUpdated={handleTaskStatusUpdated}
+                            onTaskUpdated={handleTaskUpdated}
                             onCommitChanges={onCommitChanges}
                         />
                     </div>
