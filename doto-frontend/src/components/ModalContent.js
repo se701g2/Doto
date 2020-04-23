@@ -69,7 +69,7 @@ const ModalContent = props => {
         if (date > new Date()) {
             setSelectedDueDate(date);
         } else {
-            setSelectedDueDate("invalid beans");
+            setSelectedDueDate("invalid date");
         }
     };
 
@@ -77,7 +77,7 @@ const ModalContent = props => {
         if (date > new Date()) {
             setEarliestDate(date);
         } else {
-            setEarliestDate("invalid beans");
+            setEarliestDate("invalid date");
         }
     };
     const handleLocationChange = event => {
