@@ -185,9 +185,7 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
           />
         </div>
       </div>
-      <div
-        className="flex"
-      >
+      <div>
         <h2
           style={
             Object {
@@ -197,70 +195,710 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
             }
           }
         >
-          Theme:
+          Available Points: 
         </h2>
-        <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-text"
-          disabled={false}
-          id="color-palette"
-          onBlur={[Function]}
-          onClick={[Function]}
-          onDragLeave={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseLeave={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
-          style={
-            Object {
-              "backgroundColor": "#3700b3",
-            }
-          }
-          tabIndex={0}
-          type="button"
+        <div
+          className="MuiAvatar-root MuiAvatar-circle makeStyles-blue-167 MuiAvatar-colorDefault"
         >
-          <span
-            className="MuiButton-label"
-          />
-          <span
-            className="MuiTouchRipple-root"
-          />
-        </button>
-        <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-text"
-          disabled={false}
-          id="color-palette"
-          onBlur={[Function]}
-          onClick={[Function]}
-          onDragLeave={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseLeave={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
-          style={
-            Object {
-              "backgroundColor": "#2e7d32",
-            }
-          }
-          tabIndex={0}
-          type="button"
+          <span>
+            0
+          </span>
+        </div>
+        <br />
+        <div
+          className="flex"
         >
-          <span
-            className="MuiButton-label"
-          />
-          <span
-            className="MuiTouchRipple-root"
-          />
-        </button>
+          <h2
+            style={
+              Object {
+                "marginLeft": "10vw",
+                "marginTop": "4vh",
+                "textAlign": "left",
+              }
+            }
+          >
+            Theme:
+          </h2>
+          <div>
+            <div
+              className="market-content-box"
+            >
+              <div
+                className="theme-content-box"
+              >
+                <button
+                  className="MuiButtonBase-root MuiButton-root MuiButton-text"
+                  disabled={false}
+                  id="color-palette"
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onDragLeave={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  style={
+                    Object {
+                      "backgroundColor": "#3700b3",
+                    }
+                  }
+                  tabIndex={0}
+                  type="button"
+                >
+                  <span
+                    className="MuiButton-label"
+                  />
+                  <span
+                    className="MuiTouchRipple-root"
+                  />
+                </button>
+                <h2
+                  style={
+                    Object {
+                      "textAlign": "right",
+                    }
+                  }
+                >
+                  Owned
+                </h2>
+              </div>
+              <div
+                className="theme-content-box"
+              >
+                <div>
+                  <button
+                    aria-describedby={null}
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text"
+                    disabled={false}
+                    id="color-palette"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#2e7d32",
+                      }
+                    }
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <span
+                      className="MuiButton-label"
+                    >
+                      <img
+                        alt="locked"
+                        src="lock.png"
+                        style={
+                          Object {
+                            "height": "2em",
+                          }
+                        }
+                      />
+                    </span>
+                    <span
+                      className="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <h2
+                  style={
+                    Object {
+                      "textAlign": "right",
+                    }
+                  }
+                >
+                  Cost:20
+                </h2>
+              </div>
+              <div
+                className="theme-content-box"
+              >
+                <div>
+                  <button
+                    aria-describedby={null}
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text"
+                    disabled={false}
+                    id="color-palette"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "gray",
+                      }
+                    }
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <span
+                      className="MuiButton-label"
+                    >
+                      <img
+                        alt="locked"
+                        src="lock.png"
+                        style={
+                          Object {
+                            "height": "2em",
+                          }
+                        }
+                      />
+                    </span>
+                    <span
+                      className="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <h2
+                  style={
+                    Object {
+                      "textAlign": "right",
+                    }
+                  }
+                >
+                  Cost:300
+                </h2>
+              </div>
+              <div
+                className="theme-content-box"
+              >
+                <div>
+                  <button
+                    aria-describedby={null}
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text"
+                    disabled={false}
+                    id="color-palette"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "magenta",
+                      }
+                    }
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <span
+                      className="MuiButton-label"
+                    >
+                      <img
+                        alt="locked"
+                        src="lock.png"
+                        style={
+                          Object {
+                            "height": "2em",
+                          }
+                        }
+                      />
+                    </span>
+                    <span
+                      className="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <h2
+                  style={
+                    Object {
+                      "textAlign": "right",
+                    }
+                  }
+                >
+                  Cost:100
+                </h2>
+              </div>
+              <br />
+              <div
+                className="theme-content-box"
+              >
+                <div>
+                  <button
+                    aria-describedby={null}
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text"
+                    disabled={false}
+                    id="color-palette"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "purple",
+                      }
+                    }
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <span
+                      className="MuiButton-label"
+                    >
+                      <img
+                        alt="locked"
+                        src="lock.png"
+                        style={
+                          Object {
+                            "height": "2em",
+                          }
+                        }
+                      />
+                    </span>
+                    <span
+                      className="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <h2
+                  style={
+                    Object {
+                      "textAlign": "right",
+                    }
+                  }
+                >
+                  Cost:200
+                </h2>
+              </div>
+              <div
+                className="theme-content-box"
+              >
+                <div>
+                  <button
+                    aria-describedby={null}
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text"
+                    disabled={false}
+                    id="color-palette"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "crimson",
+                      }
+                    }
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <span
+                      className="MuiButton-label"
+                    >
+                      <img
+                        alt="locked"
+                        src="lock.png"
+                        style={
+                          Object {
+                            "height": "2em",
+                          }
+                        }
+                      />
+                    </span>
+                    <span
+                      className="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <h2
+                  style={
+                    Object {
+                      "textAlign": "right",
+                    }
+                  }
+                >
+                  Cost:300
+                </h2>
+              </div>
+              <div
+                className="theme-content-box"
+              >
+                <div>
+                  <button
+                    aria-describedby={null}
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text"
+                    disabled={false}
+                    id="color-palette"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "red",
+                      }
+                    }
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <span
+                      className="MuiButton-label"
+                    >
+                      <img
+                        alt="locked"
+                        src="lock.png"
+                        style={
+                          Object {
+                            "height": "2em",
+                          }
+                        }
+                      />
+                    </span>
+                    <span
+                      className="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <h2
+                  style={
+                    Object {
+                      "textAlign": "right",
+                    }
+                  }
+                >
+                  Cost:500
+                </h2>
+              </div>
+              <div
+                className="theme-content-box"
+              >
+                <div>
+                  <button
+                    aria-describedby={null}
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text"
+                    disabled={false}
+                    id="color-palette"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "black",
+                      }
+                    }
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <span
+                      className="MuiButton-label"
+                    >
+                      <img
+                        alt="locked"
+                        src="lock.png"
+                        style={
+                          Object {
+                            "height": "2em",
+                          }
+                        }
+                      />
+                    </span>
+                    <span
+                      className="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <h2
+                  style={
+                    Object {
+                      "textAlign": "right",
+                    }
+                  }
+                >
+                  Cost:400
+                </h2>
+              </div>
+              <br />
+              <div
+                className="theme-content-box"
+              >
+                <div>
+                  <button
+                    aria-describedby={null}
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text"
+                    disabled={false}
+                    id="color-palette"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "darkSeaGreen",
+                      }
+                    }
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <span
+                      className="MuiButton-label"
+                    >
+                      <img
+                        alt="locked"
+                        src="lock.png"
+                        style={
+                          Object {
+                            "height": "2em",
+                          }
+                        }
+                      />
+                    </span>
+                    <span
+                      className="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <h2
+                  style={
+                    Object {
+                      "textAlign": "right",
+                    }
+                  }
+                >
+                  Cost:600
+                </h2>
+              </div>
+              <div
+                className="theme-content-box"
+              >
+                <div>
+                  <button
+                    aria-describedby={null}
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text"
+                    disabled={false}
+                    id="color-palette"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "antiqueWhite",
+                      }
+                    }
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <span
+                      className="MuiButton-label"
+                    >
+                      <img
+                        alt="locked"
+                        src="lock.png"
+                        style={
+                          Object {
+                            "height": "2em",
+                          }
+                        }
+                      />
+                    </span>
+                    <span
+                      className="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <h2
+                  style={
+                    Object {
+                      "textAlign": "right",
+                    }
+                  }
+                >
+                  Cost:700
+                </h2>
+              </div>
+              <div
+                className="theme-content-box"
+              >
+                <div>
+                  <button
+                    aria-describedby={null}
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text"
+                    disabled={false}
+                    id="color-palette"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "darkKhaki",
+                      }
+                    }
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <span
+                      className="MuiButton-label"
+                    >
+                      <img
+                        alt="locked"
+                        src="lock.png"
+                        style={
+                          Object {
+                            "height": "2em",
+                          }
+                        }
+                      />
+                    </span>
+                    <span
+                      className="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <h2
+                  style={
+                    Object {
+                      "textAlign": "right",
+                    }
+                  }
+                >
+                  Cost:800
+                </h2>
+              </div>
+              <div
+                className="theme-content-box"
+              >
+                <div>
+                  <button
+                    aria-describedby={null}
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text"
+                    disabled={false}
+                    id="color-palette"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onDragLeave={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "darkSlateBlue",
+                      }
+                    }
+                    tabIndex={0}
+                    type="button"
+                  >
+                    <span
+                      className="MuiButton-label"
+                    >
+                      <img
+                        alt="locked"
+                        src="lock.png"
+                        style={
+                          Object {
+                            "height": "2em",
+                          }
+                        }
+                      />
+                    </span>
+                    <span
+                      className="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <h2
+                  style={
+                    Object {
+                      "textAlign": "right",
+                    }
+                  }
+                >
+                  Cost:900
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div
         className="MuiGrid-root MuiGrid-container"
@@ -307,7 +945,7 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
                 onFocus={[Function]}
                 required={false}
                 type="text"
-                value="02:40 PM"
+                value="05:51 PM"
               />
               <div
                 className="MuiInputAdornment-root MuiInputAdornment-positionEnd"
@@ -400,7 +1038,7 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
                 onFocus={[Function]}
                 required={false}
                 type="text"
-                value="02:40 PM"
+                value="05:51 PM"
               />
               <div
                 className="MuiInputAdornment-root MuiInputAdornment-positionEnd"
