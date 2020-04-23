@@ -67,7 +67,6 @@ const DotoService = {
             duration: task.duration,
             travelTime: task.travelTime,
             reminderType: task.reminderType,
-            dueDate: task.dueDate,
             ...(task.reminderDate && { reminderDate: task.reminderDate.toString() }),
             ...(task.description && { description: task.description }),
             ...(task.priority && { priority: task.priority }),
