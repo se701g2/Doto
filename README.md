@@ -59,6 +59,8 @@ If you have run into any issues, you can contact our lecturer Kelly Blincoe and 
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
+If you're a developer in the project and would like to add yourself here, please follow the instructions [here](https://github.com/se701g2/Doto/wiki/All-Contributors-Bot).
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
