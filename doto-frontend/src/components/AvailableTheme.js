@@ -8,81 +8,59 @@ import Fade from "@material-ui/core/Fade";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 
-class AvailableTheme extends React.Component {
-    constructor(props) {
-        super(props);
-        if (props.cost === 0) {
-            this.state = {
-                locked: false,
-            };
-        } else {
-            this.state = {
-                locked: true,
-            };
-        }
-    }
-
-    unlockTheme() {
-        this.setState({
-            locked: false,
-        });
-    }
-
-    handleClick() {
-        if (!this.state.locked) {
-            this.props.handleThemeClick(this.props.colour, this.props.cost);
+const AvailableTheme = props => {
+    const handleClick = () => {
+        if (!props.locked) {
+            props.handleThemeClick(props.colour, props.cost);
         } else {
             // TODO: Error if not enough points
-            this.props.buyItem(this.props.cost);
-            this.unlockTheme();
+            props.buyItem(props.cost, props.colour);
         }
-    }
+    };
 
-    render() {
-        return (
-            <div className="theme-content-box">
-                <ThemeProvider>
-                    {this.state.locked ? (
-                        <PopupState variant="popper" popupId="demo-popup-popper">
-                            {popupState => (
-                                <div>
-                                    <Button
-                                        id="color-palette"
-                                        style={{ backgroundColor: this.props.htmlColour }}
-                                        {...bindToggle(popupState)}
-                                    >
-                                        <img src={lockImage} style={{ height: "2em" }} alt="locked" />
-                                    </Button>
-                                    <Popper {...bindPopper(popupState)} transition>
-                                        {({ TransitionProps }) => (
-                                            <Fade {...TransitionProps} timeout={350}>
-                                                <Paper>
-                                                    <Button
-                                                        startIcon={<VpnKeyIcon fontSize="small" />}
-                                                        onClick={() => this.handleClick()}
-                                                    >
-                                                        Unlock for {this.props.cost} points
-                                                    </Button>
-                                                </Paper>
-                                            </Fade>
-                                        )}
-                                    </Popper>
-                                </div>
-                            )}
-                        </PopupState>
-                    ) : (
-                        <Button
-                            onClick={() => this.handleClick()}
-                            id="color-palette"
-                            style={{ backgroundColor: this.props.htmlColour }}
-                        />
-                    )}
-                </ThemeProvider>
+    return (
+        <div className="theme-content-box">
+            <ThemeProvider>
+                {props.locked ? (
+                    <PopupState variant="popper" popupId="demo-popup-popper">
+                        {popupState => (
+                            <div>
+                                <Button
+                                    id="color-palette"
+                                    style={{ backgroundColor: props.htmlColour }}
+                                    {...bindToggle(popupState)}
+                                >
+                                    <img src={lockImage} style={{ height: "2em" }} alt="locked" />
+                                </Button>
+                                <Popper {...bindPopper(popupState)} transition>
+                                    {({ TransitionProps }) => (
+                                        <Fade {...TransitionProps} timeout={350}>
+                                            <Paper>
+                                                <Button
+                                                    startIcon={<VpnKeyIcon fontSize="small" />}
+                                                    onClick={() => handleClick()}
+                                                >
+                                                    Unlock for {props.cost} points
+                                                </Button>
+                                            </Paper>
+                                        </Fade>
+                                    )}
+                                </Popper>
+                            </div>
+                        )}
+                    </PopupState>
+                ) : (
+                    <Button
+                        onClick={() => handleClick()}
+                        id="color-palette"
+                        style={{ backgroundColor: props.htmlColour }}
+                    />
+                )}
+            </ThemeProvider>
 
-                <h2 style={{ textAlign: "right" }}>{this.state.locked ? "Cost:" + this.props.cost : "Owned"}</h2>
-            </div>
-        );
-    }
-}
+            <h2 style={{ textAlign: "right" }}>{props.locked ? "Cost:" + props.cost : "Owned"}</h2>
+        </div>
+    );
+};
 
 export default AvailableTheme;

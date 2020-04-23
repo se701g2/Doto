@@ -32,6 +32,11 @@ const userschema = mongoose.Schema({
         type: Number,
         default: 0,
     },
+    unlockedItems: [
+        {
+            type: String,
+        },
+    ],
 });
 
 userschema.plugin(uniqueValidator);

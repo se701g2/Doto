@@ -20,6 +20,7 @@ const themeCost = {
 };
 
 const MarketPlace = props => {
+    const unlockedItems = new Set(props.unlockedItems);
     return (
         <div>
             <div className="market-content-box">
@@ -29,6 +30,7 @@ const MarketPlace = props => {
                     htmlColour="#3700b3"
                     handleThemeClick={props.handleThemeClick}
                     buyItem={props.buyItem}
+                    locked={false}
                 />
                 <AvailableTheme
                     colour="green"
@@ -36,6 +38,7 @@ const MarketPlace = props => {
                     htmlColour="#2e7d32"
                     handleThemeClick={props.handleThemeClick}
                     buyItem={props.buyItem}
+                    locked={!unlockedItems.has("green")}
                 />
                 <AvailableTheme
                     colour="gray"
@@ -43,6 +46,7 @@ const MarketPlace = props => {
                     htmlColour="gray"
                     handleThemeClick={props.handleThemeClick}
                     buyItem={props.buyItem}
+                    locked={!unlockedItems.has("gray")}
                 />
                 <AvailableTheme
                     colour="magenta"
@@ -50,6 +54,7 @@ const MarketPlace = props => {
                     htmlColour="magenta"
                     handleThemeClick={props.handleThemeClick}
                     buyItem={props.buyItem}
+                    locked={!unlockedItems.has("magenta")}
                 />
 
                 <br></br>
@@ -60,6 +65,7 @@ const MarketPlace = props => {
                     htmlColour="purple"
                     handleThemeClick={props.handleThemeClick}
                     buyItem={props.buyItem}
+                    locked={!unlockedItems.has("purple")}
                 />
                 <AvailableTheme
                     colour="crimson"
@@ -67,6 +73,7 @@ const MarketPlace = props => {
                     htmlColour="crimson"
                     handleThemeClick={props.handleThemeClick}
                     buyItem={props.buyItem}
+                    locked={!unlockedItems.has("crimson")}
                 />
                 <AvailableTheme
                     colour="red"
@@ -74,6 +81,7 @@ const MarketPlace = props => {
                     htmlColour="red"
                     handleThemeClick={props.handleThemeClick}
                     buyItem={props.buyItem}
+                    locked={!unlockedItems.has("red")}
                 />
                 <AvailableTheme
                     colour="black"
@@ -81,6 +89,7 @@ const MarketPlace = props => {
                     htmlColour="black"
                     handleThemeClick={props.handleThemeClick}
                     buyItem={props.buyItem}
+                    locked={!unlockedItems.has("black")}
                 />
 
                 <br></br>
@@ -91,6 +100,7 @@ const MarketPlace = props => {
                     htmlColour="darkSeaGreen"
                     handleThemeClick={props.handleThemeClick}
                     buyItem={props.buyItem}
+                    locked={!unlockedItems.has("darkSeaGreen")}
                 />
                 <AvailableTheme
                     colour="antiqueWhite"
@@ -98,6 +108,7 @@ const MarketPlace = props => {
                     htmlColour="antiqueWhite"
                     handleThemeClick={props.handleThemeClick}
                     buyItem={props.buyItem}
+                    locked={!unlockedItems.has("antiqueWhite")}
                 />
                 <AvailableTheme
                     colour="darkKhaki"
@@ -105,6 +116,7 @@ const MarketPlace = props => {
                     htmlColour="darkKhaki"
                     handleThemeClick={props.handleThemeClick}
                     buyItem={props.buyItem}
+                    locked={!unlockedItems.has("darkKhaki")}
                 />
                 <AvailableTheme
                     colour="darkSlateBlue"
@@ -112,6 +124,7 @@ const MarketPlace = props => {
                     htmlColour="darkSlateBlue"
                     handleThemeClick={props.handleThemeClick}
                     buyItem={props.buyItem}
+                    locked={!unlockedItems.has("darkSlateBlue")}
                 />
             </div>
         </div>

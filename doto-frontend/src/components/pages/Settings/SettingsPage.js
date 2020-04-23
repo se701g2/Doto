@@ -164,7 +164,11 @@ const ThemePicker = props => {
             <div className="flex">
                 <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
 
-                <MarketPlace handleThemeClick={handleThemeClick} buyItem={props.onBuyItem}></MarketPlace>
+                <MarketPlace
+                    handleThemeClick={handleThemeClick}
+                    buyItem={props.onBuyItem}
+                    unlockedItems={props.unlockedItems}
+                ></MarketPlace>
             </div>
         </div>
     );
@@ -179,6 +183,7 @@ const SettingsPage = () => {
     const [startTime, setStartTime] = activeHoursStart;
     const [endTime, setEndTime] = activeHoursEnd;
     const [userPoints, setUserPoints] = useState(0);
+    const [unlockedItems, setUnlockedItems] = useState([]);
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -190,6 +195,7 @@ const SettingsPage = () => {
             setStartTime(userInfo.startTime);
             setEndTime(userInfo.endTime);
             setUserPoints(userInfo.points);
+            setUnlockedItems(userInfo.unlockedItems || []);
         };
         fetchUserInfo();
     }, [setTheme, setStartTime, setEndTime]);
@@ -206,9 +212,11 @@ const SettingsPage = () => {
         DotoService.updateUserInfo({ themePreference: theme, startTime, newTime }).then(setEndTime(newTime));
     };
 
-    const handleBuyItem = cost => {
-        DotoService.updateUserInfo({ points: userPoints - cost });
+    const handleBuyItem = (cost, item) => {
+        const newUnlockedItems = [...unlockedItems, item];
+        DotoService.updateUserInfo({ points: userPoints - cost, unlockedItems: newUnlockedItems });
         setUserPoints(userPoints - cost);
+        setUnlockedItems(newUnlockedItems);
     };
 
     return (
@@ -231,7 +239,12 @@ const SettingsPage = () => {
                     <InputNameField name={name} />
                     <InputEmailField email={email} />
 
-                    <ThemePicker changeTheme={changeTheme} onBuyItem={handleBuyItem} userPoints={userPoints} />
+                    <ThemePicker
+                        changeTheme={changeTheme}
+                        onBuyItem={handleBuyItem}
+                        userPoints={userPoints}
+                        unlockedItems={unlockedItems}
+                    />
                     <WorkingHoursPicker
                         startTime={startTime}
                         endTime={endTime}
