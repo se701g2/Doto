@@ -28,6 +28,10 @@ const userschema = mongoose.Schema({
         type: Date,
         default: new Date(new Date().setHours(19, 0, 0, 0)),
     },
+    points: {
+        type: Number,
+        default: 0,
+    },
 });
 
 userschema.plugin(uniqueValidator);

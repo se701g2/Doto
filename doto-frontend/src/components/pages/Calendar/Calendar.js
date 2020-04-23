@@ -56,7 +56,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Calendar = () => {
-    var pointRef = React.createRef();
     var streakRef = React.createRef();
 
     const classes = useStyles();
@@ -67,6 +66,7 @@ const Calendar = () => {
     const [statsOpen, setStatsOpen] = useState(false);
     const [theme, setTheme] = useContext(ThemeContext);
     const [priorityStats, setPriorityStats] = useState([]);
+    const [userPoints, setUserPoints] = useState(0);
 
     const handleIsScoreOpen = () => {
         if (isOpenScore) {
@@ -110,6 +110,7 @@ const Calendar = () => {
         const fetchUserInfo = async () => {
             const userInfo = await DotoService.getUserInfo();
             setTheme(userInfo.themePreference);
+            setUserPoints(userInfo.points);
         };
         fetchUserInfo();
         fetchTasks();
@@ -135,6 +136,11 @@ const Calendar = () => {
         await DotoService.deleteTask(taskId);
     };
 
+    const changePoints = change => {
+        DotoService.updateUserInfo({ points: userPoints + change });
+        setUserPoints(userPoints + change);
+    };
+
     const handleTaskStatusUpdated = taskId => {
         const newTasks = [...tasks];
         const taskToUpdate = newTasks.find(task => task.taskId === taskId);
@@ -145,7 +151,7 @@ const Calendar = () => {
             ? taskToUpdate.duration
             : Math.abs(taskToUpdate.startDate - taskToUpdate.endDate) / 1000 / 60;
         // if task is completed, increase points, otherwise, decrease points
-        taskToUpdate.isComplete ? pointRef.current.changePoints(-minutes) : pointRef.current.changePoints(minutes);
+        taskToUpdate.isComplete ? changePoints(-minutes) : changePoints(minutes);
 
         // update task
         taskToUpdate.isComplete = !taskToUpdate.isComplete;
@@ -219,7 +225,7 @@ const Calendar = () => {
                 </div>
                 <div>
                     <h2>Points</h2>
-                    <Points ref={pointRef} avatarClass={classes.blue} />
+                    <Points avatarClass={classes.blue} value={userPoints} />
                 </div>
                 <div>
                     <Streak tasks={[...tasks]} ref={streakRef} />

@@ -119,7 +119,6 @@ const useStyles = makeStyles(theme => ({
 // Using props to change the colour theme of the webpage when changed by the user
 const ThemePicker = props => {
     const classes = useStyles();
-    var pointRef = React.createRef();
 
     const handleThemeClick = (themeColour, cost) => {
         // @params themeColour and cost
@@ -157,20 +156,15 @@ const ThemePicker = props => {
         }
     };
 
-    const buyItem = cost => {
-        pointRef.current.changePoints(-cost);
-        // TODO: Link this with the user stored points (when it gets stored)
-    };
-
     return (
         <div>
             <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Available Points: </h2>
-            <Points ref={pointRef} avatarClass={classes.blue} />
+            <Points avatarClass={classes.blue} value={props.userPoints} />
             <br></br>
             <div className="flex">
                 <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
 
-                <MarketPlace handleThemeClick={handleThemeClick} buyItem={buyItem}></MarketPlace>
+                <MarketPlace handleThemeClick={handleThemeClick} buyItem={props.onBuyItem}></MarketPlace>
             </div>
         </div>
     );
@@ -184,6 +178,7 @@ const SettingsPage = () => {
     const [email, setEmail] = useState();
     const [startTime, setStartTime] = activeHoursStart;
     const [endTime, setEndTime] = activeHoursEnd;
+    const [userPoints, setUserPoints] = useState(0);
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -194,20 +189,26 @@ const SettingsPage = () => {
             setEmail(userInfo.email);
             setStartTime(userInfo.startTime);
             setEndTime(userInfo.endTime);
+            setUserPoints(userInfo.points);
         };
         fetchUserInfo();
     }, [setTheme, setStartTime, setEndTime]);
 
     const changeTheme = newTheme => {
-        DotoService.updateUserInfo(newTheme, startTime, endTime).then(setTheme(newTheme));
+        DotoService.updateUserInfo({ themePreference: newTheme, startTime, endTime }).then(setTheme(newTheme));
     };
 
     const changeStartTime = newTime => {
-        DotoService.updateUserInfo(theme, newTime, endTime).then(setStartTime(newTime));
+        DotoService.updateUserInfo({ themePreference: theme, newTime, endTime }).then(setStartTime(newTime));
     };
 
     const changeEndTime = newTime => {
-        DotoService.updateUserInfo(theme, startTime, newTime).then(setEndTime(newTime));
+        DotoService.updateUserInfo({ themePreference: theme, startTime, newTime }).then(setEndTime(newTime));
+    };
+
+    const handleBuyItem = cost => {
+        DotoService.updateUserInfo({ points: userPoints - cost });
+        setUserPoints(userPoints - cost);
     };
 
     return (
@@ -230,7 +231,7 @@ const SettingsPage = () => {
                     <InputNameField name={name} />
                     <InputEmailField email={email} />
 
-                    <ThemePicker changeTheme={changeTheme} />
+                    <ThemePicker changeTheme={changeTheme} onBuyItem={handleBuyItem} userPoints={userPoints} />
                     <WorkingHoursPicker
                         startTime={startTime}
                         endTime={endTime}
