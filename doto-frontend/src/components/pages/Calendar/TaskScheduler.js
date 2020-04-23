@@ -104,6 +104,7 @@ const addTaskToSchedule = (newTask, existingTasks) => {
     newTask.startDate = new Date(newTask.startDate.getTime());
 
     if (newTask.reminder) {
+        newTask.reminderType = newTask.reminder;
         newTask.reminderDate = new Date(newTask.startDate.getTime() - newTask.reminder * MILLISECONDS_PER_MINUTE);
     }
 
