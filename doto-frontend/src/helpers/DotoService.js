@@ -21,7 +21,6 @@ const taskMapper = data => {
         ...(data.priority && { priority: data.priority }),
         ...(data.location && { location: data.location }),
         isComplete: data.isComplete,
-        dueDate: data.dueDate,
     };
 };
 
