@@ -46,10 +46,14 @@ const addTaskToSchedule = (newTask, existingTasks, currDate, startTime, endTime)
             // Shift all subsequent competing tasks forward and insert the new task at the start
             for (let j = i; j < competingTasks.length; j++) {
                 competingTasks[j].startDate = new Date(
-                    competingTasks[j].startDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE,
+                    competingTasks[j].startDate.getTime() +
+                        newTask.duration * MILLISECONDS_PER_MINUTE +
+                        newTask.travelTime * MILLISECONDS_PER_MINUTE,
                 );
                 competingTasks[j].endDate = new Date(
-                    competingTasks[j].endDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE,
+                    competingTasks[j].endDate.getTime() +
+                        newTask.duration * MILLISECONDS_PER_MINUTE +
+                        newTask.travelTime * MILLISECONDS_PER_MINUTE,
                 );
             }
 
@@ -60,6 +64,7 @@ const addTaskToSchedule = (newTask, existingTasks, currDate, startTime, endTime)
                     newTask.duration * MILLISECONDS_PER_MINUTE +
                     newTask.travelTime * MILLISECONDS_PER_MINUTE,
             );
+
             // Insert the new task at the specified index
             competingTasks.splice(i, 0, newTask);
 
@@ -78,6 +83,7 @@ const addTaskToSchedule = (newTask, existingTasks, currDate, startTime, endTime)
     newTask.startDate = new Date(newTask.startDate.getTime());
 
     if (newTask.reminder) {
+        newTask.reminderType = newTask.reminder;
         newTask.reminderDate = new Date(newTask.startDate.getTime() - newTask.reminder * MILLISECONDS_PER_MINUTE);
     }
 
