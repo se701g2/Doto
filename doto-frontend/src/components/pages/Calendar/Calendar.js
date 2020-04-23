@@ -68,7 +68,7 @@ const Calendar = () => {
 
     // Adds new task based on input fields from Modal
     const addNewTask = (newTask, currentDate) => {
-        const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks, currentDate);
+        const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks);
         newTask.taskId = uuidv4();
         setTasks(newTaskOrder);
         handleClose();
