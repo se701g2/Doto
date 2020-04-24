@@ -54,6 +54,16 @@
       ]
     },
     {
+      "login": "qibao0722",
+      "name": "Xiaoji Sun",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/53366211?v=4",
+      "profile": "https://github.com/qibao0722",
+      "contributions": [
+        "code",
+        "design"
+      ]
+    },
+    {
       "login": "PreetPatel",
       "name": "Preet Patel",
       "avatar_url": "https://avatars1.githubusercontent.com/u/22407548?v=4",
@@ -73,7 +83,32 @@
       "contributions": [
         "code",
         "review",
-        "design"
+        "design",
+        "test"
+      ]
+    },
+    {
+      "login": "harmanlamba",
+      "name": "Harman Lamba",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/40023122?v=4",
+      "profile": "https://github.com/harmanlamba",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "test"
+      ]
+    },
+    {
+      "login": "salma-s",
+      "name": "salma-s",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/43306586?v=4",
+      "profile": "https://github.com/salma-s",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "test"
       ]
     }
   ],
