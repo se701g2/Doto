@@ -9,11 +9,10 @@ const MILLISECONDS_PER_MINUTE = 60000;
  *
  * @param {object} newTasks The new tasks to schedule, with no start/end datetimes present
  * @param {Array<object>} existingTasks The existing scheduled tasks, with start/end datetimes present
- * @param {Date} currDate The datetime after which the task should be scheduled (usually the current datetime)
  * @returns A chronologically ordered (based on startDate) array of all tasks scheduled with start/end
  * datetimes - essentially existingTasks + newTasks
  */
-const addTaskToSchedule = (newTask, existingTasks, currDate) => {
+const addTaskToSchedule = (newTask, existingTasks) => {
     // TODO: Take into account any possible gap between datetime and startDate of the first task in oldTasks
     // TODO: Take into account priority of tasks
     // TODO: Take into account location of tasks, add time gaps to allow for travel
@@ -21,18 +20,41 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
     const competingTasks = [];
     const oldTasks = [];
 
-    // Separate existing tasks with a startDate > current datetime from older tasks (which won't be considered)
+    // filter existing tasks to get tasks with a startDate > earliestDate
     existingTasks.forEach(task => {
-        task.startDate > currDate ? competingTasks.push(task) : oldTasks.push(task);
+        task.startDate > newTask.earliestDate ? competingTasks.push(task) : oldTasks.push(task);
     });
 
-    // If the endDate of the latest oldTask is after currDate, then the earliest any new task can be scheduled is oldTask.endDate
+    // If the endDate of the latest oldTask is after earliest start date, then the earliest any new task can be scheduled is oldTask.endDate
     const minDate =
-        (oldTasks[0] && oldTasks[oldTasks.length - 1].endDate) > currDate
+        (oldTasks[0] && oldTasks[oldTasks.length - 1].endDate) > newTask.earliestDate
             ? oldTasks[oldTasks.length - 1].endDate
-            : currDate;
+            : newTask.earliestDate;
 
     let cTask;
+
+    const earliestPossibleEnd = new Date(
+        newTask.earliestDate.getTime() +
+            newTask.duration * MILLISECONDS_PER_MINUTE +
+            newTask.travelTime * MILLISECONDS_PER_MINUTE,
+    );
+
+    if (competingTasks.length > 0) {
+        if (earliestPossibleEnd < competingTasks[0].startDate && newTask.dueDate < competingTasks[0].dueDate) {
+            newTask.startDate = new Date(newTask.earliestDate.getTime());
+            newTask.endDate = earliestPossibleEnd;
+
+            if (newTask.reminder) {
+                newTask.reminderDate = new Date(
+                    newTask.startDate.getTime() - newTask.reminder * MILLISECONDS_PER_MINUTE,
+                );
+            }
+            return {
+                newTaskOrder: [...oldTasks, newTask, ...competingTasks],
+                updatedTask: newTask,
+            };
+        }
+    }
 
     // Schedule tasks based on earliest dueDate (Earliest Deadline First)
     for (let i = 0; i < competingTasks.length; i++) {
@@ -44,10 +66,14 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
             // Shift all subsequent competing tasks forward and insert the new task at the start
             for (let j = i; j < competingTasks.length; j++) {
                 competingTasks[j].startDate = new Date(
-                    competingTasks[j].startDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE,
+                    competingTasks[j].startDate.getTime() +
+                        newTask.duration * MILLISECONDS_PER_MINUTE +
+                        newTask.travelTime * MILLISECONDS_PER_MINUTE,
                 );
                 competingTasks[j].endDate = new Date(
-                    competingTasks[j].endDate.getTime() + newTask.duration * MILLISECONDS_PER_MINUTE,
+                    competingTasks[j].endDate.getTime() +
+                        newTask.duration * MILLISECONDS_PER_MINUTE +
+                        newTask.travelTime * MILLISECONDS_PER_MINUTE,
                 );
             }
 
@@ -58,6 +84,12 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
                     newTask.duration * MILLISECONDS_PER_MINUTE +
                     newTask.travelTime * MILLISECONDS_PER_MINUTE,
             );
+
+            if (newTask.reminder) {
+                newTask.reminderDate = new Date(
+                    newTask.startDate.getTime() - newTask.reminder * MILLISECONDS_PER_MINUTE,
+                );
+            }
             // Insert the new task at the specified index
             competingTasks.splice(i, 0, newTask);
             return {
@@ -72,6 +104,7 @@ const addTaskToSchedule = (newTask, existingTasks, currDate) => {
     newTask.startDate = new Date(newTask.startDate.getTime());
 
     if (newTask.reminder) {
+        newTask.reminderType = newTask.reminder;
         newTask.reminderDate = new Date(newTask.startDate.getTime() - newTask.reminder * MILLISECONDS_PER_MINUTE);
     }
 
