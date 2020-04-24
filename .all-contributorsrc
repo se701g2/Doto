@@ -74,6 +74,17 @@
         "design",
         "doc"
       ]
+    },
+    {
+      "login": "salma-s",
+      "name": "salma-s",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/43306586?v=4",
+      "profile": "https://github.com/salma-s",
+      "contributions": [
+        "code",
+        "review",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
