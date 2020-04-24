@@ -76,6 +76,18 @@
       ]
     },
     {
+      "login": "EricPedrido",
+      "name": "Eric Pedrido",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/43208889?v=4",
+      "profile": "https://github.com/EricPedrido",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "test"
+      ]
+    },
+    {
       "login": "harmanlamba",
       "name": "Harman Lamba",
       "avatar_url": "https://avatars1.githubusercontent.com/u/40023122?v=4",
@@ -83,7 +95,8 @@
       "contributions": [
         "code",
         "review",
-        "design"
+        "design",
+        "test"
       ]
     },
     {
@@ -94,7 +107,8 @@
       "contributions": [
         "code",
         "review",
-        "design"
+        "design",
+        "test"
       ]
     }
   ],
