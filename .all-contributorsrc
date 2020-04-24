@@ -110,6 +110,19 @@
         "design",
         "test"
       ]
+    },
+    {
+      "login": "Minus20Five",
+      "name": "Tony Liu",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/20623467?v=4",
+      "profile": "https://github.com/Minus20Five",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "doc",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
