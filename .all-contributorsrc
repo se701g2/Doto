@@ -123,6 +123,18 @@
         "doc",
         "test"
       ]
+    },
+    {
+      "login": "HarrisonLeach1",
+      "name": "Harrison Leach",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/44953072?v=4",
+      "profile": "https://harrisonleach1.github.io",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
