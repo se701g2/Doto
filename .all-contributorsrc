@@ -62,6 +62,18 @@
         "code",
         "design"
       ]
+    },
+    {
+      "login": "PreetPatel",
+      "name": "Preet Patel",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/22407548?v=4",
+      "profile": "http://PreetPatel.com",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
