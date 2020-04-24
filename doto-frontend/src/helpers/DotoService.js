@@ -21,6 +21,7 @@ const taskMapper = data => {
         ...(data.priority && { priority: data.priority }),
         ...(data.location && { location: data.location }),
         isComplete: data.isComplete,
+        earliestDate: new Date(data.earliestDate),
     };
 };
 
@@ -72,6 +73,7 @@ const DotoService = {
             ...(task.priority && { priority: task.priority }),
             ...(task.location && { location: task.location }),
             isComplete: false,
+            earliestDate: task.earliestDate.toString(),
         };
 
         axios({

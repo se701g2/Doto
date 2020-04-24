@@ -80,6 +80,7 @@ const ModalContent = props => {
             setEarliestDate("invalid date");
         }
     };
+
     const handleLocationChange = event => {
         setSelectedLocation(event.target.value);
     };

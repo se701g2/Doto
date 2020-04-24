@@ -262,6 +262,10 @@
                 "reminderType": {
                     "type": "integer",
                     "uniqueItems": false
+                },
+                "earliestDate": {
+                    "type": "date",
+                    "uniqueItems": false
                 }
             }
         },

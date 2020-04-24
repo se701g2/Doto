@@ -38,6 +38,7 @@ const UpdateModalContent = props => {
     const [selectedName, setSelectedName] = useState(props.taskToUpdate.title);
     const [selectedDescription, setSelectedDescription] = useState(props.taskToUpdate.description);
     const [selectedDueDate, setSelectedDueDate] = useState(new Date());
+    const [selectedEarliestDate, setSelectedEarliestDate] = useState(props.taskToUpdate.earliestDate);
 
     // default duration is 1 hour
     var initialDuration = new Date();
@@ -64,6 +65,7 @@ const UpdateModalContent = props => {
         setSelectedLocation(props.taskToUpdate.location || "");
         setSelectedPriority(props.taskToUpdate.priority || "");
         setSelectedReminder(props.taskToUpdate.reminderType || "");
+        setSelectedEarliestDate(convertMinutesToDateTime(props.taskToUpdate.earliestDate));
     }, [props.taskToUpdate]);
 
     // ----- HANDLERS FOR INPUT FIELDS -----
@@ -79,7 +81,15 @@ const UpdateModalContent = props => {
         if (date > new Date()) {
             setSelectedDueDate(date);
         } else {
-            setSelectedDueDate("invalid beans");
+            setSelectedDueDate("invalid date");
+        }
+    };
+
+    const handleEarliestChange = date => {
+        if (date > new Date()) {
+            setSelectedEarliestDate(date);
+        } else {
+            setSelectedEarliestDate("invalid date");
         }
     };
 
@@ -111,6 +121,7 @@ const UpdateModalContent = props => {
             title: selectedName,
             description: selectedDescription,
             dueDate: selectedDueDate,
+            earliestDate: selectedEarliestDate,
             duration: selectedDuration.getHours() * 60 + selectedDuration.getMinutes(),
             travelTime: selectedTravelTime.getHours() * 60 + selectedTravelTime.getMinutes(),
             location: selectedLocation,
@@ -171,6 +182,28 @@ const UpdateModalContent = props => {
                                 label="Due Date"
                                 value={selectedDueDate}
                                 onChange={handleDateChange}
+                                KeyboardButtonProps={{
+                                    "aria-label": "Change date/time",
+                                }}
+                            />
+                        </MuiPickersUtilsProvider>
+                    </div>
+                    <div>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDateTimePicker
+                                disableToolbar
+                                autoOk={true}
+                                minDate={new Date()}
+                                minDateMessage="Date must be after now"
+                                invalidDateMessage="Date must be after now"
+                                variant="inline"
+                                format="MM/dd/yyyy HH:mm"
+                                ampm={false}
+                                margin="normal"
+                                id="date-picker-inline"
+                                label="Earliest Start"
+                                value={selectedEarliestDate}
+                                onChange={handleEarliestChange}
                                 KeyboardButtonProps={{
                                     "aria-label": "Change date/time",
                                 }}
