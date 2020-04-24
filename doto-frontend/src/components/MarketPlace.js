@@ -1,4 +1,3 @@
-/* @author: Utsav Trivedi */
 import React from "react";
 import "./MarketPlace.css";
 import AvailableTheme from "./AvailableTheme";
