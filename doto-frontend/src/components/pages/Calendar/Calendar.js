@@ -73,14 +73,8 @@ const Calendar = () => {
     }, [setTheme, setStartTime, setEndTime]);
 
     // Adds new task based on input fields from Modal
-    const addNewTask = async (newTask, currentDate) => {
-        const { newTaskOrder, updatedTask } = addTaskToSchedule(
-            newTask,
-            tasks,
-            currentDate,
-            new Date(startTime),
-            new Date(endTime),
-        );
+    const addNewTask = async newTask => {
+        const { newTaskOrder, updatedTask } = addTaskToSchedule(newTask, tasks, new Date(startTime), new Date(endTime));
         newTask.taskId = uuidv4();
         newTask.id = newTask.taskId;
         setTasks(newTaskOrder);
