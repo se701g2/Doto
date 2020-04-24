@@ -46,7 +46,8 @@ class Streak extends React.Component {
     }
 
     componentDidMount() {
-        this.interval = setInterval(() => this.updateStreak(), 1000);
+        // update streak every minute incase a previous task becomes overdue; streak would be set to 0
+        this.interval = setInterval(() => this.updateStreak(), 1000 * 60);
     }
 
     render() {
