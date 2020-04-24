@@ -14,7 +14,5 @@
       "pre-commit": "lerna run --concurrency 1 --stream precommit --since HEAD"
     }
   },
-  "dependencies": {
-    "react-minimal-pie-chart": "^7.2.0"
-  }
+  "dependencies": {}
 }
