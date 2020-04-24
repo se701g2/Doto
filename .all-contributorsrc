@@ -64,6 +64,17 @@
         "design",
         "doc"
       ]
+    },
+    {
+      "login": "EricPedrido",
+      "name": "Eric Pedrido",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/43208889?v=4",
+      "profile": "https://github.com/EricPedrido",
+      "contributions": [
+        "code",
+        "review",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
