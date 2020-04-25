@@ -14,6 +14,12 @@ import { ActiveHoursContext } from "../../../context/ActiveHoursContext";
 import { Themes } from "../../../constants/Themes";
 import "./SettingsPage.css";
 import "../Pages.css";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import { shiftTasks } from "../Calendar/TaskShifter";
 
 const classnames = require("classnames");
 
@@ -62,6 +68,21 @@ const ProfilePhoto = props => {
 
 // TODO: Implement logic for working hours in sync with task-scheduling algorithm
 const WorkingHoursPicker = props => {
+    const [dialog, setDialog] = useState(false);
+
+    const handleClickOpen = () => {
+        setDialog(true);
+    };
+
+    const handleClose = () => {
+        setDialog(false);
+    };
+
+    const handleCloseAndSave = () => {
+        setDialog(false);
+        props.saveChanges(props.startTime, props.endTime);
+    };
+
     const handleStartTimeChange = date => {
         props.changeStartTime(date);
     };
@@ -100,6 +121,32 @@ const WorkingHoursPicker = props => {
                     />
                 </MuiPickersUtilsProvider>
             </div>
+            <div style={{ marginLeft: "3vw", marginTop: "3vh", textAlign: "left" }}>
+                <Button variant="contained" color="secondary" onClick={handleClickOpen}>
+                    Save
+                </Button>
+                <Dialog
+                    open={dialog}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Want to save those changes?"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Your time-table will be re-managed automatically. Please check again.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                            Cancle
+                        </Button>
+                        <Button onClick={handleCloseAndSave} color="primary" autoFocus>
+                            Ok
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
         </Grid>
     );
 };
@@ -135,8 +182,13 @@ const SettingsPage = () => {
     const [email, setEmail] = useState();
     const [startTime, setStartTime] = activeHoursStart;
     const [endTime, setEndTime] = activeHoursEnd;
+    const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
+        const fetchTasks = async () => {
+            const tasks = await DotoService.getTasks();
+            setTasks(tasks);
+        };
         const fetchUserInfo = async () => {
             const userInfo = await DotoService.getUserInfo();
             setTheme(userInfo.themePreference);
@@ -147,6 +199,7 @@ const SettingsPage = () => {
             setEndTime(userInfo.endTime);
         };
         fetchUserInfo();
+        fetchTasks();
     }, [setTheme, setStartTime, setEndTime]);
 
     const changeTheme = newTheme => {
@@ -154,11 +207,19 @@ const SettingsPage = () => {
     };
 
     const changeStartTime = newTime => {
-        DotoService.updateUserInfo(theme, newTime, endTime).then(setStartTime(newTime));
+        setStartTime(newTime);
     };
 
     const changeEndTime = newTime => {
-        DotoService.updateUserInfo(theme, startTime, newTime).then(setEndTime(newTime));
+        setEndTime(newTime);
+    };
+
+    const saveChanges = (newStartTime, newEndTime) => {
+        DotoService.updateUserInfo(theme, newStartTime, newEndTime);
+        const { shiftedTasks } = shiftTasks(tasks, new Date(newStartTime), new Date(newEndTime));
+        for (let i = 0; i < shiftedTasks.length; i++) {
+            DotoService.updateTask(shiftedTasks[i]);
+        }
     };
 
     return (
@@ -187,6 +248,7 @@ const SettingsPage = () => {
                         endTime={endTime}
                         changeStartTime={changeStartTime}
                         changeEndTime={changeEndTime}
+                        saveChanges={saveChanges}
                     />
                 </div>
             </span>
