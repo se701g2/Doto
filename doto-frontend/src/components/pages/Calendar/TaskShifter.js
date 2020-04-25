@@ -20,6 +20,7 @@ const shiftTasks = (scheduledTasks, startTime, endTime) => {
     for (let i = 0; i < tasks.length; i++) {
         const taskStart = tasks[i].startDate.getHours() * 60 + tasks[i].startDate.getMinutes();
         const taskEnd = tasks[i].endDate.getHours() * 60 + tasks[i].endDate.getMinutes();
+        const shiftToTomorrow = startActingHour + 1440 - taskStart;
 
         // if the start time of task is earlier than start working time, then shift it and all tasks after it based on startActingHour - taskStart
         // if the end time of task is later than end working time, then shift it and all tasks after it based on startActingHour + 1440 - taskStart
@@ -34,12 +35,8 @@ const shiftTasks = (scheduledTasks, startTime, endTime) => {
             }
         } else if (taskEnd > endActingHour) {
             for (let j = i; j < tasks.length; j++) {
-                tasks[j].startDate = new Date(
-                    tasks[j].startDate.getTime() + (startActingHour + 1440 - taskStart) * MILLISECONDS_PER_MINUTE,
-                );
-                tasks[j].endDate = new Date(
-                    tasks[j].endDate.getTime() + (startActingHour + 1440 - taskStart) * MILLISECONDS_PER_MINUTE,
-                );
+                tasks[j].startDate = new Date(tasks[j].startDate.getTime() + shiftToTomorrow * MILLISECONDS_PER_MINUTE);
+                tasks[j].endDate = new Date(tasks[j].endDate.getTime() + shiftToTomorrow * MILLISECONDS_PER_MINUTE);
             }
         }
     }

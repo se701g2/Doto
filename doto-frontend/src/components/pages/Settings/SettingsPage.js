@@ -122,7 +122,7 @@ const WorkingHoursPicker = props => {
                 </MuiPickersUtilsProvider>
             </div>
             <div style={{ marginLeft: "3vw", marginTop: "3vh", textAlign: "left" }}>
-                <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+                <Button variant="contained" color="secondary" onClick={handleClickOpen}>
                     Save
                 </Button>
                 <Dialog
@@ -134,15 +134,15 @@ const WorkingHoursPicker = props => {
                     <DialogTitle id="alert-dialog-title">{"Want to save those changes?"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            Your time table will be re-managed automatically. Please check again.
+                            Your time-table will be re-managed automatically. Please check again.
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose} color="primary">
-                            Disagree
+                            Cancle
                         </Button>
                         <Button onClick={handleCloseAndSave} color="primary" autoFocus>
-                            Agree
+                            Ok
                         </Button>
                     </DialogActions>
                 </Dialog>
