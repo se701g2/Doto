@@ -37,7 +37,7 @@ const UpdateModalContent = props => {
 
     const [selectedName, setSelectedName] = useState(props.taskToUpdate.title);
     const [selectedDescription, setSelectedDescription] = useState(props.taskToUpdate.description);
-    const [selectedDueDate, setSelectedDueDate] = useState(new Date());
+    const [selectedDueDate, setSelectedDueDate] = useState(props.taskToUpdate.dueDate);
     const [selectedEarliestDate, setSelectedEarliestDate] = useState(props.taskToUpdate.earliestDate);
 
     // default duration is 1 hour
@@ -55,6 +55,8 @@ const UpdateModalContent = props => {
     const [selectedLocation, setSelectedLocation] = useState(props.taskToUpdate.location);
     const [selectedPriority, setSelectedPriority] = useState("");
     const [selectedReminder, setSelectedReminder] = useState("");
+    const [dueDateValid, setDueDateValid] = useState(props.taskToUpdate.dueDate > new Date());
+    const [earliestDateValid, setEarliestDateValid] = useState(props.taskToUpdate.earliestDate >= new Date());
 
     useEffect(() => {
         setSelectedName(props.taskToUpdate.title || "");
@@ -65,7 +67,7 @@ const UpdateModalContent = props => {
         setSelectedLocation(props.taskToUpdate.location || "");
         setSelectedPriority(props.taskToUpdate.priority || "");
         setSelectedReminder(props.taskToUpdate.reminderType || "");
-        setSelectedEarliestDate(convertMinutesToDateTime(props.taskToUpdate.earliestDate));
+        setSelectedEarliestDate(props.taskToUpdate.earliestDate || "");
     }, [props.taskToUpdate]);
 
     // ----- HANDLERS FOR INPUT FIELDS -----
@@ -80,16 +82,20 @@ const UpdateModalContent = props => {
     const handleDateChange = date => {
         if (date > new Date()) {
             setSelectedDueDate(date);
+            setDueDateValid(true);
         } else {
             setSelectedDueDate("invalid date");
+            setDueDateValid(false);
         }
     };
 
     const handleEarliestChange = date => {
-        if (date > new Date()) {
+        if (date >= new Date()) {
             setSelectedEarliestDate(date);
+            setEarliestDateValid(true);
         } else {
             setSelectedEarliestDate("invalid date");
+            setEarliestDateValid(false);
         }
     };
 
@@ -185,6 +191,7 @@ const UpdateModalContent = props => {
                                 KeyboardButtonProps={{
                                     "aria-label": "Change date/time",
                                 }}
+                                error={!dueDateValid}
                             />
                         </MuiPickersUtilsProvider>
                     </div>
@@ -207,6 +214,7 @@ const UpdateModalContent = props => {
                                 KeyboardButtonProps={{
                                     "aria-label": "Change date/time",
                                 }}
+                                error={!earliestDateValid}
                             />
                         </MuiPickersUtilsProvider>
                     </div>
@@ -279,7 +287,12 @@ const UpdateModalContent = props => {
                 </form>
             </div>
             <div id="add-button">
-                <Button variant="contained" color="default" onClick={handleUpdate}>
+                <Button
+                    variant="contained"
+                    color="default"
+                    onClick={handleUpdate}
+                    disabled={!(dueDateValid && earliestDateValid)}
+                >
                     Update
                 </Button>
             </div>
