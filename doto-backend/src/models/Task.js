@@ -59,7 +59,7 @@ const taskSchema = mongoose.Schema({
         required: false,
     },
     category: {
-        type: String,
+        type: Number,
     },
 });
 

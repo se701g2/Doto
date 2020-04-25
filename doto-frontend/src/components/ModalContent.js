@@ -249,10 +249,10 @@ const ModalContent = props => {
                         <FormControl className={classes.formControl}>
                             <InputLabel id="category-label">Category</InputLabel>
                             <Select value={selectedCategory} onChange={handleCategory}>
-                                <MenuItem value={"#FF6900"}>Homework</MenuItem>
-                                <MenuItem value={"#7BDCB5"}>Work</MenuItem>
-                                <MenuItem value={"#00D084"}>Household</MenuItem>
-                                <MenuItem value={"#F78DA7"}>Personal</MenuItem>
+                                <MenuItem value={1}>Homework</MenuItem>
+                                <MenuItem value={2}>Work</MenuItem>
+                                <MenuItem value={3}>Household</MenuItem>
+                                <MenuItem value={4}>Personal</MenuItem>
                             </Select>
                         </FormControl>
                     </div>

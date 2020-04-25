@@ -4,6 +4,7 @@ import { ViewState, EditingState, IntegratedEditing } from "@devexpress/dx-react
 import PropTypes from "prop-types";
 import {
     Scheduler,
+    Resources,
     WeekView,
     MonthView,
     DayView,
@@ -30,6 +31,7 @@ import Fade from "@material-ui/core/Fade";
 import UpdateModalContent from "../../updateModal/UpdateModalContent";
 import { makeStyles } from "@material-ui/core/styles";
 import { ThemeContext } from "../../../context/ThemeContext";
+import { categoryData } from "../../../constants/Categories";
 
 const CalendarComponent = ({ tasks, onTaskStatusUpdated, onTaskDeleted, onTaskUpdated, onCommitChanges }) => {
     return (
@@ -56,9 +58,17 @@ const CalendarComponent = ({ tasks, onTaskStatusUpdated, onTaskDeleted, onTaskUp
                     />
                 )}
             />
+            <Resources data={resources} mainResourceName="category" />
         </Scheduler>
     );
 };
+
+const resources = [
+    {
+        fieldName: "category",
+        instances: categoryData,
+    },
+];
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -186,7 +196,6 @@ const Appointment = ({ children, style, ...restProps }) => (
                 ? { ...style, backgroundColor: "#adadad" }
                 : {
                       style,
-                      backgroundColor: restProps.data.category,
                   }
         }
     >
