@@ -186,6 +186,7 @@ const Appointment = ({ children, style, ...restProps }) => (
                 ? { ...style, backgroundColor: "#adadad" }
                 : {
                       style,
+                      backgroundColor: restProps.data.category,
                   }
         }
     >

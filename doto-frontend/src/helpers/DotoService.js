@@ -19,6 +19,7 @@ const taskMapper = data => {
         reminderDate: data.reminderDate,
         ...(data.description && { description: data.description }),
         ...(data.priority && { priority: data.priority }),
+        ...(data.category && { category: data.category }),
         ...(data.location && { location: data.location }),
         isComplete: data.isComplete,
     };
@@ -70,6 +71,7 @@ const DotoService = {
             ...(task.reminderDate && { reminderDate: task.reminderDate.toString() }),
             ...(task.description && { description: task.description }),
             ...(task.priority && { priority: task.priority }),
+            ...(task.category && { category: task.category }),
             ...(task.location && { location: task.location }),
             isComplete: false,
         };
