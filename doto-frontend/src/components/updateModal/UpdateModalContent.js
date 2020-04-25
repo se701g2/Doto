@@ -54,6 +54,7 @@ const UpdateModalContent = props => {
     const [selectedLocation, setSelectedLocation] = useState(props.taskToUpdate.location);
     const [selectedPriority, setSelectedPriority] = useState("");
     const [selectedReminder, setSelectedReminder] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState("");
 
     useEffect(() => {
         setSelectedName(props.taskToUpdate.title || "");
@@ -62,6 +63,7 @@ const UpdateModalContent = props => {
         setSelectedDuration(convertMinutesToDateTime(props.taskToUpdate.duration));
         setSelectedTravelTime(convertMinutesToDateTime(props.taskToUpdate.travelTime));
         setSelectedLocation(props.taskToUpdate.location || "");
+        setSelectedCategory(props.taskToUpdate.category || "");
         setSelectedPriority(props.taskToUpdate.priority || "");
         setSelectedReminder(props.taskToUpdate.reminderType || "");
     }, [props.taskToUpdate]);
@@ -91,6 +93,10 @@ const UpdateModalContent = props => {
         setSelectedPriority(event.target.value);
     };
 
+    const handleCategory = event => {
+        setSelectedCategory(event.target.value);
+    };
+
     const handleReminder = event => {
         setSelectedReminder(event.target.value);
     };
@@ -116,6 +122,7 @@ const UpdateModalContent = props => {
             location: selectedLocation,
             priority: selectedPriority,
             reminder: selectedReminder,
+            category: selectedCategory,
         };
 
         props.onTaskUpdated(task);
@@ -226,6 +233,18 @@ const UpdateModalContent = props => {
                                 <MenuItem value={10}>High</MenuItem>
                                 <MenuItem value={20}>Medium</MenuItem>
                                 <MenuItem value={30}>Low</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <div className="drop-down">
+                        {/* Set task categories, the category will determine what colour the task has */}
+                        <FormControl className={classes.formControl}>
+                            <InputLabel id="category-label">Category</InputLabel>
+                            <Select value={selectedCategory} onChange={handleCategory}>
+                                <MenuItem value={"#FF6900"}>Homework</MenuItem>
+                                <MenuItem value={"#7BDCB5"}>Work</MenuItem>
+                                <MenuItem value={"#00D084"}>Household</MenuItem>
+                                <MenuItem value={"#F78DA7"}>Personal</MenuItem>
                             </Select>
                         </FormControl>
                     </div>
