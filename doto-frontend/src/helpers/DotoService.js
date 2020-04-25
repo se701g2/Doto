@@ -86,7 +86,7 @@ const DotoService = {
         // TODO: catch for errors depending if it didn't post properly or maybe retry mechanism
     },
     deleteTask: async taskId => {
-        axios({
+        await axios({
             method: "delete",
             url: baseUrl + `/task/${taskId}`,
             headers: { Authorization: "Bearer " + CookieManager.get("jwt") },
