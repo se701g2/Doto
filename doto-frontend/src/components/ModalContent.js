@@ -55,6 +55,8 @@ const ModalContent = props => {
     const [selectedLocation, setSelectedLocation] = useState("");
     const [selectedPriority, setSelectedPriority] = useState("");
     const [selectedReminder, setSelectedReminder] = useState("");
+    const [dueDateValid, setDueDateValid] = useState(false);
+    const [earliestDateValid, setEarliestDateValid] = useState(true);
 
     // ----- HANDLERS FOR INPUT FIELDS -----
     const handleNameChange = event => {
@@ -68,16 +70,20 @@ const ModalContent = props => {
     const handleDateChange = date => {
         if (date > new Date()) {
             setSelectedDueDate(date);
+            setDueDateValid(true);
         } else {
             setSelectedDueDate("invalid date");
+            setDueDateValid(false);
         }
     };
 
     const handleEarliestChange = date => {
-        if (date > new Date()) {
+        if (date >= new Date()) {
             setEarliestDate(date);
+            setEarliestDateValid(true);
         } else {
             setEarliestDate("invalid date");
+            setEarliestDateValid(false);
         }
     };
 
@@ -163,6 +169,7 @@ const ModalContent = props => {
                                 KeyboardButtonProps={{
                                     "aria-label": "Change date/time",
                                 }}
+                                error={!dueDateValid}
                             />
                         </MuiPickersUtilsProvider>
                     </div>
@@ -185,6 +192,7 @@ const ModalContent = props => {
                                 KeyboardButtonProps={{
                                     "aria-label": "Change date/time",
                                 }}
+                                error={!earliestDateValid}
                             />
                         </MuiPickersUtilsProvider>
                     </div>
@@ -252,7 +260,13 @@ const ModalContent = props => {
                                 <MenuItem value={5}>5 Minutes Before</MenuItem>
                             </Select>
                         </FormControl>
-                        <Button id="add-button" variant="contained" color="default" onClick={handleAdd}>
+                        <Button
+                            id="add-button"
+                            variant="contained"
+                            color="default"
+                            onClick={handleAdd}
+                            disabled={!(dueDateValid && earliestDateValid)}
+                        >
                             ADD
                         </Button>
                     </div>
