@@ -1,0 +1,14 @@
+.market-content-box {
+    display: inline-block;
+    margin: 1px auto;
+}
+
+.theme-content-box {
+    display: inline-block;
+}
+
+#color-palette {
+    margin-top: 3vh;
+    height: 40px;
+    margin: 1px auto;
+}
