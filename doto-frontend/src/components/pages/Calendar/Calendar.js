@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { blue, yellow } from "@material-ui/core/colors";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -7,10 +8,16 @@ import Fab from "@material-ui/core/Fab";
 import Tooltip from "@material-ui/core/Tooltip";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import ScoreIcon from "@material-ui/icons/Score";
 import AddIcon from "@material-ui/icons/Add";
+import PieChartIcon from "@material-ui/icons/PieChart";
 import ModalContent from "../../ModalContent";
+import Points from "../../Points";
+import Streak from "../../Streak";
+import ProductivityScore from "../../ProductivityScore";
 import CalendarComponent from "./CalendarComponent";
 import CalendarListView from "./CalendarListView";
+import UserStats from "../../UserStats";
 import Header from "../Header";
 import { ThemeContext } from "../../../context/ThemeContext";
 import { addTaskToSchedule } from "./TaskScheduler";
@@ -37,17 +44,41 @@ const useStyles = makeStyles(theme => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
+    blue: {
+        color: theme.palette.getContrastText(blue[500]),
+        backgroundColor: blue[500],
+        boxShadow: theme.shadows[5],
+    },
+    shadow: {
+        color: theme.palette.getContrastText(yellow[500]),
+        boxShadow: theme.shadows[5],
+        borderRadius: "50%",
+    },
 }));
 
 const Calendar = () => {
+    var streakRef = React.createRef();
+
     const classes = useStyles();
     const [listView, setListView] = useState();
+    const [isOpenScore, setIsOpenScore] = useState(false);
     const [tasks, setTasks] = useState([]);
     const [open, setOpen] = useState(false);
+    const [statsOpen, setStatsOpen] = useState(false);
     const [theme, setTheme] = useContext(ThemeContext);
+    const [priorityStats, setPriorityStats] = useState([]);
+    const [userPoints, setUserPoints] = useState(0);
     const { activeHoursStart, activeHoursEnd } = useContext(ActiveHoursContext);
     const [startTime, setStartTime] = activeHoursStart;
     const [endTime, setEndTime] = activeHoursEnd;
+
+    const handleIsScoreOpen = () => {
+        if (isOpenScore) {
+            setIsOpenScore(false);
+        } else {
+            setIsOpenScore(true);
+        }
+    };
 
     const handleOpen = () => {
         setOpen(true);
@@ -55,6 +86,24 @@ const Calendar = () => {
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const handleStatsOpen = () => {
+        if (statsOpen) {
+            setStatsOpen(false);
+        } else {
+            var medTasks = tasks.filter(function(task) {
+                return task.priority === 20 && task.isComplete;
+            });
+            var lowTasks = tasks.filter(function(task) {
+                return task.priority === 30 && task.isComplete;
+            });
+            var highTasks = tasks.filter(function(task) {
+                return task.priority === 10 && task.isComplete;
+            });
+            setPriorityStats([highTasks.length, medTasks.length, lowTasks.length]);
+            setStatsOpen(true);
+        }
     };
 
     useEffect(() => {
@@ -65,6 +114,7 @@ const Calendar = () => {
         const fetchUserInfo = async () => {
             const userInfo = await DotoService.getUserInfo();
             setTheme(userInfo.themePreference);
+            setUserPoints(userInfo.points);
             setStartTime(userInfo.startTime);
             setEndTime(userInfo.endTime);
         };
@@ -91,12 +141,30 @@ const Calendar = () => {
         await DotoService.deleteTask(taskId);
     };
 
-    const handleTaskStatusUpdated = async taskId => {
+    const changePoints = change => {
+        DotoService.updateUserInfo({ points: userPoints + change });
+        setUserPoints(userPoints + change);
+    };
+
+    const handleTaskStatusUpdated = taskId => {
         const newTasks = [...tasks];
         const taskToUpdate = newTasks.find(task => task.taskId === taskId);
+
+        // update points
+        // if duration is passed in, use that, otherwise calculate it from start and end dates
+        const minutes = taskToUpdate.duration
+            ? taskToUpdate.duration
+            : Math.abs(taskToUpdate.startDate - taskToUpdate.endDate) / 1000 / 60;
+        // if task is completed, increase points, otherwise, decrease points
+        taskToUpdate.isComplete ? changePoints(-minutes) : changePoints(minutes);
+
+        // update task
         taskToUpdate.isComplete = !taskToUpdate.isComplete;
-        await DotoService.updateTask(taskToUpdate);
+        DotoService.updateTask(taskToUpdate);
         setTasks(newTasks);
+
+        // update streak
+        streakRef.current.updateStreak();
     };
 
     const handleTaskUpdated = async task => {
@@ -153,11 +221,30 @@ const Calendar = () => {
                 <div className="mb-3">
                     <Tooltip title="List View">
                         <Fab onClick={() => setListView(!listView)} size="small">
-                            {/* Toggle on list view icon to show/hide to-do tasks */}
-                            {!listView && <FormatListBulletedIcon />}
-                            {listView && <CalendarTodayIcon />}
+                            {listView ? <CalendarTodayIcon /> : <FormatListBulletedIcon />}
                         </Fab>
                     </Tooltip>
+                </div>
+                <div className="mb-3">
+                    <Tooltip title="View Your Stats">
+                        <Fab onClick={handleStatsOpen} size="small">
+                            <PieChartIcon />
+                        </Fab>
+                    </Tooltip>
+                </div>
+                <div className="mb-3">
+                    <Tooltip title="Productivity Score View">
+                        <Fab onClick={handleIsScoreOpen} size="small">
+                            <ScoreIcon />
+                        </Fab>
+                    </Tooltip>
+                </div>
+                <div>
+                    <h2>Points</h2>
+                    <Points avatarClass={classes.blue} value={userPoints} />
+                </div>
+                <div>
+                    <Streak tasks={[...tasks]} ref={streakRef} />
                 </div>
             </div>
             <span className="content-container">
@@ -190,6 +277,49 @@ const Calendar = () => {
                     <Fade in={open}>
                         <div className={classes.paper}>
                             <ModalContent addNewTask={addNewTask} modalBackground={theme} />
+                        </div>
+                    </Fade>
+                </Modal>
+                <Modal
+                    aria-labelledby="stats-modal"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={statsOpen}
+                    onClose={handleStatsOpen}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={statsOpen}>
+                        <div className={classes.paper}>
+                            <UserStats
+                                modalBackground={theme}
+                                // TODO: get real values for these.
+                                hoursWorked="10.5"
+                                dayRecord="4"
+                                priorityStats={priorityStats}
+                            />
+                        </div>
+                    </Fade>
+                </Modal>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={isOpenScore}
+                    onClose={handleIsScoreOpen}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    {/* Transition effects for list view of to-do tasks for today */}
+                    <Fade in={isOpenScore}>
+                        <div className={classes.paper}>
+                            <ProductivityScore />
                         </div>
                     </Fade>
                 </Modal>
