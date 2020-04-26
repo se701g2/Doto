@@ -1,6 +1,6 @@
 # Doto
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![](https://github.com/se701g2/Doto/workflows/doto-CI/badge.svg?event=push) 
@@ -79,6 +79,7 @@ If you're a developer in the project and would like to add yourself here, please
     <td align="center"><a href="https://github.com/salma-s"><img src="https://avatars0.githubusercontent.com/u/43306586?v=4" width="100px;" alt=""/><br /><sub><b>salma-s</b></sub></a><br /><a href="https://github.com/se701g2/Doto/commits?author=salma-s" title="Code">💻</a> <a href="https://github.com/se701g2/Doto/pulls?q=is%3Apr+reviewed-by%3Asalma-s" title="Reviewed Pull Requests">👀</a> <a href="#design-salma-s" title="Design">🎨</a> <a href="https://github.com/se701g2/Doto/commits?author=salma-s" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://github.com/Minus20Five"><img src="https://avatars3.githubusercontent.com/u/20623467?v=4" width="100px;" alt=""/><br /><sub><b>Tony Liu</b></sub></a><br /><a href="https://github.com/se701g2/Doto/commits?author=Minus20Five" title="Code">💻</a> <a href="https://github.com/se701g2/Doto/pulls?q=is%3Apr+reviewed-by%3AMinus20Five" title="Reviewed Pull Requests">👀</a> <a href="#design-Minus20Five" title="Design">🎨</a> <a href="https://github.com/se701g2/Doto/commits?author=Minus20Five" title="Documentation">📖</a> <a href="https://github.com/se701g2/Doto/commits?author=Minus20Five" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://harrisonleach1.github.io"><img src="https://avatars3.githubusercontent.com/u/44953072?v=4" width="100px;" alt=""/><br /><sub><b>Harrison Leach</b></sub></a><br /><a href="https://github.com/se701g2/Doto/commits?author=HarrisonLeach1" title="Code">💻</a> <a href="https://github.com/se701g2/Doto/pulls?q=is%3Apr+reviewed-by%3AHarrisonLeach1" title="Reviewed Pull Requests">👀</a> <a href="#design-HarrisonLeach1" title="Design">🎨</a> <a href="https://github.com/se701g2/Doto/commits?author=HarrisonLeach1" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/DeshmukhChinmay"><img src="https://avatars3.githubusercontent.com/u/41243225?v=4" width="100px;" alt=""/><br /><sub><b>Chinmay Deshmukh</b></sub></a><br /><a href="https://github.com/se701g2/Doto/commits?author=DeshmukhChinmay" title="Code">💻</a> <a href="https://github.com/se701g2/Doto/pulls?q=is%3Apr+reviewed-by%3ADeshmukhChinmay" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/se701g2/Doto/commits?author=DeshmukhChinmay" title="Documentation">📖</a></td>
   </tr>
 </table>
 
