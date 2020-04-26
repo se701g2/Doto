@@ -36,7 +36,6 @@ const DotoService = {
             const tasks = response.data.map(task => taskMapper(task));
             return tasks;
         } catch (e) {
-            // TODO: Check for errors
             console.log(e);
         }
     },
@@ -100,7 +99,6 @@ const DotoService = {
             const userInfo = response.data;
             return userInfo;
         } catch (e) {
-            // TODO: Check for errors
             console.log(e);
         }
     },
