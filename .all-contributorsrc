@@ -135,6 +135,17 @@
         "design",
         "test"
       ]
+    },
+    {
+      "login": "brianzhang310",
+      "name": "brianzhang310",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/43288000?v=4",
+      "profile": "https://github.com/brianzhang310",
+      "contributions": [
+        "code",
+        "review",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
