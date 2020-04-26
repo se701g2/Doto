@@ -135,6 +135,17 @@
         "design",
         "test"
       ]
+    },
+    {
+      "login": "DeshmukhChinmay",
+      "name": "Chinmay Deshmukh",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/41243225?v=4",
+      "profile": "https://github.com/DeshmukhChinmay",
+      "contributions": [
+        "code",
+        "review",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
