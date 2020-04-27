@@ -27,6 +27,7 @@ router.post("/post", authenticateToken, function (req, res) {
     task.travelTime = req.body.travelTime;
     task.reminderType = req.body.reminderType;
     task.dueDate = req.body.dueDate;
+    task.category = req.body.category;
 
     task.save(function (err) {
         if (err) {
