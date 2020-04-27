@@ -28,6 +28,7 @@ router.post("/post", authenticateToken, function (req, res) {
     task.reminderType = req.body.reminderType;
     task.dueDate = req.body.dueDate;
     task.earliestDate = req.body.earliestDate;
+    task.category = req.body.category;
 
     task.save(function (err) {
         if (err) {
@@ -40,8 +41,6 @@ router.post("/post", authenticateToken, function (req, res) {
 });
 
 // UPDATE task
-// TO DO: This is not integrated with the frontend.
-//        Authentication should be applied to this route too.
 router.put("/:taskId", authenticateToken, function (req, res) {
     Task.updateOne({ taskId: req.params.taskId }, req.body, { new: true }, function (err, updatedTask) {
         logger.info(updatedTask);

@@ -19,6 +19,7 @@ const taskMapper = data => {
         reminderDate: data.reminderDate,
         ...(data.description && { description: data.description }),
         ...(data.priority && { priority: data.priority }),
+        ...(data.category && { category: data.category }),
         ...(data.location && { location: data.location }),
         isComplete: data.isComplete,
         earliestDate: new Date(data.earliestDate),
@@ -37,7 +38,6 @@ const DotoService = {
             const tasks = response.data.map(task => taskMapper(task));
             return tasks;
         } catch (e) {
-            // TODO: Check for errors
             console.log(e);
         }
     },
@@ -71,6 +71,7 @@ const DotoService = {
             ...(task.reminderDate && { reminderDate: task.reminderDate.toString() }),
             ...(task.description && { description: task.description }),
             ...(task.priority && { priority: task.priority }),
+            ...(task.category && { category: task.category }),
             ...(task.location && { location: task.location }),
             isComplete: false,
             earliestDate: task.earliestDate.toString(),
@@ -102,16 +103,13 @@ const DotoService = {
             const userInfo = response.data;
             return userInfo;
         } catch (e) {
-            // TODO: Check for errors
             console.log(e);
         }
     },
-    updateUserInfo: async (theme, startTime, endTime) => {
+    updateUserInfo: async userInfo => {
         const updatedUserInfo = {
             user: CookieManager.get("email"),
-            themePreference: theme,
-            startTime: startTime,
-            endTime: endTime,
+            ...userInfo,
         };
 
         axios({

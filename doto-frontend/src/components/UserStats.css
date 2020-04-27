@@ -1,0 +1,57 @@
+.makeStyles-paper-507 {
+    padding: 0px !important;
+}
+
+.makeStyles-paper-2 {
+    padding: 0px !important;
+}
+
+.modal-p {
+    background-image: url("./images//modal-background-purple.jpg");
+    background-size: cover;
+}
+
+.modal-g {
+    background-image: url("./images//modal-background-green.jpg");
+    background-size: cover;
+}
+
+.stats-content {
+    display: table;
+    border-spacing: 10px;
+    margin-left: 100px;
+    margin-top: 30px;
+    font-size: 20px;
+    width: 400px;
+    height: 450px;
+}
+
+.stats-row {
+    display: table-row;
+}
+
+.stats-graphic {
+    text-align: center;
+    display: table-cell;
+    width: 120px;
+}
+
+.stats-text {
+    vertical-align: top;
+    display: table-cell;
+    text-align: left;
+    font-size: 20px;
+}
+
+.title {
+    text-align: center;
+    font-size: 40px;
+}
+
+.spacing {
+    margin-top: 55px !important;
+}
+
+.group-spacing {
+    margin-top: 10px !important;
+}

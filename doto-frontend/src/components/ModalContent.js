@@ -57,6 +57,7 @@ const ModalContent = props => {
     const [selectedReminder, setSelectedReminder] = useState("");
     const [dueDateValid, setDueDateValid] = useState(false);
     const [earliestDateValid, setEarliestDateValid] = useState(true);
+    const [selectedCategory, setSelectedCategory] = useState("");
 
     // ----- HANDLERS FOR INPUT FIELDS -----
     const handleNameChange = event => {
@@ -95,6 +96,10 @@ const ModalContent = props => {
         setSelectedPriority(event.target.value);
     };
 
+    const handleCategory = event => {
+        setSelectedCategory(event.target.value);
+    };
+
     const handleReminder = event => {
         setSelectedReminder(event.target.value);
     };
@@ -112,6 +117,7 @@ const ModalContent = props => {
             travelTime: selectedTravelTime.getHours() * 60 + selectedTravelTime.getMinutes(),
             location: selectedLocation,
             priority: selectedPriority,
+            category: selectedCategory,
             reminder: selectedReminder,
         };
 
@@ -244,6 +250,18 @@ const ModalContent = props => {
                                 <MenuItem value={10}>High</MenuItem>
                                 <MenuItem value={20}>Medium</MenuItem>
                                 <MenuItem value={30}>Low</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <div className="drop-down">
+                        {/* Set task categories, the category will determine what colour the task has */}
+                        <FormControl className={classes.formControl}>
+                            <InputLabel id="category-label">Category</InputLabel>
+                            <Select value={selectedCategory} onChange={handleCategory}>
+                                <MenuItem value={1}>Homework</MenuItem>
+                                <MenuItem value={2}>Work</MenuItem>
+                                <MenuItem value={3}>Household</MenuItem>
+                                <MenuItem value={4}>Personal</MenuItem>
                             </Select>
                         </FormControl>
                     </div>

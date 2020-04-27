@@ -52,7 +52,123 @@
         "design",
         "doc"
       ]
-    }
+    },
+    {
+      "login": "qibao0722",
+      "name": "Xiaoji Sun",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/53366211?v=4",
+      "profile": "https://github.com/qibao0722",
+      "contributions": [
+        "code",
+        "design"
+      ]
+    },
+    {
+      "login": "PreetPatel",
+      "name": "Preet Patel",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/22407548?v=4",
+      "profile": "http://PreetPatel.com",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "doc"
+      ]
+    },
+    {
+      "login": "EricPedrido",
+      "name": "Eric Pedrido",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/43208889?v=4",
+      "profile": "https://github.com/EricPedrido",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "test"
+      ]
+    },
+    {
+      "login": "harmanlamba",
+      "name": "Harman Lamba",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/40023122?v=4",
+      "profile": "https://github.com/harmanlamba",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "test"
+      ]
+    },
+    {
+      "login": "salma-s",
+      "name": "salma-s",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/43306586?v=4",
+      "profile": "https://github.com/salma-s",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "test"
+      ]
+    },
+    {
+      "login": "Minus20Five",
+      "name": "Tony Liu",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/20623467?v=4",
+      "profile": "https://github.com/Minus20Five",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "doc",
+        "test"
+      ]
+    },
+    {
+      "login": "HarrisonLeach1",
+      "name": "Harrison Leach",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/44953072?v=4",
+      "profile": "https://harrisonleach1.github.io",
+      "contributions": [
+        "code",
+        "review",
+        "design",
+        "test"
+      ]
+    },
+    {
+      "login": "DeshmukhChinmay",
+      "name": "Chinmay Deshmukh",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/41243225?v=4",
+      "profile": "https://github.com/DeshmukhChinmay",
+      "contributions": [
+        "code",
+        "review",
+        "doc"
+      ]
+    },
+    {
+      "login": "TCHE614",
+      "name": "TCHE614",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/48304096?v=4",
+      "profile": "https://github.com/TCHE614",
+      "contributions": [
+        "code",
+        "review",
+        "doc"
+      ]
+    },
+    {
+      "login": "brianzhang310",
+      "name": "brianzhang310",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/43288000?v=4",
+      "profile": "https://github.com/brianzhang310",
+      "contributions": [
+        "code",
+        "review",
+        "doc"
+      ]
+    },
   ],
   "contributorsPerLine": 7,
   "projectName": "Doto",

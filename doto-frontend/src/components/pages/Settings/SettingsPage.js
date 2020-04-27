@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import { FormControl, Button, Input, InputAdornment, Grid } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from "@material-ui/pickers";
 import EmailIcon from "@material-ui/icons/Email";
 import { AccountCircle } from "@material-ui/icons";
@@ -10,10 +9,20 @@ import DateFnsUtils from "@date-io/date-fns";
 import Header from "../Header";
 import DotoService from "../../../helpers/DotoService";
 import { ThemeContext } from "../../../context/ThemeContext";
+import MarketPlace from "../../MarketPlace";
 import { ActiveHoursContext } from "../../../context/ActiveHoursContext";
 import { Themes } from "../../../constants/Themes";
 import "./SettingsPage.css";
 import "../Pages.css";
+import Points from "../../Points";
+import { makeStyles } from "@material-ui/core/styles";
+import { blue } from "@material-ui/core/colors";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import { shiftTasks } from "../Calendar/TaskShifter";
 
 const classnames = require("classnames");
 
@@ -62,6 +71,21 @@ const ProfilePhoto = props => {
 
 // TODO: Implement logic for working hours in sync with task-scheduling algorithm
 const WorkingHoursPicker = props => {
+    const [dialog, setDialog] = useState(false);
+
+    const handleClickOpen = () => {
+        setDialog(true);
+    };
+
+    const handleClose = () => {
+        setDialog(false);
+    };
+
+    const handleCloseAndSave = () => {
+        setDialog(false);
+        props.saveChanges(props.startTime, props.endTime);
+    };
+
     const handleStartTimeChange = date => {
         props.changeStartTime(date);
     };
@@ -100,29 +124,99 @@ const WorkingHoursPicker = props => {
                     />
                 </MuiPickersUtilsProvider>
             </div>
+            <div style={{ marginLeft: "3vw", marginTop: "3vh", textAlign: "left" }}>
+                <Button variant="contained" color="secondary" onClick={handleClickOpen}>
+                    Save
+                </Button>
+                <Dialog
+                    open={dialog}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Want to save those changes?"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Your time-table will be re-managed automatically. Please check again.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                            Cancle
+                        </Button>
+                        <Button onClick={handleCloseAndSave} color="primary" autoFocus>
+                            Ok
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
         </Grid>
     );
 };
 
+const useStyles = makeStyles(theme => ({
+    blue: {
+        color: theme.palette.getContrastText(blue[500]),
+        backgroundColor: blue[500],
+        boxShadow: theme.shadows[5],
+        marginLeft: "10vw",
+    },
+}));
+
 // Using props to change the colour theme of the webpage when changed by the user
 const ThemePicker = props => {
-    const handleChangeThemeToDark = () => {
-        props.changeTheme(Themes.DARK);
-    };
+    const classes = useStyles();
 
-    const handleChangeThemeToLight = () => {
-        props.changeTheme(Themes.LIGHT);
+    const handleThemeClick = (themeColour, cost) => {
+        // @params themeColour and cost
+
+        switch (themeColour) {
+            case "blue":
+                props.changeTheme(Themes.DARK);
+                break;
+            case "green":
+                props.changeTheme(Themes.LIGHT);
+                break;
+
+            case "gray":
+                break;
+            case "magenta":
+                break;
+            case "purple":
+                break;
+            case "crimson":
+                break;
+            case "black":
+                break;
+            case "red":
+                break;
+            case "darkSeaGreen":
+                break;
+            case "antiqueWhite":
+                break;
+            case "darkKhaki":
+                break;
+            case "darkSlateBlue":
+                break;
+            default:
+                break;
+        }
     };
 
     return (
-        <div className="flex">
-            <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
-            <ThemeProvider>
-                <Button onClick={handleChangeThemeToDark} id="color-palette" style={{ backgroundColor: "#3700b3" }} />
-            </ThemeProvider>
-            <ThemeProvider>
-                <Button onClick={handleChangeThemeToLight} id="color-palette" style={{ backgroundColor: "#2e7d32" }} />
-            </ThemeProvider>
+        <div>
+            <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Available Points: </h2>
+            <Points avatarClass={classes.blue} value={props.userPoints} />
+            <br></br>
+            <div className="flex">
+                <h2 style={{ marginLeft: "10vw", marginTop: "4vh", textAlign: "left" }}>Theme:</h2>
+
+                <MarketPlace
+                    handleThemeClick={handleThemeClick}
+                    buyItem={props.onBuyItem}
+                    unlockedItems={props.unlockedItems}
+                ></MarketPlace>
+            </div>
         </div>
     );
 };
@@ -135,8 +229,15 @@ const SettingsPage = () => {
     const [email, setEmail] = useState();
     const [startTime, setStartTime] = activeHoursStart;
     const [endTime, setEndTime] = activeHoursEnd;
+    const [userPoints, setUserPoints] = useState(0);
+    const [unlockedItems, setUnlockedItems] = useState([]);
+    const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
+        const fetchTasks = async () => {
+            const tasks = await DotoService.getTasks();
+            setTasks(tasks);
+        };
         const fetchUserInfo = async () => {
             const userInfo = await DotoService.getUserInfo();
             setTheme(userInfo.themePreference);
@@ -145,20 +246,44 @@ const SettingsPage = () => {
             setEmail(userInfo.email);
             setStartTime(userInfo.startTime);
             setEndTime(userInfo.endTime);
+            setUserPoints(userInfo.points);
+            setUnlockedItems(userInfo.unlockedItems || []);
         };
         fetchUserInfo();
+        fetchTasks();
     }, [setTheme, setStartTime, setEndTime]);
 
     const changeTheme = newTheme => {
-        DotoService.updateUserInfo(newTheme, startTime, endTime).then(setTheme(newTheme));
+        DotoService.updateUserInfo({ themePreference: newTheme, startTime, endTime }).then(setTheme(newTheme));
     };
 
     const changeStartTime = newTime => {
-        DotoService.updateUserInfo(theme, newTime, endTime).then(setStartTime(newTime));
+        setStartTime(newTime);
     };
 
     const changeEndTime = newTime => {
-        DotoService.updateUserInfo(theme, startTime, newTime).then(setEndTime(newTime));
+        setEndTime(newTime);
+    };
+
+    const saveChanges = (newStartTime, newEndTime) => {
+        DotoService.updateUserInfo(theme, newStartTime, newEndTime);
+        const { shiftedTasks } = shiftTasks(tasks, new Date(newStartTime), new Date(newEndTime));
+        for (let i = 0; i < shiftedTasks.length; i++) {
+            DotoService.updateTask(shiftedTasks[i]);
+        }
+    };
+
+    const handleBuyItem = (cost, item) => {
+        const newPointsBalance = userPoints - cost;
+
+        // prevent user from purchasing items they cannot afford
+        if (newPointsBalance >= 0) {
+            const newUnlockedItems = [...unlockedItems, item];
+            DotoService.updateUserInfo({ points: newPointsBalance, unlockedItems: newUnlockedItems });
+            setUserPoints(newPointsBalance);
+            setUnlockedItems(newUnlockedItems);
+        }
+        // TODO: Display error message explaining why user cannot buy the item
     };
 
     return (
@@ -181,12 +306,18 @@ const SettingsPage = () => {
                     <InputNameField name={name} />
                     <InputEmailField email={email} />
 
-                    <ThemePicker changeTheme={changeTheme} />
+                    <ThemePicker
+                        changeTheme={changeTheme}
+                        onBuyItem={handleBuyItem}
+                        userPoints={userPoints}
+                        unlockedItems={unlockedItems}
+                    />
                     <WorkingHoursPicker
                         startTime={startTime}
                         endTime={endTime}
                         changeStartTime={changeStartTime}
                         changeEndTime={changeEndTime}
+                        saveChanges={saveChanges}
                     />
                 </div>
             </span>
