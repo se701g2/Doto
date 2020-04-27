@@ -83,9 +83,11 @@ const Routes = () => {
                         activeHoursEnd: [activeHourEndTime, setActiveHourEndTime],
                     }}
                 >
-                    <PrivateRoute path="/calendar" exact component={Calendar} />
-                    <PrivateRoute path="/settings" exact component={SettingsPage} />
-                    <Route component={NotFound} />
+                    <Switch>
+                        <PrivateRoute path="/calendar" exact component={Calendar} />
+                        <PrivateRoute path="/settings" exact component={SettingsPage} />
+                        <Route component={NotFound} />
+                    </Switch>
                 </ActiveHoursContext.Provider>
             </ThemeContext.Provider>
         </Switch>
