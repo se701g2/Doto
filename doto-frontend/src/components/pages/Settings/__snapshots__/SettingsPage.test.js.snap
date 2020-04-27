@@ -945,7 +945,7 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
                 onFocus={[Function]}
                 required={false}
                 type="text"
-                value="05:51 PM"
+                value="12:26 AM"
               />
               <div
                 className="MuiInputAdornment-root MuiInputAdornment-positionEnd"
@@ -1038,7 +1038,7 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
                 onFocus={[Function]}
                 required={false}
                 type="text"
-                value="05:51 PM"
+                value="12:26 AM"
               />
               <div
                 className="MuiInputAdornment-root MuiInputAdornment-positionEnd"
@@ -1088,6 +1088,43 @@ exports[`<SettingsPage /> component being rendered Make sure render matches snap
             </div>
             
           </div>
+        </div>
+        <div
+          style={
+            Object {
+              "marginLeft": "3vw",
+              "marginTop": "3vh",
+              "textAlign": "left",
+            }
+          }
+        >
+          <button
+            className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            <span
+              className="MuiButton-label"
+            >
+              Save
+            </span>
+            <span
+              className="MuiTouchRipple-root"
+            />
+          </button>
         </div>
       </div>
     </div>
