@@ -82,6 +82,10 @@ const useStyles = makeStyles(theme => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
+    dueContainer: {
+        margin: "0 auto",
+        color: "red",
+    },
 }));
 
 export function Content({
@@ -121,6 +125,11 @@ export function Content({
 
     return (
         <AppointmentTooltip.Content {...restProps} appointmentData={appointmentData}>
+            <Grid container alignItems="center">
+                <div className={classes.dueContainer}>
+                    <div>Due: {new Date(appointmentData.dueDate).toLocaleString()}</div>
+                </div>
+            </Grid>
             <Grid container alignItems="center">
                 <div className="footer-container">
                     <div>
