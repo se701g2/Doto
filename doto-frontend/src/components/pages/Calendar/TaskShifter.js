@@ -13,7 +13,7 @@ const shiftTasks = (scheduledTasks, startTime, endTime) => {
     const tasks = scheduledTasks;
     const MILLISECONDS_PER_MINUTE = 60000;
 
-    // transforming startTime and endTime to minitues format
+    // transforming startTime and endTime to minutes format
     const startActingHour = startTime.getHours() * 60 + startTime.getMinutes();
     const endActingHour = endTime.getHours() * 60 + endTime.getMinutes();
 

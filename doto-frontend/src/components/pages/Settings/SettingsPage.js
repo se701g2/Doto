@@ -142,7 +142,7 @@ const WorkingHoursPicker = props => {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose} color="primary">
-                            Cancle
+                            Cancel
                         </Button>
                         <Button onClick={handleCloseAndSave} color="primary" autoFocus>
                             Ok
@@ -265,21 +265,21 @@ const SettingsPage = () => {
         setEndTime(newTime);
     };
 
-    const saveChanges = (newStartTime, newEndTime) => {
-        DotoService.updateUserInfo(theme, newStartTime, newEndTime);
+    const saveChanges = async (newStartTime, newEndTime) => {
+        await DotoService.updateUserInfo({ startTime: newStartTime, endTime: newEndTime });
         const { shiftedTasks } = shiftTasks(tasks, new Date(newStartTime), new Date(newEndTime));
         for (let i = 0; i < shiftedTasks.length; i++) {
-            DotoService.updateTask(shiftedTasks[i]);
+            await DotoService.updateTask(shiftedTasks[i]);
         }
     };
 
-    const handleBuyItem = (cost, item) => {
+    const handleBuyItem = async (cost, item) => {
         const newPointsBalance = userPoints - cost;
 
         // prevent user from purchasing items they cannot afford
         if (newPointsBalance >= 0) {
             const newUnlockedItems = [...unlockedItems, item];
-            DotoService.updateUserInfo({ points: newPointsBalance, unlockedItems: newUnlockedItems });
+            await DotoService.updateUserInfo({ points: newPointsBalance, unlockedItems: newUnlockedItems });
             setUserPoints(newPointsBalance);
             setUnlockedItems(newUnlockedItems);
         }

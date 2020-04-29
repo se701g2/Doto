@@ -146,7 +146,7 @@ const Calendar = () => {
         setUserPoints(userPoints + change);
     };
 
-    const handleTaskStatusUpdated = taskId => {
+    const handleTaskStatusUpdated = async taskId => {
         const newTasks = [...tasks];
         const taskToUpdate = newTasks.find(task => task.taskId === taskId);
 
@@ -160,7 +160,7 @@ const Calendar = () => {
 
         // update task
         taskToUpdate.isComplete = !taskToUpdate.isComplete;
-        DotoService.updateTask(taskToUpdate);
+        await DotoService.updateTask(taskToUpdate);
         setTasks(newTasks);
 
         // update streak
