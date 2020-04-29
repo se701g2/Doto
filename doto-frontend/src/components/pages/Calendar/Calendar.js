@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Calendar = () => {
-    const streakRef = React.createRef();
+    var streakRef = React.createRef();
 
     const classes = useStyles();
     const [listView, setListView] = useState();
@@ -146,7 +146,7 @@ const Calendar = () => {
         setUserPoints(userPoints + change);
     };
 
-    const handleTaskStatusUpdated = async taskId => {
+    const handleTaskStatusUpdated = taskId => {
         const newTasks = [...tasks];
         const taskToUpdate = newTasks.find(task => task.taskId === taskId);
 
@@ -160,7 +160,7 @@ const Calendar = () => {
 
         // update task
         taskToUpdate.isComplete = !taskToUpdate.isComplete;
-        await DotoService.updateTask(taskToUpdate);
+        DotoService.updateTask(taskToUpdate);
         setTasks(newTasks);
 
         // update streak
