@@ -48,7 +48,7 @@ const DotoService = {
             user: CookieManager.get("email"),
             ...mongoTask,
         };
-        axios({
+        await axios({
             method: "put",
             url: baseUrl + `/task/${task.taskId}`,
             headers: { Authorization: "Bearer " + CookieManager.get("jwt") },
@@ -112,7 +112,7 @@ const DotoService = {
             ...userInfo,
         };
 
-        axios({
+        await axios({
             method: "put",
             url: baseUrl + "/user/update",
             headers: { Authorization: "Bearer " + CookieManager.get("jwt") },
@@ -122,7 +122,7 @@ const DotoService = {
         // TODO: catch for errors depending if it didn't post properly or maybe retry mechanism
     },
     subscribeToReminders: async subscription => {
-        axios({
+        await axios({
             method: "post",
             url: baseUrl + "/reminders/subscribe",
             headers: { Authorization: "Bearer " + CookieManager.get("jwt") },

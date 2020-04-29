@@ -95,11 +95,8 @@ const addTaskToSchedule = (newTask, existingTasks, startTime, endTime) => {
             // Insert the new task at the specified index
             competingTasks.splice(i, 0, newTask);
 
-            // Shift the Tasks based on working hours
-            const { shiftedTasks } = shiftTasks([...oldTasks, ...competingTasks], startTime, endTime);
-
             return {
-                newTaskOrder: shiftedTasks,
+                newTaskOrder: [...oldTasks, ...competingTasks],
                 updatedTask: newTask,
             };
         }
