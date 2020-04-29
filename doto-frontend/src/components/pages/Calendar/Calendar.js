@@ -171,7 +171,7 @@ const Calendar = () => {
         const taskList = [...tasks];
         const index = taskList.findIndex(currentTask => currentTask.taskId === task.taskId);
         taskList.splice(index, 1);
-        const { newTaskOrder, updatedTask } = addTaskToSchedule(task, taskList, new Date());
+        const { newTaskOrder, updatedTask } = addTaskToSchedule(task, taskList);
         setTasks(newTaskOrder);
         await DotoService.deleteTask(task.taskId);
         await DotoService.setNewTask(updatedTask);

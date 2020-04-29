@@ -26,6 +26,7 @@ const validTask = new TaskModel({
     isComplete: false,
     travelTime: 10,
     dueDate: "2020-08-14T07:50:00+12:00",
+    earliestDate: "2020-08-14T07:50:00+12:00",
 });
 
 process.env.TEST_SUITE = "task-test";
@@ -221,6 +222,7 @@ describe("Task Model Tests", function () {
             isComplete: false,
             travelTime: 20,
             dueDate: "2020-08-14T07:50:00+12:00",
+            earliestDate: "2020-08-14T07:50:00+12:00",
         });
         await testTask.save();
         const [retrievedTask] = await TaskModel.find({
@@ -247,6 +249,7 @@ describe("Task Model Tests", function () {
             isComplete: false,
             travelTime: 20,
             dueDate: "2020-08-14T07:50:00+12:00",
+            earliestDate: "2020-08-14T07:50:00+12:00",
         });
         await testTask.save();
         const retrievedTasks = await TaskModel.find({
@@ -274,6 +277,7 @@ describe("Task Model Tests", function () {
             isComplete: false,
             travelTime: 20,
             dueDate: "2020-08-14T07:50:00+12:00",
+            earliestDate: "2020-08-14T07:50:00+12:00",
         });
         await testTask.save();
         const retrievedTasks = await TaskModel.find({
@@ -301,6 +305,7 @@ describe("Task Model Tests", function () {
             isComplete: true,
             travelTime: 20,
             dueDate: "2020-08-14T07:50:00+12:00",
+            earliestDate: "2020-08-14T07:50:00+12:00",
         });
         await testTask.save();
         const retrievedTasks = await TaskModel.find({

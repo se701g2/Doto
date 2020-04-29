@@ -22,6 +22,7 @@ const taskMapper = data => {
         ...(data.category && { category: data.category }),
         ...(data.location && { location: data.location }),
         isComplete: data.isComplete,
+        earliestDate: new Date(data.earliestDate),
     };
 };
 
@@ -73,6 +74,7 @@ const DotoService = {
             ...(task.category && { category: task.category }),
             ...(task.location && { location: task.location }),
             isComplete: false,
+            earliestDate: task.earliestDate.toString(),
         };
 
         axios({
@@ -85,7 +87,7 @@ const DotoService = {
         // TODO: catch for errors depending if it didn't post properly or maybe retry mechanism
     },
     deleteTask: async taskId => {
-        axios({
+        await axios({
             method: "delete",
             url: baseUrl + `/task/${taskId}`,
             headers: { Authorization: "Bearer " + CookieManager.get("jwt") },

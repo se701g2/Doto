@@ -58,6 +58,10 @@ const taskSchema = mongoose.Schema({
         type: Number,
         required: false,
     },
+    earliestDate: {
+        type: Date,
+        required: true,
+    },
     category: {
         type: Number,
     },
