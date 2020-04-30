@@ -85,7 +85,7 @@ If you're a developer in the project and would like to add yourself here, please
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/nikotj1"><img src="https://avatars1.githubusercontent.com/u/43423740?v=4" width="100px;" alt=""/><br /><sub><b>nikotj1</b></sub></a><br /><a href="https://github.com/se701g2/Doto/issues?q=author%3Anikotj1" title="Bug reports">🐛</a> <a href="#design-nikotj1" title="Design">🎨</a></td>
-    <td align="center"><a href="https://github.com/Kalashnikkov"><img src="https://avatars2.githubusercontent.com/u/48403060?v=4" width="100px;" alt=""/><br /><sub><b>Finn</b></sub></a><br /><a href="https://github.com/se701g2/Doto/issues?q=author%3AKalashnikkov" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/Kalashnikkov"><img src="https://avatars2.githubusercontent.com/u/48403060?v=4" width="100px;" alt=""/><br /><sub><b>Finn</b></sub></a><br /><a href="https://github.com/se701g2/Doto/issues?q=author%3AKalashnikkov" title="Bug reports">🐛</a> <a href="https://github.com/se701g2/Doto/commits?author=Kalashnikkov" title="Code">💻</a></td>
   </tr>
 </table>
 
