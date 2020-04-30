@@ -181,6 +181,15 @@
         "bug",
         "design"
       ]
+    },
+    {
+      "login": "Kalashnikkov",
+      "name": "Finn",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/48403060?v=4",
+      "profile": "https://github.com/Kalashnikkov",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
