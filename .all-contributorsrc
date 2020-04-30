@@ -171,6 +171,16 @@
         "review",
         "doc"
       ]
+    },
+    {
+      "login": "nikotj1",
+      "name": "nikotj1",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/43423740?v=4",
+      "profile": "https://github.com/nikotj1",
+      "contributions": [
+        "bug",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
