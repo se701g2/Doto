@@ -201,6 +201,17 @@
         "code",
         "design"
       ]
+    },
+    {
+      "login": "rmoradc",
+      "name": "rmoradc",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/43200280?v=4",
+      "profile": "https://github.com/rmoradc",
+      "contributions": [
+        "code",
+        "review",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
